@@ -209,42 +209,35 @@ sub render_tree_contents
     my $coords = $args{coords};
     my $host = $sub_contents->{host} || $args{host} or
         die "Host not specified!";
+
     my $show_always = $args{show_always};
-    my $role = $sub_contents->{role} || "normal";
-
-    my @args;
-    my $is_separator = 0;
-
-    if ($sub_contents->{separator})
-    {
-        $is_separator = 1;
-    }
-    if (exists($sub_contents->{value}))
-    {
-        push @args, 'value' => $sub_contents->{value};
-    }
     if (exists($sub_contents->{show_always}))
     {
         $show_always = $sub_contents->{show_always};
     }
+    
+    my $new_item = +{};
+
+    if (exists($sub_contents->{value}))
+    {
+        $new_item->{'value'} = $sub_contents->{value};
+    }
     if (exists($sub_contents->{'host'}))
     {
-        push @args, 'host' => $sub_contents->{'host'};
+        $new_item->{'host'} = $sub_contents->{'host'};
     }
     
     my $is_same_node = 0;
-    my $is_hidden = 0;
-            
+
     if (exists($sub_contents->{url}))
     {
         my $host_url = $sub_contents->{url};
 
-        push @args, 
-            'url' => $host_url;
+        $new_item->{'url'} = $host_url;
 
         if ($sub_contents->{hide})
         {
-            $is_hidden = 1;
+            $new_item->{hide} = 1;
         }
 
         if (($host_url eq $path_info) && ($host eq $self->{current_host}))
@@ -252,26 +245,17 @@ sub render_tree_contents
             $is_same_node = 1;
         }
     }
-    my $new_item;
+    
+    if ($sub_contents->{separator})
     {
-        $new_item = +{@args};
-        if ($is_separator)
-        {
-            $new_item->{separator} = 1;
-        }
-        if ($is_hidden)
-        {
-            $new_item->{hide} = 1;
-        }
-        if (defined($show_always))
-        {
-            $new_item->{'show_always'} = $show_always;
-        }
-        if (defined($role))
-        {
-            $new_item->{'role'} = $role;
-        }
+        $new_item->{separator} = 1;
     }
+    if (defined($show_always))
+    {
+        $new_item->{'show_always'} = $show_always;
+    }
+    $new_item->{'role'} = $sub_contents->{role} || "normal";
+
     if (exists($sub_contents->{'title'}))
     {
         $new_item->{'title'} = $sub_contents->{'title'};
