@@ -68,6 +68,7 @@ use Error qw(:try);
 require HTML::Widgets::NavMenu::Iterator::NavMenu;
 require HTML::Widgets::NavMenu::Iterator::SiteMap;
 require HTML::Widgets::NavMenu::Tree::Node;
+require HTML::Widgets::NavMenu::Predicate;
 
 sub new
 {
@@ -198,6 +199,12 @@ sub path_info
     return $self->{path_info};
 }
 
+sub current_host
+{
+    my $self = shift;
+    return $self->{'current_host'};
+}
+
 sub get_cross_host_rel_url
 {
     my $self = shift;
@@ -241,14 +248,14 @@ sub create_new_nav_menu_item
 
     $new_item->set_values_from_hash_ref($sub_contents);
 
-    if (exists($sub_contents->{expand_re}))
+    if (exists($sub_contents->{'expand'}))
     {
-        my $regexp = $sub_contents->{expand_re};
-        # If $regexp is empty - then always succeeed.
-        # This is because a pattern match in which the pattern
-        # evaluates to an empty regexp uses the last successful pattern
-        # match.
-        if (($regexp eq "") || ($self->path_info() =~ /$regexp/))
+        if (HTML::Widgets::NavMenu::Predicate->new(
+                'spec' => $sub_contents->{'expand'},
+            )->evaluate(
+                'path_info' => $self->path_info(),
+                'current_host' => $self->current_host(),
+            ))
         {
             $new_item->expand();
         }
@@ -945,11 +952,12 @@ DocBook's "role" attribute, only induces different HTML markup. The vanilla
 HTML::Widgets::NavMenu does not distinguish between any roles, but see
 L<HTML::Widgets::NavMenu::HeaderRole>.
 
-=item 'expand_re'
+=item 'expand'
 
-This specifies a regular expression to be matched against the path to determine
-if the navigation menu should be expanded at this node. If it does, all of 
-the nodes up to it will expand as well.
+This specifies a predicate (a Perl value that is evaluated to a boolean
+value, see "Predicate Values" below.) to be matched against the path and 
+current host to determine if the navigation menu should be expanded at this 
+node. If it does, all of the nodes up to it will expand as well.
 
 =item 'show_always'
 
@@ -959,6 +967,74 @@ function is similar to C<'expand_re'> but its propagation semantics the
 opposite.
 
 =back
+
+=head1 Predicate Values
+
+An explicitly specified predicate value is a hash reference that contains
+one of the following three keys with their appropriate values:
+
+=over 4
+
+=item 'cb' => \&predicate_func
+
+This specifies a sub-routine reference (or "callback" or "cb"), that will be
+called to determine the result of the predicate. It accepts two named arguments
+- C<'path_info'> which is the path of the current page (without the leading
+slash) and C<'current_host'> which is the ID of the current host.
+
+Here is an example for such a callback:
+
+    sub predicate_cb1
+    {
+        my %args = (@_);
+        my $host = $args{'current_host'};
+        my $path = $args{'path_info'};
+        return (($host eq "true") && ($path eq "mypath/"));
+    }
+
+=item 're' => $regexp_string
+
+This specifies a regular expression to be matched against the path_info
+(regardless of what current_host is), to determine the result of the 
+predicate.
+
+=item 'bool' => [ 0 | 1 ]
+
+This specifies the constant boolean value of the predicate.
+
+=back
+
+Note that if C<'cb'> is specified then both C<'re'> and C<'bool'> will
+be ignored, and C<'re'> over-rides C<'bool'>. 
+
+If the predicate is not a hash reference, then HTML::Widgets::NavMenu will
+try to guess what it is. If it's a sub-routine reference, it will be an
+implicit callback. If it's one of the values C<"0">, C<"1">, C<"yes">, 
+C<"no">, C<"true">, C<"false">, C<"True">, C<"False"> it will be considered
+a boolean. If it's a different string, a regular expression match will
+be attempted. Else, an excpetion will be thrown.
+
+Here are some examples for predicates:
+
+    # Always expand.
+    'expand' => { 'bool' => 1, };
+
+    # Never expand.
+    'expand' => { 'bool' => 0, };
+
+    # Expand under home/
+    'expand' => { 're' => "^home/" },
+
+    # Expand under home/ when the current host is "foo"
+    sub expand_path_home_host_foo
+    {
+        my %args = (@_);
+        my $host = $args{'current_host'};
+        my $path = $args{'path_info'};
+        return (($host eq "foo") && ($path =~ m!^home/!));
+    }
+
+    'expand' => { 'cb' => \&expand_path_home_host_foo, },
 
 =head1 The Leading Path Component Class
 
