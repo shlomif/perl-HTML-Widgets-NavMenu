@@ -17,4 +17,5 @@
 
 3. By fully qualified URLs (http://www.mysite.org/hoola/hello/world/yes.html)
 
+* Make the module support URLs with CGI GET parameters properly.
 
