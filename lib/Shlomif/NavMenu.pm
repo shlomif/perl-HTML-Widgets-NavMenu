@@ -67,6 +67,7 @@ use Error qw(:try);
 
 require Shlomif::NavMenu::Iterator::NavMenu;
 require Shlomif::NavMenu::Iterator::SiteMap;
+require Shlomif::NavMenu::Tree::Node;
 
 sub new
 {
@@ -209,6 +210,13 @@ sub get_cross_host_rel_url
             ($self->{hosts}->{$host}->{base_url} . $host_url);
 }
 
+sub gen_blank_nav_menu_tree_node
+{
+    my $self = shift;
+
+    return Shlomif::NavMenu::Tree::Node->new();
+}
+
 sub create_new_nav_menu_item
 {
     my $self = shift;
@@ -219,25 +227,23 @@ sub create_new_nav_menu_item
     my $host = $sub_contents->{host} || $args{host} or
         die "Host not specified!";
 
-    my $new_item = +{};
+    my $new_item = $self->gen_blank_nav_menu_tree_node();
 
-    foreach my $key (qw(value host show_always title url))
+    foreach my $key (qw(host role show_always title url value))
     {
         if (exists($sub_contents->{$key}))
         {
-            $new_item->{$key} = $sub_contents->{$key};
+            $new_item->set($key, $sub_contents->{$key});
         }
     }
 
-    foreach my $key (qw(separator hide))
+    foreach my $key (qw(hide separator))
     {
         if ($sub_contents->{$key})
         {
-            $new_item->{$key} = 1;
+            $new_item->set($key, 1);
         }
     }
-
-    $new_item->{'role'} = $sub_contents->{role} || "normal";
 
     if (exists($sub_contents->{expand_re}))
     {
