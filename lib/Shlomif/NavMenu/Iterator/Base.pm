@@ -68,7 +68,7 @@ sub get_node_subs
     my $self = shift;
     my %args = (@_);
     my $node = $args{'node'};
-    return $node->subs();
+    return [ @{$node->subs()} ];
 }
 
 sub get_new_accum_state
