@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 use Shlomif::NavMenu;
 
@@ -130,4 +130,53 @@ EOF
     # TEST
     ok (validate_nav_menu($rendered, $expected_string), 
         "Nav Menu for minimal - 2"); 
+}
+
+# This test tests that an expand_re directive should not cause
+# the current coords to be assigned to it, thus marking a site
+# incorrectly.
+{
+    my $nav_menu = Shlomif::NavMenu->new(
+        'path_info' => "/me/",
+        @{$test_data->{'expand_re'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render(
+            'no_ie' => "true",
+            'styles' =>
+            {
+                'bar' => 'nav',
+                'level0' => 'navbarmain',
+                'level1' => 'navbarnested',
+                'level2' => "navbarnested",
+                'level3' => "navbarnested",
+                'level4' => "navbarnested",
+                'list' => "navbarmain",
+            },
+        );
+
+    my $expected_string = <<"EOF";
+<ul class="navbarmain">
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<b>About Me</b>
+</li>
+<li>
+<a href="../foo/" title="Fooish">Foo</a>
+<br />
+<ul class="navbarnested">
+<li>
+<a href="../foo/expanded/" title="Expanded">Expanded</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Nav Menu for expand_re"); 
 }

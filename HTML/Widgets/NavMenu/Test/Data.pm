@@ -110,6 +110,45 @@ my @two_sites_data =
     },
 );
 
+my @expand_re_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'value' => "Top 1",
+        'title' => "T1 Title",
+        'expand_re' => "",
+        'subs' =>
+        [
+            {
+                'value' => "Home",
+                'url' => "",
+            },
+            {
+                'value' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+            },
+            {
+                'value' => "Foo",
+                'title' => "Fooish",
+                'url' => "foo/",
+                'subs' =>
+                [
+                    {
+                        'value' => "Expanded",
+                        'title' => "Expanded",
+                        'url' => "foo/expanded/",
+                        'expand_re' => "",
+                    },
+                ],
+            }
+        ],
+    },
+);
+
 
 sub get_test_data
 {
@@ -117,6 +156,7 @@ sub get_test_data
         {
             'two_sites' => \@two_sites_data,
             'minimal' => \@minimal_nav_menu,
+            'expand_re' => \@expand_re_nav_menu,
         };
 }
 

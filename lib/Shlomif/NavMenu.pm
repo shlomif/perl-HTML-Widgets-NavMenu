@@ -441,7 +441,6 @@ sub render_tree_contents
         if ($path_info =~ /$regexp/)
         {
             $new_item->setActive(1);
-            $self->{current_coords} = [ @$coords ];
         }
     }
     
