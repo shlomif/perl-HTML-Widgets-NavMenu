@@ -14,8 +14,8 @@ use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
 
     $node->set("url", "Rabbi/Zalman/");
     is($node->url(), "Rabbi/Zalman/", "Testing for URL Setting"); # TEST
-    $node->set("value", "Trail of Innocence");
-    is($node->value(), "Trail of Innocence", "Testing for value"); # TEST
+    $node->set("text", "Trail of Innocence");
+    is($node->text(), "Trail of Innocence", "Testing for text"); # TEST
     $node->set("show_always", 1);
     is($node->show_always(), 1, "Set/get show_always"); # TEST 
     $node->set("title", "It's Raining");
@@ -26,7 +26,7 @@ use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
     # Testing again for the same values to see that they are still OK.
 
     is($node->url(), "Rabbi/Zalman/", "Testing for URL Setting"); # TEST
-    is($node->value(), "Trail of Innocence", "Testing for value"); # TEST
+    is($node->text(), "Trail of Innocence", "Testing for text"); # TEST
     is($node->show_always(), 1, "Set/get show_always");  # TEST
     is($node->title(), "It's Raining", "Set/get title"); # TEST
     is($node->host(), "vipe", "Set/get host"); # TEST

@@ -17,16 +17,16 @@ my @minimal_nav_menu =
     'tree_contents' =>
     {
         'host' => "default",
-        'value' => "Top 1",
+        'text' => "Top 1",
         'title' => "T1 Title",
         'subs' =>
         [
             {
-                'value' => "Home",
+                'text' => "Home",
                 'url' => "",
             },
             {
-                'value' => "About Me",
+                'text' => "About Me",
                 'title' => "About Myself",
                 'url' => "me/",
             },
@@ -51,34 +51,34 @@ my @two_sites_data =
     'tree_contents' =>
     {
         'host' => "default",
-        'value' => "Top 1",
+        'text' => "Top 1",
         'title' => "T1 Title",
         'subs' =>
         [
             {
-                'value' => "Home",
+                'text' => "Home",
                 'url' => "",
             },
             {
-                'value' => "About Me",
+                'text' => "About Me",
                 'title' => "About Myself",
                 'url' => "me/",
                 'subs' =>
                 [
                     {
                         'url' => "round/hello/personal.html",
-                        'value' => "Bio",
+                        'text' => "Bio",
                         'title' => "Biography of Myself",
                     },
                     {
                         'url' => "round/toto/",
-                        'value' => "Gloria",
+                        'text' => "Gloria",
                         'title' => "A Useful Conspiracy",
                     },
                 ],
             },
             {
-                'value' => "Tam Tam Drums",
+                'text' => "Tam Tam Drums",
                 'title' => "Drumming is good for your health",
                 'url' => "hoola/",
                 'host' => "other",
@@ -87,17 +87,17 @@ my @two_sites_data =
                     {
                         'url' => "hello/hoop.html",
                         'title' => "Hoola Hoops Rulez and Ownz!",
-                        'value' => "Hoola Hoops",
+                        'text' => "Hoola Hoops",
                         'host' => "default",
                     },
                     {
                         'url' => "tetra/",
-                        'value' => "Tetrahedron",
+                        'text' => "Tetrahedron",
                         'subs' =>
                         [
                             {
                                 'url' => "tetra/one/",
-                                'value' => "Tetra One",
+                                'text' => "Tetra One",
                                 'title' => "Tetra One Title",
                             },
                         ],
@@ -115,27 +115,27 @@ my @expand_re_nav_menu =
     'tree_contents' =>
     {
         'host' => "default",
-        'value' => "Top 1",
+        'text' => "Top 1",
         'title' => "T1 Title",
         'subs' =>
         [
             {
-                'value' => "Home",
+                'text' => "Home",
                 'url' => "",
             },
             {
-                'value' => "About Me",
+                'text' => "About Me",
                 'title' => "About Myself",
                 'url' => "me/",
             },
             {
-                'value' => "Foo",
+                'text' => "Foo",
                 'title' => "Fooish",
                 'url' => "foo/",
                 'subs' =>
                 [
                     {
-                        'value' => "Expanded",
+                        'text' => "Expanded",
                         'title' => "Expanded",
                         'url' => "foo/expanded/",
                         'expand' => { 're' => "", },
@@ -153,47 +153,47 @@ my @show_always_nav_menu =
     'tree_contents' =>
     {
         'host' => "default",
-        'value' => "Top 1",
+        'text' => "Top 1",
         'title' => "T1 Title",
         'subs' =>
         [
             {
-                'value' => "Home",
+                'text' => "Home",
                 'url' => "",
             },
             {
-                'value' => "About Me",
+                'text' => "About Me",
                 'title' => "About Myself",
                 'url' => "me/",
             },
             {
-                'value' => "Show Always",
+                'text' => "Show Always",
                 'url' => "show-always/",
                 'show_always' => 1,
                 'subs' =>
                 [
                     {
-                        'value' => "Gandalf",
+                        'text' => "Gandalf",
                         'url' => "show-always/gandalf/",
                     },
                     {
-                        'value' => "Robin",
+                        'text' => "Robin",
                         'url' => "robin/",
                         'subs' =>
                         [
                             {
-                                'value' => "Hood",
+                                'text' => "Hood",
                                 'url' => "robin/hood/",
                             },
                         ],
                     },
                     {
-                        'value' => "Queen Esther",
+                        'text' => "Queen Esther",
                         'url' => "esther/",
                         'subs' =>
                         [
                             {
-                                'value' => "Haman",
+                                'text' => "Haman",
                                 'url' => "haman/",
                             },
                         ],
@@ -217,34 +217,34 @@ my @items_in_sub_nav_menu =
     'tree_contents' =>
     {
         'host' => "default",
-        'value' => "Top 1",
+        'text' => "Top 1",
         'title' => "T1 Title",
         'subs' =>
         [
             {
-                'value' => "Home",
+                'text' => "Home",
                 'url' => "",
             },
             {
-                'value' => "About Me",
+                'text' => "About Me",
                 'title' => "About Myself",
                 'url' => "me/",
                 'subs' =>
                 [
                     {
                         'url' => "me/bio.html",
-                        'value' => "Bio",
+                        'text' => "Bio",
                         'title' => "Biography of Myself",
                     },
                     {
                         'url' => "me/gloria/",
-                        'value' => "Gloria",
+                        'text' => "Gloria",
                         'title' => "A Useful Conspiracy",
                     },
                 ],
             },
             {
-                'value' => "Tam Tam Drums",
+                'text' => "Tam Tam Drums",
                 'title' => "Drumming is good for your health",
                 'url' => "hoola/",
             },
@@ -259,26 +259,26 @@ my @separator_nav_menu =
     'tree_contents' =>
     {
         'host' => "default",
-        'value' => "Top 1",
+        'text' => "Top 1",
         'title' => "T1 Title",
         'subs' =>
         [
             {
-                'value' => "Home",
+                'text' => "Home",
                 'url' => "",
             },
             {
-                'value' => "About Me",
+                'text' => "About Me",
                 'title' => "About Myself",
                 'url' => "me/",
                 'subs' =>
                 [
                     {
-                        'value' => "Group Hug",
+                        'text' => "Group Hug",
                         'url' => "me/group-hug/",
                     },
                     {
-                        'value' => "Cool I/O",
+                        'text' => "Cool I/O",
                         'url' => "me/cool-io/",
                     },
                     {
@@ -286,7 +286,7 @@ my @separator_nav_menu =
                         'skip' => 1,
                     },
                     {
-                        'value' => "Resume",
+                        'text' => "Resume",
                         'url' => "resume.html",
                     },
                 ],
@@ -296,7 +296,7 @@ my @separator_nav_menu =
                 'skip' => 1,
             },
             {
-                'value' => "Halifax",
+                'text' => "Halifax",
                 'url' => "halifax/",
             },
         ],
@@ -310,31 +310,31 @@ my @hidden_item_nav_menu =
     'tree_contents' =>
     {
         'host' => "default",
-        'value' => "Top 1",
+        'text' => "Top 1",
         'title' => "T1 Title",
         'subs' =>
         [
             {
-                'value' => "Home",
+                'text' => "Home",
                 'url' => "",
             },
             {
-                'value' => "About Me",
+                'text' => "About Me",
                 'title' => "About Myself",
                 'url' => "me/",
                 'subs' =>
                 [
                     {
-                        'value' => "Visible",
+                        'text' => "Visible",
                         'url' => "me/visible/",
                     },
                     {
-                        'value' => "Hidden",
+                        'text' => "Hidden",
                         'url' => "me/hidden/",
                         'hide' => 1,
                     },
                     {
-                        'value' => "Visible Too",
+                        'text' => "Visible Too",
                         'url' => "me/visible-too/",
                     },
                 ],
@@ -350,16 +350,16 @@ my @header_role_nav_menu =
     'tree_contents' =>
     {
         'host' => "default",
-        'value' => "Top 1",
+        'text' => "Top 1",
         'title' => "T1 Title",
         'subs' =>
         [
             {
-                'value' => "Home",
+                'text' => "Home",
                 'url' => "",
             },
             {
-                'value' => "About Me",
+                'text' => "About Me",
                 'title' => "About Myself",
                 'url' => "me/",
                 'role' => "header",
@@ -367,11 +367,11 @@ my @header_role_nav_menu =
                 'subs' =>
                 [
                     {
-                        'value' => "Sub Me",
+                        'text' => "Sub Me",
                         'url' => "me/sub-me1/",
                     },
                     {
-                        'value' => "Sub Me 2",
+                        'text' => "Sub Me 2",
                         'url' => "me/sub-me-two/",
                     },
                 ],
@@ -387,52 +387,52 @@ my @selective_expand_nav_menu =
     'tree_contents' =>
     {
         'host' => "default",
-        'value' => "Top 1",
+        'text' => "Top 1",
         'title' => "T1 Title",
         'subs' =>
         [
             {
-                'value' => "Home",
+                'text' => "Home",
                 'url' => "",
             },
             {
-                'value' => "About Me",
+                'text' => "About Me",
                 'title' => "About Myself",
                 'url' => "me/",
                 'expand' => { 're' => "^me/", },
                 'subs' =>
                 [
                     {
-                        'value' => "Group Hug",
+                        'text' => "Group Hug",
                         'url' => "me/group-hug/",
                     },
                     {
-                        'value' => "Cool I/O",
+                        'text' => "Cool I/O",
                         'url' => "me/cool-io/",
                     },
                     {
-                        'value' => "Resume",
+                        'text' => "Resume",
                         'url' => "resume.html",
                     },
                 ],
             },
             {
-                'value' => "Halifax",
+                'text' => "Halifax",
                 'url' => "halifax/",
             },
             {
-                'value' => "Software",
+                'text' => "Software",
                 'title' => "Open Source Software I Wrote",
                 'url' => "open-source/",
                 'expand' => { 're' => "^open-source/", },
                 'subs' =>
                 [
                     {
-                        'value' => "Fooware",
+                        'text' => "Fooware",
                         'url' => "open-source/fooware/",
                     },
                     {
-                        'value' => "Condor-Man",
+                        'text' => "Condor-Man",
                         'title' => "Kwalitee",
                         'url' => "open-source/condor-man/",
                     },

@@ -58,7 +58,7 @@ sub get_link_tag
     my $node = $self->top->node();
     if ($node->CurrentlyActive())
     {
-        return "<b>" . $node->value() . "</b>";
+        return "<b>" . $node->text() . "</b>";
     }
     else
     {

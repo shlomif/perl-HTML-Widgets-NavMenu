@@ -6,7 +6,7 @@ use base 'Class::Accessor';
 
 __PACKAGE__->mk_accessors(
     qw(CurrentlyActive expanded hide host role separator show_always),
-    qw(subs title url value)
+    qw(subs title url text)
     );
 
 sub initialize
@@ -56,7 +56,7 @@ sub list_regular_keys
 {
     my $self = shift;
 
-    return (qw(host role show_always title url value));
+    return (qw(host role show_always title url text));
 }
 
 sub list_boolean_keys

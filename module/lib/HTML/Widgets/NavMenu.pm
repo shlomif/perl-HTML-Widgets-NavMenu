@@ -629,7 +629,7 @@ sub render
                         'host' => $host,
                         'host_url' => $host_url,
                         'title' => $ptr->{title},
-                        'label' => $ptr->{value},
+                        'label' => $ptr->{text},
                         'direct_url' =>
                             $self->get_cross_host_rel_url(
                                 'host' => $host,
@@ -706,17 +706,17 @@ HTML::Widgets::NavMenu - A Perl Module for Generating HTML Navigation Menus
             'tree_contents' =>
             {
                 'host' => "default",
-                'value' => "Top 1",
+                'text' => "Top 1",
                 'title' => "T1 Title",
                 'expand_re' => "",
                 'subs' =>
                 [
                     {
-                        'value' => "Home",
+                        'text' => "Home",
                         'url' => "",
                     },
                     {
-                        'value' => "About Me",
+                        'text' => "About Me",
                         'title' => "About Myself",
                         'url' => "me/",
                     },
@@ -732,11 +732,10 @@ HTML::Widgets::NavMenu - A Perl Module for Generating HTML Navigation Menus
 
 This module generates a navigation menu for a site. It can also generate
 a complete site map, a path of leading components, and also keeps
-track of navigation links ("Next", "Prev", "Up", etc.) It's a little bit 
-scarse on documentation now, because it's still was not made ready for
-public consumption yet. You can start from the example above and see more
-examples in the tests, and complete working sites in the Subversion
-repositories at L<http://stalker.iguide.co.il:8080/svn/shlomif-homepage/>
+track of navigation links ("Next", "Prev", "Up", etc.) You can start from the 
+example above and see more examples in the tests, and complete working sites 
+in the Subversion repositories at 
+L<http://stalker.iguide.co.il:8080/svn/shlomif-homepage/>
 and L<http://opensvn.csie.org/perlbegin/perl-begin/>.
 
 To use this module call the constructor with the following named arguments:
@@ -902,10 +901,10 @@ contain a leading slash. This value does not propagate further.
 
 The URL should be specified for every nodes except separators and the such.
 
-=item 'value'
+=item 'text'
 
 This is the text that will be presented to the user as the text of the 
-link inside the navigation bar. E.g.: if C<'value'> is "Hi There", then the
+link inside the navigation bar. E.g.: if C<'text'> is "Hi There", then the
 link will look something like this:
 
     <a href="my-url/">Hi There</a>
@@ -920,7 +919,7 @@ as is, and so should be escaped to prevent HTML-injection attacks.
 =item 'title'
 
 This is the text of the link tag's title attribute. It is also not
-processed and so the user of the module, should make sure it is escaped
+processed and so the user of the module should make sure it is escaped
 if needed, to prevent HTML-injection attacks. It is optional, and if not
 specified, no title will be presented.
 
@@ -1059,7 +1058,7 @@ The URL of the node within the host. (one given in its 'url' key).
 
 =item label
 
-The label of the node. (one given in its 'value' key). This is not
+The label of the node. (one given in its 'text' key). This is not
 SGML-escaped.
 
 =item title 
