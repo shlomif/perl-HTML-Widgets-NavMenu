@@ -2,7 +2,8 @@
 
 use strict;
 # TODO: Replace with a use lib thingy.
-# 
+#
+use lib "./Shlomif-NavMenu-0.1.7/lib/";
 use Shlomif::NavMenu;
 use SitesData;
 
@@ -67,7 +68,9 @@ sub process_site
     foreach my $host_id (keys(%{$site_ref->{'hosts'}}))
     {
         my $host_dir = "$site_dir/$host_id";
+        notice("Now processing $host_dir");
         mymkdir($host_dir);
+        my $count = 0;
         foreach my $file (@{$site_ref->{'file_list'}->{$host_id}})
         {
             my $file_path = "$host_dir/$file";
@@ -119,7 +122,20 @@ sub process_site
             # TODO : add the nav-links, site-map, etc.
             close($fh);
         }
+        continue
+        {
+            $count++;
+            if ($count % 10 == 0)
+            {
+                notice("Processed $count files out of $host_dir");
+            }
+        }
     }
 }
+
+open my $stamp, ">$type.stamp";
+print {$stamp} "";
+close($stamp);
+
 1;
 
