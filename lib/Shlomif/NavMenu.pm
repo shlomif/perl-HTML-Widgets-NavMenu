@@ -793,12 +793,13 @@ sub fill_leading_path_and_mark_currently_active_node
 
     my $coords = $self->get_current_coords();
 
+    my $node_ret = $self->find_node_by_coords($coords, $args{'callback'});
+
     # This is so we won't mark the root as CurrentlyActive.
     # Otherwise, the tree is attempted to be captioned and stuff.
     # TODO: add a suitable test.
     if (@$coords)
-    {    
-        my $node_ret = $self->find_node_by_coords($coords, $args{'callback'});
+    {
         my $ptr = $node_ret->{ptr};
         $ptr->{perl_ref}->setActive(1);
         $ptr->{perl_ref}->setCurrentlyActive(1);
