@@ -61,7 +61,13 @@ sub visit
 sub num_subs_to_go
 {
     my $self = shift;
-    return (scalar(@{$self->{'subs'}}) - $self->{'sub_idx'} - 1);
+    return $self->num_subs() - $self->{'sub_idx'} - 1;
+}
+
+sub num_subs
+{
+    my $self = shift;
+    return scalar(@{$self->{'subs'}});
 }
 
 1;

@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 30;
+use Test::More tests => 33;
 
 use strict;
 
@@ -89,12 +89,14 @@ sub does_throw_exception
     
     ok ((!$item->is_visited()), "Item is not visited at start"); # TEST
     is ($item->num_subs_to_go(), 4, "Num subs to go at start"); # TEST
+    is ($item->num_subs(), 4, "Num subs at start"); # TEST
     is ($item->visit(), "ONE", "First sub"); # TEST
     is ($item->num_subs_to_go(), 3, "Num subs to go after first visit"); # TEST
     ok ($item->is_visited(), "Item is visited after first visit"); # TEST
     is ($item->visit(), "Two", "Second sub"); # TEST
     ok ($item->is_visited(), "Item is visited after second visit"); # TEST
     is ($item->num_subs_to_go(), 2, "Num subs to go (3)"); # TEST
+    is ($item->num_subs(), 4, "Num subs at middle"); # TEST
     is ($item->visit(), "threE3", "Third sub"); # TEST
     ok ($item->is_visited(), "Item is visited after third visit"); # TEST
     is ($item->num_subs_to_go(), 1, "Num subs to go (4)"); # TEST
@@ -104,6 +106,8 @@ sub does_throw_exception
     ok ((!defined($item->visit())), "No more subs"); # TEST
     ok ($item->is_visited(), "Item is visited after no more subs"); # TEST
     is ($item->num_subs_to_go(), 0, "Num subs to go (end 2)"); # TEST
+    is ($item->num_subs(), 4, "Num subs at finish"); # TEST
     ok ((!defined($item->visit())), "No more subs (2)"); # TEST
     is ($item->node(), "Hello", "item->node() is correct"); # TEST
+    
 }
