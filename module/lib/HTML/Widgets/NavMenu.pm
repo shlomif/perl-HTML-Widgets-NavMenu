@@ -4,7 +4,7 @@ use utf8;
 
 package HTML::Widgets::NavMenu;
 
-our $VERSION = '0.1.10_00';
+our $VERSION = '0.1.11_00';
 
 package HTML::Widgets::NavMenu::Error;
 
