@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 23;
+use Test::More tests => 24;
 
 use strict;
 
@@ -68,6 +68,9 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
     my $node = Shlomif::NavMenu::Tree::Node->new();
 
     ok((!$node->CurrentlyActive()), "Testing node->CurrentlyActive()"); # TEST
+    # TEST
+    ok((!$node->expanded()), 
+        "Testing node->expanded() before mark_as_current()"); 
     $node->mark_as_current();
     # TEST
     ok($node->CurrentlyActive(), 
