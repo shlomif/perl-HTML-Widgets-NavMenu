@@ -380,6 +380,67 @@ my @header_role_nav_menu =
     },
 );
 
+my @selective_expand_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'value' => "Top 1",
+        'title' => "T1 Title",
+        'subs' =>
+        [
+            {
+                'value' => "Home",
+                'url' => "",
+            },
+            {
+                'value' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'expand' => { 're' => "^me/", },
+                'subs' =>
+                [
+                    {
+                        'value' => "Group Hug",
+                        'url' => "me/group-hug/",
+                    },
+                    {
+                        'value' => "Cool I/O",
+                        'url' => "me/cool-io/",
+                    },
+                    {
+                        'value' => "Resume",
+                        'url' => "resume.html",
+                    },
+                ],
+            },
+            {
+                'value' => "Halifax",
+                'url' => "halifax/",
+            },
+            {
+                'value' => "Software",
+                'title' => "Open Source Software I Wrote",
+                'url' => "open-source/",
+                'expand' => { 're' => "^open-source/", },
+                'subs' =>
+                [
+                    {
+                        'value' => "Fooware",
+                        'url' => "open-source/fooware/",
+                    },
+                    {
+                        'value' => "Condor-Man",
+                        'title' => "Kwalitee",
+                        'url' => "open-source/condor-man/",
+                    },
+                ],
+            },            
+        ],
+    },
+);
 
 sub get_test_data
 {
@@ -393,6 +454,7 @@ sub get_test_data
             'separator' => \@separator_nav_menu,
             'hidden_item' => \@hidden_item_nav_menu,
             'header_role' => \@header_role_nav_menu,
+            'selective_expand' => \@selective_expand_nav_menu,
         };
 }
 

@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 10;
+use Test::More tests => 12;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -410,3 +410,89 @@ EOF
         "Nav Menu with a selected item with a role of \"header\" "); 
 }
 
+# Test the selective expand. (test #1)
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/me/bio/test.html",
+        @{$test_data->{'selective_expand'}},
+        'ul_classes' => [ "one", "two", "three" ],
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul class="one">
+<li>
+<a href="./../../">Home</a>
+</li>
+<li>
+<a href="./../" title="About Myself">About Me</a>
+<br />
+<ul class="two">
+<li>
+<a href="./../group-hug/">Group Hug</a>
+</li>
+<li>
+<a href="./../cool-io/">Cool I/O</a>
+</li>
+<li>
+<a href="./../../resume.html">Resume</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="./../../halifax/">Halifax</a>
+</li>
+<li>
+<a href="./../../open-source/" title="Open Source Software I Wrote">Software</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Selective Expand Nav-Menu #1"); 
+}
+
+# Test the selective expand. (test #2)
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/open-source/bits.html",
+        @{$test_data->{'selective_expand'}},
+        'ul_classes' => [ "one", "two", "three" ],
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul class="one">
+<li>
+<a href="./../">Home</a>
+</li>
+<li>
+<a href="./../me/" title="About Myself">About Me</a>
+</li>
+<li>
+<a href="./../halifax/">Halifax</a>
+</li>
+<li>
+<a href="./" title="Open Source Software I Wrote">Software</a>
+<br />
+<ul class="two">
+<li>
+<a href="./fooware/">Fooware</a>
+</li>
+<li>
+<a href="./condor-man/" title="Kwalitee">Condor-Man</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Selective Expand Nav-Menu #2"); 
+}
