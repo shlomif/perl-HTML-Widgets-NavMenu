@@ -85,7 +85,20 @@ sub get_new_accum_state
     my $prev_state = 
         $parent_item->accum_state();
 
-    return { 'host' => ($node->{'host'} || $prev_state->{'host'}) };
+    my $show_always = 0;
+    if (exists($prev_state->{'show_always'}))
+    {
+        $show_always = $prev_state->{'show_always'};
+    }
+    if (exists($node->{'show_always'}))
+    {
+        $show_always = $node->{'show_always'};
+    }
+    return 
+        { 
+            'host' => ($node->{'host'} || $prev_state->{'host'}),
+            'show_always' => $show_always,
+        };
 }
 
 sub get_results

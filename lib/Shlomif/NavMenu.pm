@@ -210,12 +210,6 @@ sub render_tree_contents
     my $host = $sub_contents->{host} || $args{host} or
         die "Host not specified!";
 
-    my $show_always = $args{show_always};
-    if (exists($sub_contents->{show_always}))
-    {
-        $show_always = $sub_contents->{show_always};
-    }
-    
     my $new_item = +{};
 
     if (exists($sub_contents->{value}))
@@ -250,9 +244,9 @@ sub render_tree_contents
     {
         $new_item->{separator} = 1;
     }
-    if (defined($show_always))
+    if (exists($sub_contents->{'show_always'}))
     {
-        $new_item->{'show_always'} = $show_always;
+        $new_item->{'show_always'} = $sub_contents->{'show_always'};
     }
     $new_item->{'role'} = $sub_contents->{role} || "normal";
 
@@ -286,7 +280,6 @@ sub render_tree_contents
                 'sub_contents' => $sub_contents_sub,
                 'coords' => [@$coords, $index],
                 'host' => $host,
-                'show_always' => $show_always,
             );
             if ($sub_item->{'Active'})
             {
