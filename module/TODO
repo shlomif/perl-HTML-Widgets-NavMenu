@@ -8,8 +8,6 @@ the code more modular.
 * Eliminate the specified dealing with the header role by putting it in
 a derived class.
 
-* Implement the list of values to assign inside the Node class.
-
 * Restore the abs_url directive only as use_abs_url or whatever.
 
 * Add an option to link to the pages as:
@@ -29,3 +27,7 @@ Long-Term:
 ----------
 
 * Make the module support URLs with CGI GET parameters properly.
+
+* Add support for more attributes other than class="" to the ul and li
+tags.
+
