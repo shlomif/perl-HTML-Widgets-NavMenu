@@ -33,6 +33,16 @@ sub create_file_dirs
     }
 }
 
+sub render_leading_path_component
+{
+    my $component = shift;
+    my $title = $component->title();
+    my $title_attr = defined($title) ? " title=\"$title\"" : "";
+    return "<a href=\"" . CGI::escapeHTML($component->direct_url()) .
+        "\"$title_attr>" .
+        $component->label() . "</a>";
+};
+
 mymkdir("Output/$type");
 
 {
@@ -86,12 +96,20 @@ sub process_site
                 foreach my $key (@keys)
                 {
                     my $url = $nav_links->{$key};
-                    print {$fh} "<link rel=\"$key\" href=\"" . 
+                    print {$fh} "<link rel=\"$key\" href=\"" .
                         CGI::escapeHTML($url) . "\" />\n";
                 }
                 print {$fh} "$close_mark\n";
             }
-
+            {
+                print {$fh} "LEADING_PATH=\n$open_mark\n";
+                print {$fh}
+                    (map
+                        { render_leading_path_component($_) . "\n" }
+                        @{$results->{leading_path}}
+                    );
+                print {$fh} "$close_mark\n";
+            }
             # TODO : add the nav-links, site-map, etc.
             close($fh);
         }
