@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 4;
+use Test::More tests => 5;
 
 use HTML::Widgets::NavMenu;
 
@@ -207,3 +207,38 @@ EOF
         "site_map - separator");
 }
 
+# This is a test for the rec_url_type directive.
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/darling/",
+        @{$test_data->{'rec_url_type_menu'}},
+    );
+
+    my $results = $nav_menu->gen_site_map();
+
+    my $expected_text = <<"EOF";
+<ul>
+<li>
+<a href="http://www.hello.com/~shlomif/">Home</a>
+</li>
+<li>
+<a href="/~shlomif/me/" title="About Myself">About Me</a> - About Myself
+</li>
+<li>
+<a href="http://www.hello.com/~shlomif/tedious/to/write/">Hoola</a>
+</li>
+<li>
+<a href="../yowza/">Yowza</a>
+<br />
+<ul>
+<li>
+<a href="http://www.hello.com/~shlomif/yowza/howza/">This should be full_abs again</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+    # TEST
+    ok (validate_site_map($results, $expected_text), 
+        "site_map - rec_url_type");
+}
