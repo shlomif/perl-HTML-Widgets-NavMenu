@@ -198,11 +198,9 @@ sub get_cross_host_rel_url
             ($self->{hosts}->{$host}->{base_url} . $host_url);
 }
 
-sub render_tree_contents
+sub create_new_nav_menu_item
 {
     my $self = shift;
-    my $path_info = $self->path_info();
-
     my %args = (@_);
 
     my $sub_contents = $args{sub_contents};
@@ -212,7 +210,7 @@ sub render_tree_contents
 
     my $new_item = +{};
 
-    foreach my $key (qw(value host show_always title))
+    foreach my $key (qw(value host show_always title url))
     {
         if (exists($sub_contents->{$key}))
         {
@@ -230,20 +228,6 @@ sub render_tree_contents
 
     $new_item->{'role'} = $sub_contents->{role} || "normal";
 
-    my $is_same_node = 0;
-
-    if (exists($sub_contents->{url}))
-    {
-        my $host_url = $sub_contents->{url};
-
-        $new_item->{'url'} = $host_url;
-
-        if (($host_url eq $path_info) && ($host eq $self->{current_host}))
-        {
-            $is_same_node = 1;
-        }
-    }
-
     if (exists($sub_contents->{expand_re}))
     {
         my $regexp = $sub_contents->{expand_re};
@@ -251,13 +235,45 @@ sub render_tree_contents
         # This is because a pattern match in which the pattern
         # evaluates to an empty regexp uses the last successful pattern
         # match.
-        if (($regexp eq "") || ($path_info =~ /$regexp/))
+        if (($regexp eq "") || ($self->path_info() =~ /$regexp/))
         {
             $new_item->{'Active'} = 1;
         }
     }
-    
+
     $sub_contents->{perl_ref} = $new_item;
+
+    return $new_item;
+}
+
+sub render_tree_contents
+{
+    my $self = shift;
+
+    my %args = (@_);
+
+    my $path_info = $self->path_info();    
+
+    my $sub_contents = $args{sub_contents};
+    my $coords = $args{coords};
+    my $host = $sub_contents->{host} || $args{host} or
+        die "Host not specified!";
+
+    my $new_item =
+        $self->create_new_nav_menu_item(
+            %args,
+        );
+
+    my $is_same_node = 0;
+
+    if (exists($sub_contents->{url}))
+    {
+        if (($sub_contents->{url} eq $path_info) && ($host eq $self->{current_host}))
+        {
+            $is_same_node = 1;
+        }
+    }
+
     if (exists($sub_contents->{subs}))
     {
         my $index = 0;
@@ -537,7 +553,7 @@ sub fill_leading_path
     # Otherwise, the tree is attempted to be captioned and stuff.
     # TODO: add a suitable test.
     if (@$coords)
-    {    
+    {
         $self->find_node_by_coords($coords, $args{'callback'});
     }
 }
@@ -552,17 +568,17 @@ sub render
 
     my $tree_contents = $self->{tree_contents};
 
-    my $tree = 
+    my $tree =
         $self->render_tree_contents(
-            'sub_tree' => undef, 
-            'sub_contents' => $tree_contents, 
+            'sub_tree' => undef,
+            'sub_contents' => $tree_contents,
             'coords' => [],
             );
 
     my @current_coords = @{$self->{current_coords}};
 
     my @leading_path;
-    
+
     if (! @current_coords)
     {
         $tree->{'Active'} = 1;
