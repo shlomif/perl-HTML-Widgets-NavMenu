@@ -1,7 +1,3 @@
-
-* Make the syntax of the navigation menus more sane ("label" or "text" 
-instead of "value", etc.) That would break compatibility.
-
 * Restore the abs_url directive only as url_type or whatever.
     - Add a url_type accessor to LeadingPath::Component.
 
