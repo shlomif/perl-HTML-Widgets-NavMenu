@@ -10,6 +10,31 @@ use vars qw(@EXPORT);
 
 @EXPORT = qw(get_test_data);
 
+my @minimal_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'value' => "Top 1",
+        'title' => "T1 Title",
+        'expand_re' => "",
+        'subs' =>
+        [
+            {
+                'value' => "Home",
+                'url' => "",
+            },
+            {
+                'value' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+            },
+        ],
+    },
+);
+
 my @two_sites_data =
 (
     'current_host' => "default",
@@ -85,11 +110,13 @@ my @two_sites_data =
     },
 );
 
+
 sub get_test_data
 {
     return
         {
             'two_sites' => \@two_sites_data,
+            'minimal' => \@minimal_nav_menu,
         };
 }
 

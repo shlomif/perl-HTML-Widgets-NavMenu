@@ -13,27 +13,7 @@ my $test_data = get_test_data();
 {
     my $nav_menu = Shlomif::NavMenu->new(
         'path_info' => "hello/",
-        'current_host' => "default",
-        'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
-        'tree_contents' =>
-        {
-            'host' => "default",
-            'value' => "Top 1",
-            'title' => "T1 Title",
-            'expand_re' => "",
-            'subs' =>
-            [
-                {
-                    'value' => "Home",
-                    'url' => "",
-                },
-                {
-                    'value' => "About Me",
-                    'title' => "About Myself",
-                    'url' => "me/",
-                },
-            ],
-        },
+        @{$test_data->{'minimal'}},
     );
 
     my $returned_text = $nav_menu->gen_site_map();
@@ -48,9 +28,6 @@ my $test_data = get_test_data();
 </ul>
 EOF
     is($returned_text, $expected_text, "site_map #1"); # TEST
-
-    
-
 }
 
 {

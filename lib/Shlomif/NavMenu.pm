@@ -246,6 +246,13 @@ sub initialize
     return 0;
 }
 
+sub get_current_coords
+{
+    my $self = shift;
+
+    return [ @{$self->{current_coords}} ];
+}
+
 sub _register_path_info
 {
     my $self = shift;
@@ -441,8 +448,8 @@ sub render_tree_contents
         foreach my $sub_item (@{$sub_contents->{subs}})
         {
             $self->render_tree_contents(
-                'sub_tree' => $new_item, 
-                'sub_contents' => $sub_item, 
+                'sub_tree' => $new_item,
+                'sub_contents' => $sub_item,
                 'coords' => [@$coords, $index],
                 'host' => $host,
                 'show_always' => $show_always,
@@ -557,7 +564,7 @@ sub get_next_coords
 {
     my $self = shift;
 
-    my @coords = @{shift || $self->{current_coords}};
+    my @coords = @{shift || $self->get_current_coords};
 
     my @branches = ($self->{tree_contents});
 
@@ -597,7 +604,7 @@ sub get_prev_coords
 {
     my $self = shift;
 
-    my @coords = @{shift || $self->{'current_coords'}};
+    my @coords = @{shift || $self->get_current_coords()};
 
     if (scalar(@coords) == 0)
     {
@@ -630,7 +637,7 @@ sub get_up_coords
 {
     my $self = shift;
 
-    my @coords = @{shift || $self->{'current_coords'}};
+    my @coords = @{shift || $self->get_current_coords};
 
     if (scalar(@coords) == 0)
     {
@@ -647,7 +654,7 @@ sub get_top_coords
 {
     my $self = shift;
 
-    my @coords = @{shift || $self->{'current_coords'}};
+    my @coords = @{shift || $self->get_current_coords()};
 
     if (@coords)
     {
@@ -701,7 +708,7 @@ sub get_coords_while_skipping_skips
     my $self = shift;
 
     my $callback = shift;
-    my $coords = shift || $self->{current_coords};
+    my $coords = shift || $self->get_current_coords();
     
     my $do_once = 1;
 
@@ -767,6 +774,26 @@ sub get_rel_url_from_coords
     );
 }
 
+sub fill_leading_path_and_mark_currently_active_node
+{
+    my $self = shift;
+
+    my %args = (@_);
+
+    my $coords = $self->get_current_coords();
+
+    # This is so we won't mark the root as CurrentlyActive.
+    # Otherwise, the tree is attempted to be captioned and stuff.
+    # TODO: add a suitable test.
+    if (@$coords)
+    {    
+        my $node_ret = $self->find_node_by_coords($coords, $args{'callback'});
+        my $ptr = $node_ret->{ptr};
+        $ptr->{perl_ref}->setActive(1);
+        $ptr->{perl_ref}->setCurrentlyActive(1);
+    }
+}
+
 sub render
 {
     my $self = shift;
@@ -816,10 +843,10 @@ sub render
                             ),
                     );
             };
-        my $node_ret = $self->find_node_by_coords([@current_coords], $fill_leading_path);
-        my $ptr = $node_ret->{ptr};
-        $ptr->{perl_ref}->setActive(1);
-        $ptr->{perl_ref}->setCurrentlyActive(1);
+
+        $self->fill_leading_path_and_mark_currently_active_node(
+            'callback' => $fill_leading_path,
+        );
     }
 
     my %nav_links;
