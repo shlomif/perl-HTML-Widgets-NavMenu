@@ -70,21 +70,20 @@ sub get_a_tag
     my $node = $self->top->node;
 
     my $tag ="<a";
-    my $title = $node->{'title'};
+    my $title = $node->title;
 
     $tag .= " href=\"" .
         CGI::escapeHTML(
             $self->nav_menu()->get_cross_host_rel_url(
                 'host' => $self->_get_top_host(),
-                'host_url' => $node->{url},
-                'abs_url' => $node->{abs_url},
+                'host_url' => $node->url(),
             )
         ). "\"";
     if (defined($title))
     {
         $tag .= " title=\"$title\"";
     }
-    $tag .= ">" . $node->{value} . "</a>";
+    $tag .= ">" . $node->value() . "</a>";
     return $tag;
 }
 

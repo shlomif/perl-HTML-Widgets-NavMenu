@@ -29,7 +29,7 @@ sub start_regular
 
     $self->_add_tags("<li>");
     my $tag = $self->get_a_tag();
-    my $title = $node->{'title'};
+    my $title = $node->title();
     if (defined($title))
     {
         $tag .= " - $title";

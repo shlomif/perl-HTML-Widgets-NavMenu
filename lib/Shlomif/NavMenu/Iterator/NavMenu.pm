@@ -31,9 +31,9 @@ sub start_regular
     else
     {
         my $tag;
-        if ($node->{'CurrentlyActive'})
+        if ($node->CurrentlyActive())
         {
-            $tag = "<b>" . $node->{value} . "</b>";
+            $tag = "<b>" . $node->value() . "</b>";
         }
         else
         {
@@ -84,20 +84,20 @@ sub end_regular
 sub is_hidden
 {
     my $self = shift;
-    return $self->top->node()->{'hide'};
+    return $self->top->node()->hide();
 }
 
 sub is_expanded
 {
     my $self = shift;
     my $node = $self->top->node();
-    return ($node->{'expanded'} || $self->top->accum_state->{'show_always'});
+    return ($node->expanded() || $self->top->accum_state->{'show_always'});
 }
 
 sub is_role_header
 {
     my $self = shift;
-    return ($self->top->node->{'role'} eq "header");
+    return ($self->top->node->role() eq "header");
 }
 
 1;

@@ -46,7 +46,7 @@ sub _is_top_separator
 {
     my $self = shift;
 
-    return $self->top->node->{'separator'};
+    return $self->top->node->separator;
 }
 
 sub _get_top_host
@@ -68,10 +68,7 @@ sub get_node_subs
     my $self = shift;
     my %args = (@_);
     my $node = $args{'node'};
-    return
-        exists($node->{subs}) ?
-            [ @{$node->{subs}} ] :
-            [];
+    return $node->subs();
 }
 
 sub get_new_accum_state
@@ -80,27 +77,29 @@ sub get_new_accum_state
     my %args = (@_);
     my $parent_item = $args{'item'};
     my $node = $args{'node'};
-
-    if (!defined($parent_item))
+    
+    my $prev_state;
+    if (defined($parent_item))
     {
-        return { 'host' => $node->{'host'} };
+        $prev_state = $parent_item->accum_state();
     }
-
-    my $prev_state = 
-        $parent_item->accum_state();
+    else
+    {
+        $prev_state = +{};
+    }
 
     my $show_always = 0;
     if (exists($prev_state->{'show_always'}))
     {
         $show_always = $prev_state->{'show_always'};
     }
-    if (exists($node->{'show_always'}))
+    if (defined($node->show_always()))
     {
-        $show_always = $node->{'show_always'};
+        $show_always = $node->show_always();
     }
     return 
         { 
-            'host' => ($node->{'host'} || $prev_state->{'host'}),
+            'host' => ($node->host() || $prev_state->{'host'}),
             'show_always' => $show_always,
         };
 }
