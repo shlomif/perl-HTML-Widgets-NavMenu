@@ -241,8 +241,6 @@ sub create_new_nav_menu_item
         }
     }
 
-    $sub_contents->{perl_ref} = $new_item;
-
     return $new_item;
 }
 
@@ -264,13 +262,13 @@ sub render_tree_contents
             %args,
         );
 
-    my $is_same_node = 0;
-
     if (exists($sub_contents->{url}))
     {
         if (($sub_contents->{url} eq $path_info) && ($host eq $self->{current_host}))
         {
-            $is_same_node = 1;
+            $self->{current_coords} = [ @$coords ];
+            $new_item->{'Active'} = 1;
+            $new_item->{'CurrentlyActive'} = 1;
         }
     }
 
@@ -297,12 +295,6 @@ sub render_tree_contents
             $index++;
         }
         $new_item->{'subs'} = $subs;
-    }
-    if ($is_same_node)
-    {
-        $self->{current_coords} = [ @$coords ];
-        $new_item->{'Active'} = 1;
-        $new_item->{'CurrentlyActive'} = 1;
     }
     return $new_item;
 }
