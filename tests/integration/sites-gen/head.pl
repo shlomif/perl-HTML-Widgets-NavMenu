@@ -88,6 +88,7 @@ sub process_site
                     'current_host' => $host_id,
                     'hosts' => $site_ref->{'hosts'},
                     'tree_contents' => $site_ref->{'tree_contents'},
+                    'ul_classes' => ["navbarmain", (("navbarnested") x 10)],
                 );
             my $results = $nav_menu->render();
             open my $fh, ">$file_path";
