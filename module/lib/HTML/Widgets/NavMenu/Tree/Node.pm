@@ -13,16 +13,9 @@ sub initialize
 {
     my $self = shift;
 
-    $self->set("role", $self->get_default_role());
-
     $self->set("subs", []);
 
     return $self;
-}
-
-sub get_default_role
-{
-    return "normal";
 }
 
 sub expand

@@ -144,7 +144,8 @@ sub is_expanded
 sub is_role_header
 {
     my $self = shift;
-    return ($self->top->node->role() eq "header");
+    my $role = $self->top->node->role();
+    return (defined($role) && ($role eq "header"));
 }
 
 1;

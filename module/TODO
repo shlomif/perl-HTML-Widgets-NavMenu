@@ -1,11 +1,9 @@
-* Use Build.PL instead of Makefile.PL. (?)
-
 * Make 'expand_always', 'expand_cb' directives.
 
 * Eliminate the specified dealing with the header role by putting it in
 a derived class.
 
-* Restore the abs_url directive only as use_abs_url or whatever.
+* Restore the abs_url directive only as url_type or whatever.
 
 * Add an option to link to the pages as:
 
@@ -22,6 +20,8 @@ similar modules)
 
 Long-Term:
 ----------
+
+* Use Build.PL instead of Makefile.PL. (?)
 
 * Make the module support URLs with CGI GET parameters properly.
 
