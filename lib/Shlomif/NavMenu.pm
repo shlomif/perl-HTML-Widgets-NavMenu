@@ -310,7 +310,6 @@ sub gen_site_map
     my $iterator = 
         Shlomif::NavMenu::Iterator::SiteMap->new(
             'nav_menu' => $self,
-            'tree' => $self->get_traversed_tree(),
         );
 
     $iterator->traverse();
@@ -544,13 +543,7 @@ sub fill_leading_path
 
     my $coords = $self->get_current_coords();
 
-    # This is so we won't mark the root as CurrentlyActive.
-    # Otherwise, the tree is attempted to be captioned and stuff.
-    # TODO: add a suitable test.
-    if (@$coords)
-    {
-        $self->find_node_by_coords($coords, $args{'callback'});
-    }
+    $self->find_node_by_coords($coords, $args{'callback'});
 }
 
 # The traversed_tree is the tree that is calculated from the tree given
@@ -564,10 +557,7 @@ sub get_traversed_tree
     {
         my $gen_retval = $self->gen_traversed_tree();
         $self->{'traversed_tree'} = $gen_retval->{'tree'};
-        if (defined($gen_retval->{'current_coords'}))
-        {
-            $self->{'current_coords'} = $gen_retval->{'current_coords'};
-        }
+        $self->{'current_coords'} = $gen_retval->{'current_coords'};
     }
     return $self->{'traversed_tree'};
 }
@@ -576,7 +566,7 @@ sub gen_traversed_tree
 {
     my $self = shift;
 
-    my $current_coords = undef;
+    my $current_coords = [];
 
     my $tree = 
         $self->render_tree_contents(
@@ -607,12 +597,10 @@ sub render
     my $iterator =
         Shlomif::NavMenu::Iterator::NavMenu->new(
             'nav_menu' => $self,
-            'tree' => $self->get_traversed_tree(),
         );
     $iterator->traverse();
     my $html = [ @{$iterator->{'html'}} ];
     
-
     my $hosts = $self->{hosts};
 
     my @leading_path;
