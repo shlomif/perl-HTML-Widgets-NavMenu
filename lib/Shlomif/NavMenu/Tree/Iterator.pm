@@ -1,36 +1,3 @@
-package MyProxy;
-
-use Shlomif::NavMenu::Tree::Iterator::Item;
-
-use strict;
-use warnings;
-
-use base 'Shlomif::NavMenu::Object';
-
-use vars qw($AUTOLOAD);
-
-sub initialize
-{
-    my $self = shift;
-
-    $self->{'**PROXIED**'} = 
-        Shlomif::NavMenu::Tree::Iterator::Item->new(
-            @_
-        );
-    
-    return 0;
-}
-
-sub AUTOLOAD
-{
-    my $self = shift;
-    my $func_name = $AUTOLOAD;
-    $func_name =~ s!^MyProxy::!!;
-    return $self->{'**PROXIED**'}->$func_name(@_);
-}
-
-1;
-
 package Shlomif::NavMenu::Tree::Iterator;
 
 use strict;
@@ -39,6 +6,7 @@ use warnings;
 use base qw(Shlomif::NavMenu::Object);
 
 use Shlomif::NavMenu::Tree::Iterator::Stack;
+use Shlomif::NavMenu::Tree::Iterator::Item;
 
 sub initialize
 {
@@ -82,12 +50,12 @@ sub push_into_stack
             'node' => $node
         );
 
-    my $new_item = 
-        MyProxy->new(
+    my $new_item =
+        Shlomif::NavMenu::Tree::Iterator::Item->new(
             'node' => $node,
             'subs' => $subs,
             'accum_state' => $accum_state,
-        );      
+        );
 
     $self->stack()->push($new_item);
 }
