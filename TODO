@@ -2,7 +2,5 @@
 
 * Make 'expand_always', 'expand_cb' directives.
 
-* Move to the HTML::Widgets::NavMenu namespace.
-
 * Build a non-unit test of the homepage and perl-begin.
 
