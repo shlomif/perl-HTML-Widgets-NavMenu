@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 13;
+use Test::More tests => 21;
 
 use HTML::Widgets::NavMenu;
 
@@ -87,3 +87,49 @@ my $test_data = get_test_data();
     # TEST
     is ($component->url_type(), "full_abs", "Testing for url_type");
 }
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/sub-dir/",
+        @{$test_data->{'url_is_abs_menu'}},
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my @leading_path = @{$rendered->{'leading_path'}};
+
+    # TEST
+    ok ((scalar(@leading_path) == 3), "Checking for a leading path of len 1");
+
+    my $component = $leading_path[0];
+
+    # TEST
+    is ($component->title(), "T1 Title", "Testing for title of leading_path"); 
+    
+    # TEST
+    is ($component->direct_url(), "../", "Testing for direct_url");
+
+    $component = $leading_path[1];
+
+    # TEST
+    is ($component->title(), "Google it!", 
+        "Testing for title of leading_path"); 
+    
+    # TEST
+    is ($component->direct_url(), "http://www.google.com/", 
+        "Testing for direct_url");
+
+    # TEST
+    is ($component->url_type(), "full_abs", "Testing for url_type");
+
+    $component = $leading_path[2];
+  
+    # TEST
+    is ($component->direct_url(), "./", 
+        "Testing for direct_url");
+
+    # TEST
+    is ($component->url_type(), "rel", "Testing for url_type");
+}
+

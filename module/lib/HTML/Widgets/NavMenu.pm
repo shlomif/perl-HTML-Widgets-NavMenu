@@ -622,7 +622,11 @@ sub get_leading_path
                 my $host_url = (defined($node->url()) ? ($node->url()) : "");
                 my $host = $item->accum_state()->{'host'};
 
-                my $url_type = $item->get_url_type();
+                my $url_type =
+                    ($node->url_is_abs() ?
+                        "full_abs" :
+                        $item->get_url_type()
+                    );
 
                 push @leading_path,
                     HTML::Widgets::NavMenu::LeadingPath::Component->new(

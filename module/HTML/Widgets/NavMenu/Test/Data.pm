@@ -549,6 +549,14 @@ my @url_is_abs_nav_menu =
                 'title' => "Google it!",
                 'url' => "http://www.google.com/",
                 'url_is_abs' => 1,
+                'expand' => { 'bool' => 0, },
+                'subs' =>
+                [
+                    {
+                        'url' => "sub-dir/",
+                        'text' => "Sub Directory",
+                    },
+                ],
             },
         ],
     },
