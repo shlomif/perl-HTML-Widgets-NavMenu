@@ -1213,7 +1213,7 @@ role. Used for the navigation menu in L<http://perl-begin.berlios.de/>.
 =item L<HTML::Widget::SideBar>
 
 A module written by Yosef Meller for maintaining a navigation menu. 
-HTML::Widgets::NavMenu originally utilized, but it no longer does. This module
+HTML::Widgets::NavMenu originally utilized it, but no longer does. This module
 does not makes links relative on its own, and tends to generate a lot of 
 JavaScript code by default. It also does not have too many automated test
 scripts.
