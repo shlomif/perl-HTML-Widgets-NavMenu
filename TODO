@@ -1,3 +1,4 @@
-* Factor out the _add_tags() calls from Tree::Iterator.
+* Create an is_empty() function for the stack.
 
-* Eliminate the ugly $nav_menu handling in Tree::Iterator::traverse.
+* Change the $self->stack()->top() calls to $self->top().
+

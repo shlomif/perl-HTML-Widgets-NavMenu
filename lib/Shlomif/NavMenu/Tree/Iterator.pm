@@ -5,55 +5,41 @@ use warnings;
 
 use base qw(Shlomif::NavMenu::Object);
 
+use Shlomif::NavMenu::Tree::Iterator::Stack;
+
 sub initialize
 {
     my $self = shift;
 
-    $self->{'stack'} = [];
+    $self->{'stack'} = Shlomif::NavMenu::Tree::Iterator::Stack->new();
 
     return 0;
 }
 
-sub _get_stack
+sub stack
 {
     my $self = shift;
 
     return $self->{'stack'};
 }
 
-sub _stack_get_num_elems
+sub top
 {
     my $self = shift;
-
-    return scalar(@{$self->_get_stack()});
+    return $self->stack()->top();
 }
 
 sub _stack_is_empty
 {
     my $self = shift;
 
-    return ($self->_stack_get_num_elems() == 0);
-}
-
-sub _stack_get_top_item
-{
-    my $self = shift;
-
-    my $stack = $self->_get_stack();
-
-    return $stack->[-1];
-}
-
-sub _stack_pop
-{
-    my $self = shift;
-    pop(@{$self->_get_stack()});
+    return ($self->stack->len() == 0);
 }
 
 sub _get_top_remaining_subs
 {
     my $self = shift;
-    return $self->_stack_get_top_item()->{'remaining_subs'};
+    return $self->top->{'remaining_subs'};
 }
 
 sub _are_remaining_subs
@@ -84,12 +70,7 @@ sub push_into_stack
 
     my %args = (@_);
     my $node = $args{'node'};
-    my $parent_record = 
-        ($self->_stack_is_empty() ? 
-            +{} : 
-            $self->_stack_get_top_item()
-        );
-    
+
     my $record = +{};
     $record->{'node'} = $node;
     my $subs = $self->get_node_subs('node' => $node);
@@ -98,11 +79,11 @@ sub push_into_stack
     $record->{'visited'} = 0;
     $record->{'accum_state'} =
         $self->get_new_accum_state(
-            'item' => $self->_stack_get_top_item(),
+            'item' => $self->top(),
             'node' => $node
         );
 
-    push @{$self->_get_stack()}, $record;
+    $self->stack()->push($record);
 }
 
 sub traverse
@@ -113,7 +94,7 @@ sub traverse
 
     MAIN_LOOP: while (! $self->_stack_is_empty())
     {
-        my $top_item = $self->_stack_get_top_item();
+        my $top_item = $self->top();
         my $visited = $top_item->{'visited'};
 
         if (!$visited)
@@ -137,7 +118,7 @@ sub traverse
         else
         {
             $self->node_end();
-            $self->_stack_pop();
+            $self->stack->pop();
         }
     }
     

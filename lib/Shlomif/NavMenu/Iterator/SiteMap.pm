@@ -33,13 +33,13 @@ sub _is_root
 {
     my $self = shift;
 
-    return ($self->_stack_get_num_elems() == 1);
+    return ($self->stack->len() == 1);
 }
 
 sub _get_top_node
 {
     my $self = shift;
-    return $self->_stack_get_top_item()->{'node'};
+    return $self->top->{'node'};
 }
 
 sub _is_top_separator
@@ -55,7 +55,7 @@ sub _get_top_host
 
     return 
         $self->_get_stack_item_accum_state(
-            'item' => $self->_stack_get_top_item(),
+            'item' => $self->top(),
         )->{'host'};
 }
 
@@ -98,7 +98,7 @@ sub node_start
 {
     my $self = shift;
 
-    my $top_item = $self->_stack_get_top_item();
+    my $top_item = $self->top;
     my $status = $top_item->{'status'};
     my $node = $self->_get_top_node();
 
@@ -155,7 +155,7 @@ sub node_end
     {
         if (! $self->_is_top_separator())
         {
-            if ($self->_stack_get_top_item()->{'num_subs'})
+            if ($self->top()->{'num_subs'})
             {
                 $self->_add_tags("</ul>");
             }
