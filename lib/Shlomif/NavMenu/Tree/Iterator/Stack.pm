@@ -53,5 +53,12 @@ sub is_empty
     return ($self->len() == 0);
 }
 
+sub reset
+{
+    my $self = shift;
+    @{$self->{'items'}} = ();
+    return 0;
+}
+
 1;
 
