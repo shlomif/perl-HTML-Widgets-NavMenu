@@ -3,7 +3,6 @@ package HTML::Widgets::NavMenu::Url;
 use strict;
 
 use HTML::Widgets::NavMenu::Object;
-use Data::Dumper;
 
 use vars qw(@ISA);
 

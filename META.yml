@@ -1,10 +1,14 @@
 # http://module-build.sourceforge.net/META-spec.html
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         HTML-Widgets-NavMenu
-version:      0.1.9
+version:      0.1.10_00
 version_from: lib/HTML/Widgets/NavMenu.pm
 installdirs:  site
 requires:
+    CGI:                           0
+    Class::Accessor:               0
+    Error:                         0
+    Test::More:                    0
 
 distribution_type: module
 generated_by: ExtUtils::MakeMaker version 6.17
