@@ -105,8 +105,6 @@ sub traverse
         my $top_item = $self->_stack_get_top_item();
         my $status = $top_item->{'status'};
 
-        my $rem_subs = $top_item->{'remaining_subs'};
-
         if (!$status)
         {
             $self->node_start();
