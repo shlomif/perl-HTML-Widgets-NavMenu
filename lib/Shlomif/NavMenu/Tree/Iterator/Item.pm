@@ -32,6 +32,12 @@ sub node
     return $self->{'node'};
 }
 
+sub accum_state
+{
+    my $self = shift;
+    return $self->{'accum_state'};
+}
+
 sub is_visited
 {
     my $self = shift;

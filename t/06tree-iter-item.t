@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 23;
+use Test::More tests => 24;
 
 use strict;
 
@@ -64,6 +64,18 @@ sub does_throw_exception
     
     # TEST
     is ($item->node(), "Hello", "Getting the node()");
+}
+
+{
+    my $item = 
+        Shlomif::NavMenu::Tree::Iterator::Item->new(
+            'node' => "Hello",
+            'subs' => [],
+            'accum_state' => "Foobardom",
+        );
+    
+    # TEST
+    is ($item->accum_state(), "Foobardom", "Getting Foobardom");
 }
 
 {
