@@ -13,6 +13,14 @@ and navigation links. Implement them if necessary.
 
 * Document url_is_abs.
 
+* Possibly do something about:
+     my $host = $sub_contents->{host} || $args{host} or
+        die "Host not specified!";
+
+     In create_new_nav_menu_item, and in
+     render_tree_contents.
+   
+
 Long-Term:
 ----------
 

@@ -283,8 +283,6 @@ sub create_new_nav_menu_item
 
     my $sub_contents = $args{sub_contents};
     my $coords = $args{coords};
-    my $host = $sub_contents->{host} || $args{host} or
-        die "Host not specified!";
 
     my $new_item = $self->gen_blank_nav_menu_tree_node();
 
