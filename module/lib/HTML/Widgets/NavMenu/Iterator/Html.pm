@@ -15,6 +15,8 @@ package HTML::Widgets::NavMenu::Iterator::Html;
 
 use base qw(HTML::Widgets::NavMenu::Iterator::Base);
 
+use HTML::Widgets::NavMenu::EscapeHtml;
+
 sub construct_new_item
 {
     my $self = shift;
@@ -96,7 +98,7 @@ sub get_a_tag
     my $title = $node->title;
 
     $tag .= " href=\"" .
-        CGI::escapeHTML(
+        escape_html(
             $self->nav_menu()->get_url_to_item(
                 'item' => $item,
             )

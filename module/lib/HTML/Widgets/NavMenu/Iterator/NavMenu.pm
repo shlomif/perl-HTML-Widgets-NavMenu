@@ -4,7 +4,7 @@ use strict;
 
 use base qw(HTML::Widgets::NavMenu::Iterator::Html);
 
-use CGI;
+use HTML::Widgets::NavMenu::EscapeHtml;
 
 sub initialize
 {
@@ -34,7 +34,7 @@ sub gen_ul_tag
 
     return "<ul" .
         (defined($class) ?
-            (" class=\"" . CGI::escapeHTML($class) . "\"") :
+            (" class=\"" . escape_html($class) . "\"") :
             ""
         ) . ">";
 }

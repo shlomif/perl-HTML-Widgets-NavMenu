@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 18;
+use Test::More tests => 20;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -713,3 +713,61 @@ EOF
         "Mixed Expand Nav-Menu #3"); 
 }
 
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/base/",
+        @{$test_data->{'special_chars_menu'}},
+        'current_host' => "default",
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul>
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<a href="../&lt;hello&gt;&amp;&quot;you&quot;/">Special Chars</a>
+</li>
+<li>
+<a href="../non-special/">Non-special</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Special Chars Nav Menu"); 
+}
+
+# Test a special chars-based URL.
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/<hello>&\"you\"/",
+        @{$test_data->{'special_chars_menu'}},
+        'current_host' => "default",
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul>
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<b>Special Chars</b>
+</li>
+<li>
+<a href="../non-special/">Non-special</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Nav Menu with a special chars URL."); 
+}

@@ -5,8 +5,6 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Iterator::Html);
 
-use CGI;
-
 sub start_root
 {
     my $self = shift;

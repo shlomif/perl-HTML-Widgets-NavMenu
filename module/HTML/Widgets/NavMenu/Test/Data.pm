@@ -644,6 +644,32 @@ my @mixed_expand_nav_menu =
     },
 );
 
+my @special_chars_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'text' => "Top 1",
+        'title' => "T1 Title",
+        'subs' =>
+        [
+            {
+                'text' => "Home",
+                'url' => "",
+            },
+            {
+                'text' => "Special Chars",
+                'url' => "<hello>&\"you\"/",
+            },
+            {
+                'text' => "Non-special",
+                'url' => "non-special/",
+            },
+        ],
+    },
+);
 
 sub get_test_data
 {
@@ -662,6 +688,7 @@ sub get_test_data
             'rec_url_type_menu' => \@rec_url_type_menu,
             'url_is_abs_menu' => \@url_is_abs_nav_menu,
             'mixed_expand_menu' => \@mixed_expand_nav_menu,
+            'special_chars_menu' => \@special_chars_nav_menu,
         };
 }
 

@@ -5,8 +5,6 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Tree::Iterator);
 
-use CGI;
-
 sub initialize
 {
     my $self = shift;

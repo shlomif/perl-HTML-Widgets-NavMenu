@@ -33,6 +33,6 @@ generated tree re-used by all other members).
 * Create a base class for classes with 'subs' functionality - like 
 get_nth_sub, add_sub, num_subs, etc. Both ..::Node and ..::Item share it.
 
-* Eliminate the use of the CGI module, by providing my own alternative for
-CGI::escapeHTML().
+* Give an option to render a sub-set of the navigation-menu, starting
+at a certain coords/url-path.
 

@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 use HTML::Widgets::NavMenu;
 
@@ -100,6 +100,60 @@ EOF
 <a href="../esther/">Queen Esther</a>
 <br />
 <ul class="ThirdClass">
+<li>
+<a href="../haman/">Haman</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string),
+        "Nav Menu with depth classes");
+}
+
+# This test tests the escaping of the class names.
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/me/",
+        @{$test_data->{'show_always'}},
+        'ul_classes' => [ "F&F Class", "sec<h>", "T\"C" ],
+    );
+
+    my $rendered = 
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul class="F&amp;F Class">
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<b>About Me</b>
+</li>
+<li>
+<a href="../show-always/">Show Always</a>
+<br />
+<ul class="sec&lt;h&gt;">
+<li>
+<a href="../show-always/gandalf/">Gandalf</a>
+</li>
+<li>
+<a href="../robin/">Robin</a>
+<br />
+<ul class="T&quot;C">
+<li>
+<a href="../robin/hood/">Hood</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../esther/">Queen Esther</a>
+<br />
+<ul class="T&quot;C">
 <li>
 <a href="../haman/">Haman</a>
 </li>
