@@ -1,4 +1,8 @@
-* Make 'expand_always', 'expand_cb' directives.
+* Make the syntax of the navigation menus more sane ("label" or "text" 
+instead of "value", etc.) That would break compatibility.
+
+* Write the predicate class and assign it to 'expand' and possibly other
+places where it's appropriate.
 
 * Restore the abs_url directive only as url_type or whatever.
     - Add a url_type accessor to LeadingPath::Component.
@@ -23,3 +27,7 @@ Long-Term:
 * Add support for more attributes other than class="" to the ul and li
 tags.
     - like id=""
+
+* Add a host-based regexp arbitrator to the predicate:
+    { 'host_re' => { 't2' => "^home/", 'vipe' => "^home2/" } }
+

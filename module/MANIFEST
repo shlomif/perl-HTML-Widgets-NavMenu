@@ -15,6 +15,7 @@ t/07tree-iter.t
 t/08tree-node.t
 t/09leading-path.t
 t/10ul-classes.t
+t/11predicate.t
 lib/HTML/Widgets/NavMenu/HeaderRole.pm
 lib/HTML/Widgets/NavMenu/Iterator/Base.pm
 lib/HTML/Widgets/NavMenu/Iterator/Html.pm
@@ -23,6 +24,7 @@ lib/HTML/Widgets/NavMenu/Iterator/NavMenu/HeaderRole.pm
 lib/HTML/Widgets/NavMenu/Iterator/SiteMap.pm
 lib/HTML/Widgets/NavMenu/Object.pm
 lib/HTML/Widgets/NavMenu.pm
+lib/HTML/Widgets/NavMenu/Predicate.pm
 lib/HTML/Widgets/NavMenu/Tree/Iterator/Item.pm
 lib/HTML/Widgets/NavMenu/Tree/Iterator.pm
 lib/HTML/Widgets/NavMenu/Tree/Iterator/Stack.pm
