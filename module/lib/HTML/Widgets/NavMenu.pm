@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
 
-use utf8;
-
 package HTML::Widgets::NavMenu;
 
 our $VERSION = '0.1.15_00';
