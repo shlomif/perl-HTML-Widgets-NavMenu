@@ -12,6 +12,7 @@ t/05stack.t
 t/06tree-iter-item.t
 t/07tree-iter.t
 lib/Shlomif/NavMenu/Iterator/Base.pm
+lib/Shlomif/NavMenu/Iterator/Html.pm
 lib/Shlomif/NavMenu/Iterator/NavMenu.pm
 lib/Shlomif/NavMenu/Iterator/SiteMap.pm
 lib/Shlomif/NavMenu/Object.pm

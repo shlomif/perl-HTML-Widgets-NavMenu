@@ -1,8 +1,23 @@
 package Shlomif::NavMenu::Iterator::NavMenu;
 
-use base qw(Shlomif::NavMenu::Iterator::Base);
+use base qw(Shlomif::NavMenu::Iterator::Html);
 
-sub node_start
+sub start_root
+{
+    my $self = shift;
+    
+    $self->_add_tags("<ul class=\"navbarmain\">");
+}
+
+sub start_sep
+{
+    my $self = shift;
+
+    $self->_add_tags("</ul>");
+}
+
+
+sub start_regular
 {
     my $self = shift;
 
@@ -11,98 +26,78 @@ sub node_start
 
     my $nav_menu = $self->{'nav_menu'};
 
-    if ($self->_is_root())
+    if ($self->is_hidden())
     {
-        $self->_add_tags("<ul class=\"navbarmain\">");
+        # Do nothing
     }
     else
     {
-        if ($self->_is_top_separator())
+        my $tag;
+        if ($node->{'CurrentlyActive'})
         {
-            $self->_add_tags("</ul>");
+            $tag = "<b>" . $node->{value} . "</b>";
         }
         else
         {
-            if ($self->is_hidden())
+            $tag ="<a";
+            my $title = $node->{'title'};
+            $tag .= " href=\"" . 
+                CGI::escapeHTML(
+                    $nav_menu->get_cross_host_rel_url(
+                        'host' => $self->_get_top_host(),
+                        'host_url' => $node->{url},
+                        'abs_url' => $node->{abs_url},
+                    )
+                ). "\"";
+            if (defined($title))
             {
-                # Do nothing   
+                $tag .= " title=\"$title\"";
             }
-            else
+            $tag .= ">" . $node->{value} . "</a>";
+        }
+        my @tags_to_add;
+        if ($self->is_role_header())
+        {
+            @tags_to_add = ("</ul>","<h2>", $tag, "</h2>",
+                "<ul class=\"navbarmain\">");
+        }
+        else
+        {
+            @tags_to_add = ("<li>", $tag);
+            if ($top_item->num_subs_to_go() && $self->is_active())
             {
-                my $tag;
-                if ($node->{'CurrentlyActive'})
-                {
-                    $tag = "<b>" . $node->{value} . "</b>";
-                }
-                else
-                {
-                    $tag ="<a";
-                    my $title = $node->{'title'};
-                    $tag .= " href=\"" . 
-                        CGI::escapeHTML(
-                            $nav_menu->get_cross_host_rel_url(
-                                'host' => $self->_get_top_host(),
-                                'host_url' => $node->{url},
-                                'abs_url' => $node->{abs_url},
-                            )
-                        ). "\"";
-                    if (defined($title))
-                    {
-                        $tag .= " title=\"$title\"";
-                    }
-                    $tag .= ">" . $node->{value} . "</a>";
-                }
-                my @tags_to_add;
-                if ($self->is_role_header())
-                {
-                    @tags_to_add = ("</ul>","<h2>", $tag, "</h2>",
-                        "<ul class=\"navbarmain\">");
-                }
-                else
-                {
-                    @tags_to_add = ("<li>", $tag);
-                    if ($top_item->num_subs_to_go() && $self->is_active())
-                    {
-                        push @tags_to_add, 
-                            ("<br />", "<ul class=\"navbarnested\">");
-                    }
-                }
-                $self->_add_tags(@tags_to_add);
+                push @tags_to_add, 
+                    ("<br />", "<ul class=\"navbarnested\">");
             }
         }
+        $self->_add_tags(@tags_to_add);
     }
 }
 
-sub node_end
+sub end_sep
 {
     my $self = shift;
+    my $class =
+        ($self->stack->len() <= 2) ?
+            "navbarmain" :
+            "navbarnested";
+    $self->_add_tags("<ul class=\"$class\">");
+}
 
-    if ($self->_is_root())
+sub end_regular
+{
+    my $self = shift;
+    if ($self->is_hidden() || $self->is_role_header())
     {
-        $self->_add_tags("</ul>");
+        # Do nothing
     }
     else
     {
-        if ($self->_is_top_separator())
+        if ($self->top()->num_subs() && $self->is_active())
         {
-            my $class =
-                ($self->stack->len() <= 2) ?
-                    "navbarmain" :
-                    "navbarnested";
-            $self->_add_tags("<ul class=\"$class\">");
+            $self->_add_tags("</ul>");
         }
-        elsif ($self->is_hidden() || $self->is_role_header())
-        {
-            # Do nothing
-        }
-        else
-        {
-            if ($self->top()->num_subs() && $self->is_active())
-            {
-                $self->_add_tags("</ul>");
-            }
-            $self->_add_tags("</li>");
-        }
+        $self->_add_tags("</li>");
     }
 }
 
