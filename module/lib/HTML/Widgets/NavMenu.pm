@@ -996,6 +996,8 @@ page.
 
 =head1 SEE ALSO
 
+=over 4
+
 =item L<HTML::Widgets::NavMenu::HeaderRole>
 
 An HTML::Widgets::NavMenu sub-class that contains support for another 
@@ -1021,6 +1023,8 @@ This module also generates a navigation menu. The CPAN version is relatively
 old, and the author sent me a newer version. After playing with it a bit, I
 realized that I could not get it to do what I want (but I cannot recall
 why), so I abandoned it.
+
+=back
 
 =head1 AUTHORS
 
