@@ -1,7 +1,7 @@
 * Refactor get_next_coords().
 
-    - I don't see too much point. It is working as it is, and it's only
-    one function that doesn't affect the rest of the code.
+    - I don't see too much point to it. It is working as it is, and it's 
+    only one function that doesn't affect the rest of the code.
 
 * Create a base class for classes with 'subs' functionality - like 
 get_nth_sub, add_sub, num_subs, etc. Both ..::Node and ..::Item share it.

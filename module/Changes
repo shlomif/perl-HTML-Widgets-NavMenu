@@ -1,6 +1,9 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+0.6.0     Thu Mar 24 15:15:40 IST 2005
     - no longer making use of the CGI.pm module.
+    - extracted two methods in HTML::Widgets::NavMenu::Iterator::NavMenu
+      that can now be over-rided by the user.
 
 0.4.0     Thu Jan 20 16:49:15 IST 2005
     - Added the url_is_abs option to the nodes.

@@ -18,7 +18,7 @@ its enum values.
 * Give an option to render a sub-set of the navigation-menu, starting
 at a certain coords/url-path.
 
-* Release on CPAN as version 0.6.0.
+* Release on CPAN as version 0.8.0.
    - change the version in $VERSION.
    - document the changes in Changes.
    - update the readme.
