@@ -97,6 +97,16 @@ sub initialize
     return 0;
 }
 
+sub get_nav_menu_traverser
+{
+    my $self = shift;
+
+    return
+        Shlomif::NavMenu::Iterator::NavMenu->new(
+            'nav_menu' => $self,
+        );
+}
+
 sub get_current_coords
 {
     my $self = shift;
@@ -594,10 +604,7 @@ sub render
 
     # We do it first, so that current_coords will be generated.
     # We can might as well call $self->get_traversed_tree() once at the top.
-    my $iterator =
-        Shlomif::NavMenu::Iterator::NavMenu->new(
-            'nav_menu' => $self,
-        );
+    my $iterator = $self->get_nav_menu_traverser();
     $iterator->traverse();
     my $html = [ @{$iterator->{'html'}} ];
     

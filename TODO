@@ -1,3 +1,4 @@
-* Implement the regular navigation menu generation using Tree::Iterator.
-
 * Implement the tree that the iterator traverses as a tree of objects.
+
+* Use Build.PL instead of Makefile.PL. (?)
+
