@@ -212,15 +212,24 @@ sub render_tree_contents
 
     my $new_item = +{};
 
-    if (exists($sub_contents->{value}))
+    foreach my $key (qw(value host show_always title))
     {
-        $new_item->{'value'} = $sub_contents->{value};
+        if (exists($sub_contents->{$key}))
+        {
+            $new_item->{$key} = $sub_contents->{$key};
+        }
     }
-    if (exists($sub_contents->{'host'}))
+
+    foreach my $key (qw(separator hide))
     {
-        $new_item->{'host'} = $sub_contents->{'host'};
+        if ($sub_contents->{$key})
+        {
+            $new_item->{$key} = 1;
+        }
     }
-    
+
+    $new_item->{'role'} = $sub_contents->{role} || "normal";
+
     my $is_same_node = 0;
 
     if (exists($sub_contents->{url}))
@@ -229,30 +238,10 @@ sub render_tree_contents
 
         $new_item->{'url'} = $host_url;
 
-        if ($sub_contents->{hide})
-        {
-            $new_item->{hide} = 1;
-        }
-
         if (($host_url eq $path_info) && ($host eq $self->{current_host}))
         {
             $is_same_node = 1;
         }
-    }
-    
-    if ($sub_contents->{separator})
-    {
-        $new_item->{separator} = 1;
-    }
-    if (exists($sub_contents->{'show_always'}))
-    {
-        $new_item->{'show_always'} = $sub_contents->{'show_always'};
-    }
-    $new_item->{'role'} = $sub_contents->{role} || "normal";
-
-    if (exists($sub_contents->{'title'}))
-    {
-        $new_item->{'title'} = $sub_contents->{'title'};
     }
 
     if (exists($sub_contents->{expand_re}))
