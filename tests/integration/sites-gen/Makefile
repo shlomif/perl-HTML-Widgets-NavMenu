@@ -1,8 +1,19 @@
-all: good.stamp
+all: compare
+	
+compare: good.stamp head.stamp
+	diff -u -r Output/good Output/head
 
-good.stamp: Shlomif-NavMenu-0.1.7 good.pl
+good.stamp: Good-Source good.pl
 	perl good.pl
 
-Shlomif-NavMenu-0.1.7: Shlomif-NavMenu-0.1.7.tar.gz
-	tar -xzvf $<
+Good-Source:
+	svn export svn://svn.berlios.de/web-cpan/nav-menu/branches/old-fangled Good-Source
+
+head.stamp: head.pl
+	perl head.pl
+
+good-update-source: good-delete-source Good-Source
+
+good-delete-source:
+	rm -fr Good-Source
 

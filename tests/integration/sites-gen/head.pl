@@ -1,15 +1,17 @@
 #!/usr/bin/perl -w
 
+# This script tests the latest version of the code.
+
 use strict;
-# TODO: Replace with a use lib thingy.
-#
-use lib "./Good-Source/lib/";
-use Shlomif::NavMenu;
+
+use lib ($ENV{'HTML_NAVMENU_HEAD'} || "../../../module/lib/");
+
+use HTML::Widgets::NavMenu;
 use SitesData;
 
 use CGI;
 
-my $type = "good";
+my $type = "head";
 
 sub mymkdir
 {
@@ -81,7 +83,7 @@ sub process_site
             my $open_mark = "<" x $num_marks;
             my $close_mark = ">" x $num_marks;
             my $nav_menu = 
-                Shlomif::NavMenu->new(
+                HTML::Widgets::NavMenu->new(
                     'path_info' => "/$canonized_file",
                     'current_host' => $host_id,
                     'hosts' => $site_ref->{'hosts'},
