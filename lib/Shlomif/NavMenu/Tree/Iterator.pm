@@ -1,18 +1,18 @@
-package Shlomif::NavMenu::Tree::Iterator;
+package HTML::Widgets::NavMenu::Tree::Iterator;
 
 use strict;
 use warnings;
 
-use base qw(Shlomif::NavMenu::Object);
+use base qw(HTML::Widgets::NavMenu::Object);
 
-use Shlomif::NavMenu::Tree::Iterator::Stack;
-use Shlomif::NavMenu::Tree::Iterator::Item;
+use HTML::Widgets::NavMenu::Tree::Iterator::Stack;
+use HTML::Widgets::NavMenu::Tree::Iterator::Item;
 
 sub initialize
 {
     my $self = shift;
 
-    $self->{'stack'} = Shlomif::NavMenu::Tree::Iterator::Stack->new();
+    $self->{'stack'} = HTML::Widgets::NavMenu::Tree::Iterator::Stack->new();
 
     return 0;
 }
@@ -44,7 +44,7 @@ sub push_into_stack
         );
 
     my $new_item =
-        Shlomif::NavMenu::Tree::Iterator::Item->new(
+        HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
             'node' => $node,
             'subs' => $subs,
             'accum_state' => $accum_state,

@@ -1,9 +1,9 @@
-package Shlomif::NavMenu::Iterator::Base;
+package HTML::Widgets::NavMenu::Iterator::Base;
 
 use strict;
 use warnings;
 
-use base qw(Shlomif::NavMenu::Tree::Iterator);
+use base qw(HTML::Widgets::NavMenu::Tree::Iterator);
 
 use CGI;
 

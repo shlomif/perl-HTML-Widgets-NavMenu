@@ -1,6 +1,6 @@
-package Shlomif::NavMenu::Iterator::NavMenu;
+package HTML::Widgets::NavMenu::Iterator::NavMenu;
 
-use base qw(Shlomif::NavMenu::Iterator::Html);
+use base qw(HTML::Widgets::NavMenu::Iterator::Html);
 
 sub start_root
 {

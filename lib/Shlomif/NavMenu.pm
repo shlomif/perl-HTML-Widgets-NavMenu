@@ -2,11 +2,11 @@
 
 use utf8;
 
-package Shlomif::NavMenu;
+package HTML::Widgets::NavMenu;
 
 our $VERSION = '0.1.9';
 
-package Shlomif::NavMenu::Error;
+package HTML::Widgets::NavMenu::Error;
 
 use strict;
 
@@ -14,11 +14,11 @@ use Error qw(:try);
 
 use base "Error";
 
-package Shlomif::NavMenu::Error::Redirect;
+package HTML::Widgets::NavMenu::Error::Redirect;
 
 use strict;
 use vars qw(@ISA);
-@ISA=("Shlomif::NavMenu::Error");
+@ISA=("HTML::Widgets::NavMenu::Error");
 
 sub CGIpm_perform_redirect
 {
@@ -30,11 +30,11 @@ sub CGIpm_perform_redirect
     exit;
 }
 
-package Shlomif::NavMenu::LeadingPath::Component;
+package HTML::Widgets::NavMenu::LeadingPath::Component;
 
 use strict;
 
-use base qw(Shlomif::NavMenu::Object);
+use base qw(HTML::Widgets::NavMenu::Object);
 use base qw(Class::Accessor);
 
 __PACKAGE__->mk_accessors(
@@ -57,17 +57,17 @@ sub initialize
 
 1;
 
-package Shlomif::NavMenu;
+package HTML::Widgets::NavMenu;
 
 use strict;
 
 use lib ".";
-use Shlomif::NavMenu::Url;
+use HTML::Widgets::NavMenu::Url;
 use Error qw(:try);
 
-require Shlomif::NavMenu::Iterator::NavMenu;
-require Shlomif::NavMenu::Iterator::SiteMap;
-require Shlomif::NavMenu::Tree::Node;
+require HTML::Widgets::NavMenu::Iterator::NavMenu;
+require HTML::Widgets::NavMenu::Iterator::SiteMap;
+require HTML::Widgets::NavMenu::Tree::Node;
 
 sub new
 {
@@ -101,7 +101,7 @@ sub get_nav_menu_traverser
     my $self = shift;
 
     return
-        Shlomif::NavMenu::Iterator::NavMenu->new(
+        HTML::Widgets::NavMenu::Iterator::NavMenu->new(
             'nav_menu' => $self,
         );
 }
@@ -138,7 +138,7 @@ sub _register_path_info
 
     if (defined($redir_path))
     {
-        throw Shlomif::NavMenu::Error::Redirect
+        throw HTML::Widgets::NavMenu::Error::Redirect
             -redirect_path => ($redir_path."/");
     }
 
@@ -159,7 +159,7 @@ sub text_to_url_obj
 {
     my $text = shift;
     my $url = 
-        Shlomif::NavMenu::Url->new(
+        HTML::Widgets::NavMenu::Url->new(
             $text,
             (is_slash_terminated($text) || ($text eq "")),
             "server",
@@ -214,7 +214,7 @@ sub gen_blank_nav_menu_tree_node
 {
     my $self = shift;
 
-    return Shlomif::NavMenu::Tree::Node->new();
+    return HTML::Widgets::NavMenu::Tree::Node->new();
 }
 
 sub create_new_nav_menu_item
@@ -319,7 +319,7 @@ sub gen_site_map
     my $self = shift;
 
     my $iterator = 
-        Shlomif::NavMenu::Iterator::SiteMap->new(
+        HTML::Widgets::NavMenu::Iterator::SiteMap->new(
             'nav_menu' => $self,
         );
 
@@ -622,7 +622,7 @@ sub render
                 my $host_url = $ptr->{url} || "";
 
                 push @leading_path,
-                    Shlomif::NavMenu::LeadingPath::Component->new(
+                    HTML::Widgets::NavMenu::LeadingPath::Component->new(
                         'host' => $host,
                         'host_url' => $host_url,
                         'title' => $ptr->{title},

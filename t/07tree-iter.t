@@ -4,7 +4,7 @@ package MyIter;
 
 use strict;
 
-use base 'Shlomif::NavMenu::Tree::Iterator';
+use base 'HTML::Widgets::NavMenu::Tree::Iterator';
 
 sub initialize
 {

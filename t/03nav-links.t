@@ -4,7 +4,7 @@ use strict;
 
 use Test::More tests => 3;
 
-use Shlomif::NavMenu;
+use HTML::Widgets::NavMenu;
 
 my @site_args = 
 (
@@ -40,7 +40,7 @@ my @site_args =
 # links from the first page. Generally, there shouldn't be "top", "up" and 
 # "prev" nav-links and only "next".
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/",
         @site_args
     );
@@ -57,7 +57,7 @@ my @site_args =
 # The purpose of this test is to check for up arrow leading from the middle
 # page to the "Home" page
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/",
         @site_args
     );

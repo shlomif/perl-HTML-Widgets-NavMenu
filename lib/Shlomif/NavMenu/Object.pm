@@ -1,4 +1,4 @@
-package Shlomif::NavMenu::Object;
+package HTML::Widgets::NavMenu::Object;
 
 use strict;
 

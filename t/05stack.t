@@ -5,11 +5,11 @@ use Test::More tests => 23;
 use strict;
 
 BEGIN {
-use_ok ('Shlomif::NavMenu::Tree::Iterator::Stack'); # TEST
+use_ok ('HTML::Widgets::NavMenu::Tree::Iterator::Stack'); # TEST
 }
 
 {
-    my $stack = Shlomif::NavMenu::Tree::Iterator::Stack->new();
+    my $stack = HTML::Widgets::NavMenu::Tree::Iterator::Stack->new();
     ok ( $stack, "Checking for Object Allocation"); # TEST
     is ( $stack->len(), 0, "len() == 0 on allocation"); # TEST
     ok ( $stack->is_empty(), "is_empty() on allocation"); # TEST
@@ -42,7 +42,7 @@ use_ok ('Shlomif::NavMenu::Tree::Iterator::Stack'); # TEST
 }
 
 {
-    my $stack = Shlomif::NavMenu::Tree::Iterator::Stack->new();
+    my $stack = HTML::Widgets::NavMenu::Tree::Iterator::Stack->new();
     $stack->push("Hello");
     $stack->push("Superb");
     $stack->push("Quality");

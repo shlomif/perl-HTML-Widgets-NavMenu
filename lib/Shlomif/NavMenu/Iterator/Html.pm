@@ -1,6 +1,6 @@
-package Shlomif::NavMenu::Iterator::Html;
+package HTML::Widgets::NavMenu::Iterator::Html;
 
-use base qw(Shlomif::NavMenu::Iterator::Base);
+use base qw(HTML::Widgets::NavMenu::Iterator::Base);
 
 sub node_start
 {

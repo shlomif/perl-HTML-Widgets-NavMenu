@@ -4,7 +4,7 @@ use strict;
 
 use Test::More tests => 10;
 
-use Shlomif::NavMenu;
+use HTML::Widgets::NavMenu;
 
 use HTML::Widgets::NavMenu::Test::Data;
 use HTML::Widgets::NavMenu::Test::Util;
@@ -24,7 +24,7 @@ sub validate_nav_menu
 }
 
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/hello/",
         @{$test_data->{'minimal'}},
     );
@@ -62,7 +62,7 @@ EOF
 
 
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/",
         @{$test_data->{'two_sites'}},
     );
@@ -114,7 +114,7 @@ EOF
 # the current coords to be assigned to it, thus marking a site
 # incorrectly.
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/",
         @{$test_data->{'expand_re'}},
     );
@@ -164,7 +164,7 @@ EOF
 {
     my $string = "aslkdjofisvniowgvnoaifnaoiwfb";
     $string =~ s{ofisvniowgvnoaifnaoiwfb$}{};
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/",
         @{$test_data->{'expand_re'}},
     );
@@ -212,7 +212,7 @@ EOF
 # This test tests the show_always directive which causes the entire
 # sub-tree to expand at any URL.
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/",
         @{$test_data->{'show_always'}},
     );
@@ -278,7 +278,7 @@ EOF
 # This test tests a menu auto-expands if the current URL is an item
 # inside it.
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/bio.html",
         @{$test_data->{'items_in_sub'}},
     );
@@ -327,7 +327,7 @@ EOF
 }
 
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/",
         @{$test_data->{'separator'}},
     );
@@ -383,7 +383,7 @@ EOF
 }
 
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/",
         @{$test_data->{'hidden_item'}},
     );
@@ -430,7 +430,7 @@ EOF
 
 
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/good/",
         @{$test_data->{'header_role'}},
     );
@@ -475,7 +475,7 @@ EOF
 }
 
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/",
         @{$test_data->{'header_role'}},
     );

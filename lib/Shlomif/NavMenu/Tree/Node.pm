@@ -1,6 +1,6 @@
-package Shlomif::NavMenu::Tree::Node;
+package HTML::Widgets::NavMenu::Tree::Node;
 
-use base 'Shlomif::NavMenu::Object';
+use base 'HTML::Widgets::NavMenu::Object';
 
 use base 'Class::Accessor';
 

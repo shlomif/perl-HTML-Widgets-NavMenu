@@ -1,9 +1,9 @@
-package Shlomif::NavMenu::Tree::Iterator::Item;
+package HTML::Widgets::NavMenu::Tree::Iterator::Item;
 
 use strict;
 use warnings;
 
-use base qw(Shlomif::NavMenu::Object);
+use base qw(HTML::Widgets::NavMenu::Object);
 
 sub initialize
 {

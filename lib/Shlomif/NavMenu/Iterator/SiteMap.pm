@@ -1,9 +1,9 @@
-package Shlomif::NavMenu::Iterator::SiteMap;
+package HTML::Widgets::NavMenu::Iterator::SiteMap;
 
 use strict;
 use warnings;
 
-use base qw(Shlomif::NavMenu::Iterator::Html);
+use base qw(HTML::Widgets::NavMenu::Iterator::Html);
 
 use CGI;
 

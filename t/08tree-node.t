@@ -5,11 +5,11 @@ use Test::More tests => 32;
 use strict;
 
 BEGIN {
-use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
+use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
 }
 
 {
-    my $node = Shlomif::NavMenu::Tree::Node->new();
+    my $node = HTML::Widgets::NavMenu::Tree::Node->new();
     ok($node, "Constructing"); # TEST
 
     $node->set("url", "Rabbi/Zalman/");
@@ -33,7 +33,7 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
 }
 
 {
-    my $node = Shlomif::NavMenu::Tree::Node->new();
+    my $node = HTML::Widgets::NavMenu::Tree::Node->new();
 
     ok ((!$node->separator()), "Testing Node Separator - False"); # TEST
     $node->set("separator", 1);
@@ -41,7 +41,7 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
 }
 
 {
-    my $node = Shlomif::NavMenu::Tree::Node->new();
+    my $node = HTML::Widgets::NavMenu::Tree::Node->new();
 
     ok ((!$node->hide()), "Testing Node Hide - False"); # TEST
     $node->set("hide", 1);
@@ -49,7 +49,7 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
 }
 
 {
-    my $node = Shlomif::NavMenu::Tree::Node->new();
+    my $node = HTML::Widgets::NavMenu::Tree::Node->new();
 
     is($node->role(), "normal", "Testing role default value"); # TEST
     $node->set("role", "hoola");
@@ -57,7 +57,7 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
 }
 
 {
-    my $node = Shlomif::NavMenu::Tree::Node->new();
+    my $node = HTML::Widgets::NavMenu::Tree::Node->new();
 
     ok((!$node->expanded()), "Testing node->expanded()"); # TEST
     $node->expand();
@@ -65,7 +65,7 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
 }
 
 {
-    my $node = Shlomif::NavMenu::Tree::Node->new();
+    my $node = HTML::Widgets::NavMenu::Tree::Node->new();
 
     ok((!$node->CurrentlyActive()), "Testing node->CurrentlyActive()"); # TEST
     # TEST
@@ -81,20 +81,20 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
 }
 
 {
-    my $node = Shlomif::NavMenu::Tree::Node->new();
+    my $node = HTML::Widgets::NavMenu::Tree::Node->new();
 
     # TEST
     is(scalar(@{$node->subs()}), 0, 
         "Testing emptiness of node->subs at start");
 
-    my $sub_node1 = Shlomif::NavMenu::Tree::Node->new();
+    my $sub_node1 = HTML::Widgets::NavMenu::Tree::Node->new();
     $sub_node1->set("url", "Emperor/Kuzko/");
     $node->add_sub($sub_node1);
     # TEST
     is(scalar(@{$node->subs()}), 1, "node->subs len == 1");
     # TEST
     is($node->subs()->[0]->url(), "Emperor/Kuzko/", "node->subs contents");
-    my $sub_node2 = Shlomif::NavMenu::Tree::Node->new();
+    my $sub_node2 = HTML::Widgets::NavMenu::Tree::Node->new();
     $sub_node2->set("url", "gimp/ressionist/");
     $node->add_sub($sub_node2);
     # TEST
@@ -107,7 +107,7 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
         "node->subs[1] contents");
     # TEST
     ok(!$node->expanded(), "Node is not expanded");
-    my $sub_node3 = Shlomif::NavMenu::Tree::Node->new();
+    my $sub_node3 = HTML::Widgets::NavMenu::Tree::Node->new();
     $sub_node3->expand();
     $node->add_sub($sub_node3);
     # TEST

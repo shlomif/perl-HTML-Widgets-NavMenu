@@ -8,11 +8,11 @@
 use Test::More tests => 3;
 
 # TEST
-use_ok ('Shlomif::NavMenu::HTML::Widget::SideBar');
+use_ok ('HTML::Widgets::NavMenu::HTML::Widget::SideBar');
 
 # TEST
-use_ok ('Shlomif::NavMenu::Tree::Numbered');
+use_ok ('HTML::Widgets::NavMenu::Tree::Numbered');
 
 # TEST
-use_ok ('Shlomif::NavMenu');
+use_ok ('HTML::Widgets::NavMenu');
 

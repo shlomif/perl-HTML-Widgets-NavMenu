@@ -1,13 +1,13 @@
-package Shlomif::NavMenu::Url;
+package HTML::Widgets::NavMenu::Url;
 
 use strict;
 
-use Shlomif::NavMenu::Object;
+use HTML::Widgets::NavMenu::Object;
 use Data::Dumper;
 
 use vars qw(@ISA);
 
-@ISA=qw(Shlomif::NavMenu::Object);
+@ISA=qw(HTML::Widgets::NavMenu::Object);
 
 sub initialize
 {

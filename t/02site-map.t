@@ -4,14 +4,14 @@ use strict;
 
 use Test::More tests => 4;
 
-use Shlomif::NavMenu;
+use HTML::Widgets::NavMenu;
 
 use HTML::Widgets::NavMenu::Test::Data;
 
 my $test_data = get_test_data();
 
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "hello/",
         @{$test_data->{'minimal'}},
     );
@@ -31,7 +31,7 @@ EOF
 }
 
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "hello/",
         'current_host' => "default",
         'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
@@ -85,7 +85,7 @@ EOF
 }
 
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "hello/world/",
         @{$test_data->{'two_sites'}},
     );
@@ -134,7 +134,7 @@ EOF
 # Now testing that the separator is safely skipped and does not generate
 # a double </li>
 {
-    my $nav_menu = Shlomif::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "hello/",
         'current_host' => "default",
         'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
