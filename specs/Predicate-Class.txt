@@ -33,6 +33,8 @@ Callback Named Arguments:
 'path_info' => the path info.
 'current_host' => the host.
 
+Return: a boolean value.
+
 Predicate Usage:
 ----------------
 
