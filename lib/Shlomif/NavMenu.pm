@@ -4,7 +4,7 @@ use utf8;
 
 package Shlomif::NavMenu;
 
-our $VERSION = '0.001';
+our $VERSION = '0.1.5';
 
 package Shlomif::NavMenu::MySideBar;
 

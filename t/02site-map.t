@@ -6,6 +6,10 @@ use Test::More tests => 4;
 
 use Shlomif::NavMenu;
 
+use HTML::Widgets::NavMenu::Test::Data;
+
+my $test_data = get_test_data();
+
 {
     my $nav_menu = Shlomif::NavMenu->new(
         'path_info' => "hello/",
@@ -106,77 +110,7 @@ EOF
 {
     my $nav_menu = Shlomif::NavMenu->new(
         'path_info' => "hello/world/",
-        'current_host' => "default",
-        'hosts' =>
-        {
-            'default' =>
-            {
-                'base_url' => "http://www.hello.com/",
-            },
-            'other' => 
-            { 
-                'base_url' => "http://www.other-url.co.il/~shlomif/", 
-            },
-        },
-        'tree_contents' =>
-        {
-            'host' => "default",
-            'value' => "Top 1",
-            'title' => "T1 Title",
-            'expand_re' => "",
-            'subs' =>
-            [
-                {
-                    'value' => "Home",
-                    'url' => "",
-                },
-                {
-                    'value' => "About Me",
-                    'title' => "About Myself",
-                    'url' => "me/",
-                    'subs' =>
-                    [
-                        {
-                            'url' => "round/hello/personal.html",
-                            'value' => "Bio",
-                            'title' => "Biography of Myself",
-                        },
-                        {
-                            'url' => "round/toto/",
-                            'value' => "Gloria",
-                            'title' => "A Useful Conspiracy",
-                        },
-                    ],
-                },
-                {
-                    'value' => "Tam Tam Drums",
-                    'title' => "Drumming is good for your health",
-                    'url' => "hoola/",
-                    'host' => "other",
-                    'subs' =>
-                    [
-                        {
-                            'url' => "hello/hoop.html",
-                            'title' => "Hoola Hoops Rulez and Ownz!",
-                            'value' => "Hoola Hoops",
-                            'host' => "default",
-                        },
-                        {
-                            'url' => "tetra/",
-                            'value' => "Tetrahedron",
-                            'subs' =>
-                            [
-                                {
-                                    'url' => "tetra/one/",
-                                    'value' => "Tetra One",
-                                    'title' => "Tetra One Title",
-                                },
-                            ],
-                        },
-                    ],
-                },
-            ],
-        },
+        @{$test_data->{'two_sites'}},
     );
 
     my $returned_text = $nav_menu->gen_site_map();
