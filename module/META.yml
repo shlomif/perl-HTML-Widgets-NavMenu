@@ -1,13 +1,67 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         HTML-Widgets-NavMenu
-version:      0.6.0
-version_from: lib/HTML/Widgets/NavMenu.pm
-installdirs:  site
-requires:
-    Class::Accessor:               0
-    Error:                         0
-    Test::More:                    0
-
+--- #YAML:1.0
+name: HTML-Widgets-NavMenu
+version: 0.6.0
+license: bsd
 distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.17
+requires:
+  Class::Accessor: 0
+  Error: 0
+  Test::More: 0
+  perl: 5.6.1
+recommends: {}
+build_requires: {}
+conflicts: {}
+provides:
+  HTML::Widgets::NavMenu:
+    file: lib/HTML/Widgets/NavMenu.pm
+    version: 0.6.0
+  HTML::Widgets::NavMenu::Error:
+    file: lib/HTML/Widgets/NavMenu.pm
+    version: 0.6.0
+  HTML::Widgets::NavMenu::Error::Redirect:
+    file: lib/HTML/Widgets/NavMenu.pm
+    version: 0.6.0
+  HTML::Widgets::NavMenu::EscapeHtml:
+    file: lib/HTML/Widgets/NavMenu/EscapeHtml.pm
+  HTML::Widgets::NavMenu::HeaderRole:
+    file: lib/HTML/Widgets/NavMenu/HeaderRole.pm
+  HTML::Widgets::NavMenu::Iterator::Base:
+    file: lib/HTML/Widgets/NavMenu/Iterator/Base.pm
+  ? |-
+    HTML::Widgets::NavMenu::Iterator::GetCurrentlyActive
+:
+    file: lib/HTML/Widgets/NavMenu.pm
+    version: 0.6.0
+  HTML::Widgets::NavMenu::Iterator::Html:
+    file: lib/HTML/Widgets/NavMenu/Iterator/Html.pm
+  HTML::Widgets::NavMenu::Iterator::Html::Item:
+    file: lib/HTML/Widgets/NavMenu/Iterator/Html.pm
+  HTML::Widgets::NavMenu::Iterator::NavMenu:
+    file: lib/HTML/Widgets/NavMenu/Iterator/NavMenu.pm
+  ? |-
+    HTML::Widgets::NavMenu::Iterator::NavMenu::HeaderRole
+:
+    file: |-
+      lib/HTML/Widgets/NavMenu/Iterator/NavMenu/HeaderRole.pm
+  HTML::Widgets::NavMenu::Iterator::SiteMap:
+    file: lib/HTML/Widgets/NavMenu/Iterator/SiteMap.pm
+  HTML::Widgets::NavMenu::LeadingPath::Component:
+    file: lib/HTML/Widgets/NavMenu.pm
+    version: 0.6.0
+  HTML::Widgets::NavMenu::Object:
+    file: lib/HTML/Widgets/NavMenu/Object.pm
+  HTML::Widgets::NavMenu::Predicate:
+    file: lib/HTML/Widgets/NavMenu/Predicate.pm
+  HTML::Widgets::NavMenu::TagGen:
+    file: lib/HTML/Widgets/NavMenu/TagGen.pm
+  HTML::Widgets::NavMenu::Tree::Iterator:
+    file: lib/HTML/Widgets/NavMenu/Tree/Iterator.pm
+  HTML::Widgets::NavMenu::Tree::Iterator::Item:
+    file: lib/HTML/Widgets/NavMenu/Tree/Iterator/Item.pm
+  HTML::Widgets::NavMenu::Tree::Iterator::Stack:
+    file: lib/HTML/Widgets/NavMenu/Tree/Iterator/Stack.pm
+  HTML::Widgets::NavMenu::Tree::Node:
+    file: lib/HTML/Widgets/NavMenu/Tree/Node.pm
+  HTML::Widgets::NavMenu::Url:
+    file: lib/HTML/Widgets/NavMenu/Url.pm
+generated_by: Module::Build version 0.21
