@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 8;
+use Test::More tests => 10;
 
 use Shlomif::NavMenu;
 
@@ -426,5 +426,96 @@ EOF
     # TEST
     ok (validate_nav_menu($rendered, $expected_string), 
         "Nav Menu with Hidden Item"); 
+}
+
+
+{
+    my $nav_menu = Shlomif::NavMenu->new(
+        'path_info' => "/good/",
+        @{$test_data->{'header_role'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render(
+            'no_ie' => "true",
+            'styles' =>
+            {
+                'bar' => 'nav',
+                'level0' => 'navbarmain',
+                'level1' => 'navbarnested',
+                'level2' => "navbarnested",
+                'level3' => "navbarnested",
+                'level4' => "navbarnested",
+                'list' => "navbarmain",
+            },
+        );
+
+    my $expected_string = <<"EOF";
+<ul class="navbarmain">
+<li>
+<a href="../">Home</a>
+</li>
+</ul>
+<h2>
+<a href="../me/" title="About Myself">About Me</a>
+</h2>
+<ul class="navbarmain">
+<li>
+<a href="../me/sub-me1/">Sub Me</a>
+</li>
+<li>
+<a href="../me/sub-me-two/">Sub Me 2</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Nav Menu with a role of \"header\""); 
+}
+
+{
+    my $nav_menu = Shlomif::NavMenu->new(
+        'path_info' => "/me/",
+        @{$test_data->{'header_role'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render(
+            'no_ie' => "true",
+            'styles' =>
+            {
+                'bar' => 'nav',
+                'level0' => 'navbarmain',
+                'level1' => 'navbarnested',
+                'level2' => "navbarnested",
+                'level3' => "navbarnested",
+                'level4' => "navbarnested",
+                'list' => "navbarmain",
+            },
+        );
+
+    my $expected_string = <<"EOF";
+<ul class="navbarmain">
+<li>
+<a href="../">Home</a>
+</li>
+</ul>
+<h2>
+<b>About Me</b>
+</h2>
+<ul class="navbarmain">
+<li>
+<a href="sub-me1/">Sub Me</a>
+</li>
+<li>
+<a href="sub-me-two/">Sub Me 2</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Nav Menu with a selected item with a role of \"header\" "); 
 }
 

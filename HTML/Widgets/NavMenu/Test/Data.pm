@@ -350,6 +350,44 @@ my @hidden_item_nav_menu =
     },
 );
 
+my @header_role_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'value' => "Top 1",
+        'title' => "T1 Title",
+        'expand_re' => "",
+        'subs' =>
+        [
+            {
+                'value' => "Home",
+                'url' => "",
+            },
+            {
+                'value' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'role' => "header",
+                'show_always' => 1,
+                'subs' =>
+                [
+                    {
+                        'value' => "Sub Me",
+                        'url' => "me/sub-me1/",
+                    },
+                    {
+                        'value' => "Sub Me 2",
+                        'url' => "me/sub-me-two/",
+                    },
+                ],
+            },
+        ],
+    },
+);
+
 
 sub get_test_data
 {
@@ -362,6 +400,7 @@ sub get_test_data
             'items_in_sub' => \@items_in_sub_nav_menu,
             'separator' => \@separator_nav_menu,
             'hidden_item' => \@hidden_item_nav_menu,
+            'header_role' => \@header_role_nav_menu,
         };
 }
 
