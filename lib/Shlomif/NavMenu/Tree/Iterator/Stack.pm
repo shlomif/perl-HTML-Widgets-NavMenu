@@ -47,5 +47,11 @@ sub pop
     return pop(@{$self->{'items'}});
 }
 
+sub is_empty
+{
+    my $self = shift;
+    return ($self->len() == 0);
+}
+
 1;
 

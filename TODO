@@ -1,4 +1,7 @@
-* Create an is_empty() function for the stack.
+* Create an Item class for the Tree Iterator, and encapsulate all the
+functionality inside it.
 
-* Change the $self->stack()->top() calls to $self->top().
+* Implement a recurse predicate for the Tree Iterator back-end.
+
+* Implement the regular navigation menu generation using Tree::Iterator.
 
