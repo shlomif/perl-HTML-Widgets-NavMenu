@@ -8,7 +8,7 @@ use lib ($ENV{'HTML_NAVMENU_HEAD'} || "../../../module/lib/");
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
-use SitesData;
+use HeadSitesData;
 
 use CGI;
 
