@@ -7,3 +7,14 @@
 * Upload an initial version (marked with _) to CPAN in order to
 "liqbo'a uvdoth bashetakh".
 
+* Restore the abs_url directive only as use_abs_url or whatever.
+
+* Add an option to link to the pages as:
+
+1. By relative URLs. (../../../hello/world/yes.html)
+
+2. By site-abs URLs (/hoola/hello/world/yes.html)
+
+3. By fully qualified URLs (http://www.mysite.org/hoola/hello/world/yes.html)
+
+
