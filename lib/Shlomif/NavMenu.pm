@@ -295,24 +295,19 @@ sub render_tree_contents
         my $subs = [];
         foreach my $sub_contents_sub (@{$sub_contents->{subs}})
         {
-            my $sub_item = 
-            $self->render_tree_contents(
-                'sub_contents' => $sub_contents_sub,
-                'coords' => [@$coords, $index],
-                'host' => $host,
-                'current_coords_ptr' => $current_coords_ptr,
+            $new_item->add_sub(
+                $self->render_tree_contents(
+                    'sub_contents' => $sub_contents_sub,
+                    'coords' => [@$coords, $index],
+                    'host' => $host,
+                    'current_coords_ptr' => $current_coords_ptr,
+                )
             );
-            if ($sub_item->expanded())
-            {
-                $new_item->expand();
-            }
-            push @$subs, $sub_item;
         }
         continue
         {
             $index++;
         }
-        $new_item->{'subs'} = $subs;
     }
     return $new_item;
 }
