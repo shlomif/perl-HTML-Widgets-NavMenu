@@ -248,6 +248,17 @@ sub gen_blank_nav_menu_tree_node
     return HTML::Widgets::NavMenu::Tree::Node->new();
 }
 
+sub create_predicate
+{
+    my $self = shift;
+    my %args = (@_);
+
+    return
+        HTML::Widgets::NavMenu::Predicate->new(
+            'spec' => $args{'spec'},
+        );
+}
+
 sub create_new_nav_menu_item
 {
     my $self = shift;
@@ -264,7 +275,7 @@ sub create_new_nav_menu_item
 
     if (exists($sub_contents->{'expand'}))
     {
-        if (HTML::Widgets::NavMenu::Predicate->new(
+        if ($self->create_predicate(
                 'spec' => $sub_contents->{'expand'},
             )->evaluate(
                 'path_info' => $self->path_info(),

@@ -1,16 +1,13 @@
 * Write tests to test the url_type and rec_url_type of the leading path,
 and site map.
 
-* Use HTML::Widgets::NavMenu::Tree::Node and its accessors for the rest
-  of the $ptr->{text} etc. manipulations.
-
-* Encapsulate the predicate call within its own re-usable (and over-ridable)
-function.
-
 * Write full documentation for the module.
 
 Long-Term:
 ----------
+
+* Use HTML::Widgets::NavMenu::Tree::Node and its accessors for the rest
+  of the $ptr->{text} etc. manipulations.
 
 * Write a unit-test for HTML::Widgets::NavMenu::get_cross_host_rel_url().
 
