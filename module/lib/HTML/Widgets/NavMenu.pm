@@ -93,6 +93,8 @@ sub initialize
 
     $self->{current_host} = $current_host;
 
+    $self->{'ul_classes'} = ($args{'ul_classes'} || []);
+
     return 0;
 }
 
@@ -103,6 +105,7 @@ sub get_nav_menu_traverser
     return
         HTML::Widgets::NavMenu::Iterator::NavMenu->new(
             'nav_menu' => $self,
+            'ul_classes' => $self->{'ul_classes'},
         );
 }
 

@@ -4,6 +4,22 @@ use base qw(HTML::Widgets::NavMenu::Iterator::Html);
 
 use CGI;
 
+sub initialize
+{
+    my $self = shift;
+
+    $self->SUPER::initialize(@_);
+
+    my %args = (@_);
+
+    my $ul_classes = ($args{'ul_classes'} || []);
+    # Make a fresh copy just to be on the safe side.
+    $self->{'ul_classes'} = [ @$ul_classes ];
+
+    return 0;
+}
+
+# Depth is 1 for the uppermost depth.
 sub gen_ul_tag
 {
     my $self = shift;
@@ -29,7 +45,7 @@ sub get_ul_class
 
     my $depth = $args{'depth'};
 
-    return ($depth <= 1) ? "navbarmain" : "navbarnested";
+    return $self->{'ul_classes'}->[$depth-1];
 }
 
 sub start_root
