@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 10;
+use Test::More tests => 13;
 
 use HTML::Widgets::NavMenu;
 
@@ -104,5 +104,34 @@ use HTML::Widgets::NavMenu;
             'url_type' => "full_abs",
         ), "http://www.shlomifish.org/path1/other-path/", 
         "Checking for intra-host (shared component) link of 'full_abs'");
+
+    # Now we check for 'url_is_abs'
+    # TEST
+    is (
+        $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "http://www.myhost.com/",
+            'url_type' => "rel",
+            'url_is_abs' => 1,
+        ), "http://www.myhost.com/", 
+        "Checking for url_is_abs.");
+    # TEST
+    is (
+        $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "http://www.myhost.com/",
+            'url_type' => "site_abs",
+            'url_is_abs' => 1,            
+        ), "http://www.myhost.com/", 
+        "Checking for url_is_abs");
+    # TEST
+    is (
+        $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "http://www.myhost.com/",
+            'url_type' => "full_abs",
+            'url_is_abs' => 1,            
+        ), "http://www.myhost.com/", 
+        "Checking for url_is_abs");
 }
 

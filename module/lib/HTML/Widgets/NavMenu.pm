@@ -220,8 +220,13 @@ sub get_cross_host_rel_url
     my $host = $args{host};
     my $host_url = $args{host_url};
     my $url_type = $args{url_type};
+    my $url_is_abs = $args{url_is_abs};
 
-    if (($host ne $self->current_host()) || ($url_type eq "full_abs"))
+    if ($url_is_abs)
+    {
+        return $host_url;
+    }
+    elsif (($host ne $self->current_host()) || ($url_type eq "full_abs"))
     {
         return $self->get_full_abs_url(@_);
     }
