@@ -18,17 +18,9 @@ sub initialize
     $self->{'nav_menu'} = $args{'nav_menu'} or
         die "nav_menu not specified!";
 
-    $self->{'tree'} = $self->get_tree();
-
     $self->{'html'} = [];
 
     return 0;
-}
-
-sub get_tree
-{
-    my $self = shift;
-    return $self->nav_menu->get_traversed_tree();
 }
 
 sub nav_menu
@@ -68,7 +60,7 @@ sub _get_top_host
 sub get_initial_node
 {
     my $self = shift;
-    return $self->{'tree'};
+    return $self->nav_menu->get_traversed_tree();
 }
 
 sub get_node_subs
