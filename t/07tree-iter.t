@@ -91,7 +91,7 @@ sub node_should_recurse
 
 package main;
 
-use Test::More tests => 1;
+use Test::More tests => 2;
 
 use strict;
 
@@ -99,7 +99,7 @@ use HTML::Widgets::NavMenu::Test::Util;
 
 sub test_traverse
 {
-    my ($data, $expected) = (@_);
+    my ($data, $expected, $test_name) = (@_);
     my $traverser =
         MyIter->new(
             'data' => $data
@@ -108,7 +108,7 @@ sub test_traverse
     $traverser->traverse();
 
     ok ((compare_string_arrays($traverser->{'results'}, $expected) == 0),
-        "Simple example for testing the Tree traverser.");
+        $test_name);
 }
 
 # TODO : write an example with recurse == 0.
@@ -140,6 +140,37 @@ sub test_traverse
         "Start-C-one", "Start-FG-one", "End-FG", "End-C", "End-A");
 
     # TEST 
-    test_traverse($data, \@expected);
+    test_traverse($data, \@expected, "Simple example for testing the Tree traverser.");
 }
 
+# This test checks that the should_recurse predicate is honoured.
+{
+    my $data =
+        {
+            'id' => "A",
+            'recurse' => 1,
+            'accum' => "one",
+            'childs' =>
+            [
+                {
+                    'id' => "B",
+                    'accum' => "two",
+                },
+                {
+                    'id' => "C",
+                    'recurse' => 0,
+                    'childs' =>
+                    [
+                        {
+                            'id' => "FG",
+                        },
+                    ],
+                },
+            ],
+        };
+    my @expected = ("Start-A-one", "Start-B-two", "End-B",
+        "Start-C-one", "End-C", "End-A");
+
+    # TEST 
+    test_traverse($data, \@expected, "Example with recurse = 0");
+}
