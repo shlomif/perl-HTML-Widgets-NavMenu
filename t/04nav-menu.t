@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 5;
+use Test::More tests => 6;
 
 use Shlomif::NavMenu;
 
@@ -272,6 +272,57 @@ EOF
 
     # TEST
     ok (validate_nav_menu($rendered, $expected_string),
-        "Nav Menu for empty expand_re after successful pattern match");
+        "Nav Menu with show_always");
+}
+
+# This test tests a menu auto-expands if the current URL is an item
+# inside it.
+{
+    my $nav_menu = Shlomif::NavMenu->new(
+        'path_info' => "/me/bio.html",
+        @{$test_data->{'items_in_sub'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render(
+            'no_ie' => "true",
+            'styles' =>
+            {
+                'bar' => 'nav',
+                'level0' => 'navbarmain',
+                'level1' => 'navbarnested',
+                'level2' => "navbarnested",
+                'level3' => "navbarnested",
+                'level4' => "navbarnested",
+                'list' => "navbarmain",
+            },
+        );
+
+    my $expected_string = <<"EOF";
+<ul class="navbarmain">
+<li>
+<a href="./../">Home</a>
+</li>
+<li>
+<a href="./" title="About Myself">About Me</a>
+<br />
+<ul class="navbarnested">
+<li>
+<b>Bio</b>
+</li>
+<li>
+<a href="./gloria/" title="A Useful Conspiracy">Gloria</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="./../hoola/" title="Drumming is good for your health">Tam Tam Drums</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string),
+        "Nav Menu with a selected sub-item");
 }
 

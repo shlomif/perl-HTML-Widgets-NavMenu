@@ -208,6 +208,56 @@ my @show_always_nav_menu =
     },
 );
 
+my @items_in_sub_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' =>
+    {
+        'default' =>
+        {
+            'base_url' => "http://www.hello.com/",
+        },
+    },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'value' => "Top 1",
+        'title' => "T1 Title",
+        'expand_re' => "",
+        'subs' =>
+        [
+            {
+                'value' => "Home",
+                'url' => "",
+            },
+            {
+                'value' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'subs' =>
+                [
+                    {
+                        'url' => "me/bio.html",
+                        'value' => "Bio",
+                        'title' => "Biography of Myself",
+                    },
+                    {
+                        'url' => "me/gloria/",
+                        'value' => "Gloria",
+                        'title' => "A Useful Conspiracy",
+                    },
+                ],
+            },
+            {
+                'value' => "Tam Tam Drums",
+                'title' => "Drumming is good for your health",
+                'url' => "hoola/",
+            },
+        ],
+    },
+);
+
+
 
 sub get_test_data
 {
@@ -217,6 +267,7 @@ sub get_test_data
             'minimal' => \@minimal_nav_menu,
             'expand_re' => \@expand_re_nav_menu,
             'show_always' => \@show_always_nav_menu,
+            'items_in_sub' => \@items_in_sub_nav_menu,
         };
 }
 
