@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 4;
+use Test::More tests => 5;
 
 use Shlomif::NavMenu;
 
@@ -198,6 +198,72 @@ EOF
 <ul class="navbarnested">
 <li>
 <a href="../foo/expanded/" title="Expanded">Expanded</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string),
+        "Nav Menu for empty expand_re after successful pattern match");
+}
+
+# This test tests the show_always directive which causes the entire
+# sub-tree to expand at any URL.
+{
+    my $nav_menu = Shlomif::NavMenu->new(
+        'path_info' => "/me/",
+        @{$test_data->{'show_always'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render(
+            'no_ie' => "true",
+            'styles' =>
+            {
+                'bar' => 'nav',
+                'level0' => 'navbarmain',
+                'level1' => 'navbarnested',
+                'level2' => "navbarnested",
+                'level3' => "navbarnested",
+                'level4' => "navbarnested",
+                'list' => "navbarmain",
+            },
+        );
+
+    my $expected_string = <<"EOF";
+<ul class="navbarmain">
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<b>About Me</b>
+</li>
+<li>
+<a href="../show-always/">Show Always</a>
+<br />
+<ul class="navbarnested">
+<li>
+<a href="../show-always/gandalf/">Gandalf</a>
+</li>
+<li>
+<a href="../robin/">Robin</a>
+<br />
+<ul class="navbarnested">
+<li>
+<a href="../robin/hood/">Hood</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../esther/">Queen Esther</a>
+<br />
+<ul class="navbarnested">
+<li>
+<a href="../haman/">Haman</a>
+</li>
+</ul>
 </li>
 </ul>
 </li>

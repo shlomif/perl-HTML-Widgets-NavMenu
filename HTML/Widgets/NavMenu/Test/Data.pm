@@ -149,6 +149,65 @@ my @expand_re_nav_menu =
     },
 );
 
+my @show_always_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'value' => "Top 1",
+        'title' => "T1 Title",
+        'expand_re' => "",
+        'subs' =>
+        [
+            {
+                'value' => "Home",
+                'url' => "",
+            },
+            {
+                'value' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+            },
+            {
+                'value' => "Show Always",
+                'url' => "show-always/",
+                'show_always' => 1,
+                'subs' =>
+                [
+                    {
+                        'value' => "Gandalf",
+                        'url' => "show-always/gandalf/",
+                    },
+                    {
+                        'value' => "Robin",
+                        'url' => "robin/",
+                        'subs' =>
+                        [
+                            {
+                                'value' => "Hood",
+                                'url' => "robin/hood/",
+                            },
+                        ],
+                    },
+                    {
+                        'value' => "Queen Esther",
+                        'url' => "esther/",
+                        'subs' =>
+                        [
+                            {
+                                'value' => "Haman",
+                                'url' => "haman/",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+);
+
 
 sub get_test_data
 {
@@ -157,6 +216,7 @@ sub get_test_data
             'two_sites' => \@two_sites_data,
             'minimal' => \@minimal_nav_menu,
             'expand_re' => \@expand_re_nav_menu,
+            'show_always' => \@show_always_nav_menu,
         };
 }
 
