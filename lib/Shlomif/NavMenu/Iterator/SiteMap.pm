@@ -155,6 +155,11 @@ sub node_end
     }
 }
 
+sub node_should_recurse
+{
+    return 1;
+}
+
 sub get_results
 {
     my $self = shift;

@@ -70,12 +70,15 @@ sub traverse
             $self->node_start();
         }
 
-        my $sub_item = $top_item->visit();
-        
+        my $sub_item =
+            ($self->node_should_recurse() ?
+                $top_item->visit() :
+                undef);
+
         if (defined($sub_item))
         {
             $self->push_into_stack(
-                'node' => 
+                'node' =>
                     $self->get_node_from_sub(
                         'item' => $top_item,
                         'sub' => $sub_item,
@@ -89,7 +92,7 @@ sub traverse
             $self->stack->pop();
         }
     }
-    
+
     return 0;
 }
 
