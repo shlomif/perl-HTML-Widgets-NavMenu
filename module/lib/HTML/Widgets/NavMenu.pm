@@ -464,21 +464,14 @@ sub get_top_coords
     }
 }
 
-sub find_node_by_coords
-{
-    my $self = shift;
-
-    return $self->get_nav_menu_traverser()
-            ->find_node_by_coords(
-                @_);
-}
-
 sub is_skip
 {
     my $self = shift;
     my $coords = shift;
 
-    my $ret = $self->find_node_by_coords($coords);
+    my $iterator = $self->get_nav_menu_traverser();
+
+    my $ret = $iterator->find_node_by_coords($coords);
 
     my $item = $ret->{item};
 
@@ -545,8 +538,8 @@ sub get_rel_url_from_coords
     my $coords = shift;
 
     my ($ptr,$host);
-    my $node_ret = $self->find_node_by_coords($coords);
-    my $iterator = $node_ret->{'self'};
+    my $iterator = $self->get_nav_menu_traverser();
+    my $node_ret = $iterator->find_node_by_coords($coords);
     my $item = $node_ret->{'item'};
 
     return $self->get_cross_host_rel_url(
@@ -607,21 +600,14 @@ sub gen_traversed_tree
     return {'tree' => $tree, 'current_coords' => $current_coords };
 }
 
-sub render
+sub get_leading_path
 {
     my $self = shift;
-
-    my %args = (@_);
-
-    my $iterator = $self->get_nav_menu_traverser();
-    $iterator->traverse();
-    my $html = $iterator->get_results();
     
-    my $hosts = $self->{hosts};
-
     my @leading_path;
 
     {
+        my $iterator = $self->get_nav_menu_traverser(); 
         my $fill_leading_path_callback =
             sub {
                 my %args = (@_);
@@ -650,10 +636,26 @@ sub render
                     );
             };
 
-        $self->fill_leading_path(
-            'callback' => $fill_leading_path_callback,
-        );
+        $iterator->find_node_by_coords(
+            $self->get_current_coords(),
+            $fill_leading_path_callback,
+            );
     }
+
+    return \@leading_path;
+}
+
+sub render
+{
+    my $self = shift;
+
+    my %args = (@_);
+
+    my $iterator = $self->get_nav_menu_traverser();
+    $iterator->traverse();
+    my $html = $iterator->get_results();
+    
+    my $hosts = $self->{hosts};
 
     my %nav_links;
 
@@ -686,7 +688,7 @@ sub render
     return 
         {
             'html' => $html,
-            'leading_path' => \@leading_path,
+            'leading_path' => $self->get_leading_path(),
             'nav_links' => \%nav_links,
         };
 }

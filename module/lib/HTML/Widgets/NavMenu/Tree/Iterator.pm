@@ -155,7 +155,7 @@ sub find_node_by_coords
         $idx++;
         $internal_callback->();
     }
-    return +{ 'item' => $item, 'self' => $self, };
+    return +{ 'item' => $item, };
 }
 
 1;
