@@ -37,7 +37,7 @@ use strict;
 use base qw(Shlomif::NavMenu::Object);
 use base qw(Class::Accessor);
 
-Shlomif::NavMenu::LeadingPath::Component->mk_accessors(
+__PACKAGE__->mk_accessors(
     qw(host host_url title label direct_url)
     );
 
