@@ -32,5 +32,27 @@ sub node
     return $self->{'node'};
 }
 
+sub is_visited
+{
+    my $self = shift;
+    return $self->{'visited'};
+}
+
+sub visit
+{
+    my $self = shift;
+    $self->{'visited'} = 1;
+    my $idx = ++$self->{'sub_idx'};
+    if ($idx == (@{$self->{'subs'}}))
+    {
+        $self->{'sub_idx'}--;
+        return undef;
+    }
+    else
+    {
+        return $self->{'subs'}->[$idx];
+    }
+}
+
 1;
 

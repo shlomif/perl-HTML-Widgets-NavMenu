@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 10;
+use Test::More tests => 23;
 
 use strict;
 
@@ -64,4 +64,28 @@ sub does_throw_exception
     
     # TEST
     is ($item->node(), "Hello", "Getting the node()");
+}
+
+{
+    my $item =
+        Shlomif::NavMenu::Tree::Iterator::Item->new(
+            'node' => "Hello",
+            'subs' => ["ONE", "Two", "threE3", "4.0"],
+            'accum_state' => 5,
+        );
+    
+    
+    ok ((!$item->is_visited()), "Item is not visited at start"); # TEST
+    is ($item->visit(), "ONE", "First sub"); # TEST
+    ok ($item->is_visited(), "Item is visited after first visit"); # TEST
+    is ($item->visit(), "Two", "Second sub"); # TEST
+    ok ($item->is_visited(), "Item is visited after second visit"); # TEST
+    is ($item->visit(), "threE3", "Third sub"); # TEST
+    ok ($item->is_visited(), "Item is visited after third visit"); # TEST
+    is ($item->visit(), "4.0", "Fourth sub"); # TEST
+    ok ($item->is_visited(), "Item is visited after fourth visit"); # TEST
+    ok ((!defined($item->visit())), "No more subs"); # TEST
+    ok ($item->is_visited(), "Item is visited after no more subs"); # TEST
+    ok ((!defined($item->visit())), "No more subs (2)"); # TEST
+    is ($item->node(), "Hello", "item->node() is correct"); # TEST
 }
