@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 3;
+use Test::More tests => 7;
 
 use HTML::Widgets::NavMenu;
 
@@ -44,5 +44,39 @@ use HTML::Widgets::NavMenu;
             "Testing for cross-host URL of $url_type."
         );
     }
+
+    # TEST
+    is (
+        $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "hello/",
+            'url_type' => "rel",
+        ), "../../hello/", 
+        "Checking for intra-host link of 'rel'");
+    # TEST
+    is (
+        $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "hello/",
+            'url_type' => "site_abs",
+        ), "/hello/", 
+        "Checking for intra-host link of 'site_abs'");
+    # TEST
+    is (
+        $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "hello/",
+            'url_type' => "full_abs",
+        ), "http://www.shlomifish.org/hello/", 
+        "Checking for intra-host link of 'full_abs'");
+    # TEST
+    eval {
+        my $string = $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "hello/",
+            'url_type' => "unknown",
+        );
+    };
+    ok ($@, "Checking for exception thrown on intra-host URL with an unknown url_type");
 }
 
