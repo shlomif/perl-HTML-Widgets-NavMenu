@@ -5,6 +5,11 @@
 * Eliminate the hard-coded class="navbarnested", etc. directives by making
 the code more modular.
 
+* Eliminate the specified dealing with the header role by putting it in
+a derived class.
+
+* Implement the list of values to assign inside the Node class.
+
 * Restore the abs_url directive only as use_abs_url or whatever.
 
 * Add an option to link to the pages as:
@@ -15,11 +20,12 @@ the code more modular.
 
 3. By fully qualified URLs (http://www.mysite.org/hoola/hello/world/yes.html)
 
-* Make the module support URLs with CGI GET parameters properly.
-
 * Write the "SEE ALSO" section of the POD document. (cover the other
 similar modules)
 
 * Write full documentation for the module.
 
+Long-Term:
+----------
 
+* Make the module support URLs with CGI GET parameters properly.
