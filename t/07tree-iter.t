@@ -89,9 +89,30 @@ sub node_should_recurse
 
 1;
 
+package MyIterComplexSubs;
+
+use vars qw(@ISA);
+
+@ISA=qw(MyIter);
+
+sub get_node_from_sub
+{
+    my $self = shift;
+
+    my %args = (@_);
+
+    my $item = $args{'item'};
+    my $sub = $args{'sub'};
+    my $node = $item->node();
+
+    return $node->{'subs_db'}->{$sub};
+}
+
+1;
+
 package main;
 
-use Test::More tests => 3;
+use Test::More tests => 4;
 
 use strict;
 
@@ -99,9 +120,10 @@ use HTML::Widgets::NavMenu::Test::Util;
 
 sub test_traverse
 {
-    my ($data, $expected, $test_name) = (@_);
+    my ($data, $expected, $test_name, $class) = (@_);
+    $class ||= "MyIter";
     my $traverser =
-        MyIter->new(
+        $class->new(
             'data' => $data
         );
 
@@ -242,4 +264,33 @@ sub test_traverse
 
     # TEST 
     test_traverse($data, \@expected, "Example with lots of weird combinations");
+}
+
+{
+    my $data =
+        {
+            'id' => "A",
+            'recurse' => 1,
+            'accum' => "one",
+            'childs' => [qw(hello good)],
+            'subs_db' =>
+            {
+                'hello' =>
+                {
+                    'id' => "BOK",
+                    'accum' => "two",
+                },
+                'good' =>
+                {
+                    'id' => "C",
+                },
+            },
+        };
+
+    my @expected = ("Start-A-one", "Start-BOK-two", "End-BOK",
+        "Start-C-one", "End-C", "End-A");
+
+    # TEST
+    test_traverse($data, \@expected, "Example with complex sub resolution",
+        "MyIterComplexSubs");
 }
