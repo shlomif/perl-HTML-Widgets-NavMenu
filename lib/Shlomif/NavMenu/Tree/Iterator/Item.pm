@@ -48,16 +48,20 @@ sub visit
 {
     my $self = shift;
     $self->{'visited'} = 1;
-    my $idx = ++$self->{'sub_idx'};
-    if ($idx == (@{$self->{'subs'}}))
+    if ($self->num_subs_to_go())
     {
-        $self->{'sub_idx'}--;
-        return undef;
+        return $self->{'subs'}->[++$self->{'sub_idx'}];
     }
     else
     {
-        return $self->{'subs'}->[$idx];
+        return undef;
     }
+}
+
+sub num_subs_to_go
+{
+    my $self = shift;
+    return (scalar(@{$self->{'subs'}}) - $self->{'sub_idx'} - 1);
 }
 
 1;
