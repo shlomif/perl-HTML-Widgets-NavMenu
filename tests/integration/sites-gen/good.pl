@@ -110,6 +110,12 @@ sub process_site
                     );
                 print {$fh} "$close_mark\n";
             }
+            {
+                print {$fh} "SITE_MAP=\n$open_mark\n";
+                print {$fh} $nav_menu->gen_site_map();
+                print {$fh} "$close_mark\n";
+            }
+            
             # TODO : add the nav-links, site-map, etc.
             close($fh);
         }
