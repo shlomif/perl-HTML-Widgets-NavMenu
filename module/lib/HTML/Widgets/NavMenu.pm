@@ -2,7 +2,7 @@
 
 package HTML::Widgets::NavMenu;
 
-our $VERSION = '0.1.15_00';
+our $VERSION = '0.2.0';
 
 package HTML::Widgets::NavMenu::Error;
 
