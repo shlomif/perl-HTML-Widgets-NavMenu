@@ -19,7 +19,6 @@ my @minimal_nav_menu =
         'host' => "default",
         'value' => "Top 1",
         'title' => "T1 Title",
-        'expand' => { 'bool' => 1,},
         'subs' =>
         [
             {
@@ -54,7 +53,6 @@ my @two_sites_data =
         'host' => "default",
         'value' => "Top 1",
         'title' => "T1 Title",
-        'expand' => { 'bool' => 1,},
         'subs' =>
         [
             {
@@ -119,7 +117,6 @@ my @expand_re_nav_menu =
         'host' => "default",
         'value' => "Top 1",
         'title' => "T1 Title",
-        'expand' => { 'bool' => 1,},
         'subs' =>
         [
             {
@@ -158,7 +155,6 @@ my @show_always_nav_menu =
         'host' => "default",
         'value' => "Top 1",
         'title' => "T1 Title",
-        'expand' => { 'bool' => 1,},
         'subs' =>
         [
             {
@@ -223,7 +219,6 @@ my @items_in_sub_nav_menu =
         'host' => "default",
         'value' => "Top 1",
         'title' => "T1 Title",
-        'expand' => { 'bool' => 1,},
         'subs' =>
         [
             {
@@ -266,7 +261,6 @@ my @separator_nav_menu =
         'host' => "default",
         'value' => "Top 1",
         'title' => "T1 Title",
-        'expand' => { 'bool' => 1,},
         'subs' =>
         [
             {
@@ -318,7 +312,6 @@ my @hidden_item_nav_menu =
         'host' => "default",
         'value' => "Top 1",
         'title' => "T1 Title",
-        'expand' => { 'bool' => 1,},
         'subs' =>
         [
             {
@@ -359,7 +352,6 @@ my @header_role_nav_menu =
         'host' => "default",
         'value' => "Top 1",
         'title' => "T1 Title",
-        'expand' => { 'bool' => 1,},
         'subs' =>
         [
             {

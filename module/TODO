@@ -1,6 +1,3 @@
-* Remove 'expand' => { 'bool' => 1 }, from the root as it isn't needed because
-the root expands by default.
-
 * Write some tests with a selective 'expand' directive that expands in one
 path and doesn't expand in others.
 
