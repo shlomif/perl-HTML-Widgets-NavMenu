@@ -49,16 +49,21 @@ sub get_ul_class
 
     return $self->{'ul_classes'}->[$depth-1];
 }
- 
-# This functions get something like either <a href="./mydir">Link Value</a>
-# or <b>Link Value</b>
+
+sub get_currently_active_text
+{
+    my $self = shift;
+    my $node = shift;
+    return "<b>" . $node->text() . "</b>";
+}
+
 sub get_link_tag
 {
     my $self = shift;
     my $node = $self->top->node();
     if ($node->CurrentlyActive())
     {
-        return "<b>" . $node->text() . "</b>";
+        return $self->get_currently_active_text($node);
     }
     else
     {
@@ -93,7 +98,7 @@ sub start_handle_non_role
     my @tags_to_add = ("<li>", $self->get_link_tag());
     if ($top_item->num_subs_to_go() && $self->is_expanded())
     {
-        push @tags_to_add, 
+        push @tags_to_add,
             ("<br />", $self->gen_ul_tag('depth' => $self->stack->len()));
     }
     $self->_add_tags(@tags_to_add);
