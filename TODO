@@ -1,3 +1,6 @@
+* Check the sanity of MANIFEST - does it contain all the tests and modules
+that exist in the Subversion repository?
+
 * Implement a recurse predicate for the Tree Iterator back-end.
 
 * Implement the regular navigation menu generation using Tree::Iterator.

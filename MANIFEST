@@ -9,10 +9,12 @@ t/02site-map.t
 t/03nav-links.t
 t/04nav-menu.t
 t/05stack.t
+t/06tree-iter-item.t
 lib/Shlomif/NavMenu/HTML/Widget/SideBar.pm
+lib/Shlomif/NavMenu/Iterator/SiteMap.pm
 lib/Shlomif/NavMenu/Object.pm
 lib/Shlomif/NavMenu.pm
-lib/Shlomif/NavMenu/Iterator/SiteMap.pm
+lib/Shlomif/NavMenu/Tree/Iterator/Item.pm
 lib/Shlomif/NavMenu/Tree/Iterator.pm
 lib/Shlomif/NavMenu/Tree/Iterator/Stack.pm
 lib/Shlomif/NavMenu/Tree/Numbered.pm
