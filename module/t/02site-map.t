@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 5;
+use Test::More tests => 6;
 
 use HTML::Widgets::NavMenu;
 
@@ -241,4 +241,39 @@ EOF
     # TEST
     ok (validate_site_map($results, $expected_text), 
         "site_map - rec_url_type");
+}
+
+
+
+
+
+
+# This is a test for the url_is_abs directive.
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/darling/",
+        @{$test_data->{'url_is_abs_menu'}},
+    );
+
+    my $results = $nav_menu->gen_site_map();
+
+    my $expected_text = <<"EOF";
+<ul>
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<a href="http://www.google.com/" title="Google it!">Link to Google</a> - Google it!
+<br />
+<ul>
+<li>
+<a href="../sub-dir/">Sub Directory</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+    # TEST
+    ok (validate_site_map($results, $expected_text), 
+        "site_map - url_is_abs");
 }
