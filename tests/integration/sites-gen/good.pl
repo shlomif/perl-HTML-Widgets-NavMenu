@@ -6,6 +6,8 @@ use strict;
 use Shlomif::NavMenu;
 use SitesData;
 
+use CGI;
+
 my $type = "good";
 
 sub mymkdir
@@ -77,6 +79,19 @@ sub process_site
             print {$fh} "NAV_MENU=\n$open_mark\n";
             print {$fh} map { "$_\n" } @{$results->{'html'}};
             print {$fh} "$close_mark\n";
+            {
+                my $nav_links = $results->{'nav_links'};
+                my @keys = (sort { $a cmp $b } keys(%$nav_links));
+                print {$fh} "NAV_LINKS=\n$open_mark\n";
+                foreach my $key (@keys)
+                {
+                    my $url = $nav_links->{$key};
+                    print {$fh} "<link rel=\"$key\" href=\"" . 
+                        CGI::escapeHTML($url) . "\" />\n";
+                }
+                print {$fh} "$close_mark\n";
+            }
+
             # TODO : add the nav-links, site-map, etc.
             close($fh);
         }
