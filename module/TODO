@@ -1,18 +1,18 @@
-* Restore the abs_url directive only as url_type or whatever.
-    - Add a url_type accessor to LeadingPath::Component.
+* Write tests to test the url_type and rec_url_type of the leading path,
+and site map.
 
-* Add an option to link to the pages as:
+* Use HTML::Widgets::NavMenu::Tree::Node and its accessors for the rest
+  of the $ptr->{text} etc. manipulations.
 
-1. By relative URLs. (../../../hello/world/yes.html)
-
-2. By site-abs URLs (/hoola/hello/world/yes.html)
-
-3. By fully qualified URLs (http://www.mysite.org/hoola/hello/world/yes.html)
+* Encapsulate the predicate call within its own re-usable (and over-ridable)
+function.
 
 * Write full documentation for the module.
 
 Long-Term:
 ----------
+
+* Write a unit-test for HTML::Widgets::NavMenu::get_cross_host_rel_url().
 
 * Use Build.PL instead of Makefile.PL. (?)
 
@@ -28,5 +28,9 @@ tags.
 * Write more tests with a selective 'expand' directive that expands in one
 path and doesn't expand in others.
     - test more expand types.
+
+* In HTML::Widgets::NavMenu::Tree::Node - make sure url_type accepts only
+its enum values.
+
 
 

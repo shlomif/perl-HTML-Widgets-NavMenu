@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 32;
+use Test::More tests => 34;
 
 use strict;
 
@@ -22,6 +22,8 @@ use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
     is($node->title(), "It's Raining", "Set/get title"); # TEST
     $node->set("host", "vipe");
     is($node->host(), "vipe", "Set/get host"); # TEST
+    $node->set("url_type", "site_abs");
+    is($node->url_type(), "site_abs", "Set/get url_type"); # TEST
 
     # Testing again for the same values to see that they are still OK.
 
@@ -30,6 +32,7 @@ use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
     is($node->show_always(), 1, "Set/get show_always");  # TEST
     is($node->title(), "It's Raining", "Set/get title"); # TEST
     is($node->host(), "vipe", "Set/get host"); # TEST
+    is($node->url_type(), "site_abs", "Set/get url_type"); # TEST
 }
 
 {

@@ -442,6 +442,93 @@ my @selective_expand_nav_menu =
     },
 );
 
+my @url_type_menu =
+(
+    'current_host' => "default",
+    'hosts' =>
+        { 
+        'default' => 
+            { 
+                'base_url' => "http://www.hello.com/",
+                'trailing_url_base' => "/",
+            },
+        },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'text' => "Top 1",
+        'title' => "T1 Title",
+        'subs' =>
+        [
+            {
+                'text' => "Home",
+                'url' => "",
+            },
+            {
+                'text' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'url_type' => "site_abs",
+            },
+            {
+                'text' => "Yowza",
+                'url' => "yowza/",
+                'url_type' => "full_abs",
+            },
+        ],
+    },
+);
+
+my @rec_url_type_menu =
+(
+    'current_host' => "default",
+    'hosts' =>
+        { 
+        'default' => 
+            { 
+                'base_url' => "http://www.hello.com/~shlomif/",
+                'trailing_url_base' => "/~shlomif/",
+            },
+        },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'text' => "Top 1",
+        'title' => "T1 Title",
+        'rec_url_type' => "full_abs",
+        'subs' =>
+        [
+            {
+                'text' => "Home",
+                'url' => "",
+            },
+            {
+                'text' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'url_type' => "site_abs",
+            },
+            {
+                'text' => "Hoola",
+                'url' => "tedious/to/write/",
+            },
+            {
+                'text' => "Yowza",
+                'url' => "yowza/",
+                'url_type' => "rel",
+                'show_always' => 1,
+                'subs' =>
+                [
+                    {
+                        'url' => "yowza/howza/",
+                        'text' => "This should be full_abs again",
+                    },
+                ],
+            },
+        ],
+    },
+);
+
 sub get_test_data
 {
     return
@@ -455,6 +542,8 @@ sub get_test_data
             'hidden_item' => \@hidden_item_nav_menu,
             'header_role' => \@header_role_nav_menu,
             'selective_expand' => \@selective_expand_nav_menu,
+            'url_type_menu' => \@url_type_menu,
+            'rec_url_type_menu' => \@rec_url_type_menu,
         };
 }
 

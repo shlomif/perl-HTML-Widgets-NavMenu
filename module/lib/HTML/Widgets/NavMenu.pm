@@ -38,7 +38,7 @@ use base qw(HTML::Widgets::NavMenu::Object);
 use base qw(Class::Accessor);
 
 __PACKAGE__->mk_accessors(
-    qw(host host_url title label direct_url)
+    qw(host host_url title label direct_url url_type)
     );
 
 sub initialize
@@ -205,26 +205,40 @@ sub current_host
     return $self->{'current_host'};
 }
 
+sub get_full_abs_url
+{
+    my $self = shift;
+    my %args = (@_);
+    my $host = $args{host};
+    my $host_url = $args{host_url};
+    
+    return ($self->{hosts}->{$host}->{base_url} . $host_url);
+}
+
 sub get_cross_host_rel_url
 {
     my $self = shift;
     my %args = (@_);
     my $host = $args{host};
     my $host_url = $args{host_url};
-    my $abs_url = $args{abs_url};
+    my $url_type = $args{url_type};
 
-    if ($abs_url)
+    if (($host ne $self->current_host()) || ($url_type eq "full_abs"))
     {
-        return $host_url;
+        return $self->get_full_abs_url(@_);
     }
-
-    return
-        ($host eq $self->{current_host}) ?
-            get_relative_url(
-                $self->path_info(),
-                $host_url
-            ) :
-            ($self->{hosts}->{$host}->{base_url} . $host_url);
+    elsif ($url_type eq "rel")
+    {
+        return get_relative_url($self->path_info(), $host_url);
+    }
+    elsif ($url_type eq "site_abs")
+    {
+        return ($self->{hosts}->{$host}->{trailing_url_base} . $host_url);
+    }
+    else
+    {
+        die "Unknown url_type \"$url_type\"!\n";
+    }
 }
 
 sub gen_blank_nav_menu_tree_node
@@ -285,7 +299,7 @@ sub render_tree_contents
 
     if (exists($sub_contents->{url}))
     {
-        if (($sub_contents->{url} eq $path_info) && ($host eq $self->{current_host}))
+        if (($sub_contents->{url} eq $path_info) && ($host eq $self->current_host()))
         {
             $$current_coords_ptr = [ @$coords ];
             $new_item->mark_as_current();
@@ -448,9 +462,10 @@ sub find_node_by_coords
     my $callback = shift || (sub { });
     my $ptr = $self->{tree_contents};
     my $host = $ptr->{host};
+    my $rec_url_type = "rel";
     my $idx = 0;
     my $internal_callback = sub {
-        $callback->('idx' => $idx, 'ptr' => $ptr, 'host' => $host);
+        $callback->('idx' => $idx, 'ptr' => $ptr, 'host' => $host, 'rec_url_type' => $rec_url_type,);
     };
     $internal_callback->();
     foreach my $c (@$coords)
@@ -461,9 +476,13 @@ sub find_node_by_coords
         {
             $host = $ptr->{host};
         }
+        if ($ptr->{rec_url_type})
+        {
+            $rec_url_type = $ptr->{rec_url_type};
+        }
         $internal_callback->();
     }
-    return { 'ptr' => $ptr, 'host' => $host };
+    return { 'ptr' => $ptr, 'host' => $host, 'rec_url_type' => $rec_url_type, };
 }
 
 sub is_skip
@@ -545,7 +564,7 @@ sub get_rel_url_from_coords
     return $self->get_cross_host_rel_url(
         'host' => $host,
         'host_url' => ($ptr->{url} || ""),
-        'abs_url' => $ptr->{abs_url},
+        'url_type' => ($ptr->{url_type} || $node_ret->{rec_url_type} || "rel"),
     );
 }
 
@@ -620,9 +639,11 @@ sub render
                 my %args = (@_);
                 my $ptr = $args{ptr};
                 my $host = $args{host};
-                $host = $ptr->{host} if ($ptr->{host});
                 # This is a workaround for the root link.
                 my $host_url = $ptr->{url} || "";
+
+                my $url_type = 
+                    ($ptr->{url_type} || $args{rec_url_type} || "rel");
 
                 push @leading_path,
                     HTML::Widgets::NavMenu::LeadingPath::Component->new(
@@ -634,8 +655,9 @@ sub render
                             $self->get_cross_host_rel_url(
                                 'host' => $host,
                                 'host_url' => $host_url,
-                                'abs_url' => $ptr->{abs_url},
+                                'url_type' => $url_type,
                             ),
+                        'url_type' => $url_type,
                     );
             };
 
@@ -750,9 +772,14 @@ menu can spread across pages in several hosts, which will link from one to
 another using relative URLs if possible and fully-qualified (i.e: C<http://>)
 URLs if not.
 
-Currently the only key present in the hash is the C<base_url> one that points
+Currently the only key required in the hash is the C<base_url> one that points
 to a string containing the absolute URL to the sub-site. The base URL may
 have trailing components if it does not reside on the domain's root directory.
+
+An optional key that is required only if you wish to use the "site_abs" 
+url_type (see below), is C<trailing_url_base>, which denotes the component of
+the site that appears after the hostname. For C<http://www.myhost.com/~myuser/>
+it is C</~myuser/>.
 
 Here's an example for a minimal hosts value:
 
@@ -760,7 +787,8 @@ Here's an example for a minimal hosts value:
             {
                 'default' =>
                 {
-                    'base_url' => "http://www.hello.com/"
+                    'base_url' => "http://www.hello.com/",
+                    'trailing_url_base' => "/",
                 },
             },
 
@@ -772,10 +800,12 @@ two sites:
         't2' => 
         {
             'base_url' => "http://www.shlomifish.org/",
+            'trailing_url_base' => "/",
         },
         'vipe' =>
         {
             'base_url' => "http://vipe.technion.ac.il/~shlomif/",
+            'trailing_url_base' => "/~shlomif/",
         },
     },
 
@@ -969,6 +999,27 @@ This value if true, indicates that the node and all nodes below it (until
 function is similar to C<'expand_re'> but its propagation semantics the 
 opposite.
 
+=item 'url_type'
+
+This specifies the URL type to use to render this item. It can be:
+
+1. C<"rel"> - the default. This means a fully relative URL (if possible), like
+C<"../../me/about.html">.
+
+2. C<"site_abs"> - this uses a URL absolute to the site, using a slash at
+the beginning. Like C<"/~shlomif/me/about.html">. For this to work the current
+host needs to have a C<'trailing_url_base'> value set.
+
+3. C<"full_abs"> - this uses a fully qualified URL (e.g: with C<http://> at 
+the beginning, even if both the current path and the pointed path belong
+to the same host. Something like C<http://vipe.technion.ac.il/~shlomif/me/about.html>.
+
+=item 'rec_url_type'
+
+This is similar to C<'url_type'> only it recurses, to the sub-tree of the
+node. If both C<'url_type'> and C<'rec_url_type'> are specified for a node,
+then the value of C<'url_type'> will hold.
+
 =back
 
 =head1 Predicate Values
@@ -1070,6 +1121,10 @@ This is not SGML-escaped.
 
 A direct URL (usable for inclusion in an A tag ) from the current page to this
 page.
+
+=item url_type
+
+This is the C<url_type> (see above) that holds for this node.
 
 =back
 

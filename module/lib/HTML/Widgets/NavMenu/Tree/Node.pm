@@ -5,8 +5,8 @@ use base 'HTML::Widgets::NavMenu::Object';
 use base 'Class::Accessor';
 
 __PACKAGE__->mk_accessors(
-    qw(CurrentlyActive expanded hide host role separator show_always),
-    qw(subs title url text)
+    qw(CurrentlyActive expanded hide host role rec_url_type),
+    qw(separator show_always subs text title url url_type),
     );
 
 sub initialize
@@ -56,7 +56,7 @@ sub list_regular_keys
 {
     my $self = shift;
 
-    return (qw(host role show_always title url text));
+    return (qw(host rec_url_type role show_always text title url url_type));
 }
 
 sub list_boolean_keys

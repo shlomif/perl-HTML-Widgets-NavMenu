@@ -67,7 +67,8 @@ sub node_should_recurse
 sub get_a_tag
 {
     my $self = shift;
-    my $node = $self->top->node;
+    my $item = $self->top();
+    my $node = $item->node;
 
     my $tag ="<a";
     my $title = $node->title;
@@ -77,6 +78,10 @@ sub get_a_tag
             $self->nav_menu()->get_cross_host_rel_url(
                 'host' => $self->_get_top_host(),
                 'host_url' => $node->url(),
+                'url_type' => 
+                    ($node->url_type() ||
+                        $item->accum_state()->{'rec_url_type'} ||
+                        "rel"),
             )
         ). "\"";
     if (defined($title))

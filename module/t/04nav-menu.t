@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 12;
+use Test::More tests => 14;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -495,4 +495,73 @@ EOF
     # TEST
     ok (validate_nav_menu($rendered, $expected_string), 
         "Selective Expand Nav-Menu #2"); 
+}
+
+# This is a test for the url_type directive.
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/darling/",
+        @{$test_data->{'url_type_menu'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul>
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<a href="/me/" title="About Myself">About Me</a>
+</li>
+<li>
+<a href="http://www.hello.com/yowza/">Yowza</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Nav Menu for url_type - 1"); 
+}
+
+# This is a test for the rec_url_type directive.
+# Also test the behaviour of the url_type when a trailing_url_base
+# is specified
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/darling/",
+        @{$test_data->{'rec_url_type_menu'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul>
+<li>
+<a href="http://www.hello.com/~shlomif/">Home</a>
+</li>
+<li>
+<a href="/~shlomif/me/" title="About Myself">About Me</a>
+</li>
+<li>
+<a href="http://www.hello.com/~shlomif/tedious/to/write/">Hoola</a>
+</li>
+<li>
+<a href="../yowza/">Yowza</a>
+<br />
+<ul>
+<li>
+<a href="http://www.hello.com/~shlomif/yowza/howza/">This should be full_abs again</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Nav Menu for rec_url_type - 1"); 
 }
