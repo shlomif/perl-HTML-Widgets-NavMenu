@@ -1,0 +1,54 @@
+Syntax:
+
+    'expand' => 
+        +{
+            're' => $regexp,
+            'cb' => sub { [Callback] },
+            'bool' => 1 or 0,
+         }
+
+Or:
+    'expand' => sub { [Callback] },
+
+Equivalent to:
+    'expand' => +{ 'cb' => sub { } },
+
+Or:
+    'expand' => [ 1, 0, "yes", "no", "true", "false", "True", "False" ],
+
+Equivalent to:
+    
+    'expand' => +{ 'bool' => [1 , 0] },
+
+Or:
+    'expand' => "Some other string",
+
+Equivalent to:
+
+    'expand' => +{ 're' => "Some other string", },
+
+Callback Named Arguments:
+-------------------------
+
+'path_info' => the path info.
+'current_host' => the host.
+
+Predicate Usage:
+----------------
+
+my $predicate = 
+    HTML::Widgets::NavMenu::Predicate->new(
+        'spec' => $spec,
+        );
+
+$spec is the value of 'expand' (or whatever) in the previous example.
+
+my $is_true = 
+    $predicate->evaluate(
+        'path_info' => $path_info, 
+        'current_host' => $host,
+        );
+
+That way it is possible to re-use the predicate, several times without
+constructing it again.
+
