@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 7;
+use Test::More tests => 10;
 
 use HTML::Widgets::NavMenu;
 
@@ -78,5 +78,31 @@ use HTML::Widgets::NavMenu;
         );
     };
     ok ($@, "Checking for exception thrown on intra-host URL with an unknown url_type");
+
+    # Now we check for a URL that shares a component with this one.
+    # TEST
+    is (
+        $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "path1/other-path/",
+            'url_type' => "rel",
+        ), "../other-path/", 
+        "Checking for intra-host (shared component) link of 'rel'");
+    # TEST
+    is (
+        $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "path1/other-path/",
+            'url_type' => "site_abs",
+        ), "/path1/other-path/", 
+        "Checking for intra-host (shared component) link of 'site_abs'");
+    # TEST
+    is (
+        $nav_menu->get_cross_host_rel_url(
+            'host' => "shlomif",
+            'host_url' => "path1/other-path/",
+            'url_type' => "full_abs",
+        ), "http://www.shlomifish.org/path1/other-path/", 
+        "Checking for intra-host (shared component) link of 'full_abs'");
 }
 
