@@ -473,7 +473,7 @@ sub find_node_by_coords
     my $callback = shift || (sub { });
     my $ptr = $self->{tree_contents};
     my $host = $ptr->{host};
-    my $rec_url_type = "rel";
+    my $rec_url_type = ($ptr->{rec_url_type} || "rel");
     my $idx = 0;
     my $internal_callback = sub {
         $callback->('idx' => $idx, 'ptr' => $ptr, 'host' => $host, 'rec_url_type' => $rec_url_type,);
