@@ -11,6 +11,8 @@ t/04nav-menu.t
 lib/Shlomif/NavMenu/HTML/Widget/SideBar.pm
 lib/Shlomif/NavMenu/Object.pm
 lib/Shlomif/NavMenu.pm
+lib/Shlomif/NavMenu/Iterator/SiteMap.pm
+lib/Shlomif/NavMenu/Tree/Iterator.pm
 lib/Shlomif/NavMenu/Tree/Numbered.pm
 lib/Shlomif/NavMenu/Url.pm
 META.yml                                 Module meta-data (added by MakeMaker)
