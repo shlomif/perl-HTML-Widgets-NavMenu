@@ -418,8 +418,6 @@ sub render_tree_contents
     return $new_item;
 }
 
-
-
 sub gen_site_map
 {
     my $self = shift;
@@ -440,7 +438,7 @@ sub get_next_coords
 
     my @coords = @{shift || $self->get_current_coords};
 
-    my @branches = ($self->{tree_contents});
+    my @branches = ($self->get_traversed_tree());
 
     my @dest_coords;
 
@@ -448,10 +446,10 @@ sub get_next_coords
 
     for($i=0;$i<scalar(@coords);$i++)
     {
-        $branches[$i+1] = $branches[$i]->{'subs'}->[$coords[$i]];
+        $branches[$i+1] = $branches[$i]->get_nth_sub($coords[$i]);
     }
 
-    if (exists($branches[$i]->{'subs'}))
+    if ($branches[$i]->num_subs())
     {
         @dest_coords = (@coords,0);
     }
@@ -459,7 +457,7 @@ sub get_next_coords
     {
         for($i--;$i>=0;$i--)
         {
-            if (scalar(@{$branches[$i]->{'subs'}}) > ($coords[$i]+1))
+            if ($branches[$i]->num_subs() > ($coords[$i]+1))
             {
                 @dest_coords = (@coords[0 .. ($i-1)], $coords[$i]+1);
                 last;
@@ -589,24 +587,23 @@ sub get_most_advanced_leaf
     my @coords = @{$coords_ref};
 
     # Get a reference to the contents HDS (= hierarchial data structure)
-    my $branch = $self->{tree_contents};
+    my $branch = $self->get_traversed_tree();
 
     # Get to the current branch by advancing to the offset 
     foreach my $c (@coords)
     {
         # Advance to the next level which is at index $c
-        $branch = $branch->{'subs'}->[$c];
+        $branch = $branch->get_nth_sub($c);
     }
 
     # As long as there is something deeper
-    while (exists($branch->{'subs'}))
+    while (my $num_subs = $branch->num_subs())
     {
-        # Get the index of the most advanced sub-branch
-        my $index = scalar(@{$branch->{'subs'}})-1;
+        my $index = $num_subs-1;
         # We are going to return it, so store it
         push @coords, $index;
         # Recurse into the sub-branch
-        $branch = $branch->{'subs'}->[$index];
+        $branch = $branch->get_nth_sub($index);
     }
     
     return \@coords;

@@ -1,4 +1,7 @@
 * Release on CPAN as version 0.4.0.
+    - change the version in $VERSION.
+    - document the changes in Changes.
+    - update the readme.
 
 Long-Term:
 ----------
@@ -24,4 +27,9 @@ its enum values.
 * Future direction: generate the tree once and then be able to render
 it for different path_info()/current_host() configurations. (and the
 generated tree re-used by all other members).
+
+* Refactor get_next_coords().
+
+* Create a base class for classes with 'subs' functionality - like 
+get_nth_sub, add_sub, num_subs, etc. Both ..::Node and ..::Item share it.
 

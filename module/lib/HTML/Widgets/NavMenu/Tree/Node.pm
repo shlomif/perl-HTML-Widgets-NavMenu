@@ -66,6 +66,12 @@ sub get_nth_sub
     return $self->subs()->[$idx];
 }
 
+sub num_subs
+{
+    my $self = shift;
+    return scalar(@{$self->{'subs'}});
+}
+
 sub list_regular_keys
 {
     my $self = shift;
