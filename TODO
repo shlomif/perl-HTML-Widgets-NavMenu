@@ -1,4 +1,10 @@
-* Implement the tree that the iterator traverses as a tree of objects.
-
 * Use Build.PL instead of Makefile.PL. (?)
+
+* Make 'expand_always', 'expand_cb' directives.
+
+* Move to the HTML::Widgets::NavMenu namespace.
+
+* Build a non-unit test of the homepage and perl-begin.
+
+* Move the trunk to trunk/module.
 
