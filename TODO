@@ -19,3 +19,8 @@
 
 * Make the module support URLs with CGI GET parameters properly.
 
+* Write the "SEE ALSO" section of the POD document. (cover the other
+similar modules)
+
+* Write full documentation for the module.
+

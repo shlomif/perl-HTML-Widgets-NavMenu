@@ -677,5 +677,73 @@ sub render
         };
 }
 
+=head1 NAME
+
+HTML::Widgets::NavMenu - A Perl Module for Generating HTML Navigation Menus
+
+=head1 SYNOPSIS
+
+    use HTML::Widgets::NavMenu;
+
+    my $nav_menu =
+        HTML::Widgets::NavMenu->new(
+            'path_info' => "/me/",
+            'current_host' => "default",
+            'hosts' => 
+            { 
+                'default' => 
+                { 
+                    'base_url' => "http://www.hello.com/" 
+                }, 
+            },
+            'tree_contents' =>
+            {
+                'host' => "default",
+                'value' => "Top 1",
+                'title' => "T1 Title",
+                'expand_re' => "",
+                'subs' =>
+                [
+                    {
+                        'value' => "Home",
+                        'url' => "",
+                    },
+                    {
+                        'value' => "About Me",
+                        'title' => "About Myself",
+                        'url' => "me/",
+                    },
+                ],
+            },
+        );
+
+    my $results = $nav_menu->render();
+
+    my $nav_menu_html = join("\n", @{$results->{'html'}});
+
+=head1 DESCRIPTION
+
+This module generates a navigation menu for a site. It can also generate
+a complete site map, a path of leading components, and also keeps
+track of navigation links ("Next", "Prev", "Up", etc.) It's a little bit 
+scarse on documentation now, because it's still was not made ready for
+public consumption yet. You can start from the example above and see more
+examples in the tests, and complete working sites in the Subversion 
+repositories at L<http://stalker.iguide.co.il:8080/svn/shlomif-homepage/>
+and L<http://opensvn.csie.org/perlbegin/perl-begin/>.
+
+=head1 AUTHORS
+
+Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt> 
+(L<http://search.cpan.org/~shlomif/>).
+
+=head1 THANKS
+
+Thanks to Yosef Meller (L<http://search.cpan.org/~yosefm/>) for writing
+the module HTML::Widget::SideBar on which initial versions of this modules
+were based. (albeit his code is no longer used here).
+
+=cut
+
 1;
 
