@@ -28,22 +28,8 @@ sub start_regular
     my $nav_menu = $self->{'nav_menu'};
 
     $self->_add_tags("<li>");
-    my $tag = "<a";
+    my $tag = $self->get_a_tag();
     my $title = $node->{'title'};
-    $tag .= " href=\"" . 
-        CGI::escapeHTML(
-            $nav_menu->get_cross_host_rel_url(
-                'host' => $self->_get_top_host(),
-                'host_url' => $node->{url},
-                'abs_url' => $node->{abs_url},
-            )
-        ). "\"";
-    if (defined($title))
-    {
-        $tag .= " title=\"$title\"";
-    }
-    $tag .= ">" . $node->{value} . "</a>";
-
     if (defined($title))
     {
         $tag .= " - $title";
