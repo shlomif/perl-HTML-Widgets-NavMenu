@@ -11,7 +11,6 @@ t/04nav-menu.t
 t/05stack.t
 t/06tree-iter-item.t
 t/07tree-iter.t
-lib/Shlomif/NavMenu/HTML/Widget/SideBar.pm
 lib/Shlomif/NavMenu/Iterator/Base.pm
 lib/Shlomif/NavMenu/Iterator/NavMenu.pm
 lib/Shlomif/NavMenu/Iterator/SiteMap.pm
@@ -20,7 +19,6 @@ lib/Shlomif/NavMenu.pm
 lib/Shlomif/NavMenu/Tree/Iterator/Item.pm
 lib/Shlomif/NavMenu/Tree/Iterator.pm
 lib/Shlomif/NavMenu/Tree/Iterator/Stack.pm
-lib/Shlomif/NavMenu/Tree/Numbered.pm
 lib/Shlomif/NavMenu/Url.pm
 META.yml                                 Module meta-data (added by MakeMaker)
 HTML/Widgets/NavMenu/Test/Data.pm

@@ -6,162 +6,6 @@ package Shlomif::NavMenu;
 
 our $VERSION = '0.1.9';
 
-package Shlomif::NavMenu::MySideBar;
-
-use lib ".";
-
-use base qw(Shlomif::NavMenu::HTML::Widget::SideBar);
-
-use strict;
-
-sub initialize
-{
-    my $self = shift;
-    my $parent = shift;
-    $self->SUPER::initialize($parent, @_);
-    my %args = (@_);
-    $self->addField('CurrentlyActive', 0);
-    $self->addField('Title', "");
-    $self->addField('Hide', 0);
-    $self->addField('Separator', 0);
-    $self->addField('ShowAlways', 0);
-    $self->addField('Role', ($args{role} || "normal"));
-    return $self;
-}
-
-sub getFullCap
-{
-    my $item = shift;
-    my ($no_ie, $caption) = @_;
-    my $currently_active = $item->getCurrentlyActive();
-    my $title = $item->getTitle();
-    my $title_str = "";
-    if ($title)
-    {
-        $title_str = " title=\"$title\""
-    }
-    if ($currently_active)
-    {
-        my $value = $caption || $item->getValue;
-        return "<b>$value</b>";
-    }
-    else
-    {
-        my $value = $caption || $item->getValue || "";
-        my $href = $item->getURL || 'javascript:void(0)';
-        if ($no_ie && !$item->getURL) { return $value; }
-        else { return "<a href=\"$href\"${title_str}>$value</a>";}
-
-        return $item->SUPER::getFullCap(@_);
-    }
-}
-
-sub shouldExpandList
-{
-    my $item = shift;
-    return $item->SUPER::shouldExpandList(@_) || $item->getShowAlways();
-}
-
-sub shouldExpandBranch
-{
-    my $item = shift;
-    return $item->SUPER::shouldExpandBranch(@_) || $item->getShowAlways();
-}
-
-sub get_start_item
-{
-    my $self = shift;
-    my %args = (@_);
-    my $item = $args{item};
-
-    my $class = ($args{level} > 1) ? "navbarnested" : "navbarmain" ;
-
-    if ($item->getSeparator())
-    {
-        return {'html' => ["</ul>", "<ul class=\"$class\">"],};
-    }
-    elsif ($item->getHide())
-    {
-        return {'html' => [], };
-    }
-    else 
-    {
-        my @ret;
-        my $caption = $args{caption};
-        if ($item->getRole() eq "header")
-        {
-            return {'html' => ["</ul>","<h2>", $caption, "</h2>", "<ul class=\"navbarmain\">"],};
-        }
-        else
-        {
-            delete $args{attr}{-class};
-            return $self->SUPER::get_start_item(%args);
-        }
-    }
-}
-
-sub get_end_item
-{
-    my $self = shift;
-    my %args = (@_);
-    my $item = $args{item};
-    
-    if ($item->getSeparator())
-    {
-        return {'html' => [],};
-    }
-    elsif ($item->getHide())
-    {
-        return {'html' => [], };
-    }
-    elsif ($item->getRole() eq "header")
-    {
-        return {'html' => [], };
-    }
-    else
-    {
-        return $self->SUPER::get_end_item(@_);
-    }
-}
-
-sub genStartTag
-{
-    my $self = shift;
-    my %params = (@_);
-    if ($self->getRole() eq "header")
-    {
-        return ();
-    }
-    else
-    {
-        my $level = ($params{level} > 0);
-        return $self->SUPER::genStartTag(@_,
-            'class' => ($level ? "navbarnested" : "navbarmain")
-        );
-    }
-}
-
-sub getStartTagArgs
-{
-    my $self = shift;
-    my $args = $self->SUPER::getStartTagArgs(@_);
-    delete ($args->{-id});
-    return $args;
-}
-
-sub genEndTag
-{
-    my $self = shift;
-    if ($self->getRole() eq "header")
-    {
-        return ();
-    }
-    else
-    {
-        return $self->SUPER::genEndTag(@_);
-    }
-}
-
 package Shlomif::NavMenu::Error;
 
 use strict;
@@ -222,6 +66,7 @@ use Shlomif::NavMenu::Url;
 use Error qw(:try);
 
 require Shlomif::NavMenu::Iterator::NavMenu;
+require Shlomif::NavMenu::Iterator::SiteMap;
 
 sub new
 {
@@ -480,7 +325,7 @@ sub render_tree_contents
     return $new_item;
 }
 
-require Shlomif::NavMenu::Iterator::SiteMap;
+
 
 sub gen_site_map
 {
@@ -812,18 +657,6 @@ sub render
         }
     }
 
-=for Nothing
-    my $rendered_text = 
-        $tree->getHTML(
-            styles => $args{styles},
-            no_ie => 1,
-            );
-
-    my $html = $rendered_text->{html};
-    my $js_code = $rendered_text->{js_code};
-
-=cut
-
     my $iterator = 
         Shlomif::NavMenu::Iterator::NavMenu->new(
             'nav_menu' => $self,
@@ -836,8 +669,6 @@ sub render
     return 
         {
             'html' => $html,
-            'js_code' => $js_code,
-            'base_js' => "",
             'leading_path' => \@leading_path,
             'nav_links' => \%nav_links,
         };
