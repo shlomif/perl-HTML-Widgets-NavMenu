@@ -5,6 +5,8 @@ use warnings;
 
 use base qw(Shlomif::NavMenu::Tree::Iterator);
 
+use CGI;
+
 sub initialize
 {
     my $self = shift;
