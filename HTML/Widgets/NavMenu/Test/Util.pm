@@ -17,7 +17,7 @@ sub compare_string_arrays
     my $len_cmp = (@$arr1 <=> @$arr2);
     if ($len_cmp)
     {
-        print STDERR "Len is not the same: " . scalar(@$arr1) . " vs. " . scalar(@$arr2) . "\n";
+        print STDERR "Len is not the same: Expected " . scalar(@$arr1) . " vs. Result " . scalar(@$arr2) . "\n";
         return $len_cmp;
     }
     my $i;
@@ -26,7 +26,7 @@ sub compare_string_arrays
         my $item_cmp = $arr1->[$i] cmp $arr2->[$i];
         if ($item_cmp)
         {
-            print STDERR "Item[$i] is not the same:\narr1: $arr1->[$i]\narr2: $arr2->[$i]\n";
+            print STDERR "Item[$i] is not the same:\nExpected: $arr1->[$i]\nResult: $arr2->[$i]\n";
             return $item_cmp;
         }
     }
