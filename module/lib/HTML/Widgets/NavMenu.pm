@@ -989,13 +989,38 @@ This is not SGML-escaped.
 
 =item direct_url
 
-A direct URL from the current page to this page.
+A direct URL (usable for inclusion in an A tag ) from the current page to this
+page.
 
 =back
 
 =head1 SEE ALSO
 
-FILL IN.
+=item L<HTML::Widgets::NavMenu::HeaderRole>
+
+An HTML::Widgets::NavMenu sub-class that contains support for another 
+role. Used for the navigation menu in L<http://perl-begin.berlios.de/>.
+
+=item L<HTML::Widget::SideBar>
+
+A module written by Yosef Meller for maintaining a navigation menu. 
+HTML::Widgets::NavMenu originally utilized, but it no longer does. This module
+does not makes links relative on its own, and tends to generate a lot of 
+JavaScript code by default. It also does not have too many automated test
+scripts.
+
+=item L<HTML::Menu::Hierarchical>
+
+A module by Don Owens for generating hierarchical HTML menus. I could not 
+quite understand its tree traversal semantics, so I ended up not using it. Also
+seems to require that each of the tree node will have a unique ID.
+
+=item L<HTML::Widgets::Menu>
+
+This module also generates a navigation menu. The CPAN version is relatively
+old, and the author sent me a newer version. After playing with it a bit, I
+realized that I could not get it to do what I want (but I cannot recall
+why), so I abandoned it.
 
 =head1 AUTHORS
 
@@ -1007,6 +1032,13 @@ Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt>
 Thanks to Yosef Meller (L<http://search.cpan.org/~yosefm/>) for writing
 the module HTML::Widget::SideBar on which initial versions of this modules
 were based. (albeit his code is no longer used here).
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2004, Shlomi Fish. All rights reserved.
+
+You can use, modify and distribute this module under the terms of the MIT X11
+license. ( L<http://www.opensource.org/licenses/mit-license.php> ).
 
 =cut
 
