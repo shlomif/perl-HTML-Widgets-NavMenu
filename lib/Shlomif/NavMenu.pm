@@ -485,7 +485,9 @@ sub gen_site_map
             'nav_menu' => $self,
         );
 
-    return $iterator->traverse($self);
+    $iterator->traverse();
+
+    return $iterator->get_results();
 }
 
 sub get_next_coords

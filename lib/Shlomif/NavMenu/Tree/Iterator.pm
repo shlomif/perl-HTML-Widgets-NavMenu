@@ -108,9 +108,9 @@ sub traverse
             $self->_stack_pop();
         }
     }
-    return join("", map { "$_\n" } @{$self->{'html'}});
+    
+    return 0;
 }
-
 
 1;
 
