@@ -1,14 +1,5 @@
-* Release on CPAN as version 0.4.0.
-    - change the version in $VERSION.
-    - document the changes in Changes.
-    - update the readme.
-
 Long-Term:
 ----------
-
-* Use HTML::Widgets::NavMenu::Tree::Node and its accessors for the rest
-  of the $ptr->{text} etc. manipulations.
-    - for the get_next_coords() and friends functions.
 
 * Use Build.PL instead of Makefile.PL. (?)
 
@@ -24,15 +15,11 @@ tags.
 * In HTML::Widgets::NavMenu::Tree::Node - make sure url_type accepts only
 its enum values.
 
-* Future direction: generate the tree once and then be able to render
-it for different path_info()/current_host() configurations. (and the
-generated tree re-used by all other members).
-
-* Refactor get_next_coords().
-
-* Create a base class for classes with 'subs' functionality - like 
-get_nth_sub, add_sub, num_subs, etc. Both ..::Node and ..::Item share it.
-
 * Give an option to render a sub-set of the navigation-menu, starting
 at a certain coords/url-path.
+
+* Release on CPAN as version 0.6.0.
+   - change the version in $VERSION.
+   - document the changes in Changes.
+   - update the readme.
 

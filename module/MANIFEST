@@ -4,6 +4,7 @@ Makefile.PL
 MANIFEST
 README
 TODO
+TODO-Rejects
 t/00use.t
 t/01unit.t
 t/02site-map.t
