@@ -85,7 +85,7 @@ sub push_into_stack
     my $subs = $self->get_node_subs('node' => $node);
     $record->{'remaining_subs'} = $subs;
     $record->{'num_subs'} = scalar(@$subs);
-    $record->{'status'} = 0;
+    $record->{'visited'} = 0;
     $record->{'host'} = $node->{host} || $parent_record->{host};
 
     push @{$self->_get_stack()}, $record;
@@ -100,14 +100,14 @@ sub traverse
     MAIN_LOOP: while (! $self->_stack_is_empty())
     {
         my $top_item = $self->_stack_get_top_item();
-        my $status = $top_item->{'status'};
+        my $visited = $top_item->{'visited'};
 
-        if (!$status)
+        if (!$visited)
         {
             $self->node_start();
         }
         
-        $top_item->{status} = 1;
+        $top_item->{'visited'} = 1;
         
         if ($self->_are_remaining_subs())
         {
