@@ -254,7 +254,7 @@ sub create_new_nav_menu_item
         # match.
         if (($regexp eq "") || ($self->path_info() =~ /$regexp/))
         {
-            $new_item->{'expanded'} = 1;
+            $new_item->expand();
         }
     }
 
@@ -285,7 +285,7 @@ sub render_tree_contents
         if (($sub_contents->{url} eq $path_info) && ($host eq $self->{current_host}))
         {
             $$current_coords_ptr = [ @$coords ];
-            $new_item->{'expanded'} = 1;
+            $new_item->expand();
             $new_item->{'CurrentlyActive'} = 1;
         }
     }
@@ -303,9 +303,9 @@ sub render_tree_contents
                 'host' => $host,
                 'current_coords_ptr' => $current_coords_ptr,
             );
-            if ($sub_item->{'expanded'})
+            if ($sub_item->expanded())
             {
-                $new_item->{'expanded'}  = 1;
+                $new_item->expand();
             }
             push @$subs, $sub_item;
         }
@@ -598,7 +598,7 @@ sub gen_traversed_tree
     #    and eventually the root.
     # 2. If nothing was marked as expanded, it should still be marked as 
     #    expanded so it will expand.
-    $tree->{'expanded'} = 1;
+    $tree->expand();
    
     return {'tree' => $tree, 'current_coords' => $current_coords };
 }
