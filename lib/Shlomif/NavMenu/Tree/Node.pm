@@ -5,7 +5,7 @@ use base 'Shlomif::NavMenu::Object';
 use base 'Class::Accessor';
 
 __PACKAGE__->mk_accessors(
-    qw(hide host separator show_always title role url value)
+    qw(expanded hide host separator show_always title role url value)
     );
 
 sub initialize
@@ -20,6 +20,13 @@ sub initialize
 sub get_default_role
 {
     return "normal";
+}
+
+sub expand
+{
+    my $self = shift;
+    $self->expanded(1);
+    return 0;
 }
 
 1;

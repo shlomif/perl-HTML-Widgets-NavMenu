@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 18;
+use Test::More tests => 20;
 
 use strict;
 
@@ -55,3 +55,12 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
     $node->set("role", "hoola");
     is($node->role(), "hoola", "Testing role setted value"); # TEST
 }
+
+{
+    my $node = Shlomif::NavMenu::Tree::Node->new();
+
+    ok((!$node->expanded()), "Testing node->expanded()"); # TEST
+    $node->expand();
+    ok($node->expanded(), "Testing node->expanded() after expand()"); # TEST
+}
+
