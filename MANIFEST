@@ -6,6 +6,8 @@ TODO
 t/00use.t
 t/01unit.t
 t/02site-map.t
+t/03nav-links.t
+t/04nav-menu.t
 lib/Shlomif/NavMenu/HTML/Widget/SideBar.pm
 lib/Shlomif/NavMenu/Object.pm
 lib/Shlomif/NavMenu.pm

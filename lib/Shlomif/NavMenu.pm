@@ -4,7 +4,7 @@ use utf8;
 
 package Shlomif::NavMenu;
 
-our $VERSION = '0.1.5';
+our $VERSION = '0.1.6';
 
 package Shlomif::NavMenu::MySideBar;
 
@@ -127,13 +127,17 @@ sub get_end_item
 sub genStartTag
 {
     my $self = shift;
+    my %params = (@_);
     if ($self->getRole() eq "header")
     {
         return ();
     }
     else
-    {      
-        return $self->SUPER::genStartTag(@_);
+    {
+        my $level = ($params{level} > 0);
+        return $self->SUPER::genStartTag(@_,
+            'class' => ($level ? "navbarnested" : "navbarmain")
+        );
     }
 }
 
