@@ -82,10 +82,7 @@ sub push_into_stack
     
     my $record = +{};
     $record->{'node'} = $node;
-    my $subs = 
-        exists($node->{subs}) ? 
-            [ @{$node->{subs}} ] : 
-            [];
+    my $subs = $self->get_node_subs('node' => $node);
     $record->{'remaining_subs'} = $subs;
     $record->{'num_subs'} = scalar(@$subs);
     $record->{'status'} = 0;
@@ -115,7 +112,11 @@ sub traverse
         if ($self->_are_remaining_subs())
         {
             $self->push_into_stack(
-                'node' => $self->_top_extract_next_sub()
+                'node' => 
+                    $self->get_node_from_sub(
+                        'item' => $top_item,
+                        'sub' => $self->_top_extract_next_sub()
+                    ),
                 );
             next MAIN_LOOP;
         }
@@ -127,6 +128,17 @@ sub traverse
     }
     
     return 0;
+}
+
+# This function can be overriden to generate a node from the sub-nodes
+# return by get_node_subs() in a different way than the default.
+sub get_node_from_sub
+{
+    my $self = shift;
+
+    my %args = (@_);
+
+    return $args{'sub'};
 }
 
 1;

@@ -55,6 +55,17 @@ sub get_initial_node
     return $self->{'nav_menu'}->{'tree_contents'};
 }
 
+sub get_node_subs
+{
+    my $self = shift;
+    my %args = (@_);
+    my $node = $args{'node'};
+    return
+        exists($node->{subs}) ?
+            [ @{$node->{subs}} ] :
+            [];
+}
+
 sub node_start
 {
     my $self = shift;
