@@ -467,31 +467,10 @@ sub get_top_coords
 sub find_node_by_coords
 {
     my $self = shift;
-    my $coords = shift;
-    my $callback = shift || (sub { });
-    my $ptr = $self->{tree_contents};
-    my $host = $ptr->{host};
-    my $rec_url_type = ($ptr->{rec_url_type} || "rel");
-    my $idx = 0;
-    my $internal_callback = sub {
-        $callback->('idx' => $idx, 'ptr' => $ptr, 'host' => $host, 'rec_url_type' => $rec_url_type,);
-    };
-    $internal_callback->();
-    foreach my $c (@$coords)
-    {
-        $ptr = $ptr->{subs}->[$c];
-        $idx++;
-        if ($ptr->{host})
-        {
-            $host = $ptr->{host};
-        }
-        if ($ptr->{rec_url_type})
-        {
-            $rec_url_type = $ptr->{rec_url_type};
-        }
-        $internal_callback->();
-    }
-    return { 'ptr' => $ptr, 'host' => $host, 'rec_url_type' => $rec_url_type, };
+
+    return $self->get_nav_menu_traverser()
+            ->find_node_by_coords(
+                @_);
 }
 
 sub is_skip
@@ -501,9 +480,9 @@ sub is_skip
 
     my $ret = $self->find_node_by_coords($coords);
 
-    my $ptr = $ret->{ptr};
+    my $item = $ret->{item};
 
-    return $ptr->{skip};
+    return $item->node()->skip();
 }
 
 sub get_coords_while_skipping_skips
@@ -567,13 +546,13 @@ sub get_rel_url_from_coords
 
     my ($ptr,$host);
     my $node_ret = $self->find_node_by_coords($coords);
-    $ptr = $node_ret->{ptr};
-    $host = $node_ret->{host};
+    my $iterator = $node_ret->{'self'};
+    my $item = $node_ret->{'item'};
 
     return $self->get_cross_host_rel_url(
-        'host' => $host,
-        'host_url' => ($ptr->{url} || ""),
-        'url_type' => ($ptr->{url_type} || $node_ret->{rec_url_type} || "rel"),
+        'host' => $item->accum_state()->{'host'},
+        'host_url' => ($item->node->url() || ""),
+        'url_type' => $iterator->get_url_type($item),
     );
 }
 
@@ -646,20 +625,21 @@ sub render
         my $fill_leading_path_callback =
             sub {
                 my %args = (@_);
-                my $ptr = $args{ptr};
-                my $host = $args{host};
+                my $item = $args{item};
+                my $iterator = $args{'self'};
+                my $node = $item->node();
                 # This is a workaround for the root link.
-                my $host_url = $ptr->{url} || "";
+                my $host_url = (defined($node->url()) ? ($node->url()) : "");
+                my $host = $item->accum_state()->{'host'};
 
-                my $url_type = 
-                    ($ptr->{url_type} || $args{rec_url_type} || "rel");
+                my $url_type = $iterator->get_url_type($item);
 
                 push @leading_path,
                     HTML::Widgets::NavMenu::LeadingPath::Component->new(
                         'host' => $host,
                         'host_url' => $host_url,
-                        'title' => $ptr->{title},
-                        'label' => $ptr->{text},
+                        'title' => $node->title(),
+                        'label' => $node->text(),
                         'direct_url' =>
                             $self->get_cross_host_rel_url(
                                 'host' => $host,

@@ -1,4 +1,15 @@
-* Release version 0.2.0 (without the underscore) on CPAN.
+* Encapsulate the propogation of the state 
+    ($x->{'url_type'} || $parent->{'url_type'}) in one place.
+
+* Write a unit-test for HTML::Widgets::NavMenu::get_cross_host_rel_url().
+
+* Include an "url_is_abs" flag that specifies that the url specified in 
+'url' is an absolute one. For example:
+
+    1.
+        'url' => "http://www.google.com/",
+        'url_is_abs' => 1,
+
 
 Long-Term:
 ----------
@@ -6,7 +17,6 @@ Long-Term:
 * Use HTML::Widgets::NavMenu::Tree::Node and its accessors for the rest
   of the $ptr->{text} etc. manipulations.
 
-* Write a unit-test for HTML::Widgets::NavMenu::get_cross_host_rel_url().
 
 * Use Build.PL instead of Makefile.PL. (?)
 

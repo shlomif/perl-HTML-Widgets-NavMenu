@@ -78,10 +78,7 @@ sub get_a_tag
             $self->nav_menu()->get_cross_host_rel_url(
                 'host' => $self->_get_top_host(),
                 'host_url' => $node->url(),
-                'url_type' => 
-                    ($node->url_type() ||
-                        $item->accum_state()->{'rec_url_type'} ||
-                        "rel"),
+                'url_type' => $self->get_url_type($item),
             )
         ). "\"";
     if (defined($title))
@@ -90,6 +87,16 @@ sub get_a_tag
     }
     $tag .= ">" . $node->text() . "</a>";
     return $tag;
+}
+
+sub get_url_type
+{
+    my $self = shift;
+    my $item = shift;
+    return
+        ($item->node()->url_type() ||
+            $item->accum_state()->{'rec_url_type'} ||
+            "rel");
 }
 
 1;

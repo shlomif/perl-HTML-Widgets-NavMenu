@@ -6,7 +6,7 @@ use base 'Class::Accessor';
 
 __PACKAGE__->mk_accessors(
     qw(CurrentlyActive expanded hide host role rec_url_type),
-    qw(separator show_always subs text title url url_type),
+    qw(separator show_always skip subs text title url url_type),
     );
 
 sub initialize
@@ -63,7 +63,7 @@ sub list_boolean_keys
 {
     my $self = shift;
 
-    return (qw(hide separator));
+    return (qw(hide separator skip));
 }
 
 sub set_values_from_hash_ref
