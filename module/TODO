@@ -1,6 +1,3 @@
-* Encapsulate the propogation of the state 
-    ($x->{'url_type'} || $parent->{'url_type'}) in one place.
-
 * Write a unit-test for HTML::Widgets::NavMenu::get_cross_host_rel_url().
 
 * Include an "url_is_abs" flag that specifies that the url specified in 

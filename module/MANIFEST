@@ -16,6 +16,7 @@ t/08tree-node.t
 t/09leading-path.t
 t/10ul-classes.t
 t/11predicate.t
+t/12x-host-rel-url.t
 lib/HTML/Widgets/NavMenu/HeaderRole.pm
 lib/HTML/Widgets/NavMenu/Iterator/Base.pm
 lib/HTML/Widgets/NavMenu/Iterator/Html.pm
