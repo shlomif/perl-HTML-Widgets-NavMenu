@@ -5,6 +5,7 @@ use strict;
 use Test::More tests => 10;
 
 use HTML::Widgets::NavMenu;
+use HTML::Widgets::NavMenu::HeaderRole;
 
 use HTML::Widgets::NavMenu::Test::Data;
 use HTML::Widgets::NavMenu::Test::Util;
@@ -342,7 +343,7 @@ EOF
 
 
 {
-    my $nav_menu = HTML::Widgets::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu::HeaderRole->new(
         'path_info' => "/good/",
         @{$test_data->{'header_role'}},
         'ul_classes' => [ "navbarmain", ("navbarnested") x 5 ],
@@ -376,13 +377,13 @@ EOF
 }
 
 {
-    my $nav_menu = HTML::Widgets::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu::HeaderRole->new(
         'path_info' => "/me/",
         @{$test_data->{'header_role'}},
         'ul_classes' => [ "navbarmain", ("navbarnested") x 5 ],
     );
 
-    my $rendered = 
+    my $rendered =
         $nav_menu->render();
 
     my $expected_string = <<"EOF";

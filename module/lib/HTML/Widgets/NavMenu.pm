@@ -98,14 +98,21 @@ sub initialize
     return 0;
 }
 
+sub get_nav_menu_traverser_args
+{
+    my $self = shift;
+
+    return  ('nav_menu' => $self,
+            'ul_classes' => $self->{'ul_classes'});
+}
+
 sub get_nav_menu_traverser
 {
     my $self = shift;
 
     return
         HTML::Widgets::NavMenu::Iterator::NavMenu->new(
-            'nav_menu' => $self,
-            'ul_classes' => $self->{'ul_classes'},
+            $self->get_nav_menu_traverser_args()
         );
 }
 

@@ -80,21 +80,10 @@ sub start_sep
     $self->_add_tags("</ul>");
 }
 
-
 sub start_handle_role
 {
     my $self = shift;
-    if ($self->get_role() eq "header")
-    {
-        $self->_add_tags(
-            "</ul>","<h2>", $self->get_link_tag(), "</h2>",
-            $self->gen_ul_tag('depth' => $self->stack->len()-1)
-            );
-    }
-    else
-    {
-        return $self->start_handle_non_role();
-    }
+    return $self->start_handle_non_role();
 }
 
 sub start_handle_non_role
@@ -144,14 +133,7 @@ sub end_sep
 sub end_handle_role
 {
     my $self = shift;
-    if ($self->get_role() eq "header")
-    {
-        # Do nothing;
-    }
-    else
-    {
-        $self->end_handle_non_role();
-    }
+    return $self->end_handle_non_role();
 }
 
 sub end_handle_non_role
