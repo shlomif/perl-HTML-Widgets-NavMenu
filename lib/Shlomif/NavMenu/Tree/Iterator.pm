@@ -68,6 +68,16 @@ sub _top_extract_next_sub
     return shift(@{$self->_get_top_remaining_subs()});
 }
 
+sub _get_stack_item_accum_state
+{
+    my $self = shift;
+    my %args = (@_);
+
+    my $item = $args{'item'};
+
+    return $item->{'accum_state'};
+}
+
 sub push_into_stack
 {
     my $self = shift;
@@ -86,7 +96,11 @@ sub push_into_stack
     $record->{'remaining_subs'} = $subs;
     $record->{'num_subs'} = scalar(@$subs);
     $record->{'visited'} = 0;
-    $record->{'host'} = $node->{host} || $parent_record->{host};
+    $record->{'accum_state'} =
+        $self->get_new_accum_state(
+            'item' => $self->_stack_get_top_item(),
+            'node' => $node
+        );
 
     push @{$self->_get_stack()}, $record;
 }

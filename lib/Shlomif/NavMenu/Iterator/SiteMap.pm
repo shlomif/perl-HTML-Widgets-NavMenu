@@ -49,6 +49,16 @@ sub _is_top_separator
     return $self->_get_top_node()->{'separator'};
 }
 
+sub _get_top_host
+{
+    my $self = shift;
+
+    return 
+        $self->_get_stack_item_accum_state(
+            'item' => $self->_stack_get_top_item(),
+        )->{'host'};
+}
+
 sub get_initial_node
 {
     my $self = shift;
@@ -64,6 +74,24 @@ sub get_node_subs
         exists($node->{subs}) ?
             [ @{$node->{subs}} ] :
             [];
+}
+
+sub get_new_accum_state
+{
+    my $self = shift;
+    my %args = (@_);
+    my $parent_item = $args{'item'};
+    my $node = $args{'node'};
+
+    if (!defined($parent_item))
+    {
+        return { 'host' => $node->{'host'} };
+    }
+
+    my $prev_state = 
+        $self->_get_stack_item_accum_state('item' => $parent_item);
+
+    return { 'host' => ($node->{'host'} || $prev_state->{'host'}) };
 }
 
 sub node_start
@@ -90,7 +118,7 @@ sub node_start
             $tag .= " href=\"" . 
                 CGI::escapeHTML(
                     $nav_menu->get_cross_host_rel_url(
-                        'host' => $top_item->{host},
+                        'host' => $self->_get_top_host(),
                         'host_url' => $node->{url},
                         'abs_url' => $node->{abs_url},
                     )
