@@ -135,7 +135,7 @@ sub process_site
             }
             {
                 print {$fh} "SITE_MAP=\n$open_mark\n";
-                print {$fh} $nav_menu->gen_site_map();
+                print {$fh} (map { "$_\n" } @{$nav_menu->gen_site_map()});
                 print {$fh} "$close_mark\n";
             }
             
