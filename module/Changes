@@ -1,9 +1,9 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
-0.4.0
+0.4.0     Thu Jan 20 16:49:15 IST 2005
     - Added the url_is_abs option to the nodes.
     - Many code cleanups.
     
-0.2.0  Sun Jan  2 19:37:41 IST 2005
+0.2.0     Sun Jan  2 19:37:41 IST 2005
     - First non-developer CPAN Release.
 
