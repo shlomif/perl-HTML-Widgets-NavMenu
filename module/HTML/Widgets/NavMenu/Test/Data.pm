@@ -529,6 +529,31 @@ my @rec_url_type_menu =
     },
 );
 
+my @url_is_abs_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'text' => "Top 1",
+        'title' => "T1 Title",
+        'subs' =>
+        [
+            {
+                'text' => "Home",
+                'url' => "",
+            },
+            {
+                'text' => "Link to Google",
+                'title' => "Google it!",
+                'url' => "http://www.google.com/",
+                'url_is_abs' => 1,
+            },
+        ],
+    },
+);
+
 sub get_test_data
 {
     return
@@ -544,6 +569,7 @@ sub get_test_data
             'selective_expand' => \@selective_expand_nav_menu,
             'url_type_menu' => \@url_type_menu,
             'rec_url_type_menu' => \@rec_url_type_menu,
+            'url_is_abs_menu' => \@url_is_abs_nav_menu,
         };
 }
 

@@ -30,6 +30,15 @@ sub top
     return $self->stack()->top();
 }
 
+sub construct_new_item
+{
+    my $self = shift;
+
+    return HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
+        @_
+    );
+}
+
 sub get_new_item
 {
     my $self = shift;
@@ -39,7 +48,7 @@ sub get_new_item
     my $parent_item = $args{'parent_item'};
 
     return
-        HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
+        $self->construct_new_item(
             'node' => $node,
             'subs' => $self->get_node_subs('node' => $node),
             'accum_state' => 

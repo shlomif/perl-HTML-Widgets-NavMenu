@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 14;
+use Test::More tests => 15;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -565,3 +565,30 @@ EOF
     ok (validate_nav_menu($rendered, $expected_string), 
         "Nav Menu for rec_url_type - 1"); 
 }
+
+# Test the url_is_abs directive
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/hello/",
+        @{$test_data->{'url_is_abs_menu'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul>
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<a href="http://www.google.com/" title="Google it!">Link to Google</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Nav Menu for url_is_asb - 1"); 
+}
+

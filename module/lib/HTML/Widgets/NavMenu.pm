@@ -244,6 +244,20 @@ sub get_cross_host_rel_url
     }
 }
 
+sub get_url_to_item
+{
+    my $self = shift;
+    my (%args) = (@_);
+    my $item = $args{'item'};
+
+    return $self->get_cross_host_rel_url(
+        'host' => $item->accum_state()->{'host'},
+        'host_url' => ($item->node->url() || ""),
+        'url_type' => $item->get_url_type(),
+        'url_is_abs' => $item->node->url_is_abs(),
+    );
+}
+
 sub gen_blank_nav_menu_tree_node
 {
     my $self = shift;
@@ -547,11 +561,7 @@ sub get_rel_url_from_coords
     my $node_ret = $iterator->find_node_by_coords($coords);
     my $item = $node_ret->{'item'};
 
-    return $self->get_cross_host_rel_url(
-        'host' => $item->accum_state()->{'host'},
-        'host_url' => ($item->node->url() || ""),
-        'url_type' => $iterator->get_url_type($item),
-    );
+    return $self->get_url_to_item('item' => $item);
 }
 
 sub fill_leading_path
@@ -623,7 +633,7 @@ sub get_leading_path
                 my $host_url = (defined($node->url()) ? ($node->url()) : "");
                 my $host = $item->accum_state()->{'host'};
 
-                my $url_type = $iterator->get_url_type($item);
+                my $url_type = $item->get_url_type();
 
                 push @leading_path,
                     HTML::Widgets::NavMenu::LeadingPath::Component->new(
@@ -632,11 +642,7 @@ sub get_leading_path
                         'title' => $node->title(),
                         'label' => $node->text(),
                         'direct_url' =>
-                            $self->get_cross_host_rel_url(
-                                'host' => $host,
-                                'host_url' => $host_url,
-                                'url_type' => $url_type,
-                            ),
+                            $self->get_url_to_item('item' => $item),
                         'url_type' => $url_type,
                     );
             };
