@@ -84,8 +84,6 @@ sub traverse
 
     $self->{'nav_menu'} = $nav_menu;
 
-    my $path_info = $nav_menu->path_info();
-
     $self->push_into_stack('node' => $nav_menu->{'tree_contents'} );
 
     MAIN_LOOP: while (! $self->_stack_is_empty())
