@@ -4,7 +4,7 @@ use utf8;
 
 package Shlomif::NavMenu;
 
-our $VERSION = '0.1.8';
+our $VERSION = '0.1.9';
 
 package Shlomif::NavMenu::MySideBar;
 
@@ -221,6 +221,8 @@ use lib ".";
 use Shlomif::NavMenu::Url;
 use Error qw(:try);
 
+require Shlomif::NavMenu::Iterator::NavMenu;
+
 sub new
 {
     my $class = shift;
@@ -358,7 +360,6 @@ sub render_tree_contents
 
     my %args = (@_);
 
-    my $sub_tree = $args{sub_tree};
     my $sub_contents = $args{sub_contents};
     my $coords = $args{coords};
     my $host = $sub_contents->{host} || $args{host} or
@@ -381,6 +382,10 @@ sub render_tree_contents
     {
         $show_always = $sub_contents->{show_always};
     }
+    if (exists($sub_contents->{'host'}))
+    {
+        push @args, 'host' => $sub_contents->{'host'};
+    }
     
     my $is_same_node = 0;
     my $is_hidden = 0;
@@ -388,17 +393,12 @@ sub render_tree_contents
     if (exists($sub_contents->{url}))
     {
         my $host_url = $sub_contents->{url};
-        my $url = $self->get_cross_host_rel_url(
-            'host' => $host,
-            'host_url' => $host_url,
-            'abs_url' => $sub_contents->{abs_url},
-            );
-                
+
         push @args, 
-            'URL' => $url;
+            'url' => $host_url;
 
         if ($sub_contents->{hide})
-        {            
+        {
             $is_hidden = 1;
         }
 
@@ -408,32 +408,29 @@ sub render_tree_contents
         }
     }
     my $new_item;
-    if (!defined($sub_tree))
     {
-        $new_item = Shlomif::NavMenu::MySideBar->new();
-        $new_item->setRenderHidden(0);
-    }
-    else
-    {
-        $new_item = $sub_tree->append(@args);
+        $new_item = +{@args};
         if ($is_separator)
         {
-            $new_item->setSeparator(1);
+            $new_item->{separator} = 1;
         }
         if ($is_hidden)
         {
-            $new_item->setHide(1);
+            $new_item->{hide} = 1;
         }
         if (defined($show_always))
         {
-            $new_item->setShowAlways($show_always);
+            $new_item->{'show_always'} = $show_always;
         }
         if (defined($role))
         {
-            $new_item->setRole($role);
+            $new_item->{'role'} = $role;
         }
     }
-    $new_item->setTitle($sub_contents->{title} || "");
+    if (exists($sub_contents->{'title'}))
+    {
+        $new_item->{'title'} = $sub_contents->{'title'};
+    }
 
     if (exists($sub_contents->{expand_re}))
     {
@@ -444,7 +441,7 @@ sub render_tree_contents
         # match.
         if (($regexp eq "") || ($path_info =~ /$regexp/))
         {
-            $new_item->setActive(1);
+            $new_item->{'Active'} = 1;
         }
     }
     
@@ -452,24 +449,33 @@ sub render_tree_contents
     if (exists($sub_contents->{subs}))
     {
         my $index = 0;
-        foreach my $sub_item (@{$sub_contents->{subs}})
+        my $subs = [];
+        foreach my $sub_contents_sub (@{$sub_contents->{subs}})
         {
+            my $sub_item = 
             $self->render_tree_contents(
-                'sub_tree' => $new_item,
-                'sub_contents' => $sub_item,
+                'sub_contents' => $sub_contents_sub,
                 'coords' => [@$coords, $index],
                 'host' => $host,
                 'show_always' => $show_always,
             );
+            if ($sub_item->{'Active'})
+            {
+                $new_item->{'Active'}  = 1;
+            }
+            push @$subs, $sub_item;
         }
         continue
         {
             $index++;
         }
+        $new_item->{'subs'} = $subs;
     }
     if ($is_same_node)
     {
         $self->{current_coords} = [ @$coords ];
+        $new_item->{'Active'} = 1;
+        $new_item->{'CurrentlyActive'} = 1;
     }
     return $new_item;
 }
@@ -708,7 +714,7 @@ sub get_rel_url_from_coords
     );
 }
 
-sub fill_leading_path_and_mark_currently_active_node
+sub fill_leading_path
 {
     my $self = shift;
 
@@ -721,10 +727,7 @@ sub fill_leading_path_and_mark_currently_active_node
     # TODO: add a suitable test.
     if (@$coords)
     {    
-        my $node_ret = $self->find_node_by_coords($coords, $args{'callback'});
-        my $ptr = $node_ret->{ptr};
-        $ptr->{perl_ref}->setActive(1);
-        $ptr->{perl_ref}->setCurrentlyActive(1);
+        $self->find_node_by_coords($coords, $args{'callback'});
     }
 }
 
@@ -751,10 +754,10 @@ sub render
     
     if (! @current_coords)
     {
-        $tree->setActive(1);
+        $tree->{'Active'} = 1;
     }
     {
-        my $fill_leading_path =
+        my $fill_leading_path_callback =
             sub {
                 my %args = (@_);
                 my $ptr = $args{ptr};
@@ -778,8 +781,8 @@ sub render
                     );
             };
 
-        $self->fill_leading_path_and_mark_currently_active_node(
-            'callback' => $fill_leading_path,
+        $self->fill_leading_path(
+            'callback' => $fill_leading_path_callback,
         );
     }
 
@@ -809,6 +812,7 @@ sub render
         }
     }
 
+=for Nothing
     my $rendered_text = 
         $tree->getHTML(
             styles => $args{styles},
@@ -818,11 +822,22 @@ sub render
     my $html = $rendered_text->{html};
     my $js_code = $rendered_text->{js_code};
 
+=cut
+
+    my $iterator = 
+        Shlomif::NavMenu::Iterator::NavMenu->new(
+            'nav_menu' => $self,
+            'tree' => $tree,
+        );
+    $iterator->traverse();
+    my $html = [ @{$iterator->{'html'}} ];
+    my $js_code = "";
+    
     return 
         {
             'html' => $html,
             'js_code' => $js_code,
-            'base_js' => $tree->baseJS(3),
+            'base_js' => "",
             'leading_path' => \@leading_path,
             'nav_links' => \%nav_links,
         };
