@@ -61,17 +61,7 @@ sub end_sep
 {
 }
 
-sub end_regular
-{
-    my $self = shift;
-    if ($self->top()->num_subs())
-    {
-        $self->_add_tags("</ul>");
-    }
-    $self->_add_tags("</li>");
-}
-
-sub node_should_recurse
+sub is_active
 {
     return 1;
 }

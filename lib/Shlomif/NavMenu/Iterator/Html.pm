@@ -46,5 +46,21 @@ sub end_root
     $self->_add_tags("</ul>");
 }
 
+sub end_regular
+{
+    my $self = shift;
+    if ($self->top()->num_subs() && $self->is_active())
+    {
+        $self->_add_tags("</ul>");
+    }
+    $self->_add_tags("</li>");
+}
+
+sub node_should_recurse
+{
+    my $self = shift;
+    return $self->is_active();    
+}
+
 1;
 
