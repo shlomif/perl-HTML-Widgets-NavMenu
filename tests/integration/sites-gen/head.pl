@@ -7,6 +7,7 @@ use strict;
 use lib ($ENV{'HTML_NAVMENU_HEAD'} || "../../../module/lib/");
 
 use HTML::Widgets::NavMenu;
+use HTML::Widgets::NavMenu::HeaderRole;
 use SitesData;
 
 use CGI;
@@ -82,13 +83,29 @@ sub process_site
             my $num_marks = 20;
             my $open_mark = "<" x $num_marks;
             my $close_mark = ">" x $num_marks;
-            my $nav_menu = 
-                HTML::Widgets::NavMenu->new(
+            my @args = 
+                (
                     'path_info' => "/$canonized_file",
                     'current_host' => $host_id,
                     'hosts' => $site_ref->{'hosts'},
                     'tree_contents' => $site_ref->{'tree_contents'},
                     'ul_classes' => ["navbarmain", (("navbarnested") x 10)],
+                );
+            my $package = "HTML::Widgets::NavMenu";
+            if (exists($site_ref->{'class'}))
+            {
+                if ($site_ref->{'class'} eq "HeaderRole")
+                {
+                    $package = "HTML::Widgets::NavMenu::HeaderRole";
+                }
+                else
+                {
+                    die "Unknown class " . $site_ref->{class} . "!";
+                }
+            }
+            my $nav_menu = 
+                $package->new(
+                    @args,
                 );
             my $results = $nav_menu->render();
             open my $fh, ">$file_path";
