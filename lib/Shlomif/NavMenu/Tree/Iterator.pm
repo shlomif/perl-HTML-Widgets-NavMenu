@@ -126,7 +126,7 @@ sub traverse
 }
 
 # This function can be overriden to generate a node from the sub-nodes
-# return by get_node_subs() in a different way than the default.
+# returned by get_node_subs() in a different way than the default.
 sub get_node_from_sub
 {
     my $self = shift;

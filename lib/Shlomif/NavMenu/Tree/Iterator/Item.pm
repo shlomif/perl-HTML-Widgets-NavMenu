@@ -26,5 +26,11 @@ sub initialize
     return 0;
 }
 
+sub node
+{
+    my $self = shift;
+    return $self->{'node'};
+}
+
 1;
 
