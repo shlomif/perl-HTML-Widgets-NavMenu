@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 use Shlomif::NavMenu;
 
@@ -68,5 +68,8 @@ my @site_args =
 
     # TEST
     is($nav_links->{'up'}, "../",
-       "Up page leading upwards to the first page.")
+       "Up page leading upwards to the first page.");
+    # TEST
+    is($nav_links->{'top'}, "../",
+       "Top nav-link leading topwards to the first page.");
 }

@@ -667,13 +667,13 @@ sub get_top_coords
 
     my @coords = @{shift || $self->get_current_coords()};
 
-    if (@coords)
+    if ((! @coords) || ((@coords == 1) && ($coords[0] == 0)))
     {
-        return [];
+        return undef;
     }
     else
     {
-        return undef;
+        return [0];
     }
 }
 
