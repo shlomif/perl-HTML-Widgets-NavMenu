@@ -88,8 +88,6 @@ sub initialize
     $self->{hosts} = $args{hosts};
     $self->{tree_contents} = $args{tree_contents};
 
-    $self->{current_coords} = [];
-
     my $current_host = $args{current_host} || "";
 
     $self->{current_host} = $current_host;
@@ -110,6 +108,9 @@ sub get_nav_menu_traverser
 sub get_current_coords
 {
     my $self = shift;
+
+    # This is to make sure $self->{current_coords} is generated.
+    $self->get_traversed_tree();
 
     return [ @{$self->{current_coords}} ];
 }
@@ -602,8 +603,6 @@ sub render
 
     my %args = (@_);
 
-    # We do it first, so that current_coords will be generated.
-    # We can might as well call $self->get_traversed_tree() once at the top.
     my $iterator = $self->get_nav_menu_traverser();
     $iterator->traverse();
     my $html = [ @{$iterator->{'html'}} ];
