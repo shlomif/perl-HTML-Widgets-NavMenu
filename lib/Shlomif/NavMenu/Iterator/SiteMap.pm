@@ -60,7 +60,6 @@ sub node_start
     my $top_item = $self->_stack_get_top_item();
     my $status = $top_item->{'status'};
     my $node = $self->_get_top_node();
-    my $rem_subs = $top_item->{'remaining_subs'};
 
     my $nav_menu = $self->{'nav_menu'};
 
@@ -95,7 +94,7 @@ sub node_start
             }
             $self->_add_tags($tag);
         }
-        if (@$rem_subs)
+        if ($self->_are_remaining_subs())
         {
             $self->_add_tags("<br />");
             $self->_add_tags("<ul>");

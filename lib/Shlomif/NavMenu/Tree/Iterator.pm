@@ -50,6 +50,24 @@ sub _stack_pop
     pop(@{$self->_get_stack()});
 }
 
+sub _get_top_remaining_subs
+{
+    my $self = shift;
+    return $self->_stack_get_top_item()->{'remaining_subs'};
+}
+
+sub _are_remaining_subs
+{
+    my $self = shift;
+    return (@{$self->_get_top_remaining_subs()} > 0);
+}
+
+sub _top_extract_next_sub
+{
+    my $self = shift;
+    return shift(@{$self->_get_top_remaining_subs()});
+}
+
 sub push_into_stack
 {
     my $self = shift;
@@ -96,10 +114,11 @@ sub traverse
         
         $top_item->{status} = 1;
         
-        if (@$rem_subs)
+        if ($self->_are_remaining_subs())
         {
-            my $new_item = shift(@$rem_subs);
-            $self->push_into_stack('node' => $new_item);
+            $self->push_into_stack(
+                'node' => $self->_top_extract_next_sub()
+                );
             next MAIN_LOOP;
         }
         else
