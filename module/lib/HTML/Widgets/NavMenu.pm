@@ -960,12 +960,38 @@ opposite.
 
 =back
 
-Some examples for complete content trees that can be given as input 
-can be found in the examples directory of this distribution.
-
 =head1 The Leading Path Component Class
 
-FILL IN.
+When retrieving the leading path, an array of objects is returned. This section
+describes the class of these objects, so one will know how to use them.
+
+Basically, it is an object that has several accessors. The accessors are:
+
+=over 4
+
+=item host
+
+The host ID of this node.
+
+=item host_url
+
+The URL of the node within the host. (one given in its 'url' key).
+
+=item label
+
+The label of the node. (one given in its 'value' key). This is not
+SGML-escaped.
+
+=item title 
+
+The title of the node. (that can be assigned to the URL 'title' attribute).
+This is not SGML-escaped.
+
+=item direct_url
+
+A direct URL from the current page to this page.
+
+=back
 
 =head1 SEE ALSO
 

@@ -1,6 +1,7 @@
 * Make 'expand_always', 'expand_cb' directives.
 
 * Restore the abs_url directive only as url_type or whatever.
+    - Add a url_type accessor to LeadingPath::Component.
 
 * Add an option to link to the pages as:
 
