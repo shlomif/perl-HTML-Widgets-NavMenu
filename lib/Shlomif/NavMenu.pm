@@ -438,7 +438,11 @@ sub render_tree_contents
     if (exists($sub_contents->{expand_re}))
     {
         my $regexp = $sub_contents->{expand_re};
-        if ($path_info =~ /$regexp/)
+        # If $regexp is empty - then always succeeed.
+        # This is because a pattern match in which the pattern
+        # evaluates to an empty regexp uses the last successful pattern
+        # match.
+        if (($regexp eq "") || ($path_info =~ /$regexp/))
         {
             $new_item->setActive(1);
         }
