@@ -19,19 +19,7 @@ my $test_data = get_test_data();
     );
 
     my $rendered = 
-        $nav_menu->render(
-            'no_ie' => "true",
-            'styles' =>
-            {
-                'bar' => 'nav',
-                'level0' => 'navbarmain',
-                'level1' => 'navbarnested',
-                'level2' => "navbarnested",
-                'level3' => "navbarnested",
-                'level4' => "navbarnested",
-                'list' => "navbarmain",
-            },
-        );
+        $nav_menu->render();
 
     my @leading_path = @{$rendered->{'leading_path'}};
 

@@ -2,9 +2,6 @@
 
 * Make 'expand_always', 'expand_cb' directives.
 
-* Eliminate the hard-coded class="navbarnested", etc. directives by making
-the code more modular.
-
 * Eliminate the specified dealing with the header role by putting it in
 a derived class.
 
@@ -30,4 +27,4 @@ Long-Term:
 
 * Add support for more attributes other than class="" to the ul and li
 tags.
-
+    - like id=""
