@@ -5,10 +5,112 @@ use warnings;
 
 use base qw(Shlomif::NavMenu::Tree::Iterator);
 
+sub initialize
+{
+    my $self = shift;
+
+    $self->SUPER::initialize(@_);
+
+    $self->{'html'} = [];
+
+    return 0;
+}
+
 sub _add_tags
 {
     my $self = shift;
     push (@{$self->{'html'}}, @_);
+}
+
+sub _is_root
+{
+    my $self = shift;
+
+    return ($self->_stack_get_num_elems() == 1);
+}
+
+sub _get_top_node
+{
+    my $self = shift;
+    return $self->_stack_get_top_item()->{'node'};
+}
+
+sub _is_top_separator
+{
+    my $self = shift;
+
+    return $self->_get_top_node()->{'separator'};
+}
+
+sub node_start
+{
+    my $self = shift;
+
+    my $top_item = $self->_stack_get_top_item();
+    my $status = $top_item->{'status'};
+    my $node = $self->_get_top_node();
+    my $rem_subs = $top_item->{'remaining_subs'};
+
+    my $nav_menu = $self->{'nav_menu'};
+
+    if ($self->_is_root())
+    {
+        $self->_add_tags("<ul>");
+    }
+    else
+    {
+        if (!$self->_is_top_separator())
+        {
+            $self->_add_tags("<li>");
+            my $tag = "<a";
+            my $title = $node->{'title'};
+            $tag .= " href=\"" . 
+                CGI::escapeHTML(
+                    $nav_menu->get_cross_host_rel_url(
+                        'host' => $top_item->{host},
+                        'host_url' => $node->{url},
+                        'abs_url' => $node->{abs_url},
+                    )
+                ). "\"";
+            if (defined($title))
+            {
+                $tag .= " title=\"$title\"";
+            }
+            $tag .= ">" . $node->{value} . "</a>";
+
+            if (defined($title))
+            {
+                $tag .= " - $title";
+            }
+            $self->_add_tags($tag);
+        }
+        if (@$rem_subs)
+        {
+            $self->_add_tags("<br />");
+            $self->_add_tags("<ul>");
+        }       
+    }
+}
+
+sub node_end
+{
+    my $self = shift;
+
+    if ($self->_is_root())
+    {
+        $self->_add_tags("</ul>");
+    }
+    else
+    {
+        if (! $self->_is_top_separator())
+        {
+            if ($self->_stack_get_top_item()->{'num_subs'})
+            {
+                $self->_add_tags("</ul>");
+            }
+            $self->_add_tags("</li>");
+        }
+    }
 }
 
 1;

@@ -1,1 +1,3 @@
+* Factor out the _add_tags() calls from Tree::Iterator.
 
+* Eliminate the ugly $nav_menu handling in Tree::Iterator::traverse.
