@@ -861,7 +861,107 @@ contents. It returns a scalar containing all the text of the site map.
 
 =head1 The Input Tree of Contents
 
-FILL IN.
+The input tree is a nested Perl data structure that represnets the tree
+of the site. Each node is respresented as a Perl hash reference, with its
+sub-nodes contained in an array reference of its C<'subs'> value. A 
+non-existent C<'subs'> means that the node is a leaf and has no sub-nodes.
+
+The top-most node is mostly a dummy node, that just serves as the father
+of all other nodes.
+
+Following is a listing of the possible values inside a node hash and what
+their respective values mean.
+
+=over 4
+
+=item 'host'
+
+This is the host-ID of the host as found in the C<'hosts'> key to the 
+navigation menu object constructor. It implicitly propagates downwards in the 
+tree. (i.e: all nodes of the sub-tree spanning from the node will implicitly
+have it as their value by default.)
+
+Generally, a host must always be specified and so the first node should
+specify it.
+
+=item 'url'
+
+This contains the URL of the node within the host. The URL should not
+contain a leading slash. This value does not propagate further.
+
+The URL should be specified for every nodes except separators and the such.
+
+=item 'value'
+
+This is the text that will be presented to the user as the text of the 
+link inside the navigation bar. E.g.: if C<'value'> is "Hi There", then the
+link will look something like this:
+
+    <a href="my-url/">Hi There</a>
+
+Or
+
+    <b>Hi There</b>
+
+if it's the current page. Not that this text is rendered into HTML
+as is, and so should be escaped to prevent HTML-injection attacks.
+
+=item 'title'
+
+This is the text of the link tag's title attribute. It is also not
+processed and so the user of the module, should make sure it is escaped
+if needed, to prevent HTML-injection attacks. It is optional, and if not
+specified, no title will be presented.
+
+=item 'subs'
+
+This item, if specified, should point to an array reference containing the
+sub-nodes of this item, in order.
+
+=item 'separator'
+
+This key if specified and true indicate that the item is a separator, which
+should just leave a blank line in the HTML. It is best to accompany it with
+C<'skip'> (see below).
+
+If C<'separator'> is specified, it is usually meaningless to specify all 
+other node keys except C<'skip'>.
+
+=item 'skip'
+
+This key if true, indicates that the node should be skipped when traversing 
+site using the Mozilla navigation links. Instead the navigation will move
+to the next or previous nodes.
+
+=item 'hide'
+
+This key if true indicates that the item should be part of the site's flow
+and site map, but not displayed in the navigation menu.
+
+=item 'role'
+
+This indicates a role of an item. It is similar to a CSS class, or to 
+DocBook's "role" attribute, only induces different HTML markup. The vanilla
+HTML::Widgets::NavMenu does not distinguish between any roles, but see
+L<HTML::Widgets::NavMenu::HeaderRole>.
+
+=item 'expand_re'
+
+This specifies a regular expression to be matched against the path to determine
+if the navigation menu should be expanded at this node. If it does, all of 
+the nodes up to it will expand as well.
+
+=item 'show_always'
+
+This value if true, indicates that the node and all nodes below it (until
+'show_always' is explicitly set to false) must be always displayed. Its 
+function is similar to C<'expand_re'> but its propagation semantics the 
+opposite.
+
+=back
+
+Some examples for complete content trees that can be given as input 
+can be found in the examples directory of this distribution.
 
 =head1 The Leading Path Component Class
 
