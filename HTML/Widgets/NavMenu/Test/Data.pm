@@ -257,7 +257,57 @@ my @items_in_sub_nav_menu =
     },
 );
 
-
+my @separator_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'value' => "Top 1",
+        'title' => "T1 Title",
+        'expand_re' => "",
+        'subs' =>
+        [
+            {
+                'value' => "Home",
+                'url' => "",
+            },
+            {
+                'value' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'subs' =>
+                [
+                    {
+                        'value' => "Group Hug",
+                        'url' => "me/group-hug/",
+                    },
+                    {
+                        'value' => "Cool I/O",
+                        'url' => "me/cool-io/",
+                    },
+                    {
+                        'separator' => 1,
+                        'skip' => 1,
+                    },
+                    {
+                        'value' => "Resume",
+                        'url' => "resume.html",
+                    },
+                ],
+            },
+            {
+                'separator' => 1,
+                'skip' => 1,
+            },
+            {
+                'value' => "Halifax",
+                'url' => "halifax/",
+            },
+        ],
+    },
+);
 
 sub get_test_data
 {
@@ -268,6 +318,7 @@ sub get_test_data
             'expand_re' => \@expand_re_nav_menu,
             'show_always' => \@show_always_nav_menu,
             'items_in_sub' => \@items_in_sub_nav_menu,
+            'separator' => \@separator_nav_menu,
         };
 }
 

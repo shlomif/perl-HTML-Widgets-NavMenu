@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 6;
+use Test::More tests => 7;
 
 use Shlomif::NavMenu;
 
@@ -326,3 +326,58 @@ EOF
         "Nav Menu with a selected sub-item");
 }
 
+{
+    my $nav_menu = Shlomif::NavMenu->new(
+        'path_info' => "/me/",
+        @{$test_data->{'separator'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render(
+            'no_ie' => "true",
+            'styles' =>
+            {
+                'bar' => 'nav',
+                'level0' => 'navbarmain',
+                'level1' => 'navbarnested',
+                'level2' => "navbarnested",
+                'level3' => "navbarnested",
+                'level4' => "navbarnested",
+                'list' => "navbarmain",
+            },
+        );
+
+    my $expected_string = <<"EOF";
+<ul class="navbarmain">
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<b>About Me</b>
+<br />
+<ul class="navbarnested">
+<li>
+<a href="group-hug/">Group Hug</a>
+</li>
+<li>
+<a href="cool-io/">Cool I/O</a>
+</li>
+</ul>
+<ul class="navbarnested">
+<li>
+<a href="../resume.html">Resume</a>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="navbarmain">
+<li>
+<a href="../halifax/">Halifax</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Nav Menu with Separators"); 
+}
