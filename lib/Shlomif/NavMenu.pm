@@ -652,6 +652,10 @@ sub get_up_coords
     }
     else
     {
+        if ((@coords == 1) && ($coords[0] > 0))
+        {
+            return [0];
+        }
         pop(@coords);
         return \@coords;
     }
