@@ -67,7 +67,6 @@ sub node_should_recurse
 sub get_a_tag
 {
     my $self = shift;
-    my $nav_menu = $self->{'nav_menu'};
     my $node = $self->top->node;
 
     my $tag ="<a";
@@ -75,7 +74,7 @@ sub get_a_tag
 
     $tag .= " href=\"" .
         CGI::escapeHTML(
-            $nav_menu->get_cross_host_rel_url(
+            $self->nav_menu()->get_cross_host_rel_url(
                 'host' => $self->_get_top_host(),
                 'host_url' => $node->{url},
                 'abs_url' => $node->{abs_url},

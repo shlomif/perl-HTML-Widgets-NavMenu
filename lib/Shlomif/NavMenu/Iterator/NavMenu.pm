@@ -24,8 +24,6 @@ sub start_regular
     my $top_item = $self->top;
     my $node = $self->top->node();
 
-    my $nav_menu = $self->{'nav_menu'};
-
     if ($self->is_hidden())
     {
         # Do nothing
