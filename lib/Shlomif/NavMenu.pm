@@ -256,6 +256,7 @@ sub render_tree_contents
     my $coords = $args{coords};
     my $host = $sub_contents->{host} || $args{host} or
         die "Host not specified!";
+    my $current_coords_ptr = $args{current_coords_ptr};
 
     my $new_item =
         $self->create_new_nav_menu_item(
@@ -266,7 +267,7 @@ sub render_tree_contents
     {
         if (($sub_contents->{url} eq $path_info) && ($host eq $self->{current_host}))
         {
-            $self->{current_coords} = [ @$coords ];
+            $$current_coords_ptr = [ @$coords ];
             $new_item->{'Active'} = 1;
             $new_item->{'CurrentlyActive'} = 1;
         }
@@ -283,6 +284,7 @@ sub render_tree_contents
                 'sub_contents' => $sub_contents_sub,
                 'coords' => [@$coords, $index],
                 'host' => $host,
+                'current_coords_ptr' => $current_coords_ptr,
             );
             if ($sub_item->{'Active'})
             {
@@ -308,6 +310,7 @@ sub gen_site_map
     my $iterator = 
         Shlomif::NavMenu::Iterator::SiteMap->new(
             'nav_menu' => $self,
+            'tree' => $self->get_traversed_tree(),
         );
 
     $iterator->traverse();
@@ -550,31 +553,70 @@ sub fill_leading_path
     }
 }
 
+# The traversed_tree is the tree that is calculated from the tree given
+# by the user and some other parameters such as the host and path_info.
+# It is passed to the NavMenu::Iterator::* classes as argument.
+sub get_traversed_tree
+{
+    my $self = shift;
+
+    if (! $self->{'traversed_tree'})
+    {
+        my $gen_retval = $self->gen_traversed_tree();
+        $self->{'traversed_tree'} = $gen_retval->{'tree'};
+        if (defined($gen_retval->{'current_coords'}))
+        {
+            $self->{'current_coords'} = $gen_retval->{'current_coords'};
+        }
+    }
+    return $self->{'traversed_tree'};
+}
+
+sub gen_traversed_tree
+{
+    my $self = shift;
+
+    my $current_coords = undef;
+
+    my $tree = 
+        $self->render_tree_contents(
+            'sub_tree' => undef,
+            'sub_contents' => $self->{tree_contents},
+            'coords' => [],
+            'current_coords_ptr' => \$current_coords,
+            );
+
+    # The root should always be active because:
+    # 1. If one of the leafs was marked as Active so will its ancestors
+    #    and eventually the root.
+    # 2. If nothing was marked as active, it should still be marked as active
+    #    so it will expand.
+    $tree->{'Active'} = 1;
+   
+    return {'tree' => $tree, 'current_coords' => $current_coords };
+}
+
 sub render
 {
     my $self = shift;
 
     my %args = (@_);
 
+    # We do it first, so that current_coords will be generated.
+    # We can might as well call $self->get_traversed_tree() once at the top.
+    my $iterator =
+        Shlomif::NavMenu::Iterator::NavMenu->new(
+            'nav_menu' => $self,
+            'tree' => $self->get_traversed_tree(),
+        );
+    $iterator->traverse();
+    my $html = [ @{$iterator->{'html'}} ];
+    
+
     my $hosts = $self->{hosts};
-
-    my $tree_contents = $self->{tree_contents};
-
-    my $tree =
-        $self->render_tree_contents(
-            'sub_tree' => undef,
-            'sub_contents' => $tree_contents,
-            'coords' => [],
-            );
-
-    my @current_coords = @{$self->{current_coords}};
 
     my @leading_path;
 
-    if (! @current_coords)
-    {
-        $tree->{'Active'} = 1;
-    }
     {
         my $fill_leading_path_callback =
             sub {
@@ -631,13 +673,6 @@ sub render
         }
     }
 
-    my $iterator = 
-        Shlomif::NavMenu::Iterator::NavMenu->new(
-            'nav_menu' => $self,
-            'tree' => $tree,
-        );
-    $iterator->traverse();
-    my $html = [ @{$iterator->{'html'}} ];
     my $js_code = "";
     
     return 
