@@ -49,7 +49,7 @@ sub end_root
 sub end_regular
 {
     my $self = shift;
-    if ($self->top()->num_subs() && $self->is_active())
+    if ($self->top()->num_subs() && $self->is_expanded())
     {
         $self->_add_tags("</ul>");
     }
@@ -59,7 +59,7 @@ sub end_regular
 sub node_should_recurse
 {
     my $self = shift;
-    return $self->is_active();    
+    return $self->is_expanded();
 }
 
 # Get the HTML <a href=""> tag.

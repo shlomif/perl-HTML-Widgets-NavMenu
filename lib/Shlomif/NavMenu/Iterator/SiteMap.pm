@@ -47,7 +47,7 @@ sub end_sep
 {
 }
 
-sub is_active
+sub is_expanded
 {
     return 1;
 }

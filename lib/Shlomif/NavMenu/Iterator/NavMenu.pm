@@ -48,7 +48,7 @@ sub start_regular
         else
         {
             @tags_to_add = ("<li>", $tag);
-            if ($top_item->num_subs_to_go() && $self->is_active())
+            if ($top_item->num_subs_to_go() && $self->is_expanded())
             {
                 push @tags_to_add, 
                     ("<br />", "<ul class=\"navbarnested\">");
@@ -87,7 +87,7 @@ sub is_hidden
     return $self->top->node()->{'hide'};
 }
 
-sub is_active
+sub is_expanded
 {
     my $self = shift;
     my $node = $self->top->node();
