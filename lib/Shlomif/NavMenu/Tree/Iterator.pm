@@ -1,3 +1,36 @@
+package MyProxy;
+
+use Shlomif::NavMenu::Tree::Iterator::Item;
+
+use strict;
+use warnings;
+
+use base 'Shlomif::NavMenu::Object';
+
+use vars qw($AUTOLOAD);
+
+sub initialize
+{
+    my $self = shift;
+
+    $self->{'**PROXIED**'} = 
+        Shlomif::NavMenu::Tree::Iterator::Item->new(
+            @_
+        );
+    
+    return 0;
+}
+
+sub AUTOLOAD
+{
+    my $self = shift;
+    my $func_name = $AUTOLOAD;
+    $func_name =~ s!^MyProxy::!!;
+    return $self->{'**PROXIED**'}->$func_name(@_);
+}
+
+1;
+
 package Shlomif::NavMenu::Tree::Iterator;
 
 use strict;
@@ -36,54 +69,27 @@ sub _stack_is_empty
     return ($self->stack->len() == 0);
 }
 
-sub _get_top_remaining_subs
-{
-    my $self = shift;
-    return $self->top->{'remaining_subs'};
-}
-
-sub _are_remaining_subs
-{
-    my $self = shift;
-    return (@{$self->_get_top_remaining_subs()} > 0);
-}
-
-sub _top_extract_next_sub
-{
-    my $self = shift;
-    return shift(@{$self->_get_top_remaining_subs()});
-}
-
-sub _get_stack_item_accum_state
-{
-    my $self = shift;
-    my %args = (@_);
-
-    my $item = $args{'item'};
-
-    return $item->{'accum_state'};
-}
-
 sub push_into_stack
 {
     my $self = shift;
 
     my %args = (@_);
     my $node = $args{'node'};
-
-    my $record = +{};
-    $record->{'node'} = $node;
     my $subs = $self->get_node_subs('node' => $node);
-    $record->{'remaining_subs'} = $subs;
-    $record->{'num_subs'} = scalar(@$subs);
-    $record->{'visited'} = 0;
-    $record->{'accum_state'} =
+    my $accum_state =
         $self->get_new_accum_state(
             'item' => $self->top(),
             'node' => $node
         );
 
-    $self->stack()->push($record);
+    my $new_item = 
+        MyProxy->new(
+            'node' => $node,
+            'subs' => $subs,
+            'accum_state' => $accum_state,
+        );      
+
+    $self->stack()->push($new_item);
 }
 
 sub traverse
@@ -95,22 +101,22 @@ sub traverse
     MAIN_LOOP: while (! $self->_stack_is_empty())
     {
         my $top_item = $self->top();
-        my $visited = $top_item->{'visited'};
+        my $visited = $top_item->is_visited();
 
         if (!$visited)
         {
             $self->node_start();
         }
+
+        my $sub_item = $top_item->visit();
         
-        $top_item->{'visited'} = 1;
-        
-        if ($self->_are_remaining_subs())
+        if (defined($sub_item))
         {
             $self->push_into_stack(
                 'node' => 
                     $self->get_node_from_sub(
                         'item' => $top_item,
-                        'sub' => $self->_top_extract_next_sub()
+                        'sub' => $sub_item,
                     ),
                 );
             next MAIN_LOOP;

@@ -5,3 +5,5 @@ functionality inside it.
 
 * Implement the regular navigation menu generation using Tree::Iterator.
 
+* Remove the function _stack_is_empty.
+
