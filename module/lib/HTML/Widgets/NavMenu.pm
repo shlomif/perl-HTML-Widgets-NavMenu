@@ -685,12 +685,12 @@ HTML::Widgets::NavMenu - A Perl Module for Generating HTML Navigation Menus
         HTML::Widgets::NavMenu->new(
             'path_info' => "/me/",
             'current_host' => "default",
-            'hosts' => 
-            { 
-                'default' => 
-                { 
-                    'base_url' => "http://www.hello.com/" 
-                }, 
+            'hosts' =>
+            {
+                'default' =>
+                {
+                    'base_url' => "http://www.hello.com/"
+                },
             },
             'tree_contents' =>
             {
@@ -724,9 +724,152 @@ a complete site map, a path of leading components, and also keeps
 track of navigation links ("Next", "Prev", "Up", etc.) It's a little bit 
 scarse on documentation now, because it's still was not made ready for
 public consumption yet. You can start from the example above and see more
-examples in the tests, and complete working sites in the Subversion 
+examples in the tests, and complete working sites in the Subversion
 repositories at L<http://stalker.iguide.co.il:8080/svn/shlomif-homepage/>
 and L<http://opensvn.csie.org/perlbegin/perl-begin/>.
+
+To use this module call the constructor with the following named arguments:
+
+=over 4
+
+=item hosts
+
+This should be a hash reference that maps host-IDs to another hash reference
+that contains information about the hosts. An HTML::Widgets::NavMenu navigation
+menu can spread across pages in several hosts, which will link from one to
+another using relative URLs if possible and fully-qualified (i.e: C<http://>)
+URLs if not.
+
+Currently the only key present in the hash is the C<base_url> one that points
+to a string containing the absolute URL to the sub-site. The base URL may
+have trailing components if it does not reside on the domain's root directory.
+
+Here's an example for a minimal hosts value:
+
+            'hosts' =>
+            {
+                'default' =>
+                {
+                    'base_url' => "http://www.hello.com/"
+                },
+            },
+
+And here's a two-hosts value from my personal site, which is spread across
+two sites:
+
+    'hosts' =>
+    {
+        't2' => 
+        {
+            'base_url' => "http://www.shlomifish.org/",
+        },
+        'vipe' =>
+        {
+            'base_url' => "http://vipe.technion.ac.il/~shlomif/",
+        },
+    },
+
+=item current_host
+
+This parameter indicate which host-ID of the hosts in C<hosts> is the
+one that the page for which the navigation menu should be generated is. This
+is important so cross-site and inner-site URLs will be handled correctly.
+
+=item path_info
+
+This is the path relative to the host's C<base_url> of the currently displayed
+page. The path should start with a "/"-character, or otherwise a re-direction
+excpetion will be thrown (this is done to aid in using this module from within
+CGI scripts).
+
+=item tree_contents
+
+This item gives the complete tree for the navigation menu. It is a nested
+Perl data structure, whose syntax is fully explained in the section
+"The Input Tree of Contents".
+
+=item ul_classes
+
+This is an optional parameter whose value is a reference to an array that 
+indicates the values of the class="" arguments for the C<E<lt>ulE<gt>> tags 
+whose depthes are the indexes of the array.
+
+For example, assigning:
+
+    'ul_classes' => [ "FirstClass", "second myclass", "3C" ],
+
+Will assign "FirstClass" as the class of the top-most ULs, "second myclass"
+as the classes of the ULs inner to it, and "3C" as the class of the ULs inner
+to the latter ULs.
+
+If classes are undef, the UL tag will not contain a class parameter.
+
+=back
+
+A complete invocation of an HTML::Widgets::NavMenu constructor can be
+found in the SYNOPSIS above.
+
+After you initialize an instance of the navigation menu object, you need to
+get the results using the render function.
+
+=head2 $results = $nav_menu->render()
+
+render() should be called after a navigation menu object is constructed
+to prepare the results and return them. It returns a hash reference with the
+following keys:
+
+=over 4
+
+=item 'html'
+
+This key points to a reference to an array that contains the tags for the 
+HTML. One can join these tags to get the full HTML. It is possible to 
+delimit them with newlines, if one wishes the markup to be easier to read.
+
+=item 'leading_path'
+
+This is a reference to an array of leading path objects. These indicate the
+intermediate pages in the site that lead from the front page to the 
+current page. The methods supported by the class of these objects is described
+below under "The Leading Path Component Class".
+
+=item 'nav_links'
+
+This points to a hash reference whose keys are Mozilla-style link-toolbar
+( L<http://cdn.mozdev.org/linkToolbar/> ) link IDs and its values are the
+URLs to these links.
+
+This sample code renders the links as C<E<lt>link rel=...E<gt>> into the
+page header:
+
+    my $nav_links = $results->{'nav_links'};
+    # Sort the keys so their order will be preserved
+    my @keys = (sort { $a cmp $b } keys(%$nav_links));
+    foreach my $key (@keys)
+    {
+        my $url = $nav_links->{$key};
+        print {$fh} "<link rel=\"$key\" href=\"" .
+            CGI::escapeHTML($url) . "\" />\n";
+    }
+
+=back
+
+=head2 $text = $nav_menu->gen_site_map()
+
+This function can be called to generate a site map based on the tree of
+contents. It returns a scalar containing all the text of the site map.
+
+=head1 The Input Tree of Contents
+
+FILL IN.
+
+=head1 The Leading Path Component Class
+
+FILL IN.
+
+=head1 SEE ALSO
+
+FILL IN.
 
 =head1 AUTHORS
 
