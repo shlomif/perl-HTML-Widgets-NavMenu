@@ -2,9 +2,13 @@
 
 use strict;
 
-use Test::More tests => 3;
+use Test::More tests => 6;
 
 use HTML::Widgets::NavMenu;
+
+use HTML::Widgets::NavMenu::Test::Data;
+
+my $test_data = get_test_data();
 
 my @site_args = 
 (
@@ -72,4 +76,38 @@ my @site_args =
     # TEST
     is($nav_links->{'top'}, "../",
        "Top nav-link leading topwards to the first page.");
+}
+
+# This tests for behaviour with url_is_abs:
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/",
+        @{$test_data->{'url_is_abs_menu'}},
+    );
+
+    my $rendered = $nav_menu->render();
+
+    my $nav_links = $rendered->{'nav_links'};
+
+    # TEST
+    is ($nav_links->{'next'}, "http://www.google.com/",
+        "Next nav_link in url_is_abs site");
+}
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/sub-dir/",
+        @{$test_data->{'url_is_abs_menu'}},
+    );
+
+    my $rendered = $nav_menu->render();
+
+    my $nav_links = $rendered->{'nav_links'};
+
+    # TEST
+    is ($nav_links->{'up'}, "http://www.google.com/",
+        "Up nav_link in url_is_abs site");
+    # TEST
+    is ($nav_links->{'prev'}, "http://www.google.com/",
+        "Prev nav_link in url_is_abs site");
 }

@@ -8,6 +8,8 @@
 * Write tests to test the url_is_abs propagation in the leading path, site-map,
 and navigation links. Implement them if necessary.
     - Done leading_path.
+    - Done site_map.
+    - Done nav-links.
 
 * Document url_is_abs.
 
