@@ -680,6 +680,10 @@ sub render
         };
 }
 
+1;
+
+__END__
+
 =head1 NAME
 
 HTML::Widgets::NavMenu - A Perl Module for Generating HTML Navigation Menus
@@ -1121,6 +1125,3 @@ You can use, modify and distribute this module under the terms of the MIT X11
 license. ( L<http://www.opensource.org/licenses/mit-license.php> ).
 
 =cut
-
-1;
-

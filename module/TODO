@@ -1,7 +1,8 @@
 * Remove 'expand' => { 'bool' => 1 }, from the root as it isn't needed because
 the root expands by default.
 
-* Transform the POD documentation inside NavMenu.pm to "1;\n\n__END__".
+* Write some tests with a selective 'expand' directive that expands in one
+path and doesn't expand in others.
 
 * Make the syntax of the navigation menus more sane ("label" or "text" 
 instead of "value", etc.) That would break compatibility.
