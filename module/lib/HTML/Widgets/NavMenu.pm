@@ -638,7 +638,7 @@ sub render
 
     my $iterator = $self->get_nav_menu_traverser();
     $iterator->traverse();
-    my $html = [ @{$iterator->{'html'}} ];
+    my $html = $iterator->get_results();
     
     my $hosts = $self->{hosts};
 
@@ -908,7 +908,8 @@ page header:
 =head2 $text = $nav_menu->gen_site_map()
 
 This function can be called to generate a site map based on the tree of
-contents. It returns a scalar containing all the text of the site map.
+contents. It returns a reference to an array containing the tags of the 
+site map.
 
 =head1 The Input Tree of Contents
 

@@ -7,8 +7,21 @@ use Test::More tests => 4;
 use HTML::Widgets::NavMenu;
 
 use HTML::Widgets::NavMenu::Test::Data;
+use HTML::Widgets::NavMenu::Test::Util;
 
 my $test_data = get_test_data();
+
+sub validate_site_map
+{
+    my $results = shift;
+    my $expected_string = shift;
+    
+    my @result = @$results;
+
+    my @expected = (split(/\n/, $expected_string));
+
+    return (compare_string_arrays(\@expected, \@result) == 0);
+}
 
 {
     my $nav_menu = HTML::Widgets::NavMenu->new(
@@ -16,7 +29,7 @@ my $test_data = get_test_data();
         @{$test_data->{'minimal'}},
     );
 
-    my $returned_text = $nav_menu->gen_site_map();
+    my $results = $nav_menu->gen_site_map();
     my $expected_text = <<"EOF";
 <ul>
 <li>
@@ -27,7 +40,10 @@ my $test_data = get_test_data();
 </li>
 </ul>
 EOF
-    is($returned_text, $expected_text, "site_map #1"); # TEST
+
+    # TEST
+    ok (validate_site_map($results, $expected_text), 
+        "site_map #1");
 }
 
 {
@@ -64,7 +80,7 @@ EOF
         },
     );
 
-    my $returned_text = $nav_menu->gen_site_map();
+    my $results = $nav_menu->gen_site_map();
     my $expected_text = <<"EOF";
 <ul>
 <li>
@@ -81,7 +97,9 @@ EOF
 </li>
 </ul>
 EOF
-    is($returned_text, $expected_text, "site_map #2"); # TEST
+    # TEST
+    ok (validate_site_map($results, $expected_text), 
+        "site_map #2");
 }
 
 {
@@ -90,7 +108,7 @@ EOF
         @{$test_data->{'two_sites'}},
     );
 
-    my $returned_text = $nav_menu->gen_site_map();
+    my $results = $nav_menu->gen_site_map();
     my $expected_text = <<"EOF";
 <ul>
 <li>
@@ -128,7 +146,9 @@ EOF
 </li>
 </ul>
 EOF
-    is($returned_text, $expected_text, "site_map - complex"); # TEST
+    # TEST
+    ok (validate_site_map($results, $expected_text),
+        "site_map - complex");
 }
 
 # Now testing that the separator is safely skipped and does not generate
@@ -168,7 +188,7 @@ EOF
         },
     );
 
-    my $returned_text = $nav_menu->gen_site_map();
+    my $results = $nav_menu->gen_site_map();
     my $expected_text = <<"EOF";
 <ul>
 <li>
@@ -182,9 +202,8 @@ EOF
 </li>
 </ul>
 EOF
-    is($returned_text, $expected_text, "site_map - separator"); # TEST
-
-    
-
+    # TEST
+    ok (validate_site_map($results, $expected_text), 
+        "site_map - separator");
 }
 

@@ -119,7 +119,7 @@ sub get_results
 {
     my $self = shift;
 
-    return join("", map { "$_\n" } @{$self->{'html'}});
+    return [ @{$self->{'html'}} ];
 }
 
 1;
