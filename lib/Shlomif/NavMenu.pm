@@ -285,8 +285,7 @@ sub render_tree_contents
         if (($sub_contents->{url} eq $path_info) && ($host eq $self->{current_host}))
         {
             $$current_coords_ptr = [ @$coords ];
-            $new_item->expand();
-            $new_item->{'CurrentlyActive'} = 1;
+            $new_item->mark_as_current();
         }
     }
 
