@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 24;
+use Test::More tests => 32;
 
 use strict;
 
@@ -78,5 +78,39 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
     # TEST
     ok($node->expanded(), 
         "Testing node->expanded() after mark_as_current()");
+}
+
+{
+    my $node = Shlomif::NavMenu::Tree::Node->new();
+
+    # TEST
+    is(scalar(@{$node->subs()}), 0, 
+        "Testing emptiness of node->subs at start");
+
+    my $sub_node1 = Shlomif::NavMenu::Tree::Node->new();
+    $sub_node1->set("url", "Emperor/Kuzko/");
+    $node->add_sub($sub_node1);
+    # TEST
+    is(scalar(@{$node->subs()}), 1, "node->subs len == 1");
+    # TEST
+    is($node->subs()->[0]->url(), "Emperor/Kuzko/", "node->subs contents");
+    my $sub_node2 = Shlomif::NavMenu::Tree::Node->new();
+    $sub_node2->set("url", "gimp/ressionist/");
+    $node->add_sub($sub_node2);
+    # TEST
+    is(scalar(@{$node->subs()}), 2, "node->subs len == 2");
+    # TEST
+    is($node->subs()->[0]->url(), "Emperor/Kuzko/", 
+        "node->subs contents again");
+    # TEST
+    is($node->subs()->[1]->url(), "gimp/ressionist/", 
+        "node->subs[1] contents");
+    # TEST
+    ok(!$node->expanded(), "Node is not expanded");
+    my $sub_node3 = Shlomif::NavMenu::Tree::Node->new();
+    $sub_node3->expand();
+    $node->add_sub($sub_node3);
+    # TEST
+    ok($node->expanded(), "Node is expanded after adding an expanded item");
 }
 
