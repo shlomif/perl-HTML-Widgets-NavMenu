@@ -80,11 +80,7 @@ sub traverse
 {
     my $self = shift;
 
-    my $nav_menu = shift;
-
-    $self->{'nav_menu'} = $nav_menu;
-
-    $self->push_into_stack('node' => $nav_menu->{'tree_contents'} );
+    $self->push_into_stack('node' => $self->get_initial_node());
 
     MAIN_LOOP: while (! $self->_stack_is_empty())
     {

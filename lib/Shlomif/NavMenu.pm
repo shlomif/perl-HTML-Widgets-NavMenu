@@ -480,9 +480,12 @@ sub gen_site_map
 {
     my $self = shift;
 
-    my $iterator = Shlomif::NavMenu::Iterator::SiteMap->new();
+    my $iterator = 
+        Shlomif::NavMenu::Iterator::SiteMap->new(
+            'nav_menu' => $self,
+        );
 
-    $iterator->traverse($self);
+    return $iterator->traverse($self);
 }
 
 sub get_next_coords

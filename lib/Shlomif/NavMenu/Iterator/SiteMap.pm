@@ -11,6 +11,11 @@ sub initialize
 
     $self->SUPER::initialize(@_);
 
+    my %args = (@_);
+
+    $self->{'nav_menu'} = $args{'nav_menu'} or
+        die "nav_menu not specified!";
+
     $self->{'html'} = [];
 
     return 0;
@@ -40,6 +45,12 @@ sub _is_top_separator
     my $self = shift;
 
     return $self->_get_top_node()->{'separator'};
+}
+
+sub get_initial_node
+{
+    my $self = shift;
+    return $self->{'nav_menu'}->{'tree_contents'};
 }
 
 sub node_start
