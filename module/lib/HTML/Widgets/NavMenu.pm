@@ -2,7 +2,7 @@
 
 package HTML::Widgets::NavMenu;
 
-our $VERSION = '0.3.1_00';
+our $VERSION = '0.3.2_00';
 
 package HTML::Widgets::NavMenu::Error;
 
@@ -54,6 +54,92 @@ sub initialize
 }
 
 1;
+
+package HTML::Widgets::NavMenu::Iterator::GetCurrentlyActive;
+
+use base 'HTML::Widgets::NavMenu::Iterator::Base';
+
+sub initialize
+{
+    my $self = shift;
+
+    my %args = (@_);
+
+    $self->SUPER::initialize(@_);
+
+    $self->{'tree'} = $args{'tree'};
+
+    $self->{'item_found'} = 0;
+    
+    return 0;
+}
+
+sub get_initial_node
+{
+    my $self = shift;
+
+    return $self->{'tree'};
+}
+
+sub item_matches
+{
+    my $self = shift;
+    my $item = $self->top();
+    my $url = $item->node()->url();
+    my $nav_menu = $self->nav_menu();
+    return
+        (
+            ($item->accum_state()->{'host'} eq $nav_menu->current_host()) &&
+            (defined($url) && ($url eq $nav_menu->path_info()))
+        );
+}
+
+sub node_start
+{
+    my $self = shift;
+
+    if ($self->item_matches())
+    {
+        my @coords = @{$self->get_coords()};
+        $self->{'ret_coords'} = [ @coords ];
+        $self->{'temp_coords'} = [ @coords, (-1) ];
+        $self->top()->node()->mark_as_current();
+        $self->{'item_found'} = 1;
+    }
+}
+
+sub node_end
+{
+    my $self = shift;
+    if ($self->{'item_found'})
+    {
+        # Skip the first node, because the coords refer
+        # to the nodes below it.
+        my $idx = pop(@{$self->{'temp_coords'}});
+        if ($idx >= 0)
+        {
+            my $node = $self->top()->node();
+            $node->update_based_on_sub(
+                $node->get_nth_sub(
+                    $idx
+                )
+            );
+        }
+    }
+}
+
+sub node_should_recurse
+{
+    my $self = shift;
+    return (! $self->{'item_found'});
+}
+
+sub get_final_coords
+{
+    my $self = shift;
+
+    return $self->{'ret_coords'};
+}
 
 package HTML::Widgets::NavMenu;
 
@@ -282,7 +368,6 @@ sub create_new_nav_menu_item
     my %args = (@_);
 
     my $sub_contents = $args{sub_contents};
-    my $coords = $args{coords};
 
     my $new_item = $self->gen_blank_nav_menu_tree_node();
 
@@ -310,46 +395,24 @@ sub render_tree_contents
 
     my %args = (@_);
 
-    my $path_info = $self->path_info();    
+    my $path_info = $self->path_info();
 
     my $sub_contents = $args{sub_contents};
-    my $coords = $args{coords};
-    my $host = $sub_contents->{host} || $args{host} or
-        die "Host not specified!";
-    my $current_coords_ptr = $args{current_coords_ptr};
 
     my $new_item =
         $self->create_new_nav_menu_item(
             %args,
         );
 
-    if (exists($sub_contents->{url}))
-    {
-        if (($sub_contents->{url} eq $path_info) && ($host eq $self->current_host()))
-        {
-            $$current_coords_ptr = [ @$coords ];
-            $new_item->mark_as_current();
-        }
-    }
-
     if (exists($sub_contents->{subs}))
     {
-        my $index = 0;
-        my $subs = [];
         foreach my $sub_contents_sub (@{$sub_contents->{subs}})
         {
             $new_item->add_sub(
                 $self->render_tree_contents(
                     'sub_contents' => $sub_contents_sub,
-                    'coords' => [@$coords, $index],
-                    'host' => $host,
-                    'current_coords_ptr' => $current_coords_ptr,
                 )
             );
-        }
-        continue
-        {
-            $index++;
         }
     }
     return $new_item;
@@ -420,7 +483,7 @@ sub get_prev_coords
     if (scalar(@coords) == 0)
     {
         return undef;
-    }    
+    }
     elsif ($coords[$#coords] > 0)
     {
         # Get the previous leaf
@@ -501,7 +564,7 @@ sub get_coords_while_skipping_skips
 
     my $callback = shift;
     my $coords = shift || $self->get_current_coords();
-    
+
     my $do_once = 1;
 
     while ($do_once || $self->is_skip($coords))
@@ -586,11 +649,18 @@ sub gen_traversed_tree
 
     my $tree = 
         $self->render_tree_contents(
-            'sub_tree' => undef,
             'sub_contents' => $self->{tree_contents},
-            'coords' => [],
-            'current_coords_ptr' => \$current_coords,
             );
+
+    my $find_coords_iterator =
+        HTML::Widgets::NavMenu::Iterator::GetCurrentlyActive->new(
+            'nav_menu' => $self,
+            'tree' => $tree,
+        );
+
+    $find_coords_iterator->traverse();
+
+    $current_coords = $find_coords_iterator->get_final_coords() || [];
 
     # The root should always be expanded because:
     # 1. If one of the leafs was marked as expanded so will its ancestors

@@ -58,6 +58,13 @@ sub visit
     }
 }
 
+sub visited_index
+{
+    my $self = shift;
+
+    return $self->{'sub_idx'};
+}
+
 sub num_subs_to_go
 {
     my $self = shift;

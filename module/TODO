@@ -4,14 +4,14 @@
 
      In create_new_nav_menu_item, and in
      render_tree_contents.
-   
+
+        - Done.
 
 Long-Term:
 ----------
 
 * Use HTML::Widgets::NavMenu::Tree::Node and its accessors for the rest
   of the $ptr->{text} etc. manipulations.
-
 
 * Use Build.PL instead of Makefile.PL. (?)
 
@@ -30,6 +30,3 @@ path and doesn't expand in others.
 
 * In HTML::Widgets::NavMenu::Tree::Node - make sure url_type accepts only
 its enum values.
-
-
-

@@ -80,6 +80,8 @@ sub traverse
 
     $self->push_into_stack('node' => $self->get_initial_node());
 
+    $self->{'coords'} = [];
+
     my $top_item;
 
     MAIN_LOOP: while ($top_item = $self->top())
@@ -98,6 +100,7 @@ sub traverse
 
         if (defined($sub_item))
         {
+            push @{$self->{'coords'}}, $top_item->visited_index();
             $self->push_into_stack(
                 'node' =>
                     $self->get_node_from_sub(
@@ -111,6 +114,7 @@ sub traverse
         {
             $self->node_end();
             $self->stack->pop();
+            pop(@{$self->{'coords'}})
         }
     }
 
@@ -167,5 +171,11 @@ sub find_node_by_coords
     return +{ 'item' => $item, };
 }
 
+sub get_coords
+{
+    my $self = shift;
+
+    return $self->{'coords'};
+}
 1;
 

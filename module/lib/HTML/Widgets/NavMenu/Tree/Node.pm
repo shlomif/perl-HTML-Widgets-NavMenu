@@ -37,10 +37,17 @@ sub _process_new_sub
 {
     my $self = shift;
     my $sub = shift;
+    $self->update_based_on_sub($sub);    
+}
+
+sub update_based_on_sub
+{
+    my $self = shift;
+    my $sub = shift;
     if ($sub->expanded())
     {
         $self->expand();
-    }
+    }    
 }
 
 sub add_sub
@@ -50,6 +57,13 @@ sub add_sub
     push (@{$self->subs}, $sub);
     $self->_process_new_sub($sub);
     return 0;
+}
+
+sub get_nth_sub
+{
+    my $self = shift;
+    my $idx = shift;
+    return $self->subs()->[$idx];
 }
 
 sub list_regular_keys
