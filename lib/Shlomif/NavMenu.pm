@@ -838,7 +838,7 @@ sub render
     {
         # This is so we would avoid coordinates that point to the 
         # root ($coords == []).
-        if (@$coords == 0)
+        if (defined($coords) && @$coords == 0)
         {
             undef($coords);
         }
