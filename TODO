@@ -1,9 +1,4 @@
-* Create an Item class for the Tree Iterator, and encapsulate all the
-functionality inside it.
-
 * Implement a recurse predicate for the Tree Iterator back-end.
 
 * Implement the regular navigation menu generation using Tree::Iterator.
-
-* Remove the function _stack_is_empty.
 

@@ -30,13 +30,6 @@ sub top
     return $self->stack()->top();
 }
 
-sub _stack_is_empty
-{
-    my $self = shift;
-
-    return ($self->stack->len() == 0);
-}
-
 sub push_into_stack
 {
     my $self = shift;
@@ -66,9 +59,10 @@ sub traverse
 
     $self->push_into_stack('node' => $self->get_initial_node());
 
-    MAIN_LOOP: while (! $self->_stack_is_empty())
+    my $top_item;
+
+    MAIN_LOOP: while ($top_item = $self->top())
     {
-        my $top_item = $self->top();
         my $visited = $top_item->is_visited();
 
         if (!$visited)
