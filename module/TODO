@@ -1,8 +1,5 @@
 * Make 'expand_always', 'expand_cb' directives.
 
-* Eliminate the specified dealing with the header role by putting it in
-a derived class.
-
 * Restore the abs_url directive only as url_type or whatever.
 
 * Add an option to link to the pages as:
