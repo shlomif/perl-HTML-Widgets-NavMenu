@@ -248,7 +248,7 @@ sub create_new_nav_menu_item
         # match.
         if (($regexp eq "") || ($self->path_info() =~ /$regexp/))
         {
-            $new_item->{'Active'} = 1;
+            $new_item->{'expanded'} = 1;
         }
     }
 
@@ -279,7 +279,7 @@ sub render_tree_contents
         if (($sub_contents->{url} eq $path_info) && ($host eq $self->{current_host}))
         {
             $$current_coords_ptr = [ @$coords ];
-            $new_item->{'Active'} = 1;
+            $new_item->{'expanded'} = 1;
             $new_item->{'CurrentlyActive'} = 1;
         }
     }
@@ -297,9 +297,9 @@ sub render_tree_contents
                 'host' => $host,
                 'current_coords_ptr' => $current_coords_ptr,
             );
-            if ($sub_item->{'Active'})
+            if ($sub_item->{'expanded'})
             {
-                $new_item->{'Active'}  = 1;
+                $new_item->{'expanded'}  = 1;
             }
             push @$subs, $sub_item;
         }
@@ -587,12 +587,12 @@ sub gen_traversed_tree
             'current_coords_ptr' => \$current_coords,
             );
 
-    # The root should always be active because:
-    # 1. If one of the leafs was marked as Active so will its ancestors
+    # The root should always be expanded because:
+    # 1. If one of the leafs was marked as expanded so will its ancestors
     #    and eventually the root.
-    # 2. If nothing was marked as active, it should still be marked as active
-    #    so it will expand.
-    $tree->{'Active'} = 1;
+    # 2. If nothing was marked as expanded, it should still be marked as 
+    #    expanded so it will expand.
+    $tree->{'expanded'} = 1;
    
     return {'tree' => $tree, 'current_coords' => $current_coords };
 }

@@ -91,7 +91,7 @@ sub is_active
 {
     my $self = shift;
     my $node = $self->top->node();
-    return ($node->{'Active'} || $self->top->accum_state->{'show_always'});
+    return ($node->{'expanded'} || $self->top->accum_state->{'show_always'});
 }
 
 sub is_role_header
