@@ -91,7 +91,7 @@ sub node_should_recurse
 
 package main;
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 use strict;
 
@@ -111,7 +111,6 @@ sub test_traverse
         $test_name);
 }
 
-# TODO : write an example with recurse == 0.
 {
     my $data =
         {
@@ -173,4 +172,74 @@ sub test_traverse
 
     # TEST 
     test_traverse($data, \@expected, "Example with recurse = 0");
+}
+
+{
+    my $data =
+        {
+            'id' => "A",
+            'recurse' => 1,
+            'accum' => "one",
+            'childs' =>
+            [
+                {
+                    'id' => "B",
+                    'accum' => "two",
+                },
+                {
+                    'id' => "C",
+                    'recurse' => 0,
+                    'childs' =>
+                    [
+                        {
+                            'id' => "FG",
+                        },
+                        {
+                            'id' => "E",
+                            'recurse' => 0,
+                            'childs' =>
+                            [
+                                {
+                                    'id' => "Y",
+                                },
+                                {
+                                    'id' => "Z",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    'id' => "AGH",
+                    'recurse' => 1,
+                    'accum' => "three",
+                    'childs' =>
+                    [
+                        {
+                            'id' => "MON",
+                            'recurse' => 0,
+                            'accum' => "four",
+                            'childs' =>
+                            [
+                                {
+                                    'id' => "HELLO",
+                                    'recurse' => 1,
+                                },
+                            ],
+                        },
+                        {
+                            'id' => "KOJ",
+                            'recurse' => 1,
+                        },
+                    ],
+                }
+            ],
+        };
+    my @expected = ("Start-A-one", "Start-B-two", "End-B",
+        "Start-C-one", "End-C", "Start-AGH-three", 
+        "Start-MON-four", "End-MON", "Start-KOJ-three", "End-KOJ",
+        "End-AGH", "End-A");
+
+    # TEST 
+    test_traverse($data, \@expected, "Example with lots of weird combinations");
 }
