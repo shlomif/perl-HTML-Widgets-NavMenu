@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 16;
+use Test::More tests => 18;
 
 use strict;
 
@@ -48,4 +48,10 @@ use_ok ('Shlomif::NavMenu::Tree::Node'); # TEST
     ok ($node->hide(), "Testing Node Hide - True"); # TEST
 }
 
+{
+    my $node = Shlomif::NavMenu::Tree::Node->new();
 
+    is($node->role(), "normal", "Testing role default value"); # TEST
+    $node->set("role", "hoola");
+    is($node->role(), "hoola", "Testing role setted value"); # TEST
+}
