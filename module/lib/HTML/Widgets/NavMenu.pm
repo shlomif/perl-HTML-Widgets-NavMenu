@@ -1014,6 +1014,18 @@ This is similar to C<'url_type'> only it recurses, to the sub-tree of the
 node. If both C<'url_type'> and C<'rec_url_type'> are specified for a node,
 then the value of C<'url_type'> will hold.
 
+=item 'url_is_abs'
+
+This flag, if true, indicates that the URL specified by the C<'url'> key
+is an absolute URL like C<http://www.myhost.com/> and should not be 
+treated as a path within the site. All links to the page associated with
+this node will contain the URL verbatim.
+
+Note that using absolute URLs as part of the site flow is discouraged
+because once they are accessed, the navigation within the primary site 
+is lost. A better idea would be to create a separate page within the
+site, that will link to the external URL.
+
 =back
 
 =head1 Predicate Values
