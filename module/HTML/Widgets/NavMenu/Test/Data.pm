@@ -562,6 +562,89 @@ my @url_is_abs_nav_menu =
     },
 );
 
+sub mixed_expand_nav_menu_cb1
+{
+    my %args = (@_);
+    my $host = $args{'current_host'};
+    my $path_info = $args{'path_info'};
+    return (($host eq "other") && ($path_info =~ m!^open-source/!));
+}
+
+sub mixed_expand_nav_menu_cb2
+{
+    my %args = (@_);
+    my $host = $args{'current_host'};
+    my $path_info = $args{'path_info'};
+    return (($host eq "default") && ($path_info =~ m!^me/!));
+}
+
+
+my @mixed_expand_nav_menu =
+(
+    'hosts' => { 
+        'default' => { 'base_url' => "http://www.default.net/", }, 
+        'other' => { 'base_url' => "http://www.other.org/", },
+    },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'text' => "Top 1",
+        'title' => "T1 Title",
+        'subs' =>
+        [
+            {
+                'text' => "Home",
+                'url' => "",
+            },
+            {
+                'text' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'expand' => { 'cb' => \&mixed_expand_nav_menu_cb2, },
+                'subs' =>
+                [
+                    {
+                        'text' => "Group Hug",
+                        'url' => "me/group-hug/",
+                    },
+                    {
+                        'text' => "Cool I/O",
+                        'url' => "me/cool-io/",
+                    },
+                    {
+                        'text' => "Resume",
+                        'url' => "resume.html",
+                    },
+                ],
+            },
+            {
+                'text' => "Halifax",
+                'url' => "halifax/",
+            },
+            {
+                'text' => "Software",
+                'title' => "Open Source Software I Wrote",
+                'url' => "open-source/",
+                'host' => "other",
+                'expand' => { 'cb' => \&mixed_expand_nav_menu_cb1, },
+                'subs' =>
+                [
+                    {
+                        'text' => "Fooware",
+                        'url' => "open-source/fooware/",
+                    },
+                    {
+                        'text' => "Condor-Man",
+                        'title' => "Kwalitee",
+                        'url' => "open-source/condor-man/",
+                    },
+                ],
+            },            
+        ],
+    },
+);
+
+
 sub get_test_data
 {
     return
@@ -578,6 +661,7 @@ sub get_test_data
             'url_type_menu' => \@url_type_menu,
             'rec_url_type_menu' => \@rec_url_type_menu,
             'url_is_abs_menu' => \@url_is_abs_nav_menu,
+            'mixed_expand_menu' => \@mixed_expand_nav_menu,
         };
 }
 

@@ -1,17 +1,11 @@
-* Possibly do something about:
-     my $host = $sub_contents->{host} || $args{host} or
-        die "Host not specified!";
-
-     In create_new_nav_menu_item, and in
-     render_tree_contents.
-
-        - Done.
+* Release on CPAN as version 0.4.0.
 
 Long-Term:
 ----------
 
 * Use HTML::Widgets::NavMenu::Tree::Node and its accessors for the rest
   of the $ptr->{text} etc. manipulations.
+    - for the get_next_coords() and friends functions.
 
 * Use Build.PL instead of Makefile.PL. (?)
 
@@ -24,9 +18,10 @@ tags.
 * Add a host-based regexp arbitrator to the predicate:
     { 'host_re' => { 't2' => "^home/", 'vipe' => "^home2/" } }
 
-* Write more tests with a selective 'expand' directive that expands in one
-path and doesn't expand in others.
-    - test more expand types.
-
 * In HTML::Widgets::NavMenu::Tree::Node - make sure url_type accepts only
 its enum values.
+
+* Future direction: generate the tree once and then be able to render
+it for different path_info()/current_host() configurations. (and the
+generated tree re-used by all other members).
+

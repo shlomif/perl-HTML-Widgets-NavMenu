@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 15;
+use Test::More tests => 18;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -590,5 +590,126 @@ EOF
     # TEST
     ok (validate_nav_menu($rendered, $expected_string), 
         "Nav Menu for url_is_asb - 1"); 
+}
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/me/bio/test.html",
+        @{$test_data->{'mixed_expand_menu'}},
+        'current_host' => "default",
+        'ul_classes' => [ "one", "two", "three" ],
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul class="one">
+<li>
+<a href="./../../">Home</a>
+</li>
+<li>
+<a href="./../" title="About Myself">About Me</a>
+<br />
+<ul class="two">
+<li>
+<a href="./../group-hug/">Group Hug</a>
+</li>
+<li>
+<a href="./../cool-io/">Cool I/O</a>
+</li>
+<li>
+<a href="./../../resume.html">Resume</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="./../../halifax/">Halifax</a>
+</li>
+<li>
+<a href="http://www.other.org/open-source/" title="Open Source Software I Wrote">Software</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Mixed Expand Nav-Menu #1"); 
+}
+
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/me/bio/test.html",
+        @{$test_data->{'mixed_expand_menu'}},
+        'current_host' => "other",
+        'ul_classes' => [ "one", "two", "three" ],
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul class="one">
+<li>
+<a href="http://www.default.net/">Home</a>
+</li>
+<li>
+<a href="http://www.default.net/me/" title="About Myself">About Me</a>
+</li>
+<li>
+<a href="http://www.default.net/halifax/">Halifax</a>
+</li>
+<li>
+<a href="./../../open-source/" title="Open Source Software I Wrote">Software</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Mixed Expand Nav-Menu #2"); 
+}
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/open-source/not-exist/",
+        @{$test_data->{'mixed_expand_menu'}},
+        'current_host' => "other",
+        'ul_classes' => [ "one", "two", "three" ],
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul class="one">
+<li>
+<a href="http://www.default.net/">Home</a>
+</li>
+<li>
+<a href="http://www.default.net/me/" title="About Myself">About Me</a>
+</li>
+<li>
+<a href="http://www.default.net/halifax/">Halifax</a>
+</li>
+<li>
+<a href="../" title="Open Source Software I Wrote">Software</a>
+<br />
+<ul class="two">
+<li>
+<a href="../fooware/">Fooware</a>
+</li>
+<li>
+<a href="../condor-man/" title="Kwalitee">Condor-Man</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Mixed Expand Nav-Menu #3"); 
 }
 
