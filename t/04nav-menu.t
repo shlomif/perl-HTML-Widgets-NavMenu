@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 7;
+use Test::More tests => 8;
 
 use Shlomif::NavMenu;
 
@@ -381,3 +381,50 @@ EOF
     ok (validate_nav_menu($rendered, $expected_string), 
         "Nav Menu with Separators"); 
 }
+
+{
+    my $nav_menu = Shlomif::NavMenu->new(
+        'path_info' => "/me/",
+        @{$test_data->{'hidden_item'}},
+    );
+
+    my $rendered = 
+        $nav_menu->render(
+            'no_ie' => "true",
+            'styles' =>
+            {
+                'bar' => 'nav',
+                'level0' => 'navbarmain',
+                'level1' => 'navbarnested',
+                'level2' => "navbarnested",
+                'level3' => "navbarnested",
+                'level4' => "navbarnested",
+                'list' => "navbarmain",
+            },
+        );
+
+    my $expected_string = <<"EOF";
+<ul class="navbarmain">
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<b>About Me</b>
+<br />
+<ul class="navbarnested">
+<li>
+<a href="visible/">Visible</a>
+</li>
+<li>
+<a href="visible-too/">Visible Too</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    ok (validate_nav_menu($rendered, $expected_string), 
+        "Nav Menu with Hidden Item"); 
+}
+

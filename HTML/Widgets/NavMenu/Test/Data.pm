@@ -309,6 +309,48 @@ my @separator_nav_menu =
     },
 );
 
+my @hidden_item_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'value' => "Top 1",
+        'title' => "T1 Title",
+        'expand_re' => "",
+        'subs' =>
+        [
+            {
+                'value' => "Home",
+                'url' => "",
+            },
+            {
+                'value' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'subs' =>
+                [
+                    {
+                        'value' => "Visible",
+                        'url' => "me/visible/",
+                    },
+                    {
+                        'value' => "Hidden",
+                        'url' => "me/hidden/",
+                        'hide' => 1,
+                    },
+                    {
+                        'value' => "Visible Too",
+                        'url' => "me/visible-too/",
+                    },
+                ],
+            },
+        ],
+    },
+);
+
+
 sub get_test_data
 {
     return
@@ -319,6 +361,7 @@ sub get_test_data
             'show_always' => \@show_always_nav_menu,
             'items_in_sub' => \@items_in_sub_nav_menu,
             'separator' => \@separator_nav_menu,
+            'hidden_item' => \@hidden_item_nav_menu,
         };
 }
 
