@@ -564,17 +564,6 @@ sub get_rel_url_from_coords
     return $self->get_url_to_item('item' => $item);
 }
 
-sub fill_leading_path
-{
-    my $self = shift;
-
-    my %args = (@_);
-
-    my $coords = $self->get_current_coords();
-
-    $self->find_node_by_coords($coords, $args{'callback'});
-}
-
 # The traversed_tree is the tree that is calculated from the tree given
 # by the user and some other parameters such as the host and path_info.
 # It is passed to the NavMenu::Iterator::* classes as argument.
