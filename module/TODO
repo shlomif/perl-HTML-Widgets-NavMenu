@@ -1,7 +1,8 @@
+* Write tests to test the methods that were extracted due to Petersen's 
+needs.
+
 Long-Term:
 ----------
-
-* Use Build.PL instead of Makefile.PL. (?)
 
 * Make the module support URLs with CGI GET parameters properly.
 
