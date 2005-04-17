@@ -11,16 +11,17 @@ use HTML::Widgets::NavMenu::Test::Util;
 
 my $test_data = get_test_data();
 
-sub validate_nav_menu
+sub test_nav_menu
 {
     my $rendered = shift;
     my $expected_string = shift;
+    my $test_blurb = shift;
     
     my @result = (@{$rendered->{html}});
 
     my @expected = (split(/\n/, $expected_string));
 
-    return (compare_string_arrays(\@expected, \@result) == 0);
+    is_deeply (\@expected, \@result, $test_blurb);
 }
 
 {
@@ -56,8 +57,7 @@ sub validate_nav_menu
 EOF
 
     # TEST
-    ok (validate_nav_menu($rendered, $expected_string), 
-        "Testing ul classes for no CSS class to be assigned."); 
+    test_nav_menu($rendered, $expected_string, "Testing ul classes for no CSS class to be assigned."); 
 }
 
 # This test tests the show_always directive which causes the entire
@@ -111,8 +111,7 @@ EOF
 EOF
 
     # TEST
-    ok (validate_nav_menu($rendered, $expected_string),
-        "Nav Menu with depth classes");
+    test_nav_menu ($rendered, $expected_string, "Nav Menu with depth classes");
 }
 
 # This test tests the escaping of the class names.
@@ -165,7 +164,6 @@ EOF
 EOF
 
     # TEST
-    ok (validate_nav_menu($rendered, $expected_string),
-        "Nav Menu with depth classes");
+    test_nav_menu ($rendered, $expected_string, "Nav Menu with depth classes");
 }
 
