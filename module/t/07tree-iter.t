@@ -116,8 +116,6 @@ use Test::More tests => 4;
 
 use strict;
 
-use HTML::Widgets::NavMenu::Test::Util;
-
 sub test_traverse
 {
     my ($data, $expected, $test_name, $class) = (@_);

@@ -8,7 +8,6 @@ use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
 
 use HTML::Widgets::NavMenu::Test::Data;
-use HTML::Widgets::NavMenu::Test::Util;
 
 my $test_data = get_test_data();
 
