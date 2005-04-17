@@ -21,6 +21,7 @@ t/11predicate.t
 t/12x-host-rel-url.t
 t/13escape-html.t
 t/14tag-gen.t
+t/15aspetersen-inherit.t
 lib/HTML/Widgets/NavMenu/EscapeHtml.pm
 lib/HTML/Widgets/NavMenu/HeaderRole.pm
 lib/HTML/Widgets/NavMenu/Iterator/Base.pm
