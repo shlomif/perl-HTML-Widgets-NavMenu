@@ -669,9 +669,11 @@ sub gen_traversed_tree
     return {'tree' => $tree, 'current_coords' => $current_coords };
 }
 
-sub get_leading_path
+sub get_leading_path_of_coords
 {
     my $self = shift;
+
+    my (%args) = (@_);
     
     my @leading_path;
 
@@ -706,12 +708,20 @@ sub get_leading_path
             };
 
         $iterator->find_node_by_coords(
-            $self->get_current_coords(),
+            $args{'coords'},
             $fill_leading_path_callback,
             );
     }
 
     return \@leading_path;
+}
+
+sub get_leading_path
+{
+    my $self = shift;
+    return $self->get_leading_path_of_coords(
+        'coords' => $self->get_current_coords()
+    );
 }
 
 sub render
@@ -727,6 +737,7 @@ sub render
     my $hosts = $self->{hosts};
 
     my %nav_links;
+    my %nav_links_obj;
 
     my %links_proto = 
         (
@@ -748,7 +759,13 @@ sub render
         }
         if (defined($coords))
         {
-            $nav_links{$link_rel} = $self->get_rel_url_from_coords($coords);
+            my $obj = 
+                $self->get_leading_path_of_coords(
+                    'coords' => $coords
+                )->[-1];
+            
+            $nav_links_obj{$link_rel} = $obj;
+            $nav_links{$link_rel} = $obj->direct_url();
         }
     }
 
@@ -759,6 +776,7 @@ sub render
             'html' => $html,
             'leading_path' => $self->get_leading_path(),
             'nav_links' => \%nav_links,
+            'nav_links_obj' => \%nav_links_obj,
         };
 }
 

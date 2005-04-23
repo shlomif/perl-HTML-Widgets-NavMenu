@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 6;
+use Test::More tests => 11;
 
 use HTML::Widgets::NavMenu;
 
@@ -55,7 +55,22 @@ my @site_args =
     
     # TEST
     ok ((scalar(keys(%$nav_links)) == 1) && (exists($nav_links->{'next'})),
-        "Lack of Nav-Links in the First Page")
+        "Lack of Nav-Links in the First Page");
+
+    my $obj_nav_links = $rendered->{'nav_links_obj'};
+
+    my $next = $obj_nav_links->{'next'};
+
+    # TEST
+    is ($next->host(), "default", "Checking for \$next->host().");
+    # TEST
+    is ($next->label(), "About Me", "Checking for label()");
+    # TEST
+    is ($next->title(), "About Myself", "Checking for title()");
+    # TEST
+    is ($next->direct_url(), "./me/", "Checking for direct_url()");
+    # TEST
+    is ($next->host_url(), "me/", "Checking for host_url()");
 }
 
 # The purpose of this test is to check for up arrow leading from the middle

@@ -1,10 +1,8 @@
-* Write tests to test the methods that were extracted due to Petersen's 
-needs.
-
 * Return 'nav_links2' - a hash mapping rel links to objects similar to 
 the leading path ones.
+    - document it.
 
-* Convert the tests to use is_deeply from Test::More.
+* Create an API function for getting a relative URL.
 
 Long-Term:
 ----------
