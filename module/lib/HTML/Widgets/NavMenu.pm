@@ -28,7 +28,7 @@ sub CGIpm_perform_redirect
     exit;
 }
 
-package HTML::Widgets::NavMenu::LeadingPath::Component;
+package HTML::Widgets::NavMenu::NodeDescription;
 
 use strict;
 
@@ -54,6 +54,12 @@ sub initialize
 }
 
 1;
+
+package HTML::Widgets::NavMenu::LeadingPath::Component;
+
+use vars qw(@ISA);
+
+@ISA = (qw(HTML::Widgets::NavMenu::NodeDescription));
 
 package HTML::Widgets::NavMenu::Iterator::GetCurrentlyActive;
 
