@@ -1006,6 +1006,31 @@ This function can be called to generate a site map based on the tree of
 contents. It returns a reference to an array containing the tags of the 
 site map.
 
+=head2 $url = $nav_menu->get_cross_host_rel_url(...)
+
+This function can be called to calculate a URL to a different part of the
+site. It accepts four named arguments:
+
+=over 8
+
+=item 'host'
+
+This is the host ID
+
+=item 'host_url'
+
+This is URL within the host.
+
+=item 'url_type'
+
+C<'rel'>, C<'full_abs'> or C<'site_abs'>.
+
+=item 'url_is_abs'
+
+A flag that indicates if C<'host_url'> is already absolute.
+
+=back
+
 =head1 The Input Tree of Contents
 
 The input tree is a nested Perl data structure that represnets the tree
