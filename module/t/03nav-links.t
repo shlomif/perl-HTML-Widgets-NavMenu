@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 11;
+use Test::More tests => 14;
 
 use HTML::Widgets::NavMenu;
 
@@ -91,6 +91,16 @@ my @site_args =
     # TEST
     is($nav_links->{'top'}, "../",
        "Top nav-link leading topwards to the first page.");
+
+    my $nav_links_obj = $rendered->{'nav_links_obj'};
+
+    my $up = $nav_links_obj->{'up'};
+    # TEST
+    is ($up->direct_url(), "../", "direct_url()");
+    # TEST
+    is ($up->host(), "default");
+    # TEST
+    is ($up->label(), "Home");
 }
 
 # This tests for behaviour with url_is_abs:
