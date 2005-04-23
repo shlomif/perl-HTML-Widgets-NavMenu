@@ -48,6 +48,9 @@ provides:
   HTML::Widgets::NavMenu::LeadingPath::Component:
     file: lib/HTML/Widgets/NavMenu.pm
     version: 0.6.0
+  HTML::Widgets::NavMenu::NodeDescription:
+    file: lib/HTML/Widgets/NavMenu.pm
+    version: 0.6.0
   HTML::Widgets::NavMenu::Object:
     file: lib/HTML/Widgets/NavMenu/Object.pm
   HTML::Widgets::NavMenu::Predicate:

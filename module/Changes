@@ -1,5 +1,10 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+0.8.0     Sat Apr 23 12:48:40 IST 2005
+    - get_cross_host_rel_url is now part of the API.
+    - Now returning nav_links_obj
+    - Added some tests
+
 0.6.0     Thu Mar 24 15:15:40 IST 2005
     - no longer making use of the CGI.pm module.
     - extracted two methods in HTML::Widgets::NavMenu::Iterator::NavMenu

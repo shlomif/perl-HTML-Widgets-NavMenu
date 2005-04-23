@@ -1,9 +1,3 @@
-* Return 'nav_links2' - a hash mapping rel links to objects similar to 
-the leading path ones.
-    - document it.
-
-* Create an API function for getting a relative URL.
-
 Long-Term:
 ----------
 
