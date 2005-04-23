@@ -952,16 +952,38 @@ delimit them with newlines, if one wishes the markup to be easier to read.
 
 =item 'leading_path'
 
-This is a reference to an array of leading path objects. These indicate the
+This is a reference to an array of node description objects. These indicate the
 intermediate pages in the site that lead from the front page to the 
 current page. The methods supported by the class of these objects is described
-below under "The Leading Path Component Class".
+below under "The Node Description Component Class".
+
+=item 'nav_links_obj'
+
+This points to a hash reference whose keys are Mozilla-style link-toolbar
+( L<http://cdn.mozdev.org/linkToolbar/> ) link IDs and its values are Node
+Description objects. (see "The Node Description Class" below). Here's a 
+sample code that renders the links as C<E<lt>link rel=...E<gt>> into the
+page header:
+
+
+    my $nav_links = $results->{'nav_links_obj'};
+    # Sort the keys so their order will be preserved
+    my @keys = (sort { $a cmp $b } keys(%$nav_links));
+    foreach my $key (@keys)
+    {
+        my $value = $nav_links->{$key};
+        my $url = CGI:escapeHTML($value->direct_url());
+        my $title = CGI::escapeHTML($value->title());
+        print {$fh} "<link rel=\"$key\" href=\"$url\" title=\"$title\" />\n";
+    }
 
 =item 'nav_links'
 
 This points to a hash reference whose keys are Mozilla-style link-toolbar
 ( L<http://cdn.mozdev.org/linkToolbar/> ) link IDs and its values are the
-URLs to these links.
+URLs to these links. This key/value pair is provided for backwards 
+compatibility with older versions of HTML::Widgets::NavMenu. In new code,
+one is recommended to use C<'nav_links_obj'> instead.
 
 This sample code renders the links as C<E<lt>link rel=...E<gt>> into the
 page header:
@@ -1187,10 +1209,11 @@ Here are some examples for predicates:
 
     'expand' => { 'cb' => \&expand_path_home_host_foo, },
 
-=head1 The Leading Path Component Class
+=head1 The Node Description Class
 
-When retrieving the leading path, an array of objects is returned. This section
-describes the class of these objects, so one will know how to use them.
+When retrieving the leading path or the C<nav_links_obj>, an array of objects 
+is returned. This section describes the class of these objects, so one will 
+know how to use them.
 
 Basically, it is an object that has several accessors. The accessors are:
 
