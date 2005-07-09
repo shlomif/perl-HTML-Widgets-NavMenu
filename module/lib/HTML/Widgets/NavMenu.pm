@@ -972,7 +972,7 @@ page header:
     foreach my $key (@keys)
     {
         my $value = $nav_links->{$key};
-        my $url = CGI:escapeHTML($value->direct_url());
+        my $url = CGI::escapeHTML($value->direct_url());
         my $title = CGI::escapeHTML($value->title());
         print {$fh} "<link rel=\"$key\" href=\"$url\" title=\"$title\" />\n";
     }
