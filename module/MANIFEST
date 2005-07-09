@@ -22,6 +22,7 @@ t/12x-host-rel-url.t
 t/13escape-html.t
 t/14tag-gen.t
 t/15aspetersen-inherit.t
+t/16redirect.t
 lib/HTML/Widgets/NavMenu/EscapeHtml.pm
 lib/HTML/Widgets/NavMenu/HeaderRole.pm
 lib/HTML/Widgets/NavMenu/Iterator/Base.pm
@@ -40,4 +41,5 @@ lib/HTML/Widgets/NavMenu/Tree/Node.pm
 lib/HTML/Widgets/NavMenu/Url.pm
 META.yml                                 Module meta-data (added by MakeMaker)
 HTML/Widgets/NavMenu/Test/Data.pm
+HTML/Widgets/NavMenu/Test/Stdout.pm
 HTML/Widgets/NavMenu/Test/Util.pm
