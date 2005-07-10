@@ -671,6 +671,71 @@ my @special_chars_nav_menu =
     },
 );
 
+my @with_skips_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'text' => "Top 1",
+        'title' => "T1 Title",
+        'subs' =>
+        [
+            {
+                'text' => "Home",
+                'url' => "",
+            },
+            {
+                'text' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'expand' => { 're' => "^me/", },
+                'subs' =>
+                [
+                    {
+                        'text' => "Group Hug",
+                        'url' => "me/group-hug/",
+                    },
+                    {
+                        'text' => "Cool I/O",
+                        'url' => "me/cool-io/",
+                    },
+                    {
+                        'text' => "Resume",
+                        'url' => "resume.html",
+                    },
+                ],
+            },
+            {
+                'text' => "Halifax",
+                'url' => "halifax/",
+                'skip' => 1,
+            },
+            {
+                'text' => "Software",
+                'title' => "Open Source Software I Wrote",
+                'url' => "open-source/",
+                'expand' => { 're' => "^open-source/", },
+                'subs' =>
+                [
+                    {
+                        'text' => "Fooware",
+                        'url' => "open-source/fooware/",
+                        'skip' => 1,
+                    },
+                    {
+                        'text' => "Condor-Man",
+                        'title' => "Kwalitee",
+                        'url' => "open-source/condor-man/",
+                    },
+                ],
+            },            
+        ],
+    },
+);
+
+
 sub get_test_data
 {
     return
@@ -689,6 +754,7 @@ sub get_test_data
             'url_is_abs_menu' => \@url_is_abs_nav_menu,
             'mixed_expand_menu' => \@mixed_expand_nav_menu,
             'special_chars_menu' => \@special_chars_nav_menu,
+            'with_skips' => \@with_skips_nav_menu,
         };
 }
 

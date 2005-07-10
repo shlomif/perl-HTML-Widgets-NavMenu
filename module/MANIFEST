@@ -23,6 +23,7 @@ t/13escape-html.t
 t/14tag-gen.t
 t/15aspetersen-inherit.t
 t/16redirect.t
+t/17nav-coords-unit.t
 lib/HTML/Widgets/NavMenu/EscapeHtml.pm
 lib/HTML/Widgets/NavMenu/HeaderRole.pm
 lib/HTML/Widgets/NavMenu/Iterator/Base.pm
