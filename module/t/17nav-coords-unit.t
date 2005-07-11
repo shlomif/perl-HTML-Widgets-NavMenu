@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 6;
+use Test::More tests => 11;
 
 use HTML::Widgets::NavMenu;
 
@@ -27,6 +27,32 @@ my $test_data = get_test_data();
     # TEST
     is_deeply ($nav_menu->get_prev_coords(), [1,1], 
         "Testing get_prev_coords");
+
+    # TEST
+    is_deeply (
+        $nav_menu->get_coords_while_skipping_skips(
+            \&HTML::Widgets::NavMenu::get_next_coords
+        ), [3], 
+        "Testing that skipping(get_next_coords) does skip skips by default"
+    );
+    # TEST
+    is_deeply (
+        $nav_menu->get_coords_while_skipping_skips(
+            \&HTML::Widgets::NavMenu::get_prev_coords
+        ), [1,1], 
+        "Testing skipping(get_prev_coords)"
+    );
+
+    # TEST
+    is_deeply (
+        $nav_menu->get_coords_while_skipping_skips(
+            \&HTML::Widgets::NavMenu::get_next_coords,
+            [1, 2]
+        ), [3], 
+        "Testing that skipping(get_next_coords) with explicit coords"
+    );
+
+        
 }
 
 {
@@ -45,4 +71,19 @@ my $test_data = get_test_data();
     # TEST
     is_deeply ($nav_menu->get_prev_coords(), [2], 
         "Testing get_prev_coords");
+
+    # TEST
+    is_deeply (
+        $nav_menu->get_coords_while_skipping_skips(
+            \&HTML::Widgets::NavMenu::get_next_coords
+        ), [3, 1],
+        "Testing that skipping(get_next_coords) does skip skips by default"
+    );
+    # TEST
+    is_deeply (
+        $nav_menu->get_coords_while_skipping_skips(
+            \&HTML::Widgets::NavMenu::get_prev_coords
+        ), [1,2],
+        "Testing skipping(get_prev_coords)"
+    );
 }

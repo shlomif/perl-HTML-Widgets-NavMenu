@@ -568,7 +568,11 @@ sub get_coords_while_skipping_skips
     my $self = shift;
 
     my $callback = shift;
-    my $coords = shift || $self->get_current_coords();
+    my $coords = shift(@_);
+    if (!$coords)
+    {
+        $coords = $self->get_current_coords();
+    }
 
     my $do_once = 1;
 
