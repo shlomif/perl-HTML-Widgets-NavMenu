@@ -180,7 +180,8 @@ sub initialize
     $self->{hosts} = $args{hosts};
     $self->{tree_contents} = $args{tree_contents};
 
-    my $current_host = $args{current_host} || "";
+    my $current_host = $args{current_host} 
+        or die "Current host was not specified.";
 
     $self->{current_host} = $current_host;
 
@@ -615,6 +616,7 @@ sub get_most_advanced_leaf
     return \@coords;
 }
 
+=for nothing
 sub get_rel_url_from_coords
 {
     my $self = shift;
@@ -627,6 +629,7 @@ sub get_rel_url_from_coords
 
     return $self->get_url_to_item('item' => $item);
 }
+=cut
 
 # The traversed_tree is the tree that is calculated from the tree given
 # by the user and some other parameters such as the host and path_info.

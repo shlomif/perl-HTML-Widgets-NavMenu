@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 20;
+use Test::More tests => 21;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -751,3 +751,21 @@ EOF
     # TEST
     test_nav_menu($rendered, $expected_string, "Nav Menu with a special chars URL."); 
 }
+
+# Test a special chars-based URL.
+{
+    my %args = (@{$test_data->{'special_chars_menu'}});
+    delete($args{'current_host'});
+    eval {
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/<hello>&\"you\"/",
+        %args,
+    );
+    };
+
+    # TEST
+    like ($@, qr!^Current host!,
+        "Checking for exception");
+}
+
+
