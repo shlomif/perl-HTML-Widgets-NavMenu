@@ -131,13 +131,11 @@ sub evaluate
     {
         return $self->bool();
     }
-    elsif ($type eq "regexp")
+    else # $type eq "regexp"
     {
         my $re = $self->regexp();
         return (($re eq "") || ($path_info =~ /$re/));
     }
-    # We are not supposed to reach this line
-    die "Shlomi Fish sucks! Contact him about this";
 }
 
 1;
