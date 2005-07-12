@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 59;
+use Test::More tests => 65;
 
 use HTML::Widgets::NavMenu::Predicate;
 
@@ -409,5 +409,71 @@ sub predicate_cb1
         'path_info' => "/nothing/here", 
         'current_host' => "default",
     ), "regexp 1");
+}
+
+# Test the implicit bool predicate
+{
+    my $pred = 
+        HTML::Widgets::NavMenu::Predicate->new(
+            'spec' => 1,
+        );
+
+    # TEST
+    ok($pred->evaluate(
+        'path_info' => "Hoola/Yoola", 
+        'current_host' => "default",
+    ), "bool==1 test 1");
+    # TEST
+    ok($pred->evaluate(
+        'path_info' => "Shragah/Spinoza/",
+        'current_host' => "majesty",
+    ), "bool==1 test 2");
+}
+
+# Test the implicit regexp predicate
+{
+    my $pred = 
+        HTML::Widgets::NavMenu::Predicate->new(
+            'spec' => "^Hoola",
+        );
+
+    # TEST
+    ok($pred->evaluate(
+        'path_info' => "Hoola/Yoola", 
+        'current_host' => "default",
+    ), "bool==1 test 1");
+    # TEST
+    ok(!$pred->evaluate(
+        'path_info' => "Shragah/Spinoza/",
+        'current_host' => "majesty",
+    ), "bool==1 test 2");
+}
+
+# Test the implicit regexp predicate
+{
+    eval {
+    my $pred = 
+        HTML::Widgets::NavMenu::Predicate->new(
+            'spec' => { 'hoalsdkasldk' => 1},
+        );
+    };
+
+    # TEST
+    like($@, qr{^Neither}, 
+        "Exception should be thrown.");
+}
+
+# Test an incorrect spec
+{
+    eval {
+    my $pred = 
+        HTML::Widgets::NavMenu::Predicate->new(
+            'spec' => [],
+        );
+    };
+
+    # TEST
+    like($@, qr{^Unknown spec type}, 
+        "Exception should be thrown.");
 }
 
