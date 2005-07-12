@@ -502,13 +502,9 @@ sub get_prev_coords
 
         return $new_coords;
     }
-    elsif (scalar(@coords) > 0)
-    {
-        return [ @coords[0 .. ($#coords-1)] ];
-    }
     else
     {
-        return undef;
+        return [ @coords[0 .. ($#coords-1)] ];
     }
 }
 

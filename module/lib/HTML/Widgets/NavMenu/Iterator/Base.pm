@@ -47,14 +47,6 @@ sub _is_top_separator
     return $self->top->node->separator;
 }
 
-sub _get_top_host
-{
-    my $self = shift;
-
-    return 
-        $self->top->accum_state->{'host'};
-}
-
 sub get_initial_node
 {
     my $self = shift;
@@ -107,7 +99,7 @@ sub get_new_accum_state
     }
     return
         {
-            'host' => ($node->host() || $prev_state->{'host'}),
+            'host' => ($node->host() ? $node->host() : $prev_state->{'host'}),
             'show_always' => $show_always,
             'rec_url_type' => $rec_url_type,
         };
