@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 11;
+use Test::More tests => 15;
 
 use HTML::Widgets::NavMenu;
 
@@ -27,6 +27,20 @@ my $test_data = get_test_data();
     # TEST
     is_deeply ($nav_menu->get_prev_coords(), [1,1], 
         "Testing get_prev_coords");
+
+    # TEST
+    is_deeply ($nav_menu->get_up_coords(), [1], 
+        "Testing get_up_coords()");
+    # TEST
+    is_deeply ($nav_menu->get_up_coords([1, 2]), [1], 
+        "Testing get_up_coords()");
+        
+    # TEST
+    is_deeply ($nav_menu->get_top_coords(), [0], 
+        "Testing get_top_coords()");
+    # TEST
+    is_deeply ($nav_menu->get_top_coords([1, 2]), [0], 
+        "Testing get_top_coords()");
 
     # TEST
     is_deeply (
