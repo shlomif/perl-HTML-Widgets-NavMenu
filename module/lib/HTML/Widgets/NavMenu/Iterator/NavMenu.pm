@@ -14,7 +14,8 @@ sub initialize
 
     my %args = (@_);
 
-    my $ul_classes = ($args{'ul_classes'} || []);
+    my $ul_classes = $args{'ul_classes'};
+
     # Make a fresh copy just to be on the safe side.
     $self->{'ul_classes'} = [ @$ul_classes ];
 

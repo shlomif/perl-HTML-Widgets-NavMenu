@@ -376,6 +376,19 @@ my @header_role_nav_menu =
                     },
                 ],
             },
+            {
+                'text' => "Hello",
+                'url' => "aloha/",
+                'show_always' => 1,
+                'role' => "notexist",
+                'subs' =>
+                [
+                    {
+                        'text' => "OBKB",
+                        'url' => "aloha/obkb/",
+                    },
+                ],
+            },
         ],
     },
 );
