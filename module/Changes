@@ -1,5 +1,8 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+0.10.1    Mon Jul 25 17:19:05 IST 2005
+    - Fixed the building using "perl Makefile.PL" and "make".
+
 0.10.0    Tue Jul 12 20:45:40 IST 2005
     - Added tests and refactored the code to have a 100% test coverage.
     
