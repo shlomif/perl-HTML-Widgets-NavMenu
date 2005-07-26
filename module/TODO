@@ -1,3 +1,6 @@
+* Make sure Makefile.PL/Build.PL depend on IO-stringy that contains IO::Scalar
+that is needed for the tests.
+
 Long-Term:
 ----------
 

@@ -11,6 +11,7 @@ WriteMakefile(
         'Class::Accessor' => 0,
         'Error' => 0,
     },
+    PL_FILES         => +{},
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (AUTHOR         => 'Shlomi Fish <shlomif@iglu.org.il>') : ()),
 );
