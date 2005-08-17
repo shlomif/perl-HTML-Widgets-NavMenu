@@ -10,6 +10,7 @@ WriteMakefile(
         'Test::More' => 0,
         'Class::Accessor' => 0,
         'Error' => 0,
+        'IO::Scalar' => 0,
     },
     PL_FILES         => +{},
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
