@@ -1,5 +1,11 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+0.10.2    Wed Aug 24 20:37:55 IST 2005
+    (backdated - module was released on 17-August-2005)
+    - Added IO::Scalar to the Perl modules this module depends on. (it
+    is needed by the tests, but was not explicitly specified yet, because
+    it was believed to be part of the core distribution).
+    
 0.10.1    Mon Jul 25 17:19:05 IST 2005
     - Fixed the building using "perl Makefile.PL" and "make".
 

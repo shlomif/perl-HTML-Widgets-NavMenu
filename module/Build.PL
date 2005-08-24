@@ -12,6 +12,7 @@ my $build = Module::Build->new(
         'Class::Accessor' => 0,
         'Error' => 0,
         'perl' => "5.6.1",
+        'IO::Scalar' => 0,
     },
     'license' => "bsd",
 );
