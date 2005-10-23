@@ -1,3 +1,15 @@
+Short-Term:
+-----------
+
+* Make sure H::W::NM will associate the breadcrumbs trail with a category,
+if this category expands there. So, for example:
+
+http://www.shlomifish.org/philosophy/case-for-file-swapping/
+
+will generate the breadcrumbs trail of:
+
+Shlomi Fish -> Philosophy.
+
 Long-Term:
 ----------
 
