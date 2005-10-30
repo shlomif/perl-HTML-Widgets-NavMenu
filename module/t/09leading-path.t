@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 21;
+use Test::More tests => 24;
 
 use HTML::Widgets::NavMenu;
 
@@ -133,3 +133,27 @@ my $test_data = get_test_data();
     is ($component->url_type(), "rel", "Testing for url_type");
 }
 
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/open-source/alohaware/",
+        @{$test_data->{'selective_expand'}},
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my @leading_path = @{$rendered->{'leading_path'}};
+
+    # TEST
+    ok ((scalar(@leading_path) == 2), "Checking for a leading path of len 2");
+
+    my $component = $leading_path[-1];
+
+    # TEST
+    is ($component->title(), "Open Source Software I Wrote",
+        "Testing for title of leading_path"); 
+    
+    # TEST
+    is ($component->direct_url(), "../", 
+        "Testing for direct_url");
+}
