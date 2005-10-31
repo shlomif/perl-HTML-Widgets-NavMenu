@@ -635,7 +635,8 @@ sub get_most_advanced_leaf
     return \@coords;
 }
 
-=for nothing
+=begin comment
+
 sub get_rel_url_from_coords
 {
     my $self = shift;
@@ -648,6 +649,9 @@ sub get_rel_url_from_coords
 
     return $self->get_url_to_item('item' => $item);
 }
+
+=end comment
+
 =cut
 
 # The traversed_tree is the tree that is calculated from the tree given
