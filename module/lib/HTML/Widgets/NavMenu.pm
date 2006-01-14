@@ -2,7 +2,7 @@
 
 package HTML::Widgets::NavMenu;
 
-our $VERSION = '0.11.2_00';
+our $VERSION = '1.0000';
 
 package HTML::Widgets::NavMenu::Error;
 
@@ -1311,6 +1311,11 @@ This is the C<url_type> (see above) that holds for this node.
 =back
 
 =head1 SEE ALSO
+
+See the article Shlomi Fish wrote for Perl.com for a gentle introduction to
+HTML-Widgets-NavMenu:
+
+L<http://www.perl.com/pub/a/2005/07/07/navwidgets.html>
 
 =over 4
 

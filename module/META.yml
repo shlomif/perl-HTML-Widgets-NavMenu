@@ -1,9 +1,14 @@
 ---
 name: HTML-Widgets-NavMenu
-version: 0.11.2_00
-author: ~
+version: 1.0000
+author:
+  - |-
+    Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt> 
+    (L<http://search.cpan.org/~shlomif/>).
 abstract: A Perl Module for Generating HTML Navigation Menus
 license: bsd
+resources:
+  license: http://www.opensource.org/licenses/bsd-license.php
 requires:
   Class::Accessor: 0
   Error: 0
@@ -13,13 +18,11 @@ requires:
 provides:
   HTML::Widgets::NavMenu:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 0.11.2_00
+    version: 1.0000
   HTML::Widgets::NavMenu::Error:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 0.11.2_00
   HTML::Widgets::NavMenu::Error::Redirect:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 0.11.2_00
   HTML::Widgets::NavMenu::EscapeHtml:
     file: lib/HTML/Widgets/NavMenu/EscapeHtml.pm
   HTML::Widgets::NavMenu::HeaderRole:
@@ -28,7 +31,6 @@ provides:
     file: lib/HTML/Widgets/NavMenu/Iterator/Base.pm
   HTML::Widgets::NavMenu::Iterator::GetCurrentlyActive:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 0.11.2_00
   HTML::Widgets::NavMenu::Iterator::Html:
     file: lib/HTML/Widgets/NavMenu/Iterator/Html.pm
   HTML::Widgets::NavMenu::Iterator::Html::Item:
@@ -41,10 +43,8 @@ provides:
     file: lib/HTML/Widgets/NavMenu/Iterator/SiteMap.pm
   HTML::Widgets::NavMenu::LeadingPath::Component:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 0.11.2_00
   HTML::Widgets::NavMenu::NodeDescription:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 0.11.2_00
   HTML::Widgets::NavMenu::Object:
     file: lib/HTML/Widgets/NavMenu/Object.pm
   HTML::Widgets::NavMenu::Predicate:
@@ -61,4 +61,4 @@ provides:
     file: lib/HTML/Widgets/NavMenu/Tree/Node.pm
   HTML::Widgets::NavMenu::Url:
     file: lib/HTML/Widgets/NavMenu/Url.pm
-generated_by: Module::Build version 0.2611
+generated_by: Module::Build version 0.2703

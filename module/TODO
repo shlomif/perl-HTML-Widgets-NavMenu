@@ -10,6 +10,8 @@ will generate the breadcrumbs trail of:
 
 Shlomi Fish -> Philosophy.
 
+* Create a 'show' directive - like 'show_always' only with a predicate.
+
 Long-Term:
 ----------
 
