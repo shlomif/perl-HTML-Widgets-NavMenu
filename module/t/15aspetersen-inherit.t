@@ -27,13 +27,13 @@ package MyCustom::NavMenu;
 
 use base 'HTML::Widgets::NavMenu';
 
-sub get_nav_menu_traverser
+sub _get_nav_menu_traverser
 {
     my $self = shift;
 
     return
         MyCustom::NavMenu::Iterator->new(
-            $self->get_nav_menu_traverser_args()
+            $self->_get_nav_menu_traverser_args()
         );
 }
 

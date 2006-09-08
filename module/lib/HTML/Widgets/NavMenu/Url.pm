@@ -9,7 +9,7 @@ use vars qw(@ISA);
 
 @ISA=qw(HTML::Widgets::NavMenu::Object);
 
-sub initialize
+sub _init
 {
     my $self = shift;
 
@@ -38,7 +38,7 @@ sub is_dir
     return $self->{'is_dir'};
 }
 
-sub get_relative_url
+sub _get_relative_url
 {
     my $base = shift;
     my $to = shift;

@@ -10,12 +10,12 @@ sub new
     
     bless($self, $class);
     
-    $self->initialize(@_);
+    $self->_init(@_);
     
     return $self;
 }
 
-sub initialize
+sub _init
 {
     my $self = shift;
 

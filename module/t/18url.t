@@ -22,7 +22,7 @@ use HTML::Widgets::NavMenu::Url;
     my $url;
     eval
     {
-        $url = $from->get_relative_url($to);
+        $url = $from->_get_relative_url($to);
     };
     # TEST    
     like ($@, qr{^Two identical URLs},
@@ -45,7 +45,7 @@ use HTML::Widgets::NavMenu::Url;
     my $url;
     eval
     {
-        $url = $from->get_relative_url($to);
+        $url = $from->_get_relative_url($to);
     };
     # TEST    
     like ($@, qr{^Root URL},
@@ -67,7 +67,7 @@ use HTML::Widgets::NavMenu::Url;
         );
 
     # TEST
-    is ($from->get_relative_url($to, 1), "../good.html", 
+    is ($from->_get_relative_url($to, 1), "../good.html", 
         "Checking for harddisk URL from dir to file");
 }
 
@@ -85,7 +85,7 @@ use HTML::Widgets::NavMenu::Url;
         );
 
     # TEST
-    is ($from->get_relative_url($to, 1), "../good/index.html", 
+    is ($from->_get_relative_url($to, 1), "../good/index.html", 
         "Checking for harddisk URL from dir to dir");
 }
 
@@ -104,7 +104,7 @@ use HTML::Widgets::NavMenu::Url;
         );
 
     # TEST
-    is ($from->get_relative_url($to, 0), "./good/index.html", 
+    is ($from->_get_relative_url($to, 0), "./good/index.html", 
         "Checking for harddisk URL from dir to dir");
 }
 

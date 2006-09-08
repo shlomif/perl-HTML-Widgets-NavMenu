@@ -102,7 +102,7 @@ sub get_a_tag
 
     $tag .= " href=\"" .
         escape_html(
-            $self->nav_menu()->get_url_to_item(
+            $self->nav_menu()->_get_url_to_item(
                 'item' => $item,
             )
         ). "\"";

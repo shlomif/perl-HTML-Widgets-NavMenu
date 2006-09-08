@@ -5,11 +5,11 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Tree::Iterator);
 
-sub initialize
+sub _init
 {
     my $self = shift;
 
-    $self->SUPER::initialize(@_);
+    $self->SUPER::_init(@_);
 
     my %args = (@_);
 
@@ -50,7 +50,7 @@ sub _is_top_separator
 sub get_initial_node
 {
     my $self = shift;
-    return $self->nav_menu->get_traversed_tree();
+    return $self->nav_menu->_get_traversed_tree();
 }
 
 sub get_node_subs

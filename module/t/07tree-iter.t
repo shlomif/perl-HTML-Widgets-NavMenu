@@ -6,11 +6,11 @@ use strict;
 
 use base 'HTML::Widgets::NavMenu::Tree::Iterator';
 
-sub initialize
+sub _init
 {
     my $self = shift;
 
-    $self->SUPER::initialize(@_);
+    $self->SUPER::_init(@_);
 
     my %args = (@_);
 

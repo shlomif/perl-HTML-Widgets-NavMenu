@@ -5,7 +5,7 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
 
-sub initialize
+sub _init
 {
     my $self = shift;
 

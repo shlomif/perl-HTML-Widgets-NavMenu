@@ -8,7 +8,7 @@ use base qw(HTML::Widgets::NavMenu::Object);
 use HTML::Widgets::NavMenu::Tree::Iterator::Stack;
 use HTML::Widgets::NavMenu::Tree::Iterator::Item;
 
-sub initialize
+sub _init
 {
     my $self = shift;
 

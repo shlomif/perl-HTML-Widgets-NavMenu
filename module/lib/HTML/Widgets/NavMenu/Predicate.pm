@@ -11,7 +11,7 @@ __PACKAGE__->mk_accessors(
     qw(type bool regexp callback),
     );
 
-sub initialize
+sub _init
 {
     my $self = shift;
 

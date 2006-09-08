@@ -12,7 +12,7 @@ __PACKAGE__->mk_accessors(
     qw(separator show_always skip subs text title url url_is_abs url_type),
     );
 
-sub initialize
+sub _init
 {
     my $self = shift;
 

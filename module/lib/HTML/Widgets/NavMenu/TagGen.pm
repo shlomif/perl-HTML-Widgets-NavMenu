@@ -12,7 +12,7 @@ __PACKAGE__->mk_accessors(
     qw(name attributes)
 );
 
-sub initialize
+sub _init
 {
     my $self = shift;
 
