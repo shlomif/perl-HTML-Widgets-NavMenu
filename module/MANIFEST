@@ -46,3 +46,4 @@ t/17nav-coords-unit.t
 t/18url.t
 TODO
 TODO-Rejects
+t/pod.t
