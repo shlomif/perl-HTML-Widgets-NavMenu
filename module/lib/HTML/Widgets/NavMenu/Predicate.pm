@@ -26,7 +26,7 @@ sub _init
 
 my %true_vals = (map { $_ => 1 } (qw(1 yes true True)));
 
-sub is_true_bool
+sub _is_true_bool
 {
     my $self = shift;
     my $val = shift;
@@ -35,7 +35,7 @@ sub is_true_bool
 
 my %false_vals = (map { $_ => 1 } (qw(0 no false False)));
 
-sub is_false_bool
+sub _is_false_bool
 {
     my $self = shift;
     my $val = shift;
@@ -55,11 +55,11 @@ sub _get_normalized_spec
     {
         return +{ 'cb' => $spec };
     }
-    if ($self->is_true_bool($spec))
+    if ($self->_is_true_bool($spec))
     {
         return +{ 'bool' => 1, };
     }
-    if ($self->is_false_bool($spec))
+    if ($self->_is_false_bool($spec))
     {
         return +{ 'bool' => 0, };
     }
@@ -140,6 +140,34 @@ sub evaluate
         return (($re eq "") || ($path_info =~ /$re/));
     }
 }
+
+=head1 NAME
+
+HTML::Widgets::NavMenu::Predicate - a predicate object for 
+HTML::Widgets::NavMenu
+
+=head1 SYNOPSIS
+
+    my $pred = HTML::Widgets::NavMenu::Predicate->new('spec' => $spec);
+
+=head1 FUNCTIONS
+
+=head2 my $pred = HTML::Widgets::NavMenu::Predicate->new('spec' => $spec)
+
+Creates a new object.
+
+=head2 $pred->evaluate( 'path_info' => $path_info, 'current_host' => $current_host )
+
+Evaluates the predicate in the context of C<$path_info> and C<$current_host>
+and returns the result.
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2006 Shlomi Fish, all rights reserved.
+
+This program is released under the following license: MIT X11.
+
+=cut
 
 1;
 
