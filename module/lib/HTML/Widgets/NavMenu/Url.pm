@@ -1,6 +1,7 @@
 package HTML::Widgets::NavMenu::Url;
 
 use strict;
+use warnings;
 
 use HTML::Widgets::NavMenu::Object;
 

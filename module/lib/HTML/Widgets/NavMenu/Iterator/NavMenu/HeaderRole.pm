@@ -1,6 +1,7 @@
 package HTML::Widgets::NavMenu::Iterator::NavMenu::HeaderRole;
 
 use strict;
+use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Iterator::NavMenu);
 

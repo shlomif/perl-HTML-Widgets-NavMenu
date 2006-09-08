@@ -1,5 +1,8 @@
 package HTML::Widgets::NavMenu::Tree::Node;
 
+use strict;
+use warnings;
+
 use base 'HTML::Widgets::NavMenu::Object';
 
 use base 'Class::Accessor';

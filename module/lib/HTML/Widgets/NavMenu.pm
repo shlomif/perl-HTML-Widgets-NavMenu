@@ -1,12 +1,11 @@
-#!/usr/bin/perl -w
+use strict;
+use warnings;
 
 package HTML::Widgets::NavMenu;
 
 our $VERSION = '1.0000';
 
 package HTML::Widgets::NavMenu::Error;
-
-use strict;
 
 use Error qw(:try);
 

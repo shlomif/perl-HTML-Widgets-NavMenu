@@ -1,5 +1,8 @@
 package HTML::Widgets::NavMenu::Iterator::Html::Item;
 
+use strict;
+use warnings;
+
 use base qw(HTML::Widgets::NavMenu::Tree::Iterator::Item);
 
 sub get_url_type
