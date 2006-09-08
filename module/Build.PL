@@ -1,10 +1,12 @@
-#!/usr/bin/perl -w
-
 use strict;
+use warnings;
 
-use Module::Build;
+use File::Spec;
+use lib File::Spec->catdir(File::Spec->curdir(), "inc");
 
-my $build = Module::Build->new(
+use Test::Run::Builder;
+
+my $build = Test::Run::Builder->new(
     'module_name' => "HTML::Widgets::NavMenu",
     'requires' => 
     {
