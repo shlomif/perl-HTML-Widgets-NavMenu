@@ -90,11 +90,11 @@ sub item_matches
 {
     my $self = shift;
     my $item = $self->top();
-    my $url = $item->node()->url();
+    my $url = $item->_node()->url();
     my $nav_menu = $self->nav_menu();
     return
         (
-            ($item->accum_state()->{'host'} eq $nav_menu->current_host()) &&
+            ($item->_accum_state()->{'host'} eq $nav_menu->current_host()) &&
             (defined($url) && ($url eq $nav_menu->path_info()))
         );
 }
@@ -103,7 +103,7 @@ sub does_item_expand
 {
     my $self = shift;
     my $item = $self->top();
-    return $item->node()->expanded();
+    return $item->_node()->expanded();
 }
 
 sub node_start
@@ -115,7 +115,7 @@ sub node_start
         my @coords = @{$self->get_coords()};
         $self->{'ret_coords'} = [ @coords ];
         $self->{'temp_coords'} = [ @coords, (-1) ];
-        $self->top()->node()->mark_as_current();
+        $self->top()->_node()->mark_as_current();
         $self->{'item_found'} = 1;
     }
     elsif ($self->does_item_expand())
@@ -135,7 +135,7 @@ sub node_end
         my $idx = pop(@{$self->{'temp_coords'}});
         if ($idx >= 0)
         {
-            my $node = $self->top()->node();
+            my $node = $self->top()->_node();
             $node->update_based_on_sub(
                 $node->get_nth_sub(
                     $idx
@@ -362,10 +362,10 @@ sub _get_url_to_item
     my $item = $args{'item'};
 
     return $self->get_cross_host_rel_url(
-        'host' => $item->accum_state()->{'host'},
-        'host_url' => ($item->node->url() || ""),
+        'host' => $item->_accum_state()->{'host'},
+        'host_url' => ($item->_node->url() || ""),
         'url_type' => $item->get_url_type(),
-        'url_is_abs' => $item->node->url_is_abs(),
+        'url_is_abs' => $item->_node->url_is_abs(),
     );
 }
 
@@ -474,7 +474,7 @@ sub _get_next_coords
         $branches[$i+1] = $branches[$i]->get_nth_sub($coords[$i]);
     }
 
-    if ($branches[$i]->num_subs())
+    if ($branches[$i]->_num_subs())
     {
         @dest_coords = (@coords,0);
     }
@@ -482,7 +482,7 @@ sub _get_next_coords
     {
         for($i--;$i>=0;$i--)
         {
-            if ($branches[$i]->num_subs() > ($coords[$i]+1))
+            if ($branches[$i]->_num_subs() > ($coords[$i]+1))
             {
                 @dest_coords = (@coords[0 .. ($i-1)], $coords[$i]+1);
                 last;
@@ -574,7 +574,7 @@ sub _is_skip
 
     my $item = $ret->{item};
 
-    return $item->node()->skip();
+    return $item->_node()->skip();
 }
 
 sub _get_coords_while_skipping_skips
@@ -622,7 +622,7 @@ sub _get_most_advanced_leaf
     }
 
     # As long as there is something deeper
-    while (my $num_subs = $branch->num_subs())
+    while (my $num_subs = $branch->_num_subs())
     {
         my $index = $num_subs-1;
         # We are going to return it, so store it
@@ -721,10 +721,10 @@ sub _get_leading_path_of_coords
                 my %args = (@_);
                 my $item = $args{item};
                 my $iterator = $args{'self'};
-                my $node = $item->node();
+                my $node = $item->_node();
                 # This is a workaround for the root link.
                 my $host_url = (defined($node->url()) ? ($node->url()) : "");
-                my $host = $item->accum_state()->{'host'};
+                my $host = $item->_accum_state()->{'host'};
 
                 my $url_type =
                     ($node->url_is_abs() ?

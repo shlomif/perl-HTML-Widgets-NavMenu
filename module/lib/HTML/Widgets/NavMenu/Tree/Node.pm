@@ -69,7 +69,7 @@ sub get_nth_sub
     return $self->subs()->[$idx];
 }
 
-sub num_subs
+sub _num_subs
 {
     my $self = shift;
     return scalar(@{$self->{'subs'}});

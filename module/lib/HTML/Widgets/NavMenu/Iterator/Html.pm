@@ -9,8 +9,8 @@ sub get_url_type
 {
     my $item = shift;
     return
-        ($item->node()->url_type() ||
-            $item->accum_state()->{'rec_url_type'} ||
+        ($item->_node()->url_type() ||
+            $item->_accum_state()->{'rec_url_type'} ||
             "rel");
 }
 
@@ -76,7 +76,7 @@ sub end_root
 sub end_regular
 {
     my $self = shift;
-    if ($self->top()->num_subs() && $self->is_expanded())
+    if ($self->top()->_num_subs() && $self->is_expanded())
     {
         $self->_add_tags("</ul>");
     }
@@ -95,7 +95,7 @@ sub get_a_tag
 {
     my $self = shift;
     my $item = $self->top();
-    my $node = $item->node;
+    my $node = $item->_node;
 
     my $tag ="<a";
     my $title = $node->title;

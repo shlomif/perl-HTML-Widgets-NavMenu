@@ -5,6 +5,16 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
 
+=head1 NAME
+
+HTML::Widgets::NavMenu::Tree::Iterator::Item - an item for the tree iterator.
+
+=head1 SYNOPSIS
+
+For internal use only.
+
+=cut
+
 sub _init
 {
     my $self = shift;
@@ -26,29 +36,29 @@ sub _init
     return 0;
 }
 
-sub node
+sub _node
 {
     my $self = shift;
     return $self->{'node'};
 }
 
-sub accum_state
+sub _accum_state
 {
     my $self = shift;
     return $self->{'accum_state'};
 }
 
-sub is_visited
+sub _is_visited
 {
     my $self = shift;
     return $self->{'visited'};
 }
 
-sub visit
+sub _visit
 {
     my $self = shift;
     $self->{'visited'} = 1;
-    if ($self->num_subs_to_go())
+    if ($self->_num_subs_to_go())
     {
         return $self->{'subs'}->[++$self->{'sub_idx'}];
     }
@@ -58,31 +68,39 @@ sub visit
     }
 }
 
-sub visited_index
+sub _visited_index
 {
     my $self = shift;
 
     return $self->{'sub_idx'};
 }
 
-sub num_subs_to_go
+sub _num_subs_to_go
 {
     my $self = shift;
-    return $self->num_subs() - $self->{'sub_idx'} - 1;
+    return $self->_num_subs() - $self->{'sub_idx'} - 1;
 }
 
-sub num_subs
+sub _num_subs
 {
     my $self = shift;
     return scalar(@{$self->{'subs'}});
 }
 
-sub get_sub
+sub _get_sub
 {
     my $self = shift;
     my $sub_num = shift;
     return $self->{'subs'}->[$sub_num];
 }
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2006 Shlomi Fish, all rights reserved.
+
+This program is released under the following license: MIT X11.
+
+=cut
 
 1;
 

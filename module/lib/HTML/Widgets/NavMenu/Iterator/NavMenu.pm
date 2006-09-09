@@ -62,7 +62,7 @@ sub get_currently_active_text
 sub get_link_tag
 {
     my $self = shift;
-    my $node = $self->top->node();
+    my $node = $self->top->_node();
     if ($node->CurrentlyActive())
     {
         return $self->get_currently_active_text($node);
@@ -104,7 +104,7 @@ sub start_handle_non_role
     my $self = shift;
     my $top_item = $self->top;
     my @tags_to_add = ("<li>", $self->get_link_tag());
-    if ($top_item->num_subs_to_go() && $self->is_expanded())
+    if ($top_item->_num_subs_to_go() && $self->is_expanded())
     {
         push @tags_to_add, ($self->get_open_sub_menu_tags());
     }
@@ -116,7 +116,7 @@ sub start_regular
     my $self = shift;
 
     my $top_item = $self->top;
-    my $node = $self->top->node();
+    my $node = $self->top->_node();
 
     if ($self->is_hidden())
     {
@@ -174,20 +174,20 @@ sub end_regular
 sub is_hidden
 {
     my $self = shift;
-    return $self->top->node()->hide();
+    return $self->top->_node()->hide();
 }
 
 sub is_expanded
 {
     my $self = shift;
-    my $node = $self->top->node();
-    return ($node->expanded() || $self->top->accum_state->{'show_always'});
+    my $node = $self->top->_node();
+    return ($node->expanded() || $self->top->_accum_state->{'show_always'});
 }
 
 sub get_role
 {
     my $self = shift;
-    return $self->top->node->role();
+    return $self->top->_node->role();
 }
 
 sub is_role_specified

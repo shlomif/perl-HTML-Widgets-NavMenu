@@ -21,7 +21,7 @@ sub start_regular
     my $self = shift;
 
     my $top_item = $self->top;
-    my $node = $self->top->node();
+    my $node = $self->top->_node();
 
     my $nav_menu = $self->{'nav_menu'};
 
@@ -34,7 +34,7 @@ sub start_regular
     }
     $self->_add_tags($tag);
 
-    if ($top_item->num_subs_to_go())
+    if ($top_item->_num_subs_to_go())
     {
         $self->_add_tags("<br />");
         $self->_add_tags("<ul>");

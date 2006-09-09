@@ -5,6 +5,20 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Iterator::NavMenu);
 
+=head1 NAME
+
+HTML::Widgets::NavMenu::Iterator::NavMenu::HeaderRole - a nav-menu iterator
+for the HeaderRole sub-class.
+
+=head1 OVER-RIDED METHODS
+
+=head2 $iter->start_handle_role()
+
+Handles the handling the role. Accepts the C<"header"> role and defaults to the
+default behaviour with all others.
+
+=cut
+
 sub start_handle_role
 {
     my $self = shift;
@@ -21,6 +35,13 @@ sub start_handle_role
     }
 }
 
+=head2 $self->end_handle_role()
+
+Ends the role. Accepts the C<"header"> role and defaults to the
+default behaviour with all others.
+
+=cut 
+
 sub end_handle_role
 {
     my $self = shift;
@@ -33,6 +54,14 @@ sub end_handle_role
         return $self->SUPER::end_handle_role();
     }
 }
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2006 Shlomi Fish, all rights reserved.
+
+This program is released under the following license: MIT X11.
+
+=cut
 
 1;
 

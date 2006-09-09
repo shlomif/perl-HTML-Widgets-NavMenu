@@ -86,7 +86,7 @@ sub traverse
 
     MAIN_LOOP: while ($top_item = $self->top())
     {
-        my $visited = $top_item->is_visited();
+        my $visited = $top_item->_is_visited();
 
         if (!$visited)
         {
@@ -95,12 +95,12 @@ sub traverse
 
         my $sub_item =
             ($self->node_should_recurse() ?
-                $top_item->visit() :
+                $top_item->_visit() :
                 undef);
 
         if (defined($sub_item))
         {
-            push @{$self->{'coords'}}, $top_item->visited_index();
+            push @{$self->{'coords'}}, $top_item->_visited_index();
             $self->push_into_stack(
                 'node' =>
                     $self->get_node_from_sub(
@@ -161,7 +161,7 @@ sub find_node_by_coords
                 'node' =>
                     $self->get_node_from_sub(
                         'item' => $item,
-                        'sub' => $item->get_sub($c),
+                        'sub' => $item->_get_sub($c),
                     ),
                 'parent_item' => $item,
             );

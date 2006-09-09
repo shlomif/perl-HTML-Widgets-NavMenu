@@ -58,7 +58,7 @@ sub get_new_accum_state
     }
 
     my $prev_state = 
-        $parent_item->accum_state();
+        $parent_item->_accum_state();
 
     return ($node->{'accum'} || $prev_state);
 }
@@ -67,15 +67,15 @@ sub node_start
 {
     my $self = shift;
     my $top_item = $self->top;
-    my $node = $self->top->node();
+    my $node = $self->top->_node();
 
-    $self->append(join("-", "Start", $node->{'id'}, $top_item->accum_state));
+    $self->append(join("-", "Start", $node->{'id'}, $top_item->_accum_state));
 }
 
 sub node_end
 {
     my $self = shift;
-    my $node = $self->top->node();
+    my $node = $self->top->_node();
 
     $self->append(join("-", "End", $node->{'id'}));
 }
@@ -83,7 +83,7 @@ sub node_end
 sub node_should_recurse
 {
     my $self = shift;
-    my $node = $self->top->node();
+    my $node = $self->top->_node();
     return $node->{'recurse'};
 }
 
@@ -103,7 +103,7 @@ sub get_node_from_sub
 
     my $item = $args{'item'};
     my $sub = $args{'sub'};
-    my $node = $item->node();
+    my $node = $item->_node();
 
     return $node->{'subs_db'}->{$sub};
 }

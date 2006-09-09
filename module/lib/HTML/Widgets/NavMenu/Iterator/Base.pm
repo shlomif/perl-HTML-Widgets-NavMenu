@@ -44,7 +44,7 @@ sub _is_top_separator
 {
     my $self = shift;
 
-    return $self->top->node->separator;
+    return $self->top->_node->separator;
 }
 
 sub get_initial_node
@@ -71,7 +71,7 @@ sub get_new_accum_state
     my $prev_state;
     if (defined($parent_item))
     {
-        $prev_state = $parent_item->accum_state();
+        $prev_state = $parent_item->_accum_state();
     }
     else
     {
