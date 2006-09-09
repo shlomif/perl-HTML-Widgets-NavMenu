@@ -35,16 +35,16 @@ sub node_start
 
     if ($self->_is_root())
     {
-        return $self->start_root();
+        return $self->_start_root();
     }
     elsif ($self->_is_top_separator())
     {
-        # start_sep() is short for start_separator().
-        return $self->start_sep();
+        # _start_sep() is short for start_separator().
+        return $self->_start_sep();
     }
     else
     {
-        return $self->start_regular();
+        return $self->_start_regular();
     }
 }
 
@@ -58,11 +58,11 @@ sub node_end
     }
     elsif ($self->_is_top_separator())
     {
-        return $self->end_sep();
+        return $self->_end_sep();
     }
     else
     {
-        return $self->end_regular();
+        return $self->_end_regular();
     }
 }
 
@@ -73,10 +73,10 @@ sub end_root
     $self->_add_tags("</ul>");
 }
 
-sub end_regular
+sub _end_regular
 {
     my $self = shift;
-    if ($self->top()->_num_subs() && $self->is_expanded())
+    if ($self->top()->_num_subs() && $self->_is_expanded())
     {
         $self->_add_tags("</ul>");
     }
@@ -86,7 +86,7 @@ sub end_regular
 sub node_should_recurse
 {
     my $self = shift;
-    return $self->is_expanded();
+    return $self->_is_expanded();
 }
 
 # Get the HTML <a href=""> tag.

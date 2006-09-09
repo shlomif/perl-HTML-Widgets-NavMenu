@@ -5,18 +5,18 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Iterator::Html);
 
-sub start_root
+sub _start_root
 {
     my $self = shift;
     
     $self->_add_tags("<ul>");
 }
 
-sub start_sep
+sub _start_sep
 {
 }
 
-sub start_regular
+sub _start_regular
 {
     my $self = shift;
 
@@ -41,11 +41,11 @@ sub start_regular
     }
 }
 
-sub end_sep
+sub _end_sep
 {
 }
 
-sub is_expanded
+sub _is_expanded
 {
     return 1;
 }

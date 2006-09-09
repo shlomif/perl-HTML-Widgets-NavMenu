@@ -12,14 +12,14 @@ for the HeaderRole sub-class.
 
 =head1 OVER-RIDED METHODS
 
-=head2 $iter->start_handle_role()
+=head2 $iter->_start_handle_role()
 
 Handles the handling the role. Accepts the C<"header"> role and defaults to the
 default behaviour with all others.
 
 =cut
 
-sub start_handle_role
+sub _start_handle_role
 {
     my $self = shift;
     if ($self->get_role() eq "header")
@@ -31,18 +31,18 @@ sub start_handle_role
     }
     else
     {
-        return $self->SUPER::start_handle_role();
+        return $self->SUPER::_start_handle_role();
     }
 }
 
-=head2 $self->end_handle_role()
+=head2 $self->_end_handle_role()
 
 Ends the role. Accepts the C<"header"> role and defaults to the
 default behaviour with all others.
 
 =cut 
 
-sub end_handle_role
+sub _end_handle_role
 {
     my $self = shift;
     if ($self->get_role() eq "header")
@@ -51,7 +51,7 @@ sub end_handle_role
     }
     else
     {
-        return $self->SUPER::end_handle_role();
+        return $self->SUPER::_end_handle_role();
     }
 }
 
