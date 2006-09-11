@@ -1,6 +1,12 @@
 Build.PL
 Changes
 COPYING
+examples/article-examples/cgi-script/H-W-NM-serve.pl
+examples/article-examples/complex/H-W-NM-complex.pl
+examples/article-examples/fine-grained-site-flow/H-W-NM-fine-grained-site-flow.pl
+examples/article-examples/simple/H-W-NM-simple.pl
+examples/article-examples/with-embellishments/H-W-NM-embellish.pl
+examples/README
 HTML/Widgets/NavMenu/Test/Data.pm
 HTML/Widgets/NavMenu/Test/Stdout.pm
 HTML/Widgets/NavMenu/Test/Util.pm
