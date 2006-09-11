@@ -5,6 +5,17 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Iterator::Html);
 
+=head1 NAME
+
+HTML::Widgets::NavMenu::Iterator::Html - an iterator for HTML.
+
+=head1 SYNOPSIS
+
+For internal use only.
+
+=head1 METHODS
+=cut
+
 sub _start_root
 {
     my $self = shift;
@@ -49,5 +60,13 @@ sub _is_expanded
 {
     return 1;
 }
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2006 Shlomi Fish, all rights reserved.
+
+This program is released under the following license: MIT X11.
+
+=cut
 
 1;

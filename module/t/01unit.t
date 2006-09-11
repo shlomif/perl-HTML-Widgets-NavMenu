@@ -11,11 +11,11 @@ my $text = "test/foo";
 
 my $url = HTML::Widgets::NavMenu::_text_to_url_obj($text);
 
-my $components = $url->get_url();
+my $components = $url->_get_url();
 ok (scalar(@$components) == 2); # TEST
 ok ($components->[0] eq "test"); # TEST
 ok ($components->[1] eq "foo"); # TEST
-ok (! $url->is_dir()); # TEST
+ok (! $url->_is_dir()); # TEST
 
 }
 

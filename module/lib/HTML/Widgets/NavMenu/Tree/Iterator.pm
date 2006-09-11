@@ -4,33 +4,50 @@ use strict;
 use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
+use base 'Class::Accessor';
 
 use HTML::Widgets::NavMenu::Tree::Iterator::Stack;
 use HTML::Widgets::NavMenu::Tree::Iterator::Item;
+
+__PACKAGE__->mk_accessors(qw(
+    coords
+    stack
+    ));
+
+=head1 NAME
+
+HTML::Widgets::NavMenu::Tree::Iterator - an iterator for HTML.
+
+=head1 SYNOPSIS
+
+For internal use only.
+
+=head1 METHODS
+=cut
+
+
 
 sub _init
 {
     my $self = shift;
 
-    $self->{'stack'} = HTML::Widgets::NavMenu::Tree::Iterator::Stack->new();
+    $self->stack(HTML::Widgets::NavMenu::Tree::Iterator::Stack->new());
 
     return 0;
 }
 
-sub stack
-{
-    my $self = shift;
+=head2 $self->top()
 
-    return $self->{'stack'};
-}
+Retrieves the stack top item.
 
+=cut
 sub top
 {
     my $self = shift;
     return $self->stack()->top();
 }
 
-sub construct_new_item
+sub _construct_new_item
 {
     my $self = shift;
 
@@ -38,6 +55,12 @@ sub construct_new_item
         @_
     );
 }
+
+=head2 $self->get_new_item('node' => $node, 'parent_item' => $parent)
+
+Gets the new item.
+
+=cut
 
 sub get_new_item
 {
@@ -48,7 +71,7 @@ sub get_new_item
     my $parent_item = $args{'parent_item'};
 
     return
-        $self->construct_new_item(
+        $self->_construct_new_item(
             'node' => $node,
             'subs' => $self->get_node_subs('node' => $node),
             'accum_state' => 
@@ -59,7 +82,7 @@ sub get_new_item
         );
 }
 
-sub push_into_stack
+sub _push_into_stack
 {
     my $self = shift;
 
@@ -74,13 +97,19 @@ sub push_into_stack
     );
 }
 
+=head2 $self->traverse()
+
+Traverses the tree.
+
+=cut
+
 sub traverse
 {
     my $self = shift;
 
-    $self->push_into_stack('node' => $self->get_initial_node());
+    $self->_push_into_stack('node' => $self->get_initial_node());
 
-    $self->{'coords'} = [];
+    $self->coords([]);
 
     my $top_item;
 
@@ -100,8 +129,8 @@ sub traverse
 
         if (defined($sub_item))
         {
-            push @{$self->{'coords'}}, $top_item->_visited_index();
-            $self->push_into_stack(
+            push @{$self->coords()}, $top_item->_visited_index();
+            $self->_push_into_stack(
                 'node' =>
                     $self->get_node_from_sub(
                         'item' => $top_item,
@@ -114,15 +143,20 @@ sub traverse
         {
             $self->node_end();
             $self->stack->pop();
-            pop(@{$self->{'coords'}})
+            pop(@{$self->coords()})
         }
     }
 
     return 0;
 }
 
-# This function can be overriden to generate a node from the sub-nodes
-# returned by get_node_subs() in a different way than the default.
+=head2 $self->get_node_from_sub()
+
+This function can be overriden to generate a node from the sub-nodes
+returned by get_node_subs() in a different way than the default.
+
+=cut
+
 sub get_node_from_sub
 {
     my $self = shift;
@@ -131,6 +165,12 @@ sub get_node_from_sub
 
     return $args{'sub'};
 }
+
+=head2 $self->find_node_by_coords($coords, $callback)
+
+Finds a node by its coordinations.
+
+=cut
 
 sub find_node_by_coords
 {
@@ -171,11 +211,26 @@ sub find_node_by_coords
     return +{ 'item' => $item, };
 }
 
+=head2 $self->get_coords()
+
+Returns the current coordinates of the object.
+
+=cut
+
 sub get_coords
 {
     my $self = shift;
 
-    return $self->{'coords'};
+    return $self->coords();
 }
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2006 Shlomi Fish, all rights reserved.
+
+This program is released under the following license: MIT X11.
+
+=cut
+
 1;
 
