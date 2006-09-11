@@ -1,5 +1,12 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0001    Mon Sep 11 14:38:39 IDT 2006
+    - Added "use strict" and "use warnings" to all modules.
+    - Added a Test::Pod based test.
+    - Added a Test::Pod::Coverage test, and added POD to all modules.
+        - Some internal methods were prefixed with an underscore.
+    - Added the examples directory.
+
 1.0000    Sun Nov 06 16:01:00 IST 2005
     - Made sure that the breadcrumbs trail in expanded sections will
     display the components of the expanded sections.
