@@ -711,47 +711,61 @@ sub _get_leading_path_of_coords
     my $self = shift;
 
     my (%args) = (@_);
+
+    my $coords = [ @{$args{coords}} ];
     
-    my @leading_path;
-
+    if (! @$coords )
     {
-        my $iterator = $self->_get_nav_menu_traverser(); 
-        my $fill_leading_path_callback =
-            sub {
-                my %args = (@_);
-                my $item = $args{item};
-                my $iterator = $args{'self'};
-                my $node = $item->_node();
-                # This is a workaround for the root link.
-                my $host_url = (defined($node->url()) ? ($node->url()) : "");
-                my $host = $item->_accum_state()->{'host'};
-
-                my $url_type =
-                    ($node->url_is_abs() ?
-                        "full_abs" :
-                        $item->get_url_type()
-                    );
-
-                push @leading_path,
-                    HTML::Widgets::NavMenu::LeadingPath::Component->new(
-                        'host' => $host,
-                        'host_url' => $host_url,
-                        'title' => $node->title(),
-                        'label' => $node->text(),
-                        'direct_url' =>
-                            $self->_get_url_to_item('item' => $item),
-                        'url_type' => $url_type,
-                    );
-            };
-
-        $iterator->find_node_by_coords(
-            $args{'coords'},
-            $fill_leading_path_callback,
-            );
+        $coords = [ 0 ];
     }
 
-    return \@leading_path;
+    my @leading_path;
+    my $iterator = $self->_get_nav_menu_traverser();
+
+    COORDS_LOOP:
+    while (1)
+    {
+        my $ret = $iterator->find_node_by_coords(
+            $coords
+        );
+
+        my $item = $ret->{item};
+
+        my $node = $item->_node();
+        # This is a workaround for the root link.
+        my $host_url = (defined($node->url()) ? ($node->url()) : "");
+        my $host = $item->_accum_state()->{'host'};
+
+        my $url_type =
+            ($node->url_is_abs() ?
+                "full_abs" :
+                $item->get_url_type()
+            );
+
+        push @leading_path,
+            HTML::Widgets::NavMenu::LeadingPath::Component->new(
+                'host' => $host,
+                'host_url' => $host_url,
+                'title' => $node->title(),
+                'label' => $node->text(),
+                'direct_url' =>
+                    $self->_get_url_to_item('item' => $item),
+                'url_type' => $url_type,
+            );
+
+        if ((scalar(@$coords) == 1) && ($coords->[0] == 0))
+        {
+            last COORDS_LOOP;
+        }
+    }
+    continue
+    {
+        $coords = $self->_get_up_coords($coords);
+    }
+
+    return [ reverse(@leading_path) ];
 }
+
 sub _get_leading_path_coords
 {
     my $self = shift;

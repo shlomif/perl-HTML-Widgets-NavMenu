@@ -3,6 +3,12 @@ Revision history for Perl extension Shlomif::NavMenu.
     - Fixed a bug in HTML::Widgets::NavMenu::Url:
     relative URL from a non-dir to a dir. It accidently had an
     extraneous "../".
+    - Fixed the _get_leading_path_of_coords function in HTML::Widgets::NavMenu
+    to properly generate the topmost item of the breadcrumbs trail, which
+    should be in coords = [0] and not coord = []. The latter is meaningless
+    and ignored. This caused a subtle bug in combining the breadcrumbs
+    trails of my homesite.
+        - it became apparent when the URL of the [0] item was not empty.
 
 1.0001    Mon Sep 11 14:38:39 IDT 2006
     - Added "use strict" and "use warnings" to all modules.

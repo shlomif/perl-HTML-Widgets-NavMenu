@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 24;
+use Test::More tests => 27;
 
 use HTML::Widgets::NavMenu;
 
@@ -29,7 +29,7 @@ my $test_data = get_test_data();
     my $component = $leading_path[0];
 
     # TEST
-    is ($component->title(), "T1 Title", "Testing for title of leading_path"); 
+    is ($component->label(), "Home", "Testing for title of leading_path"); 
     
     # TEST
     is ($component->direct_url(), "../", "Testing for direct_url");
@@ -53,7 +53,7 @@ my $test_data = get_test_data();
     my $component = $leading_path[0];
 
     # TEST
-    is ($component->title(), "T1 Title", "Testing for title of leading_path"); 
+    is ($component->label(), "Home", "Testing for title of leading_path"); 
     
     # TEST
     is ($component->direct_url(), "http://www.hello.com/~shlomif/", 
@@ -105,7 +105,7 @@ my $test_data = get_test_data();
     my $component = $leading_path[0];
 
     # TEST
-    is ($component->title(), "T1 Title", "Testing for title of leading_path"); 
+    is ($component->label(), "Home", "Testing for title of leading_path"); 
     
     # TEST
     is ($component->direct_url(), "../", "Testing for direct_url");
@@ -152,6 +152,31 @@ my $test_data = get_test_data();
     # TEST
     is ($component->title(), "Open Source Software I Wrote",
         "Testing for title of leading_path"); 
+    
+    # TEST
+    is ($component->direct_url(), "../", 
+        "Testing for direct_url");
+}
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/puzzles/bar/",
+        @{$test_data->{'root_path_not_slash'}},
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my @leading_path = @{$rendered->{'leading_path'}};
+
+    # TEST
+    is (scalar(@leading_path), 2, "Checking for a leading path of len 2");
+
+    my $component = $leading_path[0];
+
+    # TEST
+    is ($component->label(), "Home",
+        "Points to Home"); 
     
     # TEST
     is ($component->direct_url(), "../", 
