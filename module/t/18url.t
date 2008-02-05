@@ -3,7 +3,8 @@
 use strict;
 use warnings;
 
-use Test::More tests => 5;
+# TODO : Test why Test-Count reports that there are 5 tests.
+use Test::More tests => 6;
 
 use HTML::Widgets::NavMenu::Url;
 
@@ -107,4 +108,25 @@ use HTML::Widgets::NavMenu::Url;
     is ($from->_get_relative_url($to, 0), "./good/index.html", 
         "Checking for harddisk URL from dir to dir");
 }
+
+{
+    my $from = 
+        HTML::Widgets::NavMenu::Url->new(
+            ["directory", "sub-dir", "good.html"],
+            0,
+            "server",
+        );
+    my $to = 
+        HTML::Widgets::NavMenu::Url->new(
+            ["directory"],
+            1,
+            "server"
+        );
+
+    # TEST
+    is ($from->_get_relative_url($to, 1), "../",
+        "Checking for relative URL from a non-dir to a dir."
+    );
+}
+
 

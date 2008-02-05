@@ -107,7 +107,11 @@ sub _get_relative_url
         }
         else
         {
-            $ret .= join("/", (map { ".." } @this_url), @other_url);         
+            if (! $base->_is_dir())
+            {
+                pop(@this_url);
+            }
+            $ret .= join("/", (map { ".." } @this_url), @other_url);
             if ($to->_is_dir() && ($base->{'mode'} ne "harddisk"))
             {
                 $ret .= "/";
