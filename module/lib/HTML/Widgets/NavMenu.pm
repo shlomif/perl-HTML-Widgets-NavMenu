@@ -103,7 +103,7 @@ sub does_item_expand
 {
     my $self = shift;
     my $item = $self->top();
-    return $item->_node()->expanded();
+    return $item->_node()->capture_expanded();
 }
 
 sub node_start
@@ -400,14 +400,17 @@ sub _create_new_nav_menu_item
 
     if (exists($sub_contents->{'expand'}))
     {
-        if ($self->_create_predicate(
+        my $expand_val = 
+            $self->_create_predicate(
                 'spec' => $sub_contents->{'expand'},
             )->evaluate(
                 'path_info' => $self->path_info(),
                 'current_host' => $self->current_host(),
-            ))
+            )
+            ;
+        if ($expand_val)
         {
-            $new_item->expand();
+            $new_item->expand($expand_val);
         }
     }
 
@@ -1258,6 +1261,11 @@ This specifies the constant boolean value of the predicate.
 
 Note that if C<'cb'> is specified then both C<'re'> and C<'bool'> will
 be ignored, and C<'re'> over-rides C<'bool'>. 
+
+Orthogonal to these keys is the C<'capt'> key which specifies whether this
+expansion "captures" or not. This is relevant to the behaviour in the
+breadcrumbs' trails, if one wants the item to appear there or not. The
+default value is true.
 
 If the predicate is not a hash reference, then HTML::Widgets::NavMenu will
 try to guess what it is. If it's a sub-routine reference, it will be an

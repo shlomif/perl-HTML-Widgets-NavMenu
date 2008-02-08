@@ -25,6 +25,8 @@ provides:
     file: lib/HTML/Widgets/NavMenu.pm
   HTML::Widgets::NavMenu::EscapeHtml:
     file: lib/HTML/Widgets/NavMenu/EscapeHtml.pm
+  HTML::Widgets::NavMenu::ExpandVal:
+    file: lib/HTML/Widgets/NavMenu/ExpandVal.pm
   HTML::Widgets::NavMenu::HeaderRole:
     file: lib/HTML/Widgets/NavMenu/HeaderRole.pm
   HTML::Widgets::NavMenu::Iterator::Base:
@@ -61,7 +63,7 @@ provides:
     file: lib/HTML/Widgets/NavMenu/Tree/Node.pm
   HTML::Widgets::NavMenu::Url:
     file: lib/HTML/Widgets/NavMenu/Url.pm
-generated_by: Module::Build version 0.2805
+generated_by: Module::Build version 0.2808
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2

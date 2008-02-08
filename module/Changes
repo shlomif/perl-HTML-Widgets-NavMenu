@@ -9,6 +9,7 @@ Revision history for Perl extension Shlomif::NavMenu.
     and ignored. This caused a subtle bug in combining the breadcrumbs
     trails of my homesite.
         - it became apparent when the URL of the [0] item was not empty.
+    - Added the 'capt' key to the 'expand' => keys for "capturing" regex.
 
 1.0001    Mon Sep 11 14:38:39 IDT 2006
     - Added "use strict" and "use warnings" to all modules.

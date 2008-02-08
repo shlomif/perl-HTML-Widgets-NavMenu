@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 27;
+use Test::More tests => 33;
 
 use HTML::Widgets::NavMenu;
 
@@ -181,4 +181,47 @@ my $test_data = get_test_data();
     # TEST
     is ($component->direct_url(), "../", 
         "Testing for direct_url");
+}
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/humour/by-others/foo.html",
+        @{$test_data->{'non_capturing_expand'}},
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my @lp = @{$rendered->{'leading_path'}};
+
+    # TEST
+    is (scalar(@lp), 3, "Checking for a leading path of len 2");
+
+    # TEST
+    is ($lp[0]->direct_url(), "./../../", "lp[0]");
+
+    # TEST
+    is ($lp[1]->direct_url(), "./../", "lp[1]");
+
+    # TEST
+    is ($lp[2]->direct_url(), "./", "lp[2]");
+}
+
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/humour/url-at-top.html",
+        @{$test_data->{'non_capturing_expand_reversed'}},
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my @lp = @{$rendered->{'leading_path'}};
+
+    # TEST
+    is (scalar(@lp), 1, "Checking for a leading path of len 2");
+
+    # TEST
+    is ($lp[0]->direct_url(), "./../", "Pointing to the home");
 }

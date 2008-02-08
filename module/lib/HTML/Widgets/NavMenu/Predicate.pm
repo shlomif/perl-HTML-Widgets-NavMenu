@@ -8,8 +8,10 @@ use base 'HTML::Widgets::NavMenu::Object';
 use base 'Class::Accessor';
 
 __PACKAGE__->mk_accessors(
-    qw(type bool regexp callback),
+    qw(type bool regexp callback capture),
     );
+
+use HTML::Widgets::NavMenu::ExpandVal;
 
 sub _init
 {
@@ -93,27 +95,30 @@ sub _assign_spec
     {
         $self->type("callback");
         $self->callback($spec->{'cb'});
-
-        return 0;
     }
-    if (exists($spec->{'re'}))
+    elsif (exists($spec->{'re'}))
     {
         $self->type("regexp");
         $self->regexp($spec->{'re'});
-
-        return 0;
     }
-    if (exists($spec->{'bool'}))
+    elsif (exists($spec->{'bool'}))
     {
         $self->type("bool");
         $self->bool($spec->{'bool'});
-
-        return 0;
     }
-    die "Neither 'cb' nor 're' nor 'bool' were specified in the spec.";
+    else
+    {
+        die "Neither 'cb' nor 're' nor 'bool' were specified in the spec.";
+    }
+
+    $self->capture(
+        (
+            (!exists($spec->{capt})) ? 1 : $spec->{capt}
+        )
+    );
 }
 
-sub evaluate
+sub _evaluate_bool
 {
     my $self = shift;
 
@@ -138,6 +143,24 @@ sub evaluate
     {
         my $re = $self->regexp();
         return (($re eq "") || ($path_info =~ /$re/));
+    }
+}
+
+sub evaluate
+{
+    my $self = shift;
+
+    my $bool = $self->_evaluate_bool(@_);
+
+    if (!$bool)
+    {
+        return $bool;
+    }
+    else
+    {
+        return HTML::Widgets::NavMenu::ExpandVal->new(
+            capture => $self->capture()
+        );
     }
 }
 

@@ -12,6 +12,8 @@ __PACKAGE__->mk_accessors(
     qw(separator show_always skip subs text title url url_is_abs url_type),
     );
 
+use HTML::Widgets::NavMenu::ExpandVal;
+
 =head1 NAME
 
 HTML::Widgets::NavMenu::Tree::Node - an iterator for HTML.
@@ -41,7 +43,10 @@ Expands the node.
 sub expand
 {
     my $self = shift;
-    $self->expanded(1);
+    my $v = @_ ? (shift(@_)) : 
+        HTML::Widgets::NavMenu::ExpandVal->new(capture => 1)
+        ;
+    $self->expanded($v);
     return 0;
 }
 
@@ -76,9 +81,9 @@ sub update_based_on_sub
 {
     my $self = shift;
     my $sub = shift;
-    if ($sub->expanded())
+    if (my $expand_val = $sub->expanded())
     {
-        $self->expand();
+        $self->expand($expand_val);
     }    
 }
 
@@ -167,6 +172,26 @@ sub set_values_from_hash_ref
         {
             $self->set($key, 1);
         }
+    }
+}
+
+=head2 my $bool = $self->capture_expanded()
+
+Tests whether the node is expanded and in a capturing way.
+
+=cut
+
+sub capture_expanded
+{
+    my $self = shift;
+
+    if (my $e = $self->expanded())
+    {
+        return $e->is_capturing();
+    }
+    else
+    {
+        return;
     }
 }
 

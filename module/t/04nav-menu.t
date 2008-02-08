@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 23;
+use Test::More tests => 24;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -13,6 +13,7 @@ my $test_data = get_test_data();
 
 sub test_nav_menu
 {
+    local $Test::Builder::Level = $Test::Builder::Level+1; 
     my $rendered = shift;
     my $expected_string = shift;
     my $test_blurb = shift;
@@ -849,4 +850,48 @@ EOF
 
     # TEST
     test_nav_menu($rendered, $expected_string, "Mixed Expand Nav-Menu #5"); 
+}
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/humour/by-others/foo.html",
+        @{$test_data->{'non_capturing_expand'}},
+        'current_host' => "default",
+        'ul_classes' => [ "one", "two", "three" ],
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul class="one">
+<li>
+<a href="./../../">Home</a>
+</li>
+<li>
+<a href="./../" title="My Humorous Creations">Humour</a>
+<br />
+<ul class="two">
+<li>
+<a href="./../stories/" title="Large-Scale Stories I Wrote">Stories</a>
+<br />
+<ul class="three">
+<li>
+<a href="./../TheEnemy/">The Enemy</a>
+</li>
+<li>
+<a href="./../TOWTF/">TOW The Fountainhead</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="./">By Others</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    test_nav_menu($rendered, $expected_string, "Non Capturing Expand"); 
 }
