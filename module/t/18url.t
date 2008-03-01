@@ -3,7 +3,6 @@
 use strict;
 use warnings;
 
-# TODO : Test why Test-Count reports that there are 5 tests.
 use Test::More tests => 6;
 
 use HTML::Widgets::NavMenu::Url;
@@ -25,7 +24,7 @@ use HTML::Widgets::NavMenu::Url;
     {
         $url = $from->_get_relative_url($to);
     };
-    # TEST    
+    # TEST
     like ($@, qr{^Two identical URLs},
         "Checking that an exception was thrown.");
 }
@@ -48,7 +47,7 @@ use HTML::Widgets::NavMenu::Url;
     {
         $url = $from->_get_relative_url($to);
     };
-    # TEST    
+    # TEST
     like ($@, qr{^Root URL},
         "Checking that an exception was thrown.");
 }

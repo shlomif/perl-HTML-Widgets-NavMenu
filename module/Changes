@@ -1,5 +1,8 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+    - Removed trailing whitespace from "# TEST" lines - this can confuse
+    early version of Test-Count
+
 1.0100    Fri Feb  8 19:19:09 IST 2008
     - Fixed a bug in HTML::Widgets::NavMenu::Url:
     relative URL from a non-dir to a dir. It accidently had an

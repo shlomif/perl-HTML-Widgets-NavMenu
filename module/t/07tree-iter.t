@@ -157,7 +157,7 @@ sub test_traverse
     my @expected = ("Start-A-one", "Start-B-two", "End-B",
         "Start-C-one", "Start-FG-one", "End-FG", "End-C", "End-A");
 
-    # TEST 
+    # TEST
     test_traverse($data, \@expected, "Simple example for testing the Tree traverser.");
 }
 
@@ -189,7 +189,7 @@ sub test_traverse
     my @expected = ("Start-A-one", "Start-B-two", "End-B",
         "Start-C-one", "End-C", "End-A");
 
-    # TEST 
+    # TEST
     test_traverse($data, \@expected, "Example with recurse = 0");
 }
 
@@ -259,7 +259,7 @@ sub test_traverse
         "Start-MON-four", "End-MON", "Start-KOJ-three", "End-KOJ",
         "End-AGH", "End-A");
 
-    # TEST 
+    # TEST
     test_traverse($data, \@expected, "Example with lots of weird combinations");
 }
 

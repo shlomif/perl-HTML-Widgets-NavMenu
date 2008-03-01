@@ -17,7 +17,7 @@ use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
     $node->set("text", "Trail of Innocence");
     is($node->text(), "Trail of Innocence", "Testing for text"); # TEST
     $node->set("show_always", 1);
-    is($node->show_always(), 1, "Set/get show_always"); # TEST 
+    is($node->show_always(), 1, "Set/get show_always"); # TEST
     $node->set("title", "It's Raining");
     is($node->title(), "It's Raining", "Set/get title"); # TEST
     $node->set("host", "vipe");
