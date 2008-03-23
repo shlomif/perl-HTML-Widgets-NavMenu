@@ -1,7 +1,10 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0200    Sun Mar 23 21:53:37 IST 2008
     - Removed trailing whitespace from "# TEST" lines - this can confuse
     early version of Test-Count
+    - Fixed a "# TEST" instead of a "# TESTbr" line that confused Test-Count.
+    - Added the no_leading_dot option with a test.
 
 1.0100    Fri Feb  8 19:19:09 IST 2008
     - Fixed a bug in HTML::Widgets::NavMenu::Url:

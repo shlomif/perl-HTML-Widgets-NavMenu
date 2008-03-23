@@ -3,7 +3,7 @@ use warnings;
 
 package HTML::Widgets::NavMenu;
 
-our $VERSION = '1.0100';
+our $VERSION = '1.0200';
 
 package HTML::Widgets::NavMenu::Error;
 
@@ -205,6 +205,9 @@ sub _init
 
     $self->{'ul_classes'} = ($args{'ul_classes'} || []);
 
+    $self->{'no_leading_dot'} =
+        exists($args{'no_leading_dot'}) ? $args{'no_leading_dot'} : 0;
+
     return 0;
 }
 
@@ -291,13 +294,15 @@ sub _get_relative_url
 {
     my $from_text = shift;
     my $to_text = shift(@_);
+    my $no_leading_dot = shift;
 
     my $from_url = _text_to_url_obj($from_text);
     my $to_url = _text_to_url_obj($to_text);
     my $ret = 
         $from_url->_get_relative_url(
             $to_url, 
-            _is_slash_terminated($from_text)
+            _is_slash_terminated($from_text),
+            $no_leading_dot,
         );
    return $ret;
 }
@@ -343,7 +348,9 @@ sub get_cross_host_rel_url
     }
     elsif ($url_type eq "rel")
     {
-        return _get_relative_url($self->path_info(), $host_url);
+        return _get_relative_url(
+            $self->path_info(), $host_url, $self->{'no_leading_dot'}
+        );
     }
     elsif ($url_type eq "site_abs")
     {
@@ -798,7 +805,7 @@ sub render
     my %nav_links;
     my %nav_links_obj;
 
-    my %links_proto = 
+    my %links_proto =
         (
             'prev' => $self->_get_coords_while_skipping_skips(
                         \&_get_prev_coords),
@@ -830,7 +837,7 @@ sub render
 
     my $js_code = "";
     
-    return 
+    return
         {
             'html' => $html,
             'leading_path' => $self->_get_leading_path(),
@@ -984,6 +991,13 @@ as the classes of the ULs inner to it, and "3C" as the class of the ULs inner
 to the latter ULs.
 
 If classes are undef, the UL tag will not contain a class parameter.
+
+=item no_leading_dot
+
+When this parameter is set to 1, the object will try to generate URLs that
+do not start with "./" when possible. That way, the generated markup will
+be a little more compact. This option is not enabled by default for
+backwards compatibility, but is highly recommended.
 
 =back
 

@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 24;
+use Test::More tests => 25;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -373,7 +373,7 @@ EOF
 </ul>
 EOF
 
-    # TESTbr 
+    # TEST
     test_nav_menu($rendered, $expected_string, "Nav Menu with a role of \"header\""); 
 }
 
@@ -894,4 +894,44 @@ EOF
 
     # TEST
     test_nav_menu($rendered, $expected_string, "Non Capturing Expand"); 
+}
+
+# This test tests that the URLs do not have "./" prepended to them
+# when given the no_leading_dot option.
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/me/bio.html",
+        @{$test_data->{'items_in_sub'}},
+        'ul_classes' => [ "navbarmain", ("navbarnested") x 5 ],
+        no_leading_dot => 1,
+    );
+
+    my $rendered = 
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul class="navbarmain">
+<li>
+<a href="../">Home</a>
+</li>
+<li>
+<a href="./" title="About Myself">About Me</a>
+<br />
+<ul class="navbarnested">
+<li>
+<b>Bio</b>
+</li>
+<li>
+<a href="gloria/" title="A Useful Conspiracy">Gloria</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../hoola/" title="Drumming is good for your health">Tam Tam Drums</a>
+</li>
+</ul>
+EOF
+
+    # TEST
+    test_nav_menu($rendered, $expected_string, "no_leading_dot removes the extra ./");
 }
