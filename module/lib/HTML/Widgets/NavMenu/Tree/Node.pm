@@ -46,7 +46,12 @@ sub expand
     my $v = @_ ? (shift(@_)) : 
         HTML::Widgets::NavMenu::ExpandVal->new(capture => 1)
         ;
-    $self->expanded($v);
+    # Don't set it to something if it's already capture_expanded(),
+    # otherwise it can set as a non-capturing expansion.
+    if (! $self->capture_expanded())
+    {
+        $self->expanded($v);
+    }
     return 0;
 }
 

@@ -891,6 +891,64 @@ my @non_capturing_expand_reversed =
     },
 );
 
+
+my @non_capturing_expand_nested =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'text' => "Top 1",
+        'title' => "T1 Title",
+        'subs' =>
+        [
+            {
+                'text' => "Home",
+                'url' => "",
+            },
+            {
+                'text' => "Humour", 
+                'url' => "humour/",
+                'expand' => { 're' => "^humour/", },
+                'title' => "My Humorous Creations",
+                'subs' => 
+                [
+                    {
+                        'text' => "Stories",
+                        'url' => "humour/stories/",
+                        'expand' => { 're' => "^humour/", 'capt' => 0 },
+                        'title' => "Large-Scale Stories I Wrote",
+                        'subs' =>
+                        [
+                            {
+                                'text' => "The Enemy", 
+                                'url' => "humour/TheEnemy/",
+                            },
+                            {
+                                'text' => "TOW The Fountainhead",
+                                'url' => "humour/TOWTF/",
+                            },
+                        ],
+                    },
+                    {
+                        'text' => "By Others",
+                        'url' => "humour/by-others/",
+                        'expand' => { 're' => "^humour/", capt => 0, },
+                        subs =>
+                        [
+                            {
+                                text => "Foo",
+                                url => "humour/by-others/foo.html",
+                            },
+                        ],
+                    },
+                ],
+            }
+        ],
+    },
+);
+
 sub get_test_data
 {
     return
@@ -913,6 +971,7 @@ sub get_test_data
             'root_path_not_slash' => \@root_path_not_slash,
             'non_capturing_expand' => \@non_capturing_expand,
             'non_capturing_expand_reversed' => \@non_capturing_expand_reversed,
+            'non_capturing_expand_nested' => \@non_capturing_expand_nested,
         };
 }
 

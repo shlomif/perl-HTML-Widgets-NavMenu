@@ -1,8 +1,12 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0201
+    - Fixed a case where a non-capturing expand in a node inside a
+    capturing expand caused the upper node to be non-capturing too.
+
 1.0200    Sun Mar 23 21:53:37 IST 2008
     - Removed trailing whitespace from "# TEST" lines - this can confuse
-    early version of Test-Count
+    early versions of Test-Count
     - Fixed a "# TEST" instead of a "# TESTbr" line that confused Test-Count.
     - Added the no_leading_dot option with a test.
 

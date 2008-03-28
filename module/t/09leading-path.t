@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 33;
+use Test::More tests => 34;
 
 use HTML::Widgets::NavMenu;
 
@@ -207,11 +207,12 @@ my $test_data = get_test_data();
     is ($lp[2]->direct_url(), "./", "lp[2]");
 }
 
-
+# This test is to check that a non-capturing expand does not influence
+# the upper capturing expands to not capture.
 {
     my $nav_menu = HTML::Widgets::NavMenu->new(
-        'path_info' => "/humour/url-at-top.html",
-        @{$test_data->{'non_capturing_expand_reversed'}},
+        'path_info' => "/humour/humanity/",
+        @{$test_data->{'non_capturing_expand_nested'}},
     );
 
     my $rendered =
@@ -220,8 +221,12 @@ my $test_data = get_test_data();
     my @lp = @{$rendered->{'leading_path'}};
 
     # TEST
-    is (scalar(@lp), 1, "Checking for a leading path of len 2");
+    is (scalar(@lp), 2, "Checking for a leading path of len 2");
 
     # TEST
-    is ($lp[0]->direct_url(), "./../", "Pointing to the home");
+    is ($lp[0]->direct_url(), "../../", "Pointing to the home");
+
+    # TEST
+    is ($lp[1]->direct_url(), "../", "Pointing to the humour");
+    
 }
