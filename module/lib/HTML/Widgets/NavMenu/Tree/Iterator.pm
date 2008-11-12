@@ -86,8 +86,7 @@ sub _push_into_stack
 {
     my $self = shift;
 
-    my %args = (@_);
-    my $node = $args{'node'};
+    my $node = shift;
 
     $self->stack()->push(
         $self->get_new_item(
@@ -109,7 +108,7 @@ sub traverse
 {
     my $self = shift;
 
-    $self->_push_into_stack('node' => $self->get_initial_node());
+    $self->_push_into_stack($self->get_initial_node());
 
     $self->coords([]);
 
@@ -133,12 +132,11 @@ sub traverse
         {
             push @{$self->coords()}, $top_item->_visited_index();
             $self->_push_into_stack(
-                'node' =>
-                    $self->get_node_from_sub(
-                        'item' => $top_item,
-                        'sub' => $sub_item,
-                    ),
-                );
+                $self->get_node_from_sub(
+                    'item' => $top_item,
+                    'sub' => $sub_item,
+                ),
+            );
             next MAIN_LOOP;
         }
         else
