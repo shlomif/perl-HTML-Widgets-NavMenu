@@ -383,12 +383,11 @@ sub _gen_blank_nav_menu_tree_node
 
 sub _create_predicate
 {
-    my $self = shift;
-    my %args = (@_);
+    my ($self, $args) = @_;
 
     return
         HTML::Widgets::NavMenu::Predicate->new(
-            'spec' => $args{'spec'},
+            'spec' => $args->{'spec'},
         );
 }
 
@@ -407,7 +406,9 @@ sub _create_new_nav_menu_item
     {
         my $expand_val = 
             $self->_create_predicate(
-                'spec' => $sub_contents->{'expand'},
+                {
+                    'spec' => $sub_contents->{'expand'},
+                }
             )->evaluate(
                 'path_info' => $self->path_info(),
                 'current_host' => $self->current_host(),
