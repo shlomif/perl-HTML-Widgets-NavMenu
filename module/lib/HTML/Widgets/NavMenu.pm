@@ -718,11 +718,8 @@ sub _gen_traversed_tree
 sub _get_leading_path_of_coords
 {
     my $self = shift;
+    my $coords = shift;
 
-    my (%args) = (@_);
-
-    my $coords = [ @{$args{coords}} ];
-    
     if (! @$coords )
     {
         $coords = [ 0 ];
@@ -786,7 +783,7 @@ sub _get_leading_path
 {
     my $self = shift;
     return $self->_get_leading_path_of_coords(
-        'coords' => $self->_get_leading_path_coords()
+        $self->_get_leading_path_coords()
     );
 }
 
@@ -827,7 +824,7 @@ sub render
         {
             my $obj = 
                 $self->_get_leading_path_of_coords(
-                    'coords' => $coords
+                    $coords
                 )->[-1];
             
             $nav_links_obj{$link_rel} = $obj;
