@@ -42,7 +42,7 @@ sub expand
 {
     my $self = shift;
     my $v = @_ ? (shift(@_)) : 
-        HTML::Widgets::NavMenu::ExpandVal->new(capture => 1)
+        HTML::Widgets::NavMenu::ExpandVal->new({capture => 1})
         ;
     # Don't set it to something if it's already capture_expanded(),
     # otherwise it can set as a non-capturing expansion.

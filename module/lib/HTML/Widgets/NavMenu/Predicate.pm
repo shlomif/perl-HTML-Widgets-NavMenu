@@ -155,7 +155,9 @@ sub evaluate
     else
     {
         return HTML::Widgets::NavMenu::ExpandVal->new(
-            capture => $self->capture()
+            {
+                capture => $self->capture()
+            },
         );
     }
 }

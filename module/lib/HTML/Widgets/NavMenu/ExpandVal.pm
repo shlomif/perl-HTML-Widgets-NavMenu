@@ -11,13 +11,9 @@ __PACKAGE__->mk_accessors(
 
 sub _init
 {
-    my $self = shift;
+    my ($self, $args) = @_;
 
-    my %args = (@_);
-
-    my $capture = $args{'capture'};
-
-    $self->_capture($capture);
+    $self->_capture($args->{'capture'});
 
     return 0;
 }
