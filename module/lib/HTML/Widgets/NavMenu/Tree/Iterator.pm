@@ -55,7 +55,7 @@ sub _construct_new_item
     );
 }
 
-=head2 $self->get_new_item('node' => $node, 'parent_item' => $parent)
+=head2 $self->get_new_item({'node' => $node, 'parent_item' => $parent})
 
 Gets the new item.
 
@@ -63,11 +63,10 @@ Gets the new item.
 
 sub get_new_item
 {
-    my $self = shift;
-    my %args = (@_);
+    my ($self, $args) = @_;
 
-    my $node = $args{'node'};
-    my $parent_item = $args{'parent_item'};
+    my $node = $args->{'node'};
+    my $parent_item = $args->{'parent_item'};
 
     return
         $self->_construct_new_item(
@@ -92,8 +91,10 @@ sub _push_into_stack
 
     $self->stack()->push(
         $self->get_new_item(
-            'node' => $node,
-            'parent_item' => $self->top(),
+            {
+                'node' => $node,
+                'parent_item' => $self->top(),
+            }
         ),
     );
 }
@@ -182,7 +183,9 @@ sub find_node_by_coords
     my $idx = 0;
     my $item =
         $self->get_new_item(
-            'node' => $self->get_initial_node(),
+            {
+                'node' => $self->get_initial_node(),
+            }
         );
 
     my $internal_callback =
@@ -199,12 +202,14 @@ sub find_node_by_coords
     {
         $item =
             $self->get_new_item(
-                'node' =>
+                {
+                    'node' =>
                     $self->get_node_from_sub(
                         'item' => $item,
                         'sub' => $item->_get_sub($c),
                     ),
-                'parent_item' => $item,
+                    'parent_item' => $item,
+                }
             );
         $idx++;
         $internal_callback->();
