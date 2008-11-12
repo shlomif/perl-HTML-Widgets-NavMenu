@@ -83,18 +83,19 @@ sub get_node_subs
     return [ @{$node->subs()} ];
 }
 
-=head2 $self->get_new_accum_state( item => $item, node => $node )
+=head2 $self->get_new_accum_state( { item => $item, node => $node } )
 
 Gets the new accumulated state.
 
 =cut
 
+# TODO : This method is too long - refactor.
 sub get_new_accum_state
 {
-    my $self = shift;
-    my %args = (@_);
-    my $parent_item = $args{'item'};
-    my $node = $args{'node'};
+    my ($self, $args) = @_;
+
+    my $parent_item = $args->{'item'};
+    my $node = $args->{'node'};
     
     my $prev_state;
     if (defined($parent_item))

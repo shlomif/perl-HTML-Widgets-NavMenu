@@ -48,10 +48,9 @@ sub get_node_subs
 
 sub get_new_accum_state
 {
-    my $self = shift;
-    my %args = (@_);
-    my $parent_item = $args{'item'};
-    my $node = $args{'node'};
+    my ($self, $args) = @_;
+    my $parent_item = $args->{'item'};
+    my $node = $args->{'node'};
 
     if (!defined($parent_item))
     {
