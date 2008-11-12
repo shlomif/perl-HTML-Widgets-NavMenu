@@ -31,7 +31,7 @@ sub _init
     return 0;
 }
 
-=head2 $self->gen_ul_tag(depth => $depth);
+=head2 $self->gen_ul_tag({depth => $depth});
 
 Generate a UL tag of depth $depth.
 
@@ -40,11 +40,9 @@ Generate a UL tag of depth $depth.
 # Depth is 1 for the uppermost depth.
 sub gen_ul_tag
 {
-    my $self = shift;
+    my ($self, $args) = @_;
 
-    my %args = (@_);
-
-    my $depth = $args{'depth'};
+    my $depth = $args->{'depth'};
 
     my $class = $self->_get_ul_class('depth' => $depth);
 
@@ -104,7 +102,13 @@ sub _start_root
 {
     my $self = shift;
     
-    $self->_add_tags($self->gen_ul_tag('depth' => $self->stack->len()));
+    $self->_add_tags(
+        $self->gen_ul_tag(
+            {
+                'depth' => $self->stack->len()
+            }
+        )
+    );
 }
 
 sub _start_sep
@@ -129,7 +133,11 @@ Gets the tags to open a new sub menu.
 sub get_open_sub_menu_tags
 {
     my $self = shift;
-    return ("<br />", $self->gen_ul_tag('depth' => $self->stack->len()));
+    return ("<br />", 
+        $self->gen_ul_tag(
+            {'depth' => $self->stack->len()}
+        )
+    );
 }
 
 sub _start_handle_non_role
@@ -172,7 +180,13 @@ sub _end_sep
 {
     my $self = shift;
 
-    $self->_add_tags($self->gen_ul_tag('depth' => $self->stack->len()-1));
+    $self->_add_tags(
+        $self->gen_ul_tag(
+            {
+                'depth' => $self->stack->len()-1
+            }
+        )
+    );
 }
 
 sub _end_handle_role

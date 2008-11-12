@@ -11,7 +11,7 @@ sub get_open_sub_menu_tags
 {
     my $self = shift;
     return ("<br class=\"hello\" />", 
-        $self->gen_ul_tag('depth' => $self->stack->len()));
+        $self->gen_ul_tag({'depth' => $self->stack->len()}));
 }
 
 sub get_currently_active_text

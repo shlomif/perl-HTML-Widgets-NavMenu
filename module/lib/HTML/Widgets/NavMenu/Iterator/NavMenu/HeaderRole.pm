@@ -26,7 +26,7 @@ sub _start_handle_role
     {
         $self->_add_tags(
             "</ul>","<h2>", $self->get_link_tag(), "</h2>",
-            $self->gen_ul_tag('depth' => $self->stack->len()-1)
+            $self->gen_ul_tag({'depth' => $self->stack->len()-1})
             );
     }
     else
