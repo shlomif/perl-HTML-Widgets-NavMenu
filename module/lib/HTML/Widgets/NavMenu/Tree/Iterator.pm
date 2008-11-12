@@ -4,7 +4,6 @@ use strict;
 use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
-use base 'Class::Accessor';
 
 use HTML::Widgets::NavMenu::Tree::Iterator::Stack;
 use HTML::Widgets::NavMenu::Tree::Iterator::Item;

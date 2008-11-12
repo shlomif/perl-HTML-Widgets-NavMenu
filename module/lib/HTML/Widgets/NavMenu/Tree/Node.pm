@@ -5,8 +5,6 @@ use warnings;
 
 use base 'HTML::Widgets::NavMenu::Object';
 
-use base 'Class::Accessor';
-
 __PACKAGE__->mk_accessors(
     qw(CurrentlyActive expanded hide host role rec_url_type),
     qw(separator show_always skip subs text title url url_is_abs url_type),

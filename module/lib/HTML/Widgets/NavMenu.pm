@@ -32,7 +32,6 @@ package HTML::Widgets::NavMenu::NodeDescription;
 use strict;
 
 use base qw(HTML::Widgets::NavMenu::Object);
-use base qw(Class::Accessor);
 
 __PACKAGE__->mk_accessors(
     qw(host host_url title label direct_url url_type)

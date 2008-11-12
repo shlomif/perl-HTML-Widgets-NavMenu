@@ -5,8 +5,6 @@ use warnings;
 
 use base 'HTML::Widgets::NavMenu::Object';
 
-use base 'Class::Accessor';
-
 __PACKAGE__->mk_accessors(
     qw(_capture),
     );

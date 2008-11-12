@@ -5,8 +5,6 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Tree::Iterator);
 
-use base 'Class::Accessor';
-
 __PACKAGE__->mk_accessors(qw(
     nav_menu
     ));

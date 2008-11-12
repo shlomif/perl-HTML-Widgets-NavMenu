@@ -3,6 +3,8 @@ package HTML::Widgets::NavMenu::Object;
 use strict;
 use warnings;
 
+use base 'Class::Accessor';
+
 sub new
 {
     my $class = shift;
