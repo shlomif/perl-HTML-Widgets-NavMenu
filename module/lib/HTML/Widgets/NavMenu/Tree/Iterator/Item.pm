@@ -17,20 +17,18 @@ For internal use only.
 
 sub _init
 {
-    my $self = shift;
+    my ($self, $args) = @_;
 
-    my %args = (@_);
-
-    $self->{'node'} = $args{'node'} or
+    $self->{'node'} = $args->{'node'} or
         die "node not specified!";
 
-    my $subs = $args{'subs'} or
+    my $subs = $args->{'subs'} or
         die "subs not specified!";
 
     $self->{'subs'} = $subs;
     $self->{'sub_idx'} = -1;
     $self->{'visited'} = 0;
-    $self->{'accum_state'} = $args{'accum_state'} or
+    $self->{'accum_state'} = $args->{'accum_state'} or
         die "accum_state not specified!";
     
     return 0;

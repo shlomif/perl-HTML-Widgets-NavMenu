@@ -17,7 +17,7 @@ sub does_throw_exception
     my $new_item;
     eval {
         $new_item = HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
-            @$args
+            {@$args}
             );
     };
     if ($@)
@@ -57,9 +57,11 @@ sub does_throw_exception
 {
     my $item = 
         HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
-            'node' => "Hello",
-            'subs' => [],
-            'accum_state' => 5,
+            {
+                'node' => "Hello",
+                'subs' => [],
+                'accum_state' => 5,
+            }
         );
     
     # TEST
@@ -69,9 +71,11 @@ sub does_throw_exception
 {
     my $item = 
         HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
-            'node' => "Hello",
-            'subs' => [],
-            'accum_state' => "Foobardom",
+            {
+                'node' => "Hello",
+                'subs' => [],
+                'accum_state' => "Foobardom",
+            }
         );
     
     # TEST
@@ -81,9 +85,11 @@ sub does_throw_exception
 {
     my $item =
         HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
-            'node' => "Hello",
-            'subs' => ["ONE", "Two", "threE3", "4.0"],
-            'accum_state' => 5,
+            {
+                'node' => "Hello",
+                'subs' => ["ONE", "Two", "threE3", "4.0"],
+                'accum_state' => 5,
+            }
         );
     
     

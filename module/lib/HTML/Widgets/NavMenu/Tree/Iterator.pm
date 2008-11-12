@@ -48,10 +48,10 @@ sub top
 
 sub _construct_new_item
 {
-    my $self = shift;
+    my ($self, $args) = @_;
 
     return HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
-        @_
+        $args
     );
 }
 
@@ -71,13 +71,15 @@ sub get_new_item
 
     return
         $self->_construct_new_item(
-            'node' => $node,
-            'subs' => $self->get_node_subs('node' => $node),
-            'accum_state' => 
-                $self->get_new_accum_state(
-                    'item' => $parent_item,
-                    'node' => $node,
-                ),
+            {
+                'node' => $node,
+                'subs' => $self->get_node_subs('node' => $node),
+                'accum_state' => 
+                    $self->get_new_accum_state(
+                        'item' => $parent_item,
+                        'node' => $node,
+                    ),
+            }
         );
 }
 

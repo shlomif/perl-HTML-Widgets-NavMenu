@@ -2,6 +2,8 @@ Revision history for Perl extension Shlomif::NavMenu.
 
     - Refactoring: Made HTML::Widgets::NavMenu::Object a sub-class of 
     Class::Accessor to remove many "use base" calls to it.
+    - In progress - converting a flat %args hash (splatted into the @_)
+    into a single $args hash-ref.
 
 1.0201    Fri Mar 28 17:46:59 IDT 2008
     - Fixed a case where a non-capturing expand in a node inside a
