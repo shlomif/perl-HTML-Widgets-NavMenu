@@ -67,7 +67,7 @@ sub get_initial_node
     return $self->nav_menu->_get_traversed_tree();
 }
 
-=head2 $self->get_node_subs({ args => $node})
+=head2 $self->get_node_subs({ node => $node})
 
 Gets the subs of the node.
 
@@ -76,9 +76,10 @@ Gets the subs of the node.
 
 sub get_node_subs
 {
-    my $self = shift;
-    my %args = (@_);
-    my $node = $args{'node'};
+    my ($self, $args) = @_;
+
+    my $node = $args->{'node'};
+
     return [ @{$node->subs()} ];
 }
 

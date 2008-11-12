@@ -72,7 +72,7 @@ sub get_new_item
         $self->_construct_new_item(
             {
                 'node' => $node,
-                'subs' => $self->get_node_subs('node' => $node),
+                'subs' => $self->get_node_subs( { 'node' => $node } ),
                 'accum_state' => 
                     $self->get_new_accum_state(
                         'item' => $parent_item,

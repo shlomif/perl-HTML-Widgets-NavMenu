@@ -36,9 +36,10 @@ sub get_initial_node
 
 sub get_node_subs
 {
-    my $self = shift;
-    my %args = (@_);
-    my $node = $args{'node'};
+    my ($self, $args) = @_;
+
+    my $node = $args->{'node'};
+
     return
         exists($node->{'childs'}) ?
             [ @{$node->{'childs'}} ] :
