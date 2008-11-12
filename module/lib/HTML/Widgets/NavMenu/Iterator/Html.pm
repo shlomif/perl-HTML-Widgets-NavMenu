@@ -144,9 +144,7 @@ sub get_a_tag
 
     $tag .= " href=\"" .
         escape_html(
-            $self->nav_menu()->_get_url_to_item(
-                'item' => $item,
-            )
+            $self->nav_menu()->_get_url_to_item($item)
         ). "\"";
     if (defined($title))
     {

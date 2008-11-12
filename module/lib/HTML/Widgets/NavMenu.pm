@@ -362,8 +362,7 @@ sub get_cross_host_rel_url
 sub _get_url_to_item
 {
     my $self = shift;
-    my (%args) = (@_);
-    my $item = $args{'item'};
+    my $item = shift;
 
     return $self->get_cross_host_rel_url_ref(
         {
@@ -657,7 +656,7 @@ sub get_rel_url_from_coords
     my $node_ret = $iterator->find_node_by_coords($coords);
     my $item = $node_ret->{'item'};
 
-    return $self->_get_url_to_item('item' => $item);
+    return $self->_get_url_to_item($item);
 }
 
 =end comment
@@ -762,8 +761,7 @@ sub _get_leading_path_of_coords
                     'host_url' => $host_url,
                     'title' => $node->title(),
                     'label' => $node->text(),
-                    'direct_url' =>
-                    $self->_get_url_to_item('item' => $item),
+                    'direct_url' => $self->_get_url_to_item($item),
                     'url_type' => $url_type,
                 }
             );
