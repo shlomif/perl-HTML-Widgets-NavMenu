@@ -98,11 +98,10 @@ use vars qw(@ISA);
 sub get_node_from_sub
 {
     my $self = shift;
+    my $args = shift;
 
-    my %args = (@_);
-
-    my $item = $args{'item'};
-    my $sub = $args{'sub'};
+    my $item = $args->{'item'};
+    my $sub = $args->{'sub'};
     my $node = $item->_node();
 
     return $node->{'subs_db'}->{$sub};

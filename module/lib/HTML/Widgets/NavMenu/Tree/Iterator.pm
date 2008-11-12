@@ -133,8 +133,10 @@ sub traverse
             push @{$self->coords()}, $top_item->_visited_index();
             $self->_push_into_stack(
                 $self->get_node_from_sub(
-                    'item' => $top_item,
-                    'sub' => $sub_item,
+                    {
+                        'item' => $top_item,
+                        'sub' => $sub_item,
+                    }
                 ),
             );
             next MAIN_LOOP;
@@ -160,10 +162,9 @@ returned by get_node_subs() in a different way than the default.
 sub get_node_from_sub
 {
     my $self = shift;
+    my $args = shift;
 
-    my %args = (@_);
-
-    return $args{'sub'};
+    return $args->{'sub'};
 }
 
 =head2 $self->find_node_by_coords($coords, $callback)
@@ -203,8 +204,10 @@ sub find_node_by_coords
                 {
                     'node' =>
                     $self->get_node_from_sub(
-                        'item' => $item,
-                        'sub' => $item->_get_sub($c),
+                        {
+                            'item' => $item,
+                            'sub' => $item->_get_sub($c),
+                        }
                     ),
                     'parent_item' => $item,
                 }
