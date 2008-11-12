@@ -318,14 +318,14 @@ sub _get_full_abs_url
     return ($self->{hosts}->{$host}->{base_url} . $host_url);
 }
 
-sub get_cross_host_rel_url
+sub get_cross_host_rel_url_ref
 {
-    my $self = shift;
-    my %args = (@_);
-    my $host = $args{host};
-    my $host_url = $args{host_url};
-    my $url_type = $args{url_type};
-    my $url_is_abs = $args{url_is_abs};
+    my ($self, $args) = @_;
+
+    my $host = $args->{host};
+    my $host_url = $args->{host_url};
+    my $url_type = $args->{url_type};
+    my $url_is_abs = $args->{url_is_abs};
 
     if ($url_is_abs)
     {
@@ -333,10 +333,11 @@ sub get_cross_host_rel_url
     }
     elsif (($host ne $self->current_host()) || ($url_type eq "full_abs"))
     {
-        return $self->_get_full_abs_url(\%args);
+        return $self->_get_full_abs_url($args);
     }
     elsif ($url_type eq "rel")
     {
+        # TODO : convert to a method.
         return _get_relative_url(
             $self->path_info(), $host_url, $self->{'no_leading_dot'}
         );
@@ -351,17 +352,26 @@ sub get_cross_host_rel_url
     }
 }
 
+sub get_cross_host_rel_url
+{
+    my $self = shift;
+
+    return $self->get_cross_host_rel_url_ref({@_});
+}
+
 sub _get_url_to_item
 {
     my $self = shift;
     my (%args) = (@_);
     my $item = $args{'item'};
 
-    return $self->get_cross_host_rel_url(
-        'host' => $item->_accum_state()->{'host'},
-        'host_url' => ($item->_node->url() || ""),
-        'url_type' => $item->get_url_type(),
-        'url_is_abs' => $item->_node->url_is_abs(),
+    return $self->get_cross_host_rel_url_ref(
+        {
+            'host' => $item->_accum_state()->{'host'},
+            'host_url' => ($item->_node->url() || ""),
+            'url_type' => $item->get_url_type(),
+            'url_is_abs' => $item->_node->url_is_abs(),
+        }
     );
 }
 
@@ -1072,10 +1082,10 @@ This function can be called to generate a site map based on the tree of
 contents. It returns a reference to an array containing the tags of the 
 site map.
 
-=head2 $url = $nav_menu->get_cross_host_rel_url(...)
+=head2 $url = $nav_menu->get_cross_host_rel_url_ref({...})
 
 This function can be called to calculate a URL to a different part of the
-site. It accepts four named arguments:
+site. It accepts four named arguments, passed as a hash-ref:
 
 =over 8
 
@@ -1096,6 +1106,12 @@ C<'rel'>, C<'full_abs'> or C<'site_abs'>.
 A flag that indicates if C<'host_url'> is already absolute.
 
 =back
+
+=head2 $url = $nav_menu->get_cross_host_rel_url(...)
+
+This is like get_cross_host_rel_url_ref() except that the arguments
+are clobbered into the arguments list. It is kept here for compatibility
+sake.
 
 =head1 The Input Tree of Contents
 
