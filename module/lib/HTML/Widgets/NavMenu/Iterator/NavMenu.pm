@@ -44,7 +44,7 @@ sub gen_ul_tag
 
     my $depth = $args->{'depth'};
 
-    my $class = $self->_get_ul_class('depth' => $depth);
+    my $class = $self->_get_ul_class({'depth' => $depth});
 
     return "<ul" .
         (defined($class) ?
@@ -55,11 +55,9 @@ sub gen_ul_tag
 
 sub _get_ul_class
 {
-    my $self = shift;
+    my ($self, $args) = @_;
 
-    my %args = (@_);
-
-    my $depth = $args{'depth'};
+    my $depth = $args->{'depth'};
 
     return $self->{'ul_classes'}->[$depth-1];
 }
