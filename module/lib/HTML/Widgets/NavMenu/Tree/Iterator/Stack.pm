@@ -5,11 +5,13 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
 
+__PACKAGE__->mk_accessors(qw(_items));
+
 sub _init
 {
     my $self = shift;
 
-    $self->{'items'} = [];
+    $self->reset();
 
     return 0;
 }
@@ -29,7 +31,9 @@ sub push
 {
     my $self = shift;
     my $item = shift;
-    push @{$self->{'items'}}, $item;
+
+    push @{$self->_items()}, $item;
+
     return 0;
 }
 
@@ -42,7 +46,8 @@ Pushes an item.
 sub len
 {
     my $self = shift;
-    return scalar(@{$self->{'items'}});
+
+    return scalar(@{$self->_items()});
 }
 
 =head2 $s->len($myitem)
@@ -54,7 +59,7 @@ Returns the number of elements.
 sub top
 {
     my $self = shift;
-    return $self->{'items'}->[-1];
+    return $self->_items->[-1];
 }
 
 =head2 $s->top()
@@ -68,7 +73,7 @@ sub item
 {
     my $self = shift;
     my $index = shift;
-    return $self->{'items'}->[$index];
+    return $self->_items->[$index];
 }
 
 =head2 my $item = $s->item($index)
@@ -80,7 +85,7 @@ Returns the item of index C<$index>.
 sub pop
 {
     my $self = shift;
-    return pop(@{$self->{'items'}});
+    return pop(@{$self->_items()});
 }
 
 =head2 my $item = $s->pop()
@@ -104,7 +109,9 @@ Returns true if the stack is empty.
 sub reset
 {
     my $self = shift;
-    @{$self->{'items'}} = ();
+
+    $self->_items([]);
+
     return 0;
 }
 
