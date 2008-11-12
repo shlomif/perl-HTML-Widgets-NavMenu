@@ -163,9 +163,8 @@ sub _get_leading_path_coords
 
 package HTML::Widgets::NavMenu;
 
-use strict;
+use base 'HTML::Widgets::NavMenu::Object';
 
-use lib ".";
 use HTML::Widgets::NavMenu::Url;
 use Error qw(:try);
 
@@ -173,15 +172,6 @@ require HTML::Widgets::NavMenu::Iterator::NavMenu;
 require HTML::Widgets::NavMenu::Iterator::SiteMap;
 require HTML::Widgets::NavMenu::Tree::Node;
 require HTML::Widgets::NavMenu::Predicate;
-
-sub new
-{
-    my $class = shift;
-    my $self = {};
-    bless $self, $class;
-    $self->_init(@_);
-    return $self;
-}
 
 sub _init
 {
@@ -320,10 +310,10 @@ sub current_host
 
 sub _get_full_abs_url
 {
-    my $self = shift;
-    my %args = (@_);
-    my $host = $args{host};
-    my $host_url = $args{host_url};
+    my ($self, $args) = @_;
+
+    my $host = $args->{host};
+    my $host_url = $args->{host_url};
     
     return ($self->{hosts}->{$host}->{base_url} . $host_url);
 }
@@ -343,7 +333,7 @@ sub get_cross_host_rel_url
     }
     elsif (($host ne $self->current_host()) || ($url_type eq "full_abs"))
     {
-        return $self->_get_full_abs_url(@_);
+        return $self->_get_full_abs_url(\%args);
     }
     elsif ($url_type eq "rel")
     {
