@@ -393,10 +393,9 @@ sub _create_predicate
 
 sub _create_new_nav_menu_item
 {
-    my $self = shift;
-    my %args = (@_);
+    my ($self, $args) = @_;
 
-    my $sub_contents = $args{sub_contents};
+    my $sub_contents = $args->{sub_contents};
 
     my $new_item = $self->_gen_blank_nav_menu_tree_node();
 
@@ -435,7 +434,7 @@ sub _render_tree_contents
 
     my $new_item =
         $self->_create_new_nav_menu_item(
-            %args,
+            \%args,
         );
 
     if (exists($sub_contents->{subs}))
