@@ -425,16 +425,13 @@ sub _create_new_nav_menu_item
 sub _render_tree_contents
 {
     my $self = shift;
-
-    my %args = (@_);
+    my $sub_contents = shift;
 
     my $path_info = $self->path_info();
 
-    my $sub_contents = $args{sub_contents};
-
     my $new_item =
         $self->_create_new_nav_menu_item(
-            \%args,
+            { sub_contents => $sub_contents },
         );
 
     if (exists($sub_contents->{subs}))
@@ -443,7 +440,7 @@ sub _render_tree_contents
         {
             $new_item->add_sub(
                 $self->_render_tree_contents(
-                    'sub_contents' => $sub_contents_sub,
+                    $sub_contents_sub,
                 )
             );
         }
@@ -686,7 +683,7 @@ sub _gen_traversed_tree
 
     my $tree = 
         $self->_render_tree_contents(
-            'sub_contents' => $self->{tree_contents},
+            $self->{tree_contents},
             );
 
     my $find_coords_iterator =
