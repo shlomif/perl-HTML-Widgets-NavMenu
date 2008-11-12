@@ -39,11 +39,9 @@ __PACKAGE__->mk_accessors(
 
 sub _init
 {
-    my $self = shift;
+    my ($self, $args) = @_;
 
-    my %args = (@_);
-
-    while (my ($k, $v) = each(%args))
+    while (my ($k, $v) = each(%$args))
     {
         $self->set($k,$v);
     }
@@ -759,13 +757,15 @@ sub _get_leading_path_of_coords
 
         push @leading_path,
             HTML::Widgets::NavMenu::LeadingPath::Component->new(
-                'host' => $host,
-                'host_url' => $host_url,
-                'title' => $node->title(),
-                'label' => $node->text(),
-                'direct_url' =>
+                {
+                    'host' => $host,
+                    'host_url' => $host_url,
+                    'title' => $node->title(),
+                    'label' => $node->text(),
+                    'direct_url' =>
                     $self->_get_url_to_item('item' => $item),
-                'url_type' => $url_type,
+                    'url_type' => $url_type,
+                }
             );
 
         if ((scalar(@$coords) == 1) && ($coords->[0] == 0))

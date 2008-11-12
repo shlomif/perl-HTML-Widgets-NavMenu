@@ -24,12 +24,10 @@ For internal use only.
 
 sub _init
 {
-    my $self = shift;
+    my ($self, $args) = @_;
 
-    my (%args) = (@_);
-
-    $self->name($args{'name'});
-    $self->attributes($args{'attributes'});
+    $self->name($args->{'name'});
+    $self->attributes($args->{'attributes'});
 
     return 0;
 }

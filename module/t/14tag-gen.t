@@ -11,14 +11,16 @@ use_ok ('HTML::Widgets::NavMenu::TagGen'); # TEST
 {
     my $test_tag = 
         HTML::Widgets::NavMenu::TagGen->new(
-            'name' => "a",
-            'attributes' =>
             {
-                'href' => { 'escape' => 1, },
-                'title' => { 'escape' => 0, },
-                'id' => { 'escape' => 1, },
-                'iname' => { 'escape' => 0, },
-            },
+                'name' => "a",
+                'attributes' =>
+                {
+                    'href' => { 'escape' => 1, },
+                    'title' => { 'escape' => 0, },
+                    'id' => { 'escape' => 1, },
+                    'iname' => { 'escape' => 0, },
+                },
+            }
         );
 
     # TEST
