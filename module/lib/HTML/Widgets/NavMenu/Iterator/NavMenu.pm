@@ -21,15 +21,12 @@ For internal use only.
 sub _init
 {
     my $self = shift;
+    my $args = shift;
 
-    $self->SUPER::_init(@_);
-
-    my %args = (@_);
-
-    my $ul_classes = $args{'ul_classes'};
+    $self->SUPER::_init($args);
 
     # Make a fresh copy just to be on the safe side.
-    $self->{'ul_classes'} = [ @$ul_classes ];
+    $self->{'ul_classes'} = [ @{$args->{'ul_classes'}} ];
 
     return 0;
 }

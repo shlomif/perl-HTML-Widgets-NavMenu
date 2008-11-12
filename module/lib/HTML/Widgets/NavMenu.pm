@@ -66,12 +66,11 @@ use base 'HTML::Widgets::NavMenu::Iterator::Base';
 sub _init
 {
     my $self = shift;
+    my $args = shift;
 
-    my %args = (@_);
+    $self->SUPER::_init($args);
 
-    $self->SUPER::_init(@_);
-
-    $self->{'tree'} = $args{'tree'};
+    $self->{'tree'} = $args->{'tree'};
 
     $self->{'item_found'} = 0;
     
@@ -214,8 +213,11 @@ sub _get_nav_menu_traverser_args
 {
     my $self = shift;
 
-    return  ('nav_menu' => $self,
-            'ul_classes' => $self->{'ul_classes'});
+    return
+    {
+        'nav_menu' => $self,
+        'ul_classes' => $self->{'ul_classes'}
+    };
 }
 
 sub _get_nav_menu_traverser
@@ -458,7 +460,9 @@ sub gen_site_map
 
     my $iterator = 
         HTML::Widgets::NavMenu::Iterator::SiteMap->new(
-            'nav_menu' => $self,
+            {
+               'nav_menu' => $self,
+            }
         );
 
     $iterator->traverse();
@@ -690,8 +694,10 @@ sub _gen_traversed_tree
 
     my $find_coords_iterator =
         HTML::Widgets::NavMenu::Iterator::GetCurrentlyActive->new(
-            'nav_menu' => $self,
-            'tree' => $tree,
+            {
+                'nav_menu' => $self,
+                'tree' => $tree,
+            }
         );
 
     $find_coords_iterator->traverse();

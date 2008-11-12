@@ -23,12 +23,11 @@ For internal use only.
 sub _init
 {
     my $self = shift;
+    my $args = shift;
 
     $self->SUPER::_init(@_);
 
-    my %args = (@_);
-
-    $self->nav_menu($args{'nav_menu'}) or
+    $self->nav_menu($args->{'nav_menu'}) or
         die "nav_menu not specified!";
 
     $self->{'html'} = [];

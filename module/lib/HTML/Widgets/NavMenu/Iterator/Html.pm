@@ -34,9 +34,10 @@ use HTML::Widgets::NavMenu::EscapeHtml;
 sub _construct_new_item
 {
     my $self = shift;
+    my $args = shift;
 
     return HTML::Widgets::NavMenu::Iterator::Html::Item->new(
-        @_
+        $args,
     );
 }
 
