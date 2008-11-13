@@ -182,6 +182,7 @@ require HTML::Widgets::NavMenu::Tree::Node;
 require HTML::Widgets::NavMenu::Predicate;
 
 __PACKAGE__->mk_accessors(qw(
+    _current_coords
     current_host
     _hosts
     _no_leading_dot
@@ -237,10 +238,10 @@ sub _get_current_coords
 {
     my $self = shift;
 
-    # This is to make sure $self->{current_coords} is generated.
+    # This is to make sure $self->_current_coords() is generated.
     $self->_get_traversed_tree();
 
-    return [ @{$self->{current_coords}} ];
+    return [ @{$self->_current_coords()} ];
 }
 
 sub _register_path_info
@@ -680,7 +681,7 @@ sub _get_traversed_tree
     {
         my $gen_retval = $self->_gen_traversed_tree();
         $self->{'traversed_tree'} = $gen_retval->{'tree'};
-        $self->{'current_coords'} = $gen_retval->{'current_coords'};
+        $self->_current_coords($gen_retval->{'current_coords'});
         $self->{'leading_path_coords'} = $gen_retval->{'leading_path_coords'};
     }
     return $self->{'traversed_tree'};
