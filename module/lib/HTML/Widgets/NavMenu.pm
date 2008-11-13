@@ -187,6 +187,7 @@ __PACKAGE__->mk_accessors(qw(
     _hosts
     _no_leading_dot
     path_info
+    _traversed_tree
     _tree_contents
     _ul_classes
     ));
@@ -672,14 +673,14 @@ sub _get_traversed_tree
 {
     my $self = shift;
 
-    if (! $self->{'traversed_tree'})
+    if (! $self->_traversed_tree())
     {
         my $gen_retval = $self->_gen_traversed_tree();
-        $self->{'traversed_tree'} = $gen_retval->{'tree'};
+        $self->_traversed_tree($gen_retval->{'tree'});
         $self->_current_coords($gen_retval->{'current_coords'});
         $self->{'leading_path_coords'} = $gen_retval->{'leading_path_coords'};
     }
-    return $self->{'traversed_tree'};
+    return $self->_traversed_tree();
 }
 
 sub _gen_traversed_tree
