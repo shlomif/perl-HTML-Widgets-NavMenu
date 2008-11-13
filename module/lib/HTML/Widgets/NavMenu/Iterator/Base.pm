@@ -25,7 +25,7 @@ sub _init
     my $self = shift;
     my $args = shift;
 
-    $self->SUPER::_init(@_);
+    $self->SUPER::_init($args);
 
     $self->nav_menu($args->{'nav_menu'}) or
         die "nav_menu not specified!";
