@@ -34,8 +34,6 @@ sub _start_regular
     my $top_item = $self->top;
     my $node = $self->top->_node();
 
-    my $nav_menu = $self->{'nav_menu'};
-
     $self->_add_tags("<li>");
     my $tag = $self->get_a_tag();
     my $title = $node->title();
