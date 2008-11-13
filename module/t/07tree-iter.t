@@ -12,9 +12,9 @@ sub _init
 
     $self->SUPER::_init(@_);
 
-    my %args = (@_);
+    my $args = shift;
 
-    $self->{'data'} = $args{'data'};
+    $self->{'data'} = $args->{'data'};
 
     $self->{'results'} = [];
 
@@ -121,7 +121,9 @@ sub test_traverse
     $class ||= "MyIter";
     my $traverser =
         $class->new(
-            'data' => $data
+            {
+                'data' => $data
+            },
         );
 
     $traverser->traverse();
