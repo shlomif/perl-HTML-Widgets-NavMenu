@@ -5,6 +5,14 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
 
+__PACKAGE__->mk_accessors(qw(
+    _node
+    _subs
+    _sub_idx
+    _visited
+    _accum_state
+));
+
 =head1 NAME
 
 HTML::Widgets::NavMenu::Tree::Iterator::Item - an item for the tree iterator.
@@ -19,46 +27,36 @@ sub _init
 {
     my ($self, $args) = @_;
 
-    $self->{'node'} = $args->{'node'} or
+    $self->_node($args->{'node'}) or
         die "node not specified!";
 
-    my $subs = $args->{'subs'} or
+    $self->_subs($args->{'subs'}) or
         die "subs not specified!";
 
-    $self->{'subs'} = $subs;
-    $self->{'sub_idx'} = -1;
-    $self->{'visited'} = 0;
-    $self->{'accum_state'} = $args->{'accum_state'} or
+    $self->_sub_idx(-1);
+    $self->_visited(0);
+
+    $self->_accum_state($args->{'accum_state'}) or
         die "accum_state not specified!";
     
     return 0;
 }
 
-sub _node
-{
-    my $self = shift;
-    return $self->{'node'};
-}
-
-sub _accum_state
-{
-    my $self = shift;
-    return $self->{'accum_state'};
-}
-
 sub _is_visited
 {
     my $self = shift;
-    return $self->{'visited'};
+    return $self->_visited();
 }
 
 sub _visit
 {
     my $self = shift;
-    $self->{'visited'} = 1;
+
+    $self->_visited(1);
+
     if ($self->_num_subs_to_go())
     {
-        return $self->{'subs'}->[++$self->{'sub_idx'}];
+        return $self->_subs()->[$self->_sub_idx($self->_sub_idx()+1)];
     }
     else
     {
@@ -70,26 +68,27 @@ sub _visited_index
 {
     my $self = shift;
 
-    return $self->{'sub_idx'};
+    return $self->_sub_idx();
 }
 
 sub _num_subs_to_go
 {
     my $self = shift;
-    return $self->_num_subs() - $self->{'sub_idx'} - 1;
+    return $self->_num_subs() - $self->_sub_idx() - 1;
 }
 
 sub _num_subs
 {
     my $self = shift;
-    return scalar(@{$self->{'subs'}});
+    return scalar(@{$self->_subs()});
 }
 
 sub _get_sub
 {
     my $self = shift;
     my $sub_num = shift;
-    return $self->{'subs'}->[$sub_num];
+
+    return $self->_subs()->[$sub_num];
 }
 
 =head1 COPYRIGHT & LICENSE
