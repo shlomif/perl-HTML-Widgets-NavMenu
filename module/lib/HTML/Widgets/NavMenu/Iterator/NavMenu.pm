@@ -7,6 +7,10 @@ use base qw(HTML::Widgets::NavMenu::Iterator::Html);
 
 use HTML::Widgets::NavMenu::EscapeHtml;
 
+__PACKAGE__->mk_accessors(qw(
+    _ul_classes
+    ));
+
 =head1 NAME
 
 HTML::Widgets::NavMenu::Iterator::NavMenu - navmenu iterator.
@@ -26,7 +30,7 @@ sub _init
     $self->SUPER::_init($args);
 
     # Make a fresh copy just to be on the safe side.
-    $self->{'ul_classes'} = [ @{$args->{'ul_classes'}} ];
+    $self->_ul_classes([ @{$args->{'ul_classes'}} ]);
 
     return 0;
 }
@@ -59,7 +63,7 @@ sub _get_ul_class
 
     my $depth = $args->{'depth'};
 
-    return $self->{'ul_classes'}->[$depth-1];
+    return $self->_ul_classes->[$depth-1];
 }
 
 =head2 get_currently_active_text ( $node )
