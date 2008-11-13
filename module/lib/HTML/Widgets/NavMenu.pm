@@ -182,6 +182,7 @@ require HTML::Widgets::NavMenu::Tree::Node;
 require HTML::Widgets::NavMenu::Predicate;
 
 __PACKAGE__->mk_accessors(qw(
+    current_host
     _hosts
     _tree_contents
     ));
@@ -197,10 +198,8 @@ sub _init
     $self->_hosts($args{hosts});
     $self->_tree_contents($args{tree_contents});
 
-    my $current_host = $args{current_host} 
+    $self->current_host($args{current_host})
         or die "Current host was not specified.";
-
-    $self->{current_host} = $current_host;
 
     $self->{'ul_classes'} = ($args{'ul_classes'} || []);
 
@@ -313,12 +312,6 @@ sub path_info
 {
     my $self = shift;
     return $self->{path_info};
-}
-
-sub current_host
-{
-    my $self = shift;
-    return $self->{'current_host'};
 }
 
 sub _get_full_abs_url
