@@ -186,6 +186,7 @@ __PACKAGE__->mk_accessors(qw(
     current_host
     _hosts
     _no_leading_dot
+    path_info
     _tree_contents
     _ul_classes
     ));
@@ -272,7 +273,7 @@ sub _register_path_info
 
     $path_info =~ s!^\/!!;
 
-    $self->{path_info} = $path_info;
+    $self->path_info($path_info);
 
     return 0;
 }
@@ -310,12 +311,6 @@ sub _get_relative_url
             $no_leading_dot,
         );
    return $ret;
-}
-
-sub path_info
-{
-    my $self = shift;
-    return $self->{path_info};
 }
 
 sub _get_full_abs_url
