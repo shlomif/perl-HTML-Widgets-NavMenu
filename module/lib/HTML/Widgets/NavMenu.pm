@@ -185,6 +185,7 @@ __PACKAGE__->mk_accessors(qw(
     current_host
     _hosts
     _tree_contents
+    _ul_classes
     ));
 
 sub _init
@@ -201,7 +202,7 @@ sub _init
     $self->current_host($args{current_host})
         or die "Current host was not specified.";
 
-    $self->{'ul_classes'} = ($args{'ul_classes'} || []);
+    $self->_ul_classes($args{'ul_classes'} || []);
 
     $self->{'no_leading_dot'} =
         exists($args{'no_leading_dot'}) ? $args{'no_leading_dot'} : 0;
@@ -216,7 +217,7 @@ sub _get_nav_menu_traverser_args
     return
     {
         'nav_menu' => $self,
-        'ul_classes' => $self->{'ul_classes'}
+        'ul_classes' => $self->_ul_classes(),
     };
 }
 
