@@ -3,11 +3,13 @@ package HTML::Widgets::NavMenu::Url;
 use strict;
 use warnings;
 
-use HTML::Widgets::NavMenu::Object;
+use base 'HTML::Widgets::NavMenu::Object';
 
-use vars qw(@ISA);
-
-@ISA=qw(HTML::Widgets::NavMenu::Object);
+__PACKAGE__->mk_accessors(qw(
+    _url
+    _is_dir
+    _mode
+    ));
 
 =head1 NAME
 
@@ -24,13 +26,18 @@ sub _init
 {
     my $self = shift;
 
-    my $url = shift;
-    $self->{'url'} = ((ref($url) eq "ARRAY") ? 
-        [ @$url ] :
-        [ split(/\//, $url) ])
-        ;
-    $self->{'_is_dir'} = shift || 0;
-    $self->{'mode'} = shift || 'server';
+    my ($url, $is_dir, $mode) = @_;
+
+    # TODO - extract a method.
+    $self->_url(
+        (ref($url) eq "ARRAY")
+            ? [ @$url ]
+            : [ split(/\//, $url) ]
+    );
+
+    $self->_is_dir($is_dir || 0);
+
+    $self->_mode($mode || 'server');
 
     return 0;
 }
@@ -39,14 +46,7 @@ sub _get_url
 {
     my $self = shift;
 
-    return [ @{$self->{'url'}} ];
-}
-
-sub _is_dir
-{
-    my $self = shift;
-                                   
-    return $self->{'_is_dir'};
+    return [ @{$self->_url()} ];
 }
 
 sub _get_relative_url
@@ -104,7 +104,7 @@ sub _get_url_worker
         }
     }
 
-    if (($base->{'mode'} eq "harddisk") && ($to->_is_dir()))
+    if (($base->_mode() eq "harddisk") && ($to->_is_dir()))
     {
         push @other_url, "index.html";
     }
@@ -124,7 +124,7 @@ sub _get_url_worker
                 pop(@this_url);
             }
             $ret .= join("/", (map { ".." } @this_url), @other_url);
-            if ($to->_is_dir() && ($base->{'mode'} ne "harddisk"))
+            if ($to->_is_dir() && ($base->_mode() ne "harddisk"))
             {
                 $ret .= "/";
             }
@@ -134,7 +134,7 @@ sub _get_url_worker
     {
         my @components = ((map { ".." } @this_url[1..$#this_url]), @other_url);
         $ret .= ($prefix . join("/", @components)); 
-        if (($to->_is_dir()) && ($base->{'mode'} ne "harddisk") && scalar(@components))
+        if (($to->_is_dir()) && ($base->_mode() ne "harddisk") && scalar(@components))
         {
             $ret .= "/";
         }
