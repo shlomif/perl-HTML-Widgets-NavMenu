@@ -61,6 +61,14 @@ package HTML::Widgets::NavMenu::Iterator::GetCurrentlyActive;
 
 use base 'HTML::Widgets::NavMenu::Iterator::Base';
 
+__PACKAGE__->mk_accessors(qw(
+    _item_found
+    leading_path_coords
+    _ret_coords
+    _temp_coords
+    _tree
+    ));
+
 sub _init
 {
     my $self = shift;
@@ -68,9 +76,9 @@ sub _init
 
     $self->SUPER::_init($args);
 
-    $self->{'tree'} = $args->{'tree'};
+    $self->_tree($args->{'tree'});
 
-    $self->{'item_found'} = 0;
+    $self->_item_found(0);
     
     return 0;
 }
@@ -79,7 +87,7 @@ sub get_initial_node
 {
     my $self = shift;
 
-    return $self->{'tree'};
+    return $self->_tree;
 }
 
 sub item_matches
@@ -109,26 +117,26 @@ sub node_start
     if ($self->item_matches())
     {
         my @coords = @{$self->get_coords()};
-        $self->{'ret_coords'} = [ @coords ];
-        $self->{'temp_coords'} = [ @coords, (-1) ];
+        $self->_ret_coords([ @coords ]);
+        $self->_temp_coords([ @coords, (-1) ]);
         $self->top()->_node()->mark_as_current();
-        $self->{'item_found'} = 1;
+        $self->_item_found(1);
     }
     elsif ($self->does_item_expand())
     {
         my @coords = @{$self->get_coords()};
-        $self->{'leading_path_coords'} = [ @coords];
+        $self->leading_path_coords([ @coords]);
     }
 }
 
 sub node_end
 {
     my $self = shift;
-    if ($self->{'item_found'})
+    if ($self->_item_found())
     {
         # Skip the first node, because the coords refer
         # to the nodes below it.
-        my $idx = pop(@{$self->{'temp_coords'}});
+        my $idx = pop(@{$self->_temp_coords()});
         if ($idx >= 0)
         {
             my $node = $self->top()->_node();
@@ -144,21 +152,21 @@ sub node_end
 sub node_should_recurse
 {
     my $self = shift;
-    return (! $self->{'item_found'});
+    return (! $self->_item_found());
 }
 
 sub get_final_coords
 {
     my $self = shift;
 
-    return $self->{'ret_coords'};
+    return $self->_ret_coords();
 }
 
 sub _get_leading_path_coords
 {
     my $self = shift;
 
-    return ($self->{'ret_coords'} || $self->{'leading_path_coords'});
+    return ($self->_ret_coords() || $self->leading_path_coords());
 }
 
 package HTML::Widgets::NavMenu;
