@@ -181,6 +181,10 @@ require HTML::Widgets::NavMenu::Iterator::SiteMap;
 require HTML::Widgets::NavMenu::Tree::Node;
 require HTML::Widgets::NavMenu::Predicate;
 
+__PACKAGE__->mk_accessors(qw(
+    _hosts
+    ));
+
 sub _init
 {
     my $self = shift;
@@ -189,7 +193,7 @@ sub _init
 
     $self->_register_path_info(\%args);
 
-    $self->{hosts} = $args{hosts};
+    $self->_hosts($args{hosts});
     $self->{tree_contents} = $args{tree_contents};
 
     my $current_host = $args{current_host} 
@@ -323,7 +327,7 @@ sub _get_full_abs_url
     my $host = $args->{host};
     my $host_url = $args->{host_url};
     
-    return ($self->{hosts}->{$host}->{base_url} . $host_url);
+    return ($self->_hosts->{$host}->{base_url} . $host_url);
 }
 
 sub get_cross_host_rel_url_ref
@@ -352,7 +356,7 @@ sub get_cross_host_rel_url_ref
     }
     elsif ($url_type eq "site_abs")
     {
-        return ($self->{hosts}->{$host}->{trailing_url_base} . $host_url);
+        return ($self->_hosts->{$host}->{trailing_url_base} . $host_url);
     }
     else
     {
@@ -805,8 +809,6 @@ sub render
     $iterator->traverse();
     my $html = $iterator->get_results();
     
-    my $hosts = $self->{hosts};
-
     my %nav_links;
     my %nav_links_obj;
 
