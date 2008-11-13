@@ -183,6 +183,7 @@ require HTML::Widgets::NavMenu::Predicate;
 
 __PACKAGE__->mk_accessors(qw(
     _hosts
+    _tree_contents
     ));
 
 sub _init
@@ -194,7 +195,7 @@ sub _init
     $self->_register_path_info(\%args);
 
     $self->_hosts($args{hosts});
-    $self->{tree_contents} = $args{tree_contents};
+    $self->_tree_contents($args{tree_contents});
 
     my $current_host = $args{current_host} 
         or die "Current host was not specified.";
@@ -695,7 +696,7 @@ sub _gen_traversed_tree
 
     my $tree = 
         $self->_render_tree_contents(
-            $self->{tree_contents},
+            $self->_tree_contents(),
             );
 
     my $find_coords_iterator =
