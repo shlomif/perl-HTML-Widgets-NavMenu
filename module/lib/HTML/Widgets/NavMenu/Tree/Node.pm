@@ -121,7 +121,7 @@ sub get_nth_sub
 sub _num_subs
 {
     my $self = shift;
-    return scalar(@{$self->{'subs'}});
+    return scalar(@{$self->subs()});
 }
 
 =head2 $self->list_regular_keys()
