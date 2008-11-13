@@ -6,6 +6,7 @@ use warnings;
 use base qw(HTML::Widgets::NavMenu::Tree::Iterator);
 
 __PACKAGE__->mk_accessors(qw(
+    _html
     nav_menu
     ));
 
@@ -30,7 +31,7 @@ sub _init
     $self->nav_menu($args->{'nav_menu'}) or
         die "nav_menu not specified!";
 
-    $self->{'html'} = [];
+    $self->_html([]);
 
     return 0;
 }
@@ -38,7 +39,7 @@ sub _init
 sub _add_tags
 {
     my $self = shift;
-    push (@{$self->{'html'}}, @_);
+    push (@{$self->_html()}, @_);
 }
 
 sub _is_root
@@ -144,7 +145,7 @@ sub get_results
 {
     my $self = shift;
 
-    return [ @{$self->{'html'}} ];
+    return [ @{$self->_html()} ];
 }
 
 =head1 COPYRIGHT & LICENSE
