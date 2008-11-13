@@ -63,7 +63,7 @@ use base 'HTML::Widgets::NavMenu::Iterator::Base';
 
 __PACKAGE__->mk_accessors(qw(
     _item_found
-    leading_path_coords
+    _leading_path_coords
     _ret_coords
     _temp_coords
     _tree
@@ -125,7 +125,7 @@ sub node_start
     elsif ($self->does_item_expand())
     {
         my @coords = @{$self->get_coords()};
-        $self->leading_path_coords([ @coords]);
+        $self->_leading_path_coords([ @coords]);
     }
 }
 
@@ -166,7 +166,7 @@ sub _get_leading_path_coords
 {
     my $self = shift;
 
-    return ($self->_ret_coords() || $self->leading_path_coords());
+    return ($self->_ret_coords() || $self->_leading_path_coords());
 }
 
 package HTML::Widgets::NavMenu;
@@ -186,6 +186,7 @@ __PACKAGE__->mk_accessors(qw(
     current_host
     _hosts
     _no_leading_dot
+    _leading_path_coords
     path_info
     _traversed_tree
     _tree_contents
@@ -678,7 +679,7 @@ sub _get_traversed_tree
         my $gen_retval = $self->_gen_traversed_tree();
         $self->_traversed_tree($gen_retval->{'tree'});
         $self->_current_coords($gen_retval->{'current_coords'});
-        $self->{'leading_path_coords'} = $gen_retval->{'leading_path_coords'};
+        $self->_leading_path_coords($gen_retval->{'leading_path_coords'});
     }
     return $self->_traversed_tree();
 }
@@ -779,17 +780,11 @@ sub _get_leading_path_of_coords
     return [ reverse(@leading_path) ];
 }
 
-sub _get_leading_path_coords
-{
-    my $self = shift;
-    return $self->{'leading_path_coords'};
-}
-
 sub _get_leading_path
 {
     my $self = shift;
     return $self->_get_leading_path_of_coords(
-        $self->_get_leading_path_coords()
+        $self->_leading_path_coords()
     );
 }
 
