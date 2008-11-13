@@ -6,6 +6,11 @@ use strict;
 
 use base 'HTML::Widgets::NavMenu::Tree::Iterator';
 
+__PACKAGE__->mk_accessors(qw(
+    _results
+    _data
+    ));
+
 sub _init
 {
     my $self = shift;
@@ -14,9 +19,9 @@ sub _init
 
     my $args = shift;
 
-    $self->{'data'} = $args->{'data'};
+    $self->_data($args->{'data'});
 
-    $self->{'results'} = [];
+    $self->_results([]);
 
     return 0;
 }
@@ -24,14 +29,14 @@ sub _init
 sub append
 {
     my $self = shift;
-    push @{$self->{'results'}}, @_;
+    push @{$self->_results()}, @_;
     return 0;
 }
 
 sub get_initial_node
 {
     my $self = shift;
-    return $self->{'data'};
+    return $self->_data();
 }
 
 sub get_node_subs
@@ -128,7 +133,7 @@ sub test_traverse
 
     $traverser->traverse();
 
-    is_deeply($traverser->{'results'}, $expected, $test_name);
+    is_deeply($traverser->_results(), $expected, $test_name);
 }
 
 {
