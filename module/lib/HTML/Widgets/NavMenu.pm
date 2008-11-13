@@ -184,6 +184,7 @@ require HTML::Widgets::NavMenu::Predicate;
 __PACKAGE__->mk_accessors(qw(
     current_host
     _hosts
+    _no_leading_dot
     _tree_contents
     _ul_classes
     ));
@@ -204,8 +205,9 @@ sub _init
 
     $self->_ul_classes($args{'ul_classes'} || []);
 
-    $self->{'no_leading_dot'} =
-        exists($args{'no_leading_dot'}) ? $args{'no_leading_dot'} : 0;
+    $self->_no_leading_dot(
+        exists($args{'no_leading_dot'}) ? $args{'no_leading_dot'} : 0
+    );
 
     return 0;
 }
@@ -346,7 +348,7 @@ sub get_cross_host_rel_url_ref
     {
         # TODO : convert to a method.
         return _get_relative_url(
-            $self->path_info(), $host_url, $self->{'no_leading_dot'}
+            $self->path_info(), $host_url, $self->_no_leading_dot()
         );
     }
     elsif ($url_type eq "site_abs")
