@@ -949,6 +949,62 @@ my @non_capturing_expand_nested =
     },
 );
 
+my @header_role_with_empty_cat_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'text' => "Top 1",
+        'title' => "T1 Title",
+        'subs' =>
+        [
+            {
+                'text' => "Home",
+                'url' => "",
+            },
+            {
+                'text' => "Empty Category",
+                'url' => "empty-cat/",
+                'role' => "header",
+                'show_always' => 1,
+            },
+            {
+                'text' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                'role' => "header",
+                'show_always' => 1,
+                'subs' =>
+                [
+                    {
+                        'text' => "Sub Me",
+                        'url' => "me/sub-me1/",
+                    },
+                    {
+                        'text' => "Sub Me 2",
+                        'url' => "me/sub-me-two/",
+                    },
+                ],
+            },
+            {
+                'text' => "Hello",
+                'url' => "aloha/",
+                'show_always' => 1,
+                'role' => "notexist",
+                'subs' =>
+                [
+                    {
+                        'text' => "OBKB",
+                        'url' => "aloha/obkb/",
+                    },
+                ],
+            },
+        ],
+    },
+);
+
 sub get_test_data
 {
     return
@@ -972,6 +1028,7 @@ sub get_test_data
             'non_capturing_expand' => \@non_capturing_expand,
             'non_capturing_expand_reversed' => \@non_capturing_expand_reversed,
             'non_capturing_expand_nested' => \@non_capturing_expand_nested,
+            'header_role_with_empty_cat' => \@header_role_with_empty_cat_nav_menu
         };
 }
 

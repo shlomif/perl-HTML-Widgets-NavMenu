@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 25;
+use Test::More tests => 26;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -934,4 +934,50 @@ EOF
 
     # TEST
     test_nav_menu($rendered, $expected_string, "no_leading_dot removes the extra ./");
+}
+
+{
+    my $nav_menu = HTML::Widgets::NavMenu::HeaderRole->new(
+        'path_info' => "/me/",
+        @{$test_data->{'header_role_with_empty_cat'}},
+        'ul_classes' => [ "navbarmain", ("navbarnested") x 5 ],
+    );
+
+    my $rendered =
+        $nav_menu->render();
+
+    my $expected_string = <<"EOF";
+<ul class="navbarmain">
+<li>
+<a href="../">Home</a>
+</li>
+</ul>
+<h2>
+<a href="../empty-cat/">Empty Category</a>
+</h2>
+<h2>
+<b>About Me</b>
+</h2>
+<ul class="navbarmain">
+<li>
+<a href="sub-me1/">Sub Me</a>
+</li>
+<li>
+<a href="sub-me-two/">Sub Me 2</a>
+</li>
+<li>
+<a href="../aloha/">Hello</a>
+<br />
+<ul class="navbarnested">
+<li>
+<a href="../aloha/obkb/">OBKB</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    test_nav_menu($rendered, $expected_string, 
+        "Nav Menu with an empty header role."); 
 }
