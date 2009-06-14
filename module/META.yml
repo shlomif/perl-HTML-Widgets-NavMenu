@@ -1,6 +1,6 @@
 ---
 name: HTML-Widgets-NavMenu
-version: 1.0201
+version: 1.0300
 author:
   - |-
     Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt> 
@@ -18,7 +18,7 @@ requires:
 provides:
   HTML::Widgets::NavMenu:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 1.0201
+    version: 1.0300
   HTML::Widgets::NavMenu::Error:
     file: lib/HTML/Widgets/NavMenu.pm
   HTML::Widgets::NavMenu::Error::Redirect:
@@ -63,7 +63,7 @@ provides:
     file: lib/HTML/Widgets/NavMenu/Tree/Node.pm
   HTML::Widgets::NavMenu::Url:
     file: lib/HTML/Widgets/NavMenu/Url.pm
-generated_by: Module::Build version 0.2808
+generated_by: Module::Build version 0.33
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
