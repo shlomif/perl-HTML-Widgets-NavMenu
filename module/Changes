@@ -8,6 +8,7 @@ Revision history for Perl extension Shlomif::NavMenu.
     statement that could be a subtle bug.
     - Refactoring: converted direct $self->{'field'} accesses to
     accessors. (from all the classes).
+    - Fixed a bug with the HeaderRole where an empty <ul> was created.
 
 1.0201    Fri Mar 28 17:46:59 IDT 2008
     - Fixed a case where a non-capturing expand in a node inside a
