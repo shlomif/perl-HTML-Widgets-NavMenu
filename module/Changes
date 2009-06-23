@@ -1,5 +1,6 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0301    Tue Jun 23 23:01:54 IDT 2009
     - Changed the 'license' in Build.PL from "bsd" to the more accurate
     "mit".
     - Added keywords and links to the META.yml.

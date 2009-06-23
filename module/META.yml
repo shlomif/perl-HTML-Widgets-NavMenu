@@ -1,6 +1,6 @@
 ---
 name: HTML-Widgets-NavMenu
-version: 1.0300
+version: 1.0301
 author:
   - |-
     Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt> 
@@ -20,7 +20,7 @@ requires:
 provides:
   HTML::Widgets::NavMenu:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 1.0300
+    version: 1.0301
   HTML::Widgets::NavMenu::Error:
     file: lib/HTML/Widgets/NavMenu.pm
   HTML::Widgets::NavMenu::Error::Redirect:
