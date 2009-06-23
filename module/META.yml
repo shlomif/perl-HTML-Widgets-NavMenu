@@ -6,9 +6,11 @@ author:
     Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt> 
     (L<http://search.cpan.org/~shlomif/>).
 abstract: A Perl Module for Generating HTML Navigation Menus
-license: bsd
+license: mit
 resources:
-  license: http://www.opensource.org/licenses/bsd-license.php
+  homepage: http://web-cpan.berlios.de/modules/HTML-Widgets-NavMenu/
+  license: http://www.opensource.org/licenses/mit-license.php
+  repository: http://svn.berlios.de/svnroot/repos/web-cpan/nav-menu/
 requires:
   Class::Accessor: 0
   Error: 0
@@ -67,3 +69,32 @@ generated_by: Module::Build version 0.33
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
+keywords:
+  - arrows
+  - bar
+  - breadcrumbs
+  - css
+  - expand
+  - hidden
+  - html
+  - menu
+  - menus
+  - nav-bar
+  - navbar
+  - navigation
+  - navigation aids
+  - nav-menu
+  - navmenu
+  - next
+  - prev
+  - previous
+  - pure-perl
+  - site-map
+  - skipped
+  - trail
+  - tree
+  - unexpand
+  - up
+  - widget
+  - widgets
+  - xhtml
