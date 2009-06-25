@@ -3,7 +3,7 @@ use warnings;
 
 package HTML::Widgets::NavMenu;
 
-our $VERSION = '1.0301';
+our $VERSION = '1.0302';
 
 package HTML::Widgets::NavMenu::Error;
 
@@ -897,7 +897,7 @@ a complete site map, a path of leading components, and also keeps
 track of navigation links ("Next", "Prev", "Up", etc.) You can start from the 
 example above and see more examples in the tests, and complete working sites 
 in the Subversion repositories at 
-L<http://stalker.iguide.co.il:8080/svn/shlomif-homepage/>
+L<http://opensvn.csie.org/shlomif/homepage/>
 and L<http://opensvn.csie.org/perlbegin/perl-begin/>.
 
 =head1 USAGE
@@ -1026,11 +1026,12 @@ below under "The Node Description Component Class".
 
 =item 'nav_links_obj'
 
-This points to a hash reference whose keys are Mozilla-style link-toolbar
-( L<http://cdn.mozdev.org/linkToolbar/> ) link IDs and its values are Node
-Description objects. (see "The Node Description Class" below). Here's a 
-sample code that renders the links as C<E<lt>link rel=...E<gt>> into the
-page header:
+This points to a hash reference whose keys are link IDs for
+the Firefox "Site Navigatoin Toolbar" 
+( L<http://www.bolwin.com/software/snb.shtml> ) and compatible programs,
+and its values are Node Description objects. (see "The Node Description 
+Class" below). Here's a sample code that renders the links as 
+C<E<lt>link rel=...E<gt>> into the page header:
 
 
     my $nav_links = $results->{'nav_links_obj'};
@@ -1046,11 +1047,11 @@ page header:
 
 =item 'nav_links'
 
-This points to a hash reference whose keys are Mozilla-style link-toolbar
-( L<http://cdn.mozdev.org/linkToolbar/> ) link IDs and its values are the
-URLs to these links. This key/value pair is provided for backwards 
-compatibility with older versions of HTML::Widgets::NavMenu. In new code,
-one is recommended to use C<'nav_links_obj'> instead.
+This points to a hash reference whose keys are link IDs compatible with the
+Firefox Site Navigation ( L<http://cdn.mozdev.org/linkToolbar/> ) and its 
+values are the URLs to these links. This key/value pair is provided for 
+backwards compatibility with older versions of HTML::Widgets::NavMenu. In new 
+code, one is recommended to use C<'nav_links_obj'> instead.
 
 This sample code renders the links as C<E<lt>link rel=...E<gt>> into the
 page header:
@@ -1217,7 +1218,7 @@ host needs to have a C<'trailing_url_base'> value set.
 
 3. C<"full_abs"> - this uses a fully qualified URL (e.g: with C<http://> at 
 the beginning, even if both the current path and the pointed path belong
-to the same host. Something like C<http://vipe.technion.ac.il/~shlomif/me/about.html>.
+to the same host. Something like C<http://www.shlomifish.org/me/about.html>.
 
 =item 'rec_url_type'
 

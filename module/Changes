@@ -1,5 +1,9 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0302    Thu Jun 25 16:48:42 IDT 2009
+    - Fixed some broken links and other inaccuracies in the POD of
+    lib/HTML/Widgets/NavMenu.pm .
+
 1.0301    Tue Jun 23 23:01:54 IDT 2009
     - Changed the 'license' in Build.PL from "bsd" to the more accurate
     "mit".
