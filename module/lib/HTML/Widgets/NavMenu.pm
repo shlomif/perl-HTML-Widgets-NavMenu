@@ -1027,7 +1027,7 @@ below under "The Node Description Component Class".
 =item 'nav_links_obj'
 
 This points to a hash reference whose keys are link IDs for
-the Firefox "Site Navigatoin Toolbar" 
+the Firefox "Site Navigation Toolbar" 
 ( L<http://www.bolwin.com/software/snb.shtml> ) and compatible programs,
 and its values are Node Description objects. (see "The Node Description 
 Class" below). Here's a sample code that renders the links as 
