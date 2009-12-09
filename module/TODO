@@ -1,11 +1,6 @@
 Short-Term:
 -----------
 
-* Put the HTML/ directory under t/lib or something - not directly in the
-root of the distribution.
-
-* Move away from Error.pm .
-
 * Make sure H::W::NM will associate the breadcrumbs trail with a category,
 if this category expands there. So, for example:
 
