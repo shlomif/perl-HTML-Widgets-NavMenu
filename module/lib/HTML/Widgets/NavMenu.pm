@@ -7,9 +7,7 @@ our $VERSION = '1.0302';
 
 package HTML::Widgets::NavMenu::Error;
 
-use Error qw(:try);
-
-use base "Error";
+use base "HTML::Widgets::NavMenu::Object";
 
 package HTML::Widgets::NavMenu::Error::Redirect;
 
@@ -21,9 +19,9 @@ sub CGIpm_perform_redirect
 {
     my $self = shift;
 
-    my $q = shift;
+    my $cgi = shift;
 
-    print $q->redirect($q->script_name() . $self->{-redirect_path});
+    print $cgi->redirect($cgi->script_name() . $self->{-redirect_path});
     exit;
 }
 
@@ -174,7 +172,6 @@ package HTML::Widgets::NavMenu;
 use base 'HTML::Widgets::NavMenu::Object';
 
 use HTML::Widgets::NavMenu::Url;
-use Error qw(:try);
 
 require HTML::Widgets::NavMenu::Iterator::NavMenu;
 require HTML::Widgets::NavMenu::Iterator::SiteMap;
@@ -269,8 +266,12 @@ sub _register_path_info
 
     if (defined($redir_path))
     {
-        throw HTML::Widgets::NavMenu::Error::Redirect
-            -redirect_path => ($redir_path."/");
+        my $error = HTML::Widgets::NavMenu::Error::Redirect->new();
+
+        $error->{'-redirect_path'} = ($redir_path."/");
+        $error->{'msg'} = "Need to redirect";
+
+        die $error;
     }
 
     $path_info =~ s!^\/!!;
