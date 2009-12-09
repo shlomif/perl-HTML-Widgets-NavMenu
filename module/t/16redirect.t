@@ -33,6 +33,8 @@ BEGIN
     *CORE::GLOBAL::exit = sub { $exit_count++; };
 }
 
+use lib './t/lib';
+
 use Test::More tests => 6;
 
 use HTML::Widgets::NavMenu::Test::Data;

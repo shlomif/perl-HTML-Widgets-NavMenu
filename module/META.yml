@@ -16,7 +16,9 @@ requires:
   Error: 0
   IO::Scalar: 0
   Test::More: 0
-  perl: 5.6.1
+  perl: v5.6.1
+configure_requires:
+  Module::Build: 0.35
 provides:
   HTML::Widgets::NavMenu:
     file: lib/HTML/Widgets/NavMenu.pm
@@ -65,7 +67,7 @@ provides:
     file: lib/HTML/Widgets/NavMenu/Tree/Node.pm
   HTML::Widgets::NavMenu::Url:
     file: lib/HTML/Widgets/NavMenu/Url.pm
-generated_by: Module::Build version 0.33
+generated_by: Module::Build version 0.35
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4

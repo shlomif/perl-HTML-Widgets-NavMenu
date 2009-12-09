@@ -7,9 +7,6 @@ examples/article-examples/fine-grained-site-flow/H-W-NM-fine-grained-site-flow.p
 examples/article-examples/simple/H-W-NM-simple.pl
 examples/article-examples/with-embellishments/H-W-NM-embellish.pl
 examples/README
-HTML/Widgets/NavMenu/Test/Data.pm
-HTML/Widgets/NavMenu/Test/Stdout.pm
-HTML/Widgets/NavMenu/Test/Util.pm
 inc/Test/Run/Builder.pm
 lib/HTML/Widgets/NavMenu/EscapeHtml.pm
 lib/HTML/Widgets/NavMenu/ExpandVal.pm
@@ -51,6 +48,9 @@ t/15aspetersen-inherit.t
 t/16redirect.t
 t/17nav-coords-unit.t
 t/18url.t
+t/lib/HTML/Widgets/NavMenu/Test/Data.pm
+t/lib/HTML/Widgets/NavMenu/Test/Stdout.pm
+t/lib/HTML/Widgets/NavMenu/Test/Util.pm
 TODO
 TODO-Rejects
 t/pod-coverage.t

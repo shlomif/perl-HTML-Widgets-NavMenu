@@ -2,6 +2,8 @@
 
 use strict;
 
+use lib './t/lib';
+
 use Test::More tests => 3;
 
 use HTML::Widgets::NavMenu;
