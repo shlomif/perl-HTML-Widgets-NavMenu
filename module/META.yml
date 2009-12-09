@@ -1,6 +1,6 @@
 ---
 name: HTML-Widgets-NavMenu
-version: 1.0302
+version: 1.0400
 author:
   - |-
     Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt> 
@@ -13,7 +13,6 @@ resources:
   repository: http://svn.berlios.de/svnroot/repos/web-cpan/nav-menu/
 requires:
   Class::Accessor: 0
-  Error: 0
   IO::Scalar: 0
   Test::More: 0
   perl: v5.6.1
@@ -22,7 +21,7 @@ configure_requires:
 provides:
   HTML::Widgets::NavMenu:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 1.0302
+    version: 1.0400
   HTML::Widgets::NavMenu::Error:
     file: lib/HTML/Widgets/NavMenu.pm
   HTML::Widgets::NavMenu::Error::Redirect:
