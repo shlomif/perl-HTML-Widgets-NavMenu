@@ -5,10 +5,10 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Tree::Iterator);
 
-__PACKAGE__->mk_accessors(qw(
+__PACKAGE__->mk_acc_ref([qw(
     _html
     nav_menu
-    ));
+    )]);
 
 =head1 NAME
 

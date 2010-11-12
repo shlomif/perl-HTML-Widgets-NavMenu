@@ -7,8 +7,8 @@ use base 'HTML::Widgets::NavMenu::Object';
 
 use HTML::Widgets::NavMenu::EscapeHtml;
 
-__PACKAGE__->mk_accessors(
-    qw(name attributes)
+__PACKAGE__->mk_acc_ref([
+    qw(name attributes)]
 );
 
 =head1 NAME

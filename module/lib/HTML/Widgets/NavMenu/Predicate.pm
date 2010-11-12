@@ -5,8 +5,8 @@ use warnings;
 
 use base 'HTML::Widgets::NavMenu::Object';
 
-__PACKAGE__->mk_accessors(
-    qw(type bool regexp callback _capture),
+__PACKAGE__->mk_acc_ref([
+    qw(type bool regexp callback _capture)],
     );
 
 use HTML::Widgets::NavMenu::ExpandVal;

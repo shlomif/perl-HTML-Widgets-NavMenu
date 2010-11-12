@@ -31,8 +31,8 @@ use strict;
 
 use base qw(HTML::Widgets::NavMenu::Object);
 
-__PACKAGE__->mk_accessors(
-    qw(host host_url title label direct_url url_type)
+__PACKAGE__->mk_acc_ref([
+    qw(host host_url title label direct_url url_type)]
     );
 
 sub _init
@@ -59,13 +59,13 @@ package HTML::Widgets::NavMenu::Iterator::GetCurrentlyActive;
 
 use base 'HTML::Widgets::NavMenu::Iterator::Base';
 
-__PACKAGE__->mk_accessors(qw(
+__PACKAGE__->mk_acc_ref([qw(
     _item_found
     _leading_path_coords
     _ret_coords
     _temp_coords
     _tree
-    ));
+    )]);
 
 sub _init
 {
@@ -178,7 +178,7 @@ require HTML::Widgets::NavMenu::Iterator::SiteMap;
 require HTML::Widgets::NavMenu::Tree::Node;
 require HTML::Widgets::NavMenu::Predicate;
 
-__PACKAGE__->mk_accessors(qw(
+__PACKAGE__->mk_acc_ref([qw(
     _current_coords
     current_host
     _hosts
@@ -188,7 +188,7 @@ __PACKAGE__->mk_accessors(qw(
     _traversed_tree
     _tree_contents
     _ul_classes
-    ));
+    )]);
 
 sub _init
 {

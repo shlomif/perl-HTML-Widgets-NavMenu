@@ -5,7 +5,7 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
 
-__PACKAGE__->mk_accessors(qw(_items));
+__PACKAGE__->mk_acc_ref([qw(_items)]);
 
 sub _init
 {

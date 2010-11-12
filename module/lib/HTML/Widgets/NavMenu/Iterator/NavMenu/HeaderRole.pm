@@ -5,9 +5,9 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Iterator::NavMenu);
 
-__PACKAGE__->mk_accessors(qw(
+__PACKAGE__->mk_acc_ref([qw(
     _was_role
-));
+)]);
 
 =head1 NAME
 

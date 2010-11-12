@@ -5,11 +5,11 @@ use warnings;
 
 use base 'HTML::Widgets::NavMenu::Object';
 
-__PACKAGE__->mk_accessors(qw(
+__PACKAGE__->mk_acc_ref([qw(
     _url
     _is_dir
     _mode
-    ));
+    )]);
 
 =head1 NAME
 

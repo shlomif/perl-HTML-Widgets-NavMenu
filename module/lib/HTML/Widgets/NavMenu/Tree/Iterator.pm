@@ -8,10 +8,10 @@ use base qw(HTML::Widgets::NavMenu::Object);
 use HTML::Widgets::NavMenu::Tree::Iterator::Stack;
 use HTML::Widgets::NavMenu::Tree::Iterator::Item;
 
-__PACKAGE__->mk_accessors(qw(
+__PACKAGE__->mk_acc_ref([qw(
     coords
     stack
-    ));
+    )]);
 
 =head1 NAME
 

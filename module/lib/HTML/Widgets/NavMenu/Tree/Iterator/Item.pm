@@ -5,13 +5,13 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
 
-__PACKAGE__->mk_accessors(qw(
+__PACKAGE__->mk_acc_ref([qw(
     _node
     _subs
     _sub_idx
     _visited
     _accum_state
-));
+)]);
 
 =head1 NAME
 
