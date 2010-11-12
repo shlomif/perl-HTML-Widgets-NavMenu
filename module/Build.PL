@@ -11,7 +11,7 @@ my $build = Test::Run::Builder->new(
     'requires' => 
     {
         'Test::More' => 0,
-        'Class::Accessor' => 0,
+        'Class::XSAccessor' => 0,
         'perl' => "5.6.1",
         'IO::Scalar' => 0,
     },

@@ -41,7 +41,7 @@ sub _init
 
     while (my ($k, $v) = each(%$args))
     {
-        $self->set($k,$v);
+        $self->$k($v);
     }
     
     return 0;

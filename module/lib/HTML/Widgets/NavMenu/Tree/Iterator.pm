@@ -22,6 +22,15 @@ HTML::Widgets::NavMenu::Tree::Iterator - an iterator for HTML.
 For internal use only.
 
 =head1 METHODS
+
+=head2 coords
+
+Internal use.
+
+=head2 stack
+
+Internal use.
+
 =cut
 
 

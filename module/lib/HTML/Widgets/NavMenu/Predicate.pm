@@ -6,7 +6,7 @@ use warnings;
 use base 'HTML::Widgets::NavMenu::Object';
 
 __PACKAGE__->mk_accessors(
-    qw(type bool regexp callback capture),
+    qw(type bool regexp callback _capture),
     );
 
 use HTML::Widgets::NavMenu::ExpandVal;
@@ -109,12 +109,13 @@ sub _assign_spec
         die "Neither 'cb' nor 're' nor 'bool' were specified in the spec.";
     }
 
-    $self->capture(
+    $self->_capture(
         (
             (!exists($spec->{capt})) ? 1 : $spec->{capt}
         )
     );
 }
+
 
 sub _evaluate_bool
 {
@@ -156,7 +157,7 @@ sub evaluate
     {
         return HTML::Widgets::NavMenu::ExpandVal->new(
             {
-                capture => $self->capture()
+                capture => $self->_capture()
             },
         );
     }
@@ -181,6 +182,22 @@ Creates a new object.
 
 Evaluates the predicate in the context of C<$path_info> and C<$current_host>
 and returns the result.
+
+=head2 $pred->type()
+
+The type of the predicate.
+
+=head2 $pred->bool()
+
+Sets/gets the boolean value in case the type is a boolean.
+
+=head2 $pred->callback()
+
+Sets/gets the callback in case the type is callback.
+
+=head2 $pred->regexp()
+
+Sets/gets the regular expression in case the type is "regexp".
 
 =head1 COPYRIGHT & LICENSE
 

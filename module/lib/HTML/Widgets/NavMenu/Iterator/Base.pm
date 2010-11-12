@@ -19,6 +19,11 @@ HTML::Widgets::NavMenu::Iterator::Base - base class for the iterator.
 For internal use only.
 
 =head1 METHODS
+
+=head2 nav_menu
+
+Internal use.
+
 =cut
 
 sub _init
