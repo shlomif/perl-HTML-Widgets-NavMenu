@@ -48,6 +48,7 @@ t/15aspetersen-inherit.t
 t/16redirect.t
 t/17nav-coords-unit.t
 t/18url.t
+tag-release.pl
 t/lib/HTML/Widgets/NavMenu/Test/Data.pm
 t/lib/HTML/Widgets/NavMenu/Test/Stdout.pm
 t/lib/HTML/Widgets/NavMenu/Test/Util.pm
