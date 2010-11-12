@@ -1,5 +1,8 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0500    Fri Nov 12 20:43:08 IST 2010
+    -  Convert from Class::Accessor to Class::XSAccessor for extra speed.
+
 1.0400    Wed Dec  9 11:44:05 IST 2009
     - Got rid of the dependency on Error.pm.
     - moved the HTML/ directory with the test scripts-support code from 
