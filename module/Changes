@@ -1,5 +1,9 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0501    Sun Nov 14 12:11:19 IST 2010
+    - Now generating the Makefile.PL from the Build.PL using 
+    create_makefile_pl (less error-prone).
+
 1.0500    Fri Nov 12 20:43:08 IST 2010
     - Convert from Class::Accessor to Class::XSAccessor for extra speed.
     - Add the tag-release.pl file.

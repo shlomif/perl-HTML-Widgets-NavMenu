@@ -8,6 +8,10 @@ use Test::Run::Builder;
 
 my $build = Test::Run::Builder->new(
     'module_name' => "HTML::Widgets::NavMenu",
+    configure_requires =>
+    {
+        'Module::Build' => '0.36',
+    },
     'requires' => 
     {
         'Test::More' => 0,
@@ -55,5 +59,6 @@ my $build = Test::Run::Builder->new(
             "xhtml",
         ],
     },
+    create_makefile_pl => 'traditional',
 );
 $build->create_build_script;

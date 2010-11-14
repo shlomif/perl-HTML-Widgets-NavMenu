@@ -4,7 +4,7 @@ author:
   - "Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt> \n(L<http://search.cpan.org/~shlomif/>)."
 configure_requires:
   Module::Build: 0.36
-generated_by: 'Module::Build version 0.3607'
+generated_by: 'Module::Build version 0.3617'
 keywords:
   - arrows
   - bar
@@ -42,7 +42,7 @@ name: HTML-Widgets-NavMenu
 provides:
   HTML::Widgets::NavMenu:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 1.0500
+    version: 1.0501
   HTML::Widgets::NavMenu::Error:
     file: lib/HTML/Widgets/NavMenu.pm
   HTML::Widgets::NavMenu::Error::Redirect:
@@ -94,6 +94,6 @@ requires:
   perl: v5.6.1
 resources:
   homepage: http://web-cpan.berlios.de/modules/HTML-Widgets-NavMenu/
-  license: http://opensource.org/licenses/mit-license.php
+  license: http://www.opensource.org/licenses/mit-license.php
   repository: http://svn.berlios.de/svnroot/repos/web-cpan/nav-menu/
-version: 1.0500
+version: 1.0501
