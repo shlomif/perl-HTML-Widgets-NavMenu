@@ -7,13 +7,14 @@ use base qw(HTML::Widgets::NavMenu::Iterator::Html);
 
 =head1 NAME
 
-HTML::Widgets::NavMenu::Iterator::Html - an iterator for HTML.
+HTML::Widgets::NavMenu::Iterator::SiteMap - a site-map iterator.
 
 =head1 SYNOPSIS
 
 For internal use only.
 
 =head1 METHODS
+
 =cut
 
 sub _start_root
