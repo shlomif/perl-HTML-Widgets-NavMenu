@@ -175,6 +175,7 @@ use HTML::Widgets::NavMenu::Url;
 
 require HTML::Widgets::NavMenu::Iterator::NavMenu;
 require HTML::Widgets::NavMenu::Iterator::SiteMap;
+require HTML::Widgets::NavMenu::Iterator::JQTreeView;
 require HTML::Widgets::NavMenu::Tree::Node;
 require HTML::Widgets::NavMenu::Predicate;
 
@@ -454,6 +455,26 @@ sub _render_tree_contents
         }
     }
     return $new_item;
+}
+
+sub render_jquery_treeview
+{
+    my $self = shift;
+    my %args = @_;
+
+    return $self->_render_generic(
+        { %args , _iter_method => '_get_jqtree_view_iter',}
+    );
+}
+
+sub _get_jqtree_view_iter
+{
+    my $self = shift;
+
+    return 
+        HTML::Widgets::NavMenu::Iterator::JQTreeView->new(
+            $self->_get_nav_menu_traverser_args()
+        );
 }
 
 sub gen_site_map
@@ -792,10 +813,21 @@ sub _get_leading_path
 sub render
 {
     my $self = shift;
-
     my %args = (@_);
 
-    my $iterator = $self->_get_nav_menu_traverser();
+    return $self->_render_generic(
+        { %args , _iter_method => '_get_nav_menu_traverser',}
+    );
+}
+
+sub _render_generic
+{
+    my $self = shift;
+    my $args = shift;
+
+    my $method = $args->{_iter_method};
+
+    my $iterator = $self->$method();
     $iterator->traverse();
     my $html = $iterator->get_results();
     
@@ -1068,6 +1100,12 @@ page header:
     }
 
 =back
+
+=head2 $results = $nav_menu->render_jquery_treeview()
+
+Renders a fully expanded tree suitable for input to JQuery's treeview plugin:
+L<http://bassistance.de/jquery-plugins/jquery-plugin-treeview/> - otherwise
+the same as render() .
 
 =head2 $text = $nav_menu->gen_site_map()
 

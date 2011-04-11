@@ -61,6 +61,8 @@ provides:
     file: lib/HTML/Widgets/NavMenu/Iterator/Html.pm
   HTML::Widgets::NavMenu::Iterator::Html::Item:
     file: lib/HTML/Widgets/NavMenu/Iterator/Html.pm
+  HTML::Widgets::NavMenu::Iterator::JQTreeView:
+    file: lib/HTML/Widgets/NavMenu/Iterator/JQTreeView.pm
   HTML::Widgets::NavMenu::Iterator::NavMenu:
     file: lib/HTML/Widgets/NavMenu/Iterator/NavMenu.pm
   HTML::Widgets::NavMenu::Iterator::NavMenu::HeaderRole:

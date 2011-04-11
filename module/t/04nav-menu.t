@@ -4,7 +4,7 @@ use strict;
 
 use lib './t/lib';
 
-use Test::More tests => 26;
+use Test::More tests => 27;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -983,3 +983,58 @@ EOF
     test_nav_menu($rendered, $expected_string, 
         "Nav Menu with an empty header role."); 
 }
+
+# Test render_jquery_treeview().
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/me/bio/test.html",
+        @{$test_data->{'selective_expand'}},
+        'ul_classes' => [ "one", "two", "three" ],
+    );
+
+    my $rendered =
+        $nav_menu->render_jquery_treeview();
+
+    my $expected_string = <<"EOF";
+<ul class="one">
+<li>
+<a href="./../../">Home</a>
+</li>
+<li class="open">
+<a href="./../" title="About Myself">About Me</a>
+<br />
+<ul class="two">
+<li>
+<a href="./../group-hug/">Group Hug</a>
+</li>
+<li>
+<a href="./../cool-io/">Cool I/O</a>
+</li>
+<li>
+<a href="./../../resume.html">Resume</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="./../../halifax/">Halifax</a>
+</li>
+<li>
+<a href="./../../open-source/" title="Open Source Software I Wrote">Software</a>
+<br />
+<ul class="two">
+<li>
+<a href="./../../open-source/fooware/">Fooware</a>
+</li>
+<li>
+<a href="./../../open-source/condor-man/" title="Kwalitee">Condor-Man</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    test_nav_menu($rendered, $expected_string, "render_jquery_treeview() #1"); 
+}
+
+
