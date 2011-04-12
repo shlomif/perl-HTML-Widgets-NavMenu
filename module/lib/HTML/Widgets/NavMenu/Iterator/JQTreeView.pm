@@ -36,11 +36,6 @@ For internal use only.
 
 =cut
 
-sub _start_sep
-{
-    return;
-}
-
 sub _calc_open_li_tag
 {
     my $self = shift;
@@ -76,16 +71,11 @@ sub _start_handle_non_role
     return;
 }
 
-sub _start_regular
+sub _start_handle_role
 {
     my $self = shift;
 
     return $self->_start_handle_non_role();
-}
-
-sub _end_sep
-{
-    return;
 }
 
 sub _is_expanded

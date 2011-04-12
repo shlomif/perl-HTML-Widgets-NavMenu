@@ -4,7 +4,7 @@ use strict;
 
 use lib './t/lib';
 
-use Test::More tests => 27;
+use Test::More tests => 28;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
@@ -1037,4 +1037,37 @@ EOF
     test_nav_menu($rendered, $expected_string, "render_jquery_treeview() #1"); 
 }
 
+# Test render_jquery_treeview() with hidden.
+{
+    my $nav_menu = HTML::Widgets::NavMenu->new(
+        'path_info' => "/me/",
+        @{$test_data->{'hidden_item'}},
+        'ul_classes' => [ "one", "two", "three" ],
+    );
 
+    my $rendered =
+        $nav_menu->render_jquery_treeview();
+
+    my $expected_string = <<"EOF";
+<ul class="one">
+<li>
+<a href="../">Home</a>
+</li>
+<li class="open">
+<b>About Me</b>
+<br />
+<ul class="two">
+<li>
+<a href="visible/">Visible</a>
+</li>
+<li>
+<a href="visible-too/">Visible Too</a>
+</li>
+</ul>
+</li>
+</ul>
+EOF
+
+    # TEST
+    test_nav_menu($rendered, $expected_string, "JQTreeView Nav Menu with Hidden Item"); 
+}
