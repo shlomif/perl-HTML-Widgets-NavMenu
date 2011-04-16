@@ -42,7 +42,7 @@ name: HTML-Widgets-NavMenu
 provides:
   HTML::Widgets::NavMenu:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 1.0501
+    version: 1.0600
   HTML::Widgets::NavMenu::Error:
     file: lib/HTML/Widgets/NavMenu.pm
   HTML::Widgets::NavMenu::Error::Redirect:
@@ -100,4 +100,4 @@ resources:
   homepage: http://web-cpan.berlios.de/modules/HTML-Widgets-NavMenu/
   license: http://www.opensource.org/licenses/mit-license.php
   repository: http://svn.berlios.de/svnroot/repos/web-cpan/nav-menu/
-version: 1.0501
+version: 1.0600
