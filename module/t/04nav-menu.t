@@ -8,6 +8,7 @@ use Test::More tests => 28;
 
 use HTML::Widgets::NavMenu;
 use HTML::Widgets::NavMenu::HeaderRole;
+use HTML::Widgets::NavMenu::JQueryTreeView;
 
 use HTML::Widgets::NavMenu::Test::Data;
 
@@ -984,16 +985,16 @@ EOF
         "Nav Menu with an empty header role."); 
 }
 
-# Test render_jquery_treeview().
+# Test HTML::Widgets::NavMenu::JQueryTreeView .
 {
-    my $nav_menu = HTML::Widgets::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu::JQueryTreeView->new(
         'path_info' => "/me/bio/test.html",
         @{$test_data->{'selective_expand'}},
         'ul_classes' => [ "one", "two", "three" ],
     );
 
     my $rendered =
-        $nav_menu->render_jquery_treeview();
+        $nav_menu->render();
 
     my $expected_string = <<"EOF";
 <ul class="one">
@@ -1034,19 +1035,19 @@ EOF
 EOF
 
     # TEST
-    test_nav_menu($rendered, $expected_string, "render_jquery_treeview() #1"); 
+    test_nav_menu($rendered, $expected_string, "HTML::Widgets::NavMenu::JQueryTreeView #1"); 
 }
 
-# Test render_jquery_treeview() with hidden.
+# Test HTML::Widgets::NavMenu::JQueryTreeView with hidden.
 {
-    my $nav_menu = HTML::Widgets::NavMenu->new(
+    my $nav_menu = HTML::Widgets::NavMenu::JQueryTreeView->new(
         'path_info' => "/me/",
         @{$test_data->{'hidden_item'}},
         'ul_classes' => [ "one", "two", "three" ],
     );
 
     my $rendered =
-        $nav_menu->render_jquery_treeview();
+        $nav_menu->render();
 
     my $expected_string = <<"EOF";
 <ul class="one">

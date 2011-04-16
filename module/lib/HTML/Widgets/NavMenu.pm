@@ -175,7 +175,6 @@ use HTML::Widgets::NavMenu::Url;
 
 require HTML::Widgets::NavMenu::Iterator::NavMenu;
 require HTML::Widgets::NavMenu::Iterator::SiteMap;
-require HTML::Widgets::NavMenu::Iterator::JQTreeView;
 require HTML::Widgets::NavMenu::Tree::Node;
 require HTML::Widgets::NavMenu::Predicate;
 
@@ -455,26 +454,6 @@ sub _render_tree_contents
         }
     }
     return $new_item;
-}
-
-sub render_jquery_treeview
-{
-    my $self = shift;
-    my %args = @_;
-
-    return $self->_render_generic(
-        { %args , _iter_method => '_get_jqtree_view_iter',}
-    );
-}
-
-sub _get_jqtree_view_iter
-{
-    my $self = shift;
-
-    return 
-        HTML::Widgets::NavMenu::Iterator::JQTreeView->new(
-            $self->_get_nav_menu_traverser_args()
-        );
 }
 
 sub gen_site_map

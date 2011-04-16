@@ -1,5 +1,9 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+    - Add HTML::Widgets::NavMenu::JQueryTreeView for generating navigation
+    menu that this jQuery plugin can handle well:
+        - http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
+
 1.0501    Sun Nov 14 12:11:19 IST 2010
     - Now generating the Makefile.PL from the Build.PL using 
     create_makefile_pl (less error-prone).

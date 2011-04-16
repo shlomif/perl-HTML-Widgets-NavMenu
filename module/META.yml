@@ -69,6 +69,8 @@ provides:
     file: lib/HTML/Widgets/NavMenu/Iterator/NavMenu/HeaderRole.pm
   HTML::Widgets::NavMenu::Iterator::SiteMap:
     file: lib/HTML/Widgets/NavMenu/Iterator/SiteMap.pm
+  HTML::Widgets::NavMenu::JQueryTreeView:
+    file: lib/HTML/Widgets/NavMenu/JQueryTreeView.pm
   HTML::Widgets::NavMenu::LeadingPath::Component:
     file: lib/HTML/Widgets/NavMenu.pm
   HTML::Widgets::NavMenu::NodeDescription:

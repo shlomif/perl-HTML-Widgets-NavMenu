@@ -17,6 +17,7 @@ lib/HTML/Widgets/NavMenu/Iterator/JQTreeView.pm
 lib/HTML/Widgets/NavMenu/Iterator/NavMenu/HeaderRole.pm
 lib/HTML/Widgets/NavMenu/Iterator/NavMenu.pm
 lib/HTML/Widgets/NavMenu/Iterator/SiteMap.pm
+lib/HTML/Widgets/NavMenu/JQueryTreeView.pm
 lib/HTML/Widgets/NavMenu/Object.pm
 lib/HTML/Widgets/NavMenu.pm
 lib/HTML/Widgets/NavMenu/Predicate.pm
