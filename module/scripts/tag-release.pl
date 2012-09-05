@@ -5,8 +5,8 @@ use warnings;
 
 use IO::All;
 
-my ($version) = 
-    (map { m{\$VERSION *= *'([^']+)'} ? ($1) : () } 
+my ($version) =
+    (map { m{\$VERSION *= *'([^']+)'} ? ($1) : () }
     io->file("./lib/HTML/Widgets/NavMenu.pm")->getlines()
     )
     ;
@@ -19,10 +19,9 @@ if (!defined ($version))
 my $mini_repos_url = "https://svn.berlios.de/svnroot/repos/web-cpan/nav-menu";
 
 my @cmd = (
-    "svn", "copy", "-m",
+    "hg", "tag", "-m"
     "Tagging HTML-Widgets-NavMenu as $version",
-    "$mini_repos_url/trunk",
-    "$mini_repos_url/tags/cpan-releases/$version",
+    "cpan-releases/$version",
 );
 
 print join(" ", map { /\s/ ? qq{"$_"} : $_ } @cmd), "\n";
