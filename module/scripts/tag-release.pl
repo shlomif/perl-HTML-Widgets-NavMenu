@@ -19,7 +19,7 @@ if (!defined ($version))
 my $mini_repos_url = "https://svn.berlios.de/svnroot/repos/web-cpan/nav-menu";
 
 my @cmd = (
-    "hg", "tag", "-m"
+    "hg", "tag", "-m",
     "Tagging HTML-Widgets-NavMenu as $version",
     "cpan-releases/$version",
 );
