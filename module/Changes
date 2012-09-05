@@ -1,5 +1,10 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0601    Wed  5 Sep 20:00:49 IDT 2012
+    - Moved away tag-release.pl to scripts/tag-release.pl so it won't
+    be installed by default.
+    - Moved away output.pl under examples.
+
 1.0600    Sat Apr 16 19:05:23 IDT 2011
     - Add HTML::Widgets::NavMenu::JQueryTreeView for generating navigation
     menu that this jQuery plugin can handle well:
