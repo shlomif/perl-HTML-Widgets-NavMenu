@@ -1,0 +1,7 @@
+module/Build
+module/META.json
+module/META.yml
+module/MYMETA.json
+module/MYMETA.yml
+module/Makefile.PL
+module/_build
