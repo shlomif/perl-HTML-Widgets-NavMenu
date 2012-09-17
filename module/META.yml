@@ -1,7 +1,7 @@
 ---
 abstract: 'A Perl Module for Generating HTML Navigation Menus'
 author:
-  - "Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt>\n(L<http://search.cpan.org/~shlomif/>)."
+  - 'Shlomi Fish, E<lt>shlomif@cpan.orgE<gt>, L<http://www.shlomifish.org/> .'
 build_requires: {}
 configure_requires:
   Module::Build: 0.36

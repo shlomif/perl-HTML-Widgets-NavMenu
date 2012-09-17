@@ -55,8 +55,7 @@ L<HTML::Widgets::NavMenu> for the complete documentation of the super-class.
 
 =head1 AUTHORS
 
-Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt>
-(L<http://search.cpan.org/~shlomif/>).
+Shlomi Fish, L<http://www.shlomifish.org> .
 
 =cut
 

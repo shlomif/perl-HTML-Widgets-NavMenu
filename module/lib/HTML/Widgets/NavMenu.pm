@@ -1409,8 +1409,7 @@ why), so I abandoned it.
 
 =head1 AUTHORS
 
-Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt>
-(L<http://search.cpan.org/~shlomif/>).
+Shlomi Fish, E<lt>shlomif@cpan.orgE<gt>, L<http://www.shlomifish.org/> .
 
 =head1 THANKS
 
