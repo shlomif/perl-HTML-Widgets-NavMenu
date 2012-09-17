@@ -123,7 +123,7 @@ requires:
   Test::More: 0
   perl: v5.6.1
 resources:
-  homepage: http://web-cpan.berlios.de/modules/HTML-Widgets-NavMenu/
+  homepage: http://web-cpan.shlomifish.org/modules/HTML-Widgets-NavMenu/
   license: http://www.opensource.org/licenses/mit-license.php
-  repository: http://svn.berlios.de/svnroot/repos/web-cpan/nav-menu/
+  repository: https://bitbucket.org/shlomif/perl-html-widgets-navmenu
 version: 1.0602

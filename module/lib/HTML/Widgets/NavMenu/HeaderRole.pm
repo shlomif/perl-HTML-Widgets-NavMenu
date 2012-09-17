@@ -46,8 +46,8 @@ C<E<lt>h2E<gt>> header. The HTML will look something like this:
     </h2>
     <ul>
 
-An example of this use can be found in the Perl Beginners Site
-( L<http://perl-begin.berlios.de/> ).
+An example of this use can be found on the Perl Beginners Site
+( L<http://perl-begin.org/> ).
 
 =head1 SEE ALSO
 

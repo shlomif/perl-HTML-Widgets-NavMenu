@@ -24,8 +24,8 @@ my $build = Test::Run::Builder->new(
     {
         resources =>
         {
-            repository => "http://svn.berlios.de/svnroot/repos/web-cpan/nav-menu/",
-            homepage => "http://web-cpan.berlios.de/modules/HTML-Widgets-NavMenu/",
+            repository => "https://bitbucket.org/shlomif/perl-html-widgets-navmenu",
+            homepage => "http://web-cpan.shlomifish.org/modules/HTML-Widgets-NavMenu/",
         },
         keywords =>
         [

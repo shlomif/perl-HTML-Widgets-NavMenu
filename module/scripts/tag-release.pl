@@ -16,8 +16,6 @@ if (!defined ($version))
     die "Version is undefined!";
 }
 
-my $mini_repos_url = "https://svn.berlios.de/svnroot/repos/web-cpan/nav-menu";
-
 my @cmd = (
     "hg", "tag", "-m",
     "Tagging HTML-Widgets-NavMenu as $version",
