@@ -5,3 +5,4 @@ module/MYMETA.json
 module/MYMETA.yml
 module/Makefile.PL
 module/_build
+module/blib
