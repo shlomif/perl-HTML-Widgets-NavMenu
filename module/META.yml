@@ -44,7 +44,7 @@ name: HTML-Widgets-NavMenu
 provides:
   HTML::Widgets::NavMenu:
     file: lib/HTML/Widgets/NavMenu.pm
-    version: 1.0602
+    version: 1.0603
   HTML::Widgets::NavMenu::Error:
     file: lib/HTML/Widgets/NavMenu.pm
     version: 0
@@ -126,4 +126,4 @@ resources:
   homepage: http://web-cpan.shlomifish.org/modules/HTML-Widgets-NavMenu/
   license: http://www.opensource.org/licenses/mit-license.php
   repository: https://bitbucket.org/shlomif/perl-html-widgets-navmenu
-version: 1.0602
+version: 1.0603
