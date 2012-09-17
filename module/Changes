@@ -1,5 +1,9 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0602    Mon Sep 17 17:19:29 IDT 2012
+    - Get rid of trailing space.
+    - Update the contact details.
+
 1.0601    Wed  5 Sep 20:00:49 IDT 2012
     - Moved away tag-release.pl to scripts/tag-release.pl so it won't
     be installed by default.
