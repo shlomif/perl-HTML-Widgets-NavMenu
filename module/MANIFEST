@@ -59,4 +59,5 @@ TODO
 TODO-Rejects
 t/pod-coverage.t
 t/pod.t
+t/style-trailing-space.t
 META.json
