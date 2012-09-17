@@ -12,7 +12,7 @@ my $build = Test::Run::Builder->new(
     {
         'Module::Build' => '0.36',
     },
-    'requires' => 
+    'requires' =>
     {
         'Test::More' => 0,
         'Class::XSAccessor' => 0,

@@ -25,5 +25,5 @@ use_ok ('HTML::Widgets::NavMenu::EscapeHtml'); # TEST
     is (escape_html(q{Hi "phony"}), q{Hi &quot;phony&quot;}, "Double quotes");
     # TEST
     is (escape_html(q{"<&>"}), q{&quot;&lt;&amp;&gt;&quot;}, "All in one");
-}    
+}
 

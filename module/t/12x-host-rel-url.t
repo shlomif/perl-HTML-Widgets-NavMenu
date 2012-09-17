@@ -10,7 +10,7 @@ use HTML::Widgets::NavMenu;
     my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/path1/path2/",
         'current_host' => "shlomif",
-        'hosts' => 
+        'hosts' =>
         {
             'shlomif' =>
             {
@@ -31,11 +31,11 @@ use HTML::Widgets::NavMenu;
             'title' => "T1 Title",
         },
     );
-    
+
     # TEST*3
     foreach my $url_type (qw(rel site_abs full_abs))
     {
-        is ( 
+        is (
             $nav_menu->get_cross_host_rel_url(
                 'host' => "vipe",
                 'host_url' => "hello/",
@@ -51,7 +51,7 @@ use HTML::Widgets::NavMenu;
             'host' => "shlomif",
             'host_url' => "hello/",
             'url_type' => "rel",
-        ), "../../hello/", 
+        ), "../../hello/",
         "Checking for intra-host link of 'rel'");
     # TEST
     is (
@@ -59,7 +59,7 @@ use HTML::Widgets::NavMenu;
             'host' => "shlomif",
             'host_url' => "hello/",
             'url_type' => "site_abs",
-        ), "/hello/", 
+        ), "/hello/",
         "Checking for intra-host link of 'site_abs'");
     # TEST
     is (
@@ -67,7 +67,7 @@ use HTML::Widgets::NavMenu;
             'host' => "shlomif",
             'host_url' => "hello/",
             'url_type' => "full_abs",
-        ), "http://www.shlomifish.org/hello/", 
+        ), "http://www.shlomifish.org/hello/",
         "Checking for intra-host link of 'full_abs'");
     # TEST
     eval {
@@ -86,7 +86,7 @@ use HTML::Widgets::NavMenu;
             'host' => "shlomif",
             'host_url' => "path1/other-path/",
             'url_type' => "rel",
-        ), "../other-path/", 
+        ), "../other-path/",
         "Checking for intra-host (shared component) link of 'rel'");
     # TEST
     is (
@@ -94,7 +94,7 @@ use HTML::Widgets::NavMenu;
             'host' => "shlomif",
             'host_url' => "path1/other-path/",
             'url_type' => "site_abs",
-        ), "/path1/other-path/", 
+        ), "/path1/other-path/",
         "Checking for intra-host (shared component) link of 'site_abs'");
     # TEST
     is (
@@ -102,7 +102,7 @@ use HTML::Widgets::NavMenu;
             'host' => "shlomif",
             'host_url' => "path1/other-path/",
             'url_type' => "full_abs",
-        ), "http://www.shlomifish.org/path1/other-path/", 
+        ), "http://www.shlomifish.org/path1/other-path/",
         "Checking for intra-host (shared component) link of 'full_abs'");
 
     # Now we check for 'url_is_abs'
@@ -113,7 +113,7 @@ use HTML::Widgets::NavMenu;
             'host_url' => "http://www.myhost.com/",
             'url_type' => "rel",
             'url_is_abs' => 1,
-        ), "http://www.myhost.com/", 
+        ), "http://www.myhost.com/",
         "Checking for url_is_abs.");
     # TEST
     is (
@@ -121,8 +121,8 @@ use HTML::Widgets::NavMenu;
             'host' => "shlomif",
             'host_url' => "http://www.myhost.com/",
             'url_type' => "site_abs",
-            'url_is_abs' => 1,            
-        ), "http://www.myhost.com/", 
+            'url_is_abs' => 1,
+        ), "http://www.myhost.com/",
         "Checking for url_is_abs");
     # TEST
     is (
@@ -130,8 +130,8 @@ use HTML::Widgets::NavMenu;
             'host' => "shlomif",
             'host_url' => "http://www.myhost.com/",
             'url_type' => "full_abs",
-            'url_is_abs' => 1,            
-        ), "http://www.myhost.com/", 
+            'url_is_abs' => 1,
+        ), "http://www.myhost.com/",
         "Checking for url_is_abs");
 }
 

@@ -13,14 +13,14 @@ use HTML::Widgets::NavMenu::Predicate;
 
 # Test the bool == 0 predicate
 {
-    my $pred = 
+    my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
             'spec' => +{ 'bool' => 0, },
         );
 
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "Hoola/Yoola", 
+        'path_info' => "Hoola/Yoola",
         'current_host' => "default",
     ), "bool==0 test 1");
     # TEST
@@ -32,14 +32,14 @@ use HTML::Widgets::NavMenu::Predicate;
 
 # Test the bool == 1 predicate
 {
-    my $pred = 
+    my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
             'spec' => +{ 'bool' => 1, },
         );
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "Hoola/Yoola", 
+        'path_info' => "Hoola/Yoola",
         'current_host' => "default",
     ), "bool==1 test 1");
     # TEST
@@ -51,29 +51,29 @@ use HTML::Widgets::NavMenu::Predicate;
 
 # Test the regexp evaluation.
 {
-    my $pred = 
+    my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
             'spec' => +{ 're' => "^hello/(world|good)/", },
         );
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/world/", 
+        'path_info' => "hello/world/",
         'current_host' => "default",
     ), "regexp 1");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/good/", 
+        'path_info' => "hello/good/",
         'current_host' => "default",
     ), "regexp 2");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/world/some/more/components.html", 
+        'path_info' => "hello/world/some/more/components.html",
         'current_host' => "default",
     ), "regexp 3");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/good/other/comps/", 
+        'path_info' => "hello/good/other/comps/",
         'current_host' => "default",
     ), "regexp 4");
     # TEST
@@ -97,22 +97,22 @@ use HTML::Widgets::NavMenu::Predicate;
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/startmidfinish/", 
+        'path_info' => "hello/startmidfinish/",
         'current_host' => "default",
     ), "non-anchored regexp 1");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "hello/good/", 
+        'path_info' => "hello/good/",
         'current_host' => "default",
     ), "non-anchored regexp 2");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/startmidcentermidfinish/", 
+        'path_info' => "hello/startmidcentermidfinish/",
         'current_host' => "default",
     ), "non-anchored regexp 3");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "startfinish/", 
+        'path_info' => "startfinish/",
         'current_host' => "default",
     ), "non-anchored regexp 4");
 }
@@ -134,22 +134,22 @@ sub predicate_cb1
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "mypath/", 
+        'path_info' => "mypath/",
         'current_host' => "true",
     ), "cb 1 - true");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "mypath/", 
+        'path_info' => "mypath/",
         'current_host' => "false",
     ), "cb 2 - false");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "hello/", 
+        'path_info' => "hello/",
         'current_host' => "true",
     ), "cb 3 - false");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "anuba/", 
+        'path_info' => "anuba/",
         'current_host' => "false",
     ), "cb 4 - both false");
 }
@@ -161,7 +161,7 @@ sub predicate_cb1
     # TEST*2*4
     foreach my $false_value (qw(0 no false False))
     {
-        my $pred = 
+        my $pred =
             HTML::Widgets::NavMenu::Predicate->new(
                 'spec' => $false_value,
             );
@@ -182,13 +182,13 @@ sub predicate_cb1
     # TEST*2*4
     for my $true_value (qw(1 yes true True))
     {
-        my $pred = 
+        my $pred =
             HTML::Widgets::NavMenu::Predicate->new(
                 'spec' => +{ 'bool' => 1, },
             );
 
         ok($pred->evaluate(
-            'path_info' => "Hoola/Yoola", 
+            'path_info' => "Hoola/Yoola",
             'current_host' => "default",
         ), "bool==1 test 1");
         ok($pred->evaluate(
@@ -207,22 +207,22 @@ sub predicate_cb1
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/world/", 
+        'path_info' => "hello/world/",
         'current_host' => "default",
     ), "implicit regexp 1");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/good/", 
+        'path_info' => "hello/good/",
         'current_host' => "default",
     ), "implicit regexp 2");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/world/some/more/components.html", 
+        'path_info' => "hello/world/some/more/components.html",
         'current_host' => "default",
     ), "implicit regexp 3");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/good/other/comps/", 
+        'path_info' => "hello/good/other/comps/",
         'current_host' => "default",
     ), "implicit regexp 4");
     # TEST
@@ -246,22 +246,22 @@ sub predicate_cb1
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "mypath/", 
+        'path_info' => "mypath/",
         'current_host' => "true",
     ), "ipmlicit cb 1 - true");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "mypath/", 
+        'path_info' => "mypath/",
         'current_host' => "false",
     ), "ipmlicit cb 2 - false");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "hello/", 
+        'path_info' => "hello/",
         'current_host' => "true",
     ), "ipmlicit cb 3 - false");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "anuba/", 
+        'path_info' => "anuba/",
         'current_host' => "false",
     ), "ipmlicit cb 4 - both false");
 }
@@ -274,31 +274,31 @@ sub predicate_cb1
 {
     my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
-            'spec' => 
-                +{ 
-                    're' => "^hello/(world|good)/", 
+            'spec' =>
+                +{
+                    're' => "^hello/(world|good)/",
                     'bool' => 0,
                 },
         );
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/world/", 
+        'path_info' => "hello/world/",
         'current_host' => "default",
     ), "re precedes bool 1");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/good/", 
+        'path_info' => "hello/good/",
         'current_host' => "default",
     ), "re precedes bool 2");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/world/some/more/components.html", 
+        'path_info' => "hello/world/some/more/components.html",
         'current_host' => "default",
     ), "re precedes bool 3");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "hello/good/other/comps/", 
+        'path_info' => "hello/good/other/comps/",
         'current_host' => "default",
     ), "re precedes bool 4");
 }
@@ -307,9 +307,9 @@ sub predicate_cb1
 {
     my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
-            'spec' => 
-                +{ 
-                    're' => "^hello/(world|good)/", 
+            'spec' =>
+                +{
+                    're' => "^hello/(world|good)/",
                     'cb' => \&predicate_cb1,
                 },
         );
@@ -321,7 +321,7 @@ sub predicate_cb1
     ), "cb precedes re 1");
     # TEST
     ok($pred->evaluate(
-        'path_info' => "mypath/", 
+        'path_info' => "mypath/",
         'current_host' => "true",
     ), "cb precedes re 2");
 }
@@ -330,31 +330,31 @@ sub predicate_cb1
 {
     my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
-            'spec' => 
-                +{ 
-                    'cb' => \&predicate_cb1, 
+            'spec' =>
+                +{
+                    'cb' => \&predicate_cb1,
                     'bool' => 1,
                 },
         );
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "mypath/", 
+        'path_info' => "mypath/",
         'current_host' => "true",
     ), "cb precedes bool 1 - true");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "mypath/", 
+        'path_info' => "mypath/",
         'current_host' => "false",
     ), "cb precedes bool  2 - false");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "hello/", 
+        'path_info' => "hello/",
         'current_host' => "true",
     ), "cb precedes bool  3 - false");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "anuba/", 
+        'path_info' => "anuba/",
         'current_host' => "false",
     ), "cb precedes bool 4 - both false");
 }
@@ -364,9 +364,9 @@ sub predicate_cb1
 {
     my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
-            'spec' => 
-                +{ 
-                    'cb' => \&predicate_cb1, 
+            'spec' =>
+                +{
+                    'cb' => \&predicate_cb1,
                     'bool' => 1,
                     're' => "anuba",
                 },
@@ -374,22 +374,22 @@ sub predicate_cb1
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "mypath/", 
+        'path_info' => "mypath/",
         'current_host' => "true",
     ), "cb precedes bool and re 1 - true");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "mypath/", 
+        'path_info' => "mypath/",
         'current_host' => "false",
     ), "cb precedes bool and re 2 - false");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "hello/", 
+        'path_info' => "hello/",
         'current_host' => "true",
     ), "cb precedes bool and re 3 - false");
     # TEST
     ok(!$pred->evaluate(
-        'path_info' => "anuba/", 
+        'path_info' => "anuba/",
         'current_host' => "false",
     ), "cb precedes bool and re 4 - both false");
 }
@@ -406,21 +406,21 @@ sub predicate_cb1
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "/nothing/here", 
+        'path_info' => "/nothing/here",
         'current_host' => "default",
     ), "regexp 1");
 }
 
 # Test the implicit bool predicate
 {
-    my $pred = 
+    my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
             'spec' => 1,
         );
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "Hoola/Yoola", 
+        'path_info' => "Hoola/Yoola",
         'current_host' => "default",
     ), "bool==1 test 1");
     # TEST
@@ -432,14 +432,14 @@ sub predicate_cb1
 
 # Test the implicit regexp predicate
 {
-    my $pred = 
+    my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
             'spec' => "^Hoola",
         );
 
     # TEST
     ok($pred->evaluate(
-        'path_info' => "Hoola/Yoola", 
+        'path_info' => "Hoola/Yoola",
         'current_host' => "default",
     ), "bool==1 test 1");
     # TEST
@@ -452,28 +452,28 @@ sub predicate_cb1
 # Test the implicit regexp predicate
 {
     eval {
-    my $pred = 
+    my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
             'spec' => { 'hoalsdkasldk' => 1},
         );
     };
 
     # TEST
-    like($@, qr{^Neither}, 
+    like($@, qr{^Neither},
         "Exception should be thrown.");
 }
 
 # Test an incorrect spec
 {
     eval {
-    my $pred = 
+    my $pred =
         HTML::Widgets::NavMenu::Predicate->new(
             'spec' => [],
         );
     };
 
     # TEST
-    like($@, qr{^Unknown spec type}, 
+    like($@, qr{^Unknown spec type},
         "Exception should be thrown.");
 }
 

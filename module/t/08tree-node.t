@@ -55,7 +55,7 @@ use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
     my $node = HTML::Widgets::NavMenu::Tree::Node->new();
 
     # TEST
-    ok(!defined($node->role()), 
+    ok(!defined($node->role()),
         "Testing that role is undeffed at start");
     $node->role("hoola");
     is($node->role(), "hoola", "Testing role setted value"); # TEST
@@ -74,14 +74,14 @@ use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
 
     ok((!$node->CurrentlyActive()), "Testing node->CurrentlyActive()"); # TEST
     # TEST
-    ok((!$node->expanded()), 
-        "Testing node->expanded() before mark_as_current()"); 
+    ok((!$node->expanded()),
+        "Testing node->expanded() before mark_as_current()");
     $node->mark_as_current();
     # TEST
-    ok($node->CurrentlyActive(), 
+    ok($node->CurrentlyActive(),
         "Testing node->CurAct() after mark_as_current()");
     # TEST
-    ok($node->expanded(), 
+    ok($node->expanded(),
         "Testing node->expanded() after mark_as_current()");
 }
 
@@ -89,7 +89,7 @@ use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
     my $node = HTML::Widgets::NavMenu::Tree::Node->new();
 
     # TEST
-    is(scalar(@{$node->subs()}), 0, 
+    is(scalar(@{$node->subs()}), 0,
         "Testing emptiness of node->subs at start");
 
     my $sub_node1 = HTML::Widgets::NavMenu::Tree::Node->new();
@@ -105,10 +105,10 @@ use_ok ('HTML::Widgets::NavMenu::Tree::Node'); # TEST
     # TEST
     is(scalar(@{$node->subs()}), 2, "node->subs len == 2");
     # TEST
-    is($node->subs()->[0]->url(), "Emperor/Kuzko/", 
+    is($node->subs()->[0]->url(), "Emperor/Kuzko/",
         "node->subs contents again");
     # TEST
-    is($node->subs()->[1]->url(), "gimp/ressionist/", 
+    is($node->subs()->[1]->url(), "gimp/ressionist/",
         "node->subs[1] contents");
     # TEST
     ok(!$node->expanded(), "Node is not expanded");

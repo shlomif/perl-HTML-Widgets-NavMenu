@@ -31,9 +31,9 @@ sub does_throw_exception
 }
 
 {
-    my @args_components = 
+    my @args_components =
         (
-            [ 'node' => +{ 'hello' => 'world', }, ], 
+            [ 'node' => +{ 'hello' => 'world', }, ],
             [ 'subs' => [], ],
             [ 'accum_state' => +{ 'yes' => "sir", }, ],
         );
@@ -44,7 +44,7 @@ sub does_throw_exception
         my ($exception_thrown, $new_item) = does_throw_exception(\@args);
         if ($i == (2**@args_components)-1)
         {
-            ok(((!$exception_thrown) && $new_item), 
+            ok(((!$exception_thrown) && $new_item),
                 "Checking for constructor success with good arguments");
         }
         else
@@ -55,7 +55,7 @@ sub does_throw_exception
 }
 
 {
-    my $item = 
+    my $item =
         HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
             {
                 'node' => "Hello",
@@ -63,13 +63,13 @@ sub does_throw_exception
                 'accum_state' => 5,
             }
         );
-    
+
     # TEST
     is ($item->_node(), "Hello", "Getting the node()");
 }
 
 {
-    my $item = 
+    my $item =
         HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
             {
                 'node' => "Hello",
@@ -77,7 +77,7 @@ sub does_throw_exception
                 'accum_state' => "Foobardom",
             }
         );
-    
+
     # TEST
     is ($item->_accum_state(), "Foobardom", "Getting Foobardom");
 }
@@ -91,8 +91,8 @@ sub does_throw_exception
                 'accum_state' => 5,
             }
         );
-    
-    
+
+
     ok ((!$item->_is_visited()), "Item is not visited at start"); # TEST
     is ($item->_num_subs_to_go(), 4, "Num subs to go at start"); # TEST
     is ($item->_num_subs(), 4, "Num subs at start"); # TEST
@@ -115,5 +115,5 @@ sub does_throw_exception
     is ($item->_num_subs(), 4, "Num subs at finish"); # TEST
     ok ((!defined($item->_visit())), "No more subs (2)"); # TEST
     is ($item->_node(), "Hello", "item->_node() is correct"); # TEST
-    
+
 }

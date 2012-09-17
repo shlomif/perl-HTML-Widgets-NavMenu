@@ -82,7 +82,7 @@ sub get_new_item
             {
                 'node' => $node,
                 'subs' => $self->get_node_subs( { 'node' => $node } ),
-                'accum_state' => 
+                'accum_state' =>
                     $self->get_new_accum_state(
                         {
                             'item' => $parent_item,
@@ -206,7 +206,7 @@ sub find_node_by_coords
                 'self' => $self,
             );
         };
-    
+
     $internal_callback->();
     foreach my $c (@$coords)
     {

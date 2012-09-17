@@ -38,7 +38,7 @@ sub _init
 
     $self->_accum_state($args->{'accum_state'}) or
         die "accum_state not specified!";
-    
+
     return 0;
 }
 

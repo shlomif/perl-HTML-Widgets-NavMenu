@@ -108,7 +108,7 @@ Expands the node.
 sub expand
 {
     my $self = shift;
-    my $v = @_ ? (shift(@_)) : 
+    my $v = @_ ? (shift(@_)) :
         HTML::Widgets::NavMenu::ExpandVal->new({capture => 1})
         ;
     # Don't set it to something if it's already capture_expanded(),
@@ -138,7 +138,7 @@ sub _process_new_sub
 {
     my $self = shift;
     my $sub = shift;
-    $self->update_based_on_sub($sub);    
+    $self->update_based_on_sub($sub);
 }
 
 =head2 $self->update_based_on_sub
@@ -154,7 +154,7 @@ sub update_based_on_sub
     if (my $expand_val = $sub->expanded())
     {
         $self->expand($expand_val);
-    }    
+    }
 }
 
 =head2 $self->add_sub()

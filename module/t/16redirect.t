@@ -28,7 +28,7 @@ package main;
 
 use vars qw($exit_count);
 
-BEGIN 
+BEGIN
 {
     *CORE::GLOBAL::exit = sub { $exit_count++; };
 }

@@ -62,7 +62,7 @@ sub get_new_accum_state
         return $node->{'accum'};
     }
 
-    my $prev_state = 
+    my $prev_state =
         $parent_item->_accum_state();
 
     return ($node->{'accum'} || $prev_state);
@@ -261,7 +261,7 @@ sub test_traverse
             ],
         };
     my @expected = ("Start-A-one", "Start-B-two", "End-B",
-        "Start-C-one", "End-C", "Start-AGH-three", 
+        "Start-C-one", "End-C", "Start-AGH-three",
         "Start-MON-four", "End-MON", "Start-KOJ-three", "End-KOJ",
         "End-AGH", "End-A");
 

@@ -11,7 +11,7 @@ Revision history for Perl extension Shlomif::NavMenu.
         - http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
 
 1.0501    Sun Nov 14 12:11:19 IST 2010
-    - Now generating the Makefile.PL from the Build.PL using 
+    - Now generating the Makefile.PL from the Build.PL using
     create_makefile_pl (less error-prone).
 
 1.0500    Fri Nov 12 20:43:08 IST 2010
@@ -20,7 +20,7 @@ Revision history for Perl extension Shlomif::NavMenu.
 
 1.0400    Wed Dec  9 11:44:05 IST 2009
     - Got rid of the dependency on Error.pm.
-    - moved the HTML/ directory with the test scripts-support code from 
+    - moved the HTML/ directory with the test scripts-support code from
     the root of the distribution to unde t/lib .
 
 1.0302    Thu Jun 25 16:48:42 IDT 2009
@@ -33,7 +33,7 @@ Revision history for Perl extension Shlomif::NavMenu.
     - Added keywords and links to the META.yml.
 
 1.0300    Sun Jun 14 13:57:09 IDT 2009
-    - Refactoring: Made HTML::Widgets::NavMenu::Object a sub-class of 
+    - Refactoring: Made HTML::Widgets::NavMenu::Object a sub-class of
     Class::Accessor to remove many "use base" calls to it.
     - In progress - converting a flat %args hash (splatted into the @_)
     into a single $args hash-ref.
@@ -85,13 +85,13 @@ Revision history for Perl extension Shlomif::NavMenu.
     - Added IO::Scalar to the Perl modules this module depends on. (it
     is needed by the tests, but was not explicitly specified yet, because
     it was believed to be part of the core distribution).
-    
+
 0.10.1    Mon Jul 25 17:19:05 IST 2005
     - Fixed the building using "perl Makefile.PL" and "make".
 
 0.10.0    Tue Jul 12 20:45:40 IST 2005
     - Added tests and refactored the code to have a 100% test coverage.
-    
+
 0.8.0     Sat Apr 23 12:48:40 IST 2005
     - get_cross_host_rel_url is now part of the API.
     - Now returning nav_links_obj
@@ -105,7 +105,7 @@ Revision history for Perl extension Shlomif::NavMenu.
 0.4.0     Thu Jan 20 16:49:15 IST 2005
     - Added the url_is_abs option to the nodes.
     - Many code cleanups.
-    
+
 0.2.0     Sun Jan  2 19:37:41 IST 2005
     - First non-developer CPAN Release.
 

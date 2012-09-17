@@ -165,7 +165,7 @@ sub evaluate
 
 =head1 NAME
 
-HTML::Widgets::NavMenu::Predicate - a predicate object for 
+HTML::Widgets::NavMenu::Predicate - a predicate object for
 HTML::Widgets::NavMenu
 
 =head1 SYNOPSIS

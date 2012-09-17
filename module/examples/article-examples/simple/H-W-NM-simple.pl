@@ -15,11 +15,11 @@ a:hover { background-color : palegreen; }
     padding-top : 0em;
     margin-left : 1em;
     background-color : white
-    
+
 }
 .navbar {
     float : left;
-    background-color : moccasin; 
+    background-color : moccasin;
     width : 20%;
     border-color : black;
     border-width : thick;
@@ -35,7 +35,7 @@ a:hover { background-color : palegreen; }
 }
 EOF
 
-my $nav_menu_tree = 
+my $nav_menu_tree =
 {
     'host' => "default",
     'text' => "Top 1",
@@ -61,13 +61,13 @@ my $nav_menu_tree =
 
 my %hosts =
 (
-    'hosts' => 
-    { 
-        'default' => 
-        { 
-            'base_url' => ("http://web-cpan.berlios.de/modules/" . 
+    'hosts' =>
+    {
+        'default' =>
+        {
+            'base_url' => ("http://web-cpan.berlios.de/modules/" .
                 "HTML-Widgets-NavMenu/article/examples/simple/dest/"),
-        }, 
+        },
     },
 );
 
@@ -104,7 +104,7 @@ EOF
 <a href="http://www.perl.com/">Perl.com - a site with Perl articles</a>.
 </li>
 <li>
-<a href="http://www.perl.org/">Perl.org</a> - the homepage of the Perl 
+<a href="http://www.perl.org/">Perl.org</a> - the homepage of the Perl
 community.
 </li>
 <li>
@@ -120,7 +120,7 @@ foreach my $page (@pages)
     my $path = $page->{'path'};
     my $title = $page->{'title'};
     my $content = $page->{'content'};
-    my $nav_menu = 
+    my $nav_menu =
         HTML::Widgets::NavMenu->new(
             path_info => "/$path",
             current_host => "default",
@@ -131,7 +131,7 @@ foreach my $page (@pages)
     my $nav_menu_results = $nav_menu->render();
 
     my $nav_menu_text = join("\n", @{$nav_menu_results->{'html'}});
-    
+
     my $file_path = $path;
     if (($file_path =~ m{/$}) || ($file_path eq ""))
     {
@@ -139,12 +139,12 @@ foreach my $page (@pages)
     }
     my $full_path = "dest/$file_path";
     $full_path =~ m{^(.*)/[^/]+$};
-    # mkpath() throws an exception if it isn't successful, which will cause 
+    # mkpath() throws an exception if it isn't successful, which will cause
     # this program to terminate. This is what we want.
     mkpath($1, 0, 0755);
     open my $out, ">", $full_path or
         die "Could not open \"$full_path\" for writing!";
-    
+
     print {$out} <<"EOF";
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html

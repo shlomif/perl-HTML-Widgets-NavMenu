@@ -20,7 +20,7 @@ For internal use only.
 sub _start_root
 {
     my $self = shift;
-    
+
     $self->_add_tags("<ul>");
 }
 

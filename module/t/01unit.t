@@ -47,7 +47,7 @@ ok (! $url->_is_dir()); # TEST
     };
 
     # TEST
-    like($@, qr{^nav_menu not specified}, 
+    like($@, qr{^nav_menu not specified},
         "nav_menu not specified");
 }
 
@@ -55,6 +55,6 @@ ok (! $url->_is_dir()); # TEST
     my $obj = HTML::Widgets::NavMenu::Object->new();
 
     # TEST
-    isa_ok($obj, "HTML::Widgets::NavMenu::Object", 
+    isa_ok($obj, "HTML::Widgets::NavMenu::Object",
         "Testing creation of object");
 }

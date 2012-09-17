@@ -17,7 +17,7 @@ sub test_nav_menu
     my $rendered = shift;
     my $expected_string = shift;
     my $test_blurb = shift;
-    
+
     my @result = (@{$rendered->{html}});
 
     my @expected = (split(/\n/, $expected_string));
@@ -31,7 +31,7 @@ sub test_nav_menu
         @{$test_data->{'two_sites'}},
     );
 
-    my $rendered = 
+    my $rendered =
         $nav_menu->render();
 
     my $expected_string = <<"EOF";
@@ -58,7 +58,7 @@ sub test_nav_menu
 EOF
 
     # TEST
-    test_nav_menu($rendered, $expected_string, "Testing ul classes for no CSS class to be assigned."); 
+    test_nav_menu($rendered, $expected_string, "Testing ul classes for no CSS class to be assigned.");
 }
 
 # This test tests the show_always directive which causes the entire
@@ -70,7 +70,7 @@ EOF
         'ul_classes' => [ "FirstClass", "secondclass 2C", "ThirdClass" ],
     );
 
-    my $rendered = 
+    my $rendered =
         $nav_menu->render();
 
     my $expected_string = <<"EOF";
@@ -123,7 +123,7 @@ EOF
         'ul_classes' => [ "F&F Class", "sec<h>", "T\"C" ],
     );
 
-    my $rendered = 
+    my $rendered =
         $nav_menu->render();
 
     my $expected_string = <<"EOF";

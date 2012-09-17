@@ -63,10 +63,10 @@ sub gen
 
     my $attr_spec = $self->attributes();
 
-    return "<" . $self->name() . 
+    return "<" . $self->name() .
         join("", map { " $_=\"" .
-            ($attr_spec->{$_}->{'escape'} ? 
-                escape_html($attr_values->{$_}) 
+            ($attr_spec->{$_}->{'escape'} ?
+                escape_html($attr_values->{$_})
                 : $attr_values->{$_}
             ) . "\""
             } @tag_list) .

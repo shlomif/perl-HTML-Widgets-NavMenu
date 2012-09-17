@@ -9,12 +9,12 @@ my $nav_menu =
     HTML::Widgets::NavMenu->new(
         'path_info' => "/me/",
         'current_host' => "default",
-        'hosts' => 
-        { 
-            'default' => 
-            { 
-                'base_url' => "http://www.hello.com/" 
-            }, 
+        'hosts' =>
+        {
+            'default' =>
+            {
+                'base_url' => "http://www.hello.com/"
+            },
         },
         'tree_contents' =>
         {
@@ -40,6 +40,6 @@ my $nav_menu =
 my $results = $nav_menu->render();
 
 my $nav_menu_html = join("\n", @{$results->{'html'}});
- 
+
 print $nav_menu_html;
 

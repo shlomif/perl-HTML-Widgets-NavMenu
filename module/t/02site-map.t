@@ -17,7 +17,7 @@ sub validate_site_map
     my $results = shift;
     my $expected_string = shift;
     my $test_blurb = shift;
-    
+
     my @result = @$results;
 
     my @expected = (split(/\n/, $expected_string));

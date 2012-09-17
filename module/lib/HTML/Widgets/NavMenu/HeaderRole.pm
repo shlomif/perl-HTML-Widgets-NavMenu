@@ -23,7 +23,7 @@ __END__
 
 =head1 NAME
 
-HTML::Widgets::NavMenu::HeaderRole - A Specialized HTML::Widgets::NavMenu 
+HTML::Widgets::NavMenu::HeaderRole - A Specialized HTML::Widgets::NavMenu
 sub-class
 
 =head1 SYNOPOSIS
@@ -46,7 +46,7 @@ C<E<lt>h2E<gt>> header. The HTML will look something like this:
     </h2>
     <ul>
 
-An example of this use can be found in the Perl Beginners Site 
+An example of this use can be found in the Perl Beginners Site
 ( L<http://perl-begin.berlios.de/> ).
 
 =head1 SEE ALSO
@@ -55,8 +55,8 @@ L<HTML::Widgets::NavMenu> for the complete documentation of the super-class.
 
 =head1 AUTHORS
 
-Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt> 
+Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt>
 (L<http://search.cpan.org/~shlomif/>).
 
-=cut 
+=cut
 

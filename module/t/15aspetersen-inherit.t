@@ -10,7 +10,7 @@ use base 'HTML::Widgets::NavMenu::Iterator::NavMenu';
 sub get_open_sub_menu_tags
 {
     my $self = shift;
-    return ("<br class=\"hello\" />", 
+    return ("<br class=\"hello\" />",
         $self->gen_ul_tag({'depth' => $self->stack->len()}));
 }
 
@@ -54,7 +54,7 @@ sub validate_nav_menu
     my $rendered = shift;
     my $expected_string = shift;
     my $test_blurb = shift;
-    
+
     my @result = (@{$rendered->{html}});
 
     my @expected = (split(/\n/, $expected_string));
@@ -71,7 +71,7 @@ sub validate_nav_menu
         'ul_classes' => [ "navbarmain", ("navbarnested") x 5 ],
     );
 
-    my $rendered = 
+    my $rendered =
         $nav_menu->render();
 
     my $expected_string = <<"EOF";

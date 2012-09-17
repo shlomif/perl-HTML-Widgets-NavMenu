@@ -9,11 +9,11 @@ sub new
 {
     my $class = shift;
     my $self = {};
-    
+
     bless $self, $class;
-    
+
     $self->_init(@_);
-    
+
     return $self;
 }
 
@@ -27,14 +27,14 @@ sub _init
 sub destroy_
 {
     my $self = shift;
-    
+
     return 0;
 }
 
 sub DESTROY
 {
     my $self = shift;
-    
+
     $self->destroy_();
 }
 
@@ -51,7 +51,7 @@ Gotta love dynamic languages like Perl 5.
 sub mk_accessors
 {
     my $package = shift;
-    return $package->mk_acc_ref([@_]); 
+    return $package->mk_acc_ref([@_]);
 }
 
 =head2 __PACKAGE__->mk_acc_ref([qw(method1 method2 method3)])
@@ -71,7 +71,7 @@ sub mk_acc_ref
 package $package;
 
 Class::XSAccessor->import(
-    accessors => \$mapping,            
+    accessors => \$mapping,
 );
 EOF
 

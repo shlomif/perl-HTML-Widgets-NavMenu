@@ -20,7 +20,7 @@ my $test_data = get_test_data();
         @{$test_data->{'minimal'}},
     );
 
-    my $rendered = 
+    my $rendered =
         $nav_menu->render();
 
     my @leading_path = @{$rendered->{'leading_path'}};
@@ -31,8 +31,8 @@ my $test_data = get_test_data();
     my $component = $leading_path[0];
 
     # TEST
-    is ($component->label(), "Home", "Testing for title of leading_path"); 
-    
+    is ($component->label(), "Home", "Testing for title of leading_path");
+
     # TEST
     is ($component->direct_url(), "../", "Testing for direct_url");
 }
@@ -44,7 +44,7 @@ my $test_data = get_test_data();
         @{$test_data->{'rec_url_type_menu'}},
     );
 
-    my $rendered = 
+    my $rendered =
         $nav_menu->render();
 
     my @leading_path = @{$rendered->{'leading_path'}};
@@ -55,10 +55,10 @@ my $test_data = get_test_data();
     my $component = $leading_path[0];
 
     # TEST
-    is ($component->label(), "Home", "Testing for title of leading_path"); 
-    
+    is ($component->label(), "Home", "Testing for title of leading_path");
+
     # TEST
-    is ($component->direct_url(), "http://www.hello.com/~shlomif/", 
+    is ($component->direct_url(), "http://www.hello.com/~shlomif/",
         "Testing for direct_url");
 
     # TEST
@@ -67,10 +67,10 @@ my $test_data = get_test_data();
     $component = $leading_path[1];
 
     # TEST
-    is ($component->label(), "Yowza", "Testing for label of leading_path"); 
-    
+    is ($component->label(), "Yowza", "Testing for label of leading_path");
+
     # TEST
-    is ($component->direct_url(), "../", 
+    is ($component->direct_url(), "../",
         "Testing for direct_url");
 
     # TEST
@@ -79,11 +79,11 @@ my $test_data = get_test_data();
     $component = $leading_path[2];
 
     # TEST
-    is ($component->label(), "This should be full_abs again", 
-        "Testing for label of leading_path"); 
-    
+    is ($component->label(), "This should be full_abs again",
+        "Testing for label of leading_path");
+
     # TEST
-    is ($component->direct_url(), "http://www.hello.com/~shlomif/yowza/howza/", 
+    is ($component->direct_url(), "http://www.hello.com/~shlomif/yowza/howza/",
         "Testing for direct_url");
 
     # TEST
@@ -107,28 +107,28 @@ my $test_data = get_test_data();
     my $component = $leading_path[0];
 
     # TEST
-    is ($component->label(), "Home", "Testing for title of leading_path"); 
-    
+    is ($component->label(), "Home", "Testing for title of leading_path");
+
     # TEST
     is ($component->direct_url(), "../", "Testing for direct_url");
 
     $component = $leading_path[1];
 
     # TEST
-    is ($component->title(), "Google it!", 
-        "Testing for title of leading_path"); 
-    
+    is ($component->title(), "Google it!",
+        "Testing for title of leading_path");
+
     # TEST
-    is ($component->direct_url(), "http://www.google.com/", 
+    is ($component->direct_url(), "http://www.google.com/",
         "Testing for direct_url");
 
     # TEST
     is ($component->url_type(), "full_abs", "Testing for url_type");
 
     $component = $leading_path[2];
-  
+
     # TEST
-    is ($component->direct_url(), "./", 
+    is ($component->direct_url(), "./",
         "Testing for direct_url");
 
     # TEST
@@ -153,10 +153,10 @@ my $test_data = get_test_data();
 
     # TEST
     is ($component->title(), "Open Source Software I Wrote",
-        "Testing for title of leading_path"); 
-    
+        "Testing for title of leading_path");
+
     # TEST
-    is ($component->direct_url(), "../", 
+    is ($component->direct_url(), "../",
         "Testing for direct_url");
 }
 
@@ -178,10 +178,10 @@ my $test_data = get_test_data();
 
     # TEST
     is ($component->label(), "Home",
-        "Points to Home"); 
-    
+        "Points to Home");
+
     # TEST
-    is ($component->direct_url(), "../", 
+    is ($component->direct_url(), "../",
         "Testing for direct_url");
 }
 
@@ -230,5 +230,5 @@ my $test_data = get_test_data();
 
     # TEST
     is ($lp[1]->direct_url(), "../", "Pointing to the humour");
-    
+
 }

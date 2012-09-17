@@ -12,7 +12,7 @@ use HTML::Widgets::NavMenu::Test::Data;
 
 my $test_data = get_test_data();
 
-my @site_args = 
+my @site_args =
 (
     'current_host' => "default",
     'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
@@ -39,11 +39,11 @@ my @site_args =
                 'url' => "last-page.html",
             }
         ],
-    },    
+    },
 );
 
 # The purpose of this test is to check for the in-existence of navigation
-# links from the first page. Generally, there shouldn't be "top", "up" and 
+# links from the first page. Generally, there shouldn't be "top", "up" and
 # "prev" nav-links and only "next".
 {
     my $nav_menu = HTML::Widgets::NavMenu->new(
@@ -54,7 +54,7 @@ my @site_args =
     my $rendered = $nav_menu->render();
 
     my $nav_links = $rendered->{'nav_links'};
-    
+
     # TEST
     ok ((scalar(keys(%$nav_links)) == 1) && (exists($nav_links->{'next'})),
         "Lack of Nav-Links in the First Page");

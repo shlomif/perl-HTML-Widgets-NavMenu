@@ -15,11 +15,11 @@ a:hover { background-color : palegreen; }
     padding-top : 0em;
     margin-left : 1em;
     background-color : white
-    
+
 }
 .navbar {
     float : left;
-    background-color : moccasin; 
+    background-color : moccasin;
     width : 20%;
     border-color : black;
     border-width : thick;
@@ -49,7 +49,7 @@ my $nav_menu_tree =
         {
             'text' => "About Myself",
             'url' => "me/",
-            'subs' => 
+            'subs' =>
             [
                 {
                     'text' => "Bio",
@@ -76,16 +76,16 @@ my $nav_menu_tree =
                         },
                     ],
                 },
-            ],               
+            ],
         },
         {
-            'text' => "Humour", 
+            'text' => "Humour",
             'url' => "humour/",
             'title' => "My Humorous Creations",
-            'subs' => 
+            'subs' =>
             [
                 {
-                    'text' => "The Enemy", 
+                    'text' => "The Enemy",
                     'url' => "humour/TheEnemy/",
                     'title' => "The Enemy and How I Helped to Fight It",
                 },
@@ -138,7 +138,7 @@ my $nav_menu_tree =
             'text' => "Software",
             'url' => "open-source/",
             'title' => "Pages related to Software (mostly Open-Source)",
-            'subs' => 
+            'subs' =>
             [
                 {
                     'text' => "Freecell Solver",
@@ -192,10 +192,10 @@ my $nav_menu_tree =
             ],
         },
         {
-            'text' => "Lectures", 
+            'text' => "Lectures",
             'url' => "lecture/",
             'title' => "Presentations I Wrote (Mostly Technical)",
-            'subs' => 
+            'subs' =>
             [
                 {
                     'text' => "Perl for Newbies",
@@ -259,34 +259,34 @@ my $nav_menu_tree =
 
 my %hosts =
 (
-    'hosts' => 
-    { 
-        'default' => 
-        { 
-            'base_url' => ("http://web-cpan.berlios.de/modules/" . 
+    'hosts' =>
+    {
+        'default' =>
+        {
+            'base_url' => ("http://web-cpan.berlios.de/modules/" .
                 "HTML-Widgets-NavMenu/article/examples/simple/dest/"),
-        }, 
+        },
     },
 );
 
 my @page_paths =
-("", "me/", "personal.html", "me/contact-me/", "me/resumes/", "resume.html", 
-"resume_detailed.html", "humour/", "humour/TheEnemy/", "humour/TOWTF/", 
-"humour/Pope/", "humour.html", "humour/fortunes/", "MathVentures/", 
-"art/", "art/bk2hp/", "art/linux_banner/", "open-source/", 
-"open-source/projects/freecell-solver/", "jmikmod/", "rwlock/", 
-"open-source/projects/quad-pres/", "open-source/favourite/", 
-"open-source/interviews/", "open-source/contributions/", 
-"open-source/bits.html", "abstraction/", "software-tools/", "lecture/", 
-"lecture/Perl/Newbies/", "lecture/Freecell-Solver/", "lecture/lc/", 
-"lecture/Gimp/", "lecture/Autotools/", "lecture/WebMetaLecture/", 
-"essays/", "essays/Index/", "essays/open-source/", "essays/life/", 
+("", "me/", "personal.html", "me/contact-me/", "me/resumes/", "resume.html",
+"resume_detailed.html", "humour/", "humour/TheEnemy/", "humour/TOWTF/",
+"humour/Pope/", "humour.html", "humour/fortunes/", "MathVentures/",
+"art/", "art/bk2hp/", "art/linux_banner/", "open-source/",
+"open-source/projects/freecell-solver/", "jmikmod/", "rwlock/",
+"open-source/projects/quad-pres/", "open-source/favourite/",
+"open-source/interviews/", "open-source/contributions/",
+"open-source/bits.html", "abstraction/", "software-tools/", "lecture/",
+"lecture/Perl/Newbies/", "lecture/Freecell-Solver/", "lecture/lc/",
+"lecture/Gimp/", "lecture/Autotools/", "lecture/WebMetaLecture/",
+"essays/", "essays/Index/", "essays/open-source/", "essays/life/",
 "links.html");
 
 
-my @pages = 
-    (map { 
-        +{ 'path' => $_, 'title' => "Title for $_", 
+my @pages =
+    (map {
+        +{ 'path' => $_, 'title' => "Title for $_",
         'content' => "<p>Content for $_</p>" }
     } @page_paths);
 
@@ -295,7 +295,7 @@ foreach my $page (@pages)
     my $path = $page->{'path'};
     my $title = $page->{'title'};
     my $content = $page->{'content'};
-    my $nav_menu = 
+    my $nav_menu =
         HTML::Widgets::NavMenu->new(
             path_info => "/$path",
             current_host => "default",
@@ -306,7 +306,7 @@ foreach my $page (@pages)
     my $nav_menu_results = $nav_menu->render();
 
     my $nav_menu_text = join("\n", @{$nav_menu_results->{'html'}});
-    
+
     my $file_path = $path;
     if (($file_path =~ m{/$}) || ($file_path eq ""))
     {
@@ -314,17 +314,17 @@ foreach my $page (@pages)
     }
     my $full_path = "dest/$file_path";
     $full_path =~ m{^(.*)/[^/]+$};
-    # mkpath() throws an exception if it isn't successful, which will cause 
+    # mkpath() throws an exception if it isn't successful, which will cause
     # this program to terminate. This is what we want.
     mkpath($1, 0, 0755);
     open my $out, ">", $full_path or
         die "Could not open \"$full_path\" for writing!";
-    
+
     print {$out} <<"EOF";
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">    
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
 <title>$title</title>

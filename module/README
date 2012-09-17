@@ -1,7 +1,7 @@
 HTML-Widgets-NavMenu
 ====================
 
-HTML::Widgets::NavMenu generates a navigation menu for a site. It can also 
+HTML::Widgets::NavMenu generates a navigation menu for a site. It can also
 generate a complete site map, a path of leading components, and also keeps
 track of navigation links ("Next", "Prev", "Up", etc.)
 

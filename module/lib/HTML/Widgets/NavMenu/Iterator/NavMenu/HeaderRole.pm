@@ -65,7 +65,7 @@ sub _start_handle_role
 Ends the role. Accepts the C<"header"> role and defaults to the
 default behaviour with all others.
 
-=cut 
+=cut
 
 sub _end_handle_role
 {

@@ -102,7 +102,7 @@ sub get_new_accum_state
 
     my $parent_item = $args->{'item'};
     my $node = $args->{'node'};
-    
+
     my $prev_state;
     if (defined($parent_item))
     {
@@ -122,7 +122,7 @@ sub get_new_accum_state
     {
         $show_always = $node->show_always();
     }
-    
+
     my $rec_url_type;
     if (exists($prev_state->{'rec_url_type'}))
     {

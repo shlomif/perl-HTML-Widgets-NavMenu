@@ -43,7 +43,7 @@ sub _init
     {
         $self->$k($v);
     }
-    
+
     return 0;
 }
 
@@ -77,7 +77,7 @@ sub _init
     $self->_tree($args->{'tree'});
 
     $self->_item_found(0);
-    
+
     return 0;
 }
 
@@ -290,7 +290,7 @@ sub _is_slash_terminated
 sub _text_to_url_obj
 {
     my $text = shift;
-    my $url = 
+    my $url =
         HTML::Widgets::NavMenu::Url->new(
             $text,
             (_is_slash_terminated($text) || ($text eq "")),
@@ -307,9 +307,9 @@ sub _get_relative_url
 
     my $from_url = _text_to_url_obj($from_text);
     my $to_url = _text_to_url_obj($to_text);
-    my $ret = 
+    my $ret =
         $from_url->_get_relative_url(
-            $to_url, 
+            $to_url,
             _is_slash_terminated($from_text),
             $no_leading_dot,
         );
@@ -322,7 +322,7 @@ sub _get_full_abs_url
 
     my $host = $args->{host};
     my $host_url = $args->{host_url};
-    
+
     return ($self->_hosts->{$host}->{base_url} . $host_url);
 }
 
@@ -411,7 +411,7 @@ sub _create_new_nav_menu_item
 
     if (exists($sub_contents->{'expand'}))
     {
-        my $expand_val = 
+        my $expand_val =
             $self->_create_predicate(
                 {
                     'spec' => $sub_contents->{'expand'},
@@ -460,7 +460,7 @@ sub gen_site_map
 {
     my $self = shift;
 
-    my $iterator = 
+    my $iterator =
         HTML::Widgets::NavMenu::Iterator::SiteMap->new(
             {
                'nav_menu' => $self,
@@ -525,8 +525,8 @@ sub _get_prev_coords
     elsif ($coords[$#coords] > 0)
     {
         # Get the previous leaf
-	    my @previous_leaf = 
-	        ( 
+	    my @previous_leaf =
+	        (
                 @coords[0 .. ($#coords - 1) ] ,
                 $coords[$#coords]-1
             );
@@ -629,7 +629,7 @@ sub _get_most_advanced_leaf
     # Get a reference to the contents HDS (= hierarchial data structure)
     my $branch = $self->_get_traversed_tree();
 
-    # Get to the current branch by advancing to the offset 
+    # Get to the current branch by advancing to the offset
     foreach my $c (@coords)
     {
         # Advance to the next level which is at index $c
@@ -645,7 +645,7 @@ sub _get_most_advanced_leaf
         # Recurse into the sub-branch
         $branch = $branch->get_nth_sub($index);
     }
-    
+
     return \@coords;
 }
 
@@ -689,7 +689,7 @@ sub _gen_traversed_tree
 {
     my $self = shift;
 
-    my $tree = 
+    my $tree =
         $self->_render_tree_contents(
             $self->_tree_contents(),
             );
@@ -705,20 +705,20 @@ sub _gen_traversed_tree
     $find_coords_iterator->traverse();
 
     my $current_coords = $find_coords_iterator->get_final_coords() || [];
-    my $leading_path_coords = 
+    my $leading_path_coords =
         $find_coords_iterator->_get_leading_path_coords() || [];
 
     # The root should always be expanded because:
     # 1. If one of the leafs was marked as expanded so will its ancestors
     #    and eventually the root.
-    # 2. If nothing was marked as expanded, it should still be marked as 
+    # 2. If nothing was marked as expanded, it should still be marked as
     #    expanded so it will expand.
     $tree->expand();
-   
-    return 
+
+    return
         {
-            'tree' => $tree, 
-            'current_coords' => $current_coords, 
+            'tree' => $tree,
+            'current_coords' => $current_coords,
             'leading_path_coords' => $leading_path_coords,
         };
 }
@@ -809,7 +809,7 @@ sub _render_generic
     my $iterator = $self->$method();
     $iterator->traverse();
     my $html = $iterator->get_results();
-    
+
     my %nav_links;
     my %nav_links_obj;
 
@@ -825,7 +825,7 @@ sub _render_generic
 
     while (my ($link_rel, $coords) = each(%links_proto))
     {
-        # This is so we would avoid coordinates that point to the 
+        # This is so we would avoid coordinates that point to the
         # root ($coords == []).
         if (defined($coords) && @$coords == 0)
         {
@@ -833,18 +833,18 @@ sub _render_generic
         }
         if (defined($coords))
         {
-            my $obj = 
+            my $obj =
                 $self->_get_leading_path_of_coords(
                     $coords
                 )->[-1];
-            
+
             $nav_links_obj{$link_rel} = $obj;
             $nav_links{$link_rel} = $obj->direct_url();
         }
     }
 
     my $js_code = "";
-    
+
     return
         {
             'html' => $html,
@@ -906,9 +906,9 @@ HTML::Widgets::NavMenu - A Perl Module for Generating HTML Navigation Menus
 
 This module generates a navigation menu for a site. It can also generate
 a complete site map, a path of leading components, and also keeps
-track of navigation links ("Next", "Prev", "Up", etc.) You can start from the 
-example above and see more examples in the tests, and complete working sites 
-in the Subversion repositories at 
+track of navigation links ("Next", "Prev", "Up", etc.) You can start from the
+example above and see more examples in the tests, and complete working sites
+in the Subversion repositories at
 L<http://opensvn.csie.org/shlomif/homepage/>
 and L<http://opensvn.csie.org/perlbegin/perl-begin/>.
 
@@ -932,7 +932,7 @@ Currently the only key required in the hash is the C<base_url> one that points
 to a string containing the absolute URL to the sub-site. The base URL may
 have trailing components if it does not reside on the domain's root directory.
 
-An optional key that is required only if you wish to use the "site_abs" 
+An optional key that is required only if you wish to use the "site_abs"
 url_type (see below), is C<trailing_url_base>, which denotes the component of
 the site that appears after the hostname. For C<http://www.myhost.com/~myuser/>
 it is C</~myuser/>.
@@ -953,7 +953,7 @@ two sites:
 
     'hosts' =>
     {
-        't2' => 
+        't2' =>
         {
             'base_url' => "http://www.shlomifish.org/",
             'trailing_url_base' => "/",
@@ -986,8 +986,8 @@ Perl data structure, whose syntax is fully explained in the section
 
 =item ul_classes
 
-This is an optional parameter whose value is a reference to an array that 
-indicates the values of the class="" arguments for the C<E<lt>ulE<gt>> tags 
+This is an optional parameter whose value is a reference to an array that
+indicates the values of the class="" arguments for the C<E<lt>ulE<gt>> tags
 whose depthes are the indexes of the array.
 
 For example, assigning:
@@ -1025,24 +1025,24 @@ following keys:
 
 =item 'html'
 
-This key points to a reference to an array that contains the tags for the 
-HTML. One can join these tags to get the full HTML. It is possible to 
+This key points to a reference to an array that contains the tags for the
+HTML. One can join these tags to get the full HTML. It is possible to
 delimit them with newlines, if one wishes the markup to be easier to read.
 
 =item 'leading_path'
 
 This is a reference to an array of node description objects. These indicate the
-intermediate pages in the site that lead from the front page to the 
+intermediate pages in the site that lead from the front page to the
 current page. The methods supported by the class of these objects is described
 below under "The Node Description Component Class".
 
 =item 'nav_links_obj'
 
 This points to a hash reference whose keys are link IDs for
-the Firefox "Site Navigation Toolbar" 
+the Firefox "Site Navigation Toolbar"
 ( L<http://www.bolwin.com/software/snb.shtml> ) and compatible programs,
-and its values are Node Description objects. (see "The Node Description 
-Class" below). Here's a sample code that renders the links as 
+and its values are Node Description objects. (see "The Node Description
+Class" below). Here's a sample code that renders the links as
 C<E<lt>link rel=...E<gt>> into the page header:
 
 
@@ -1060,9 +1060,9 @@ C<E<lt>link rel=...E<gt>> into the page header:
 =item 'nav_links'
 
 This points to a hash reference whose keys are link IDs compatible with the
-Firefox Site Navigation ( L<http://cdn.mozdev.org/linkToolbar/> ) and its 
-values are the URLs to these links. This key/value pair is provided for 
-backwards compatibility with older versions of HTML::Widgets::NavMenu. In new 
+Firefox Site Navigation ( L<http://cdn.mozdev.org/linkToolbar/> ) and its
+values are the URLs to these links. This key/value pair is provided for
+backwards compatibility with older versions of HTML::Widgets::NavMenu. In new
 code, one is recommended to use C<'nav_links_obj'> instead.
 
 This sample code renders the links as C<E<lt>link rel=...E<gt>> into the
@@ -1089,7 +1089,7 @@ the same as render() .
 =head2 $text = $nav_menu->gen_site_map()
 
 This function can be called to generate a site map based on the tree of
-contents. It returns a reference to an array containing the tags of the 
+contents. It returns a reference to an array containing the tags of the
 site map.
 
 =head2 $url = $nav_menu->get_cross_host_rel_url_ref({...})
@@ -1127,7 +1127,7 @@ sake.
 
 The input tree is a nested Perl data structure that represnets the tree
 of the site. Each node is respresented as a Perl hash reference, with its
-sub-nodes contained in an array reference of its C<'subs'> value. A 
+sub-nodes contained in an array reference of its C<'subs'> value. A
 non-existent C<'subs'> means that the node is a leaf and has no sub-nodes.
 
 The top-most node is mostly a dummy node, that just serves as the father
@@ -1140,8 +1140,8 @@ their respective values mean.
 
 =item 'host'
 
-This is the host-ID of the host as found in the C<'hosts'> key to the 
-navigation menu object constructor. It implicitly propagates downwards in the 
+This is the host-ID of the host as found in the C<'hosts'> key to the
+navigation menu object constructor. It implicitly propagates downwards in the
 tree. (i.e: all nodes of the sub-tree spanning from the node will implicitly
 have it as their value by default.)
 
@@ -1157,7 +1157,7 @@ The URL should be specified for every nodes except separators and the such.
 
 =item 'text'
 
-This is the text that will be presented to the user as the text of the 
+This is the text that will be presented to the user as the text of the
 link inside the navigation bar. E.g.: if C<'text'> is "Hi There", then the
 link will look something like this:
 
@@ -1188,12 +1188,12 @@ This key if specified and true indicate that the item is a separator, which
 should just leave a blank line in the HTML. It is best to accompany it with
 C<'skip'> (see below).
 
-If C<'separator'> is specified, it is usually meaningless to specify all 
+If C<'separator'> is specified, it is usually meaningless to specify all
 other node keys except C<'skip'>.
 
 =item 'skip'
 
-This key if true, indicates that the node should be skipped when traversing 
+This key if true, indicates that the node should be skipped when traversing
 site using the Mozilla navigation links. Instead the navigation will move
 to the next or previous nodes.
 
@@ -1204,7 +1204,7 @@ and site map, but not displayed in the navigation menu.
 
 =item 'role'
 
-This indicates a role of an item. It is similar to a CSS class, or to 
+This indicates a role of an item. It is similar to a CSS class, or to
 DocBook's "role" attribute, only induces different HTML markup. The vanilla
 HTML::Widgets::NavMenu does not distinguish between any roles, but see
 L<HTML::Widgets::NavMenu::HeaderRole>.
@@ -1212,15 +1212,15 @@ L<HTML::Widgets::NavMenu::HeaderRole>.
 =item 'expand'
 
 This specifies a predicate (a Perl value that is evaluated to a boolean
-value, see "Predicate Values" below.) to be matched against the path and 
-current host to determine if the navigation menu should be expanded at this 
+value, see "Predicate Values" below.) to be matched against the path and
+current host to determine if the navigation menu should be expanded at this
 node. If it does, all of the nodes up to it will expand as well.
 
 =item 'show_always'
 
 This value if true, indicates that the node and all nodes below it (until
-'show_always' is explicitly set to false) must be always displayed. Its 
-function is similar to C<'expand_re'> but its propagation semantics the 
+'show_always' is explicitly set to false) must be always displayed. Its
+function is similar to C<'expand_re'> but its propagation semantics the
 opposite.
 
 =item 'url_type'
@@ -1234,7 +1234,7 @@ C<"../../me/about.html">.
 the beginning. Like C<"/~shlomif/me/about.html">. For this to work the current
 host needs to have a C<'trailing_url_base'> value set.
 
-3. C<"full_abs"> - this uses a fully qualified URL (e.g: with C<http://> at 
+3. C<"full_abs"> - this uses a fully qualified URL (e.g: with C<http://> at
 the beginning, even if both the current path and the pointed path belong
 to the same host. Something like C<http://www.shlomifish.org/me/about.html>.
 
@@ -1247,12 +1247,12 @@ then the value of C<'url_type'> will hold.
 =item 'url_is_abs'
 
 This flag, if true, indicates that the URL specified by the C<'url'> key
-is an absolute URL like C<http://www.myhost.com/> and should not be 
+is an absolute URL like C<http://www.myhost.com/> and should not be
 treated as a path within the site. All links to the page associated with
 this node will contain the URL verbatim.
 
 Note that using absolute URLs as part of the site flow is discouraged
-because once they are accessed, the navigation within the primary site 
+because once they are accessed, the navigation within the primary site
 is lost. A better idea would be to create a separate page within the
 site, that will link to the external URL.
 
@@ -1285,7 +1285,7 @@ Here is an example for such a callback:
 =item 're' => $regexp_string
 
 This specifies a regular expression to be matched against the path_info
-(regardless of what current_host is), to determine the result of the 
+(regardless of what current_host is), to determine the result of the
 predicate.
 
 =item 'bool' => [ 0 | 1 ]
@@ -1295,7 +1295,7 @@ This specifies the constant boolean value of the predicate.
 =back
 
 Note that if C<'cb'> is specified then both C<'re'> and C<'bool'> will
-be ignored, and C<'re'> over-rides C<'bool'>. 
+be ignored, and C<'re'> over-rides C<'bool'>.
 
 Orthogonal to these keys is the C<'capt'> key which specifies whether this
 expansion "captures" or not. This is relevant to the behaviour in the
@@ -1304,7 +1304,7 @@ default value is true.
 
 If the predicate is not a hash reference, then HTML::Widgets::NavMenu will
 try to guess what it is. If it's a sub-routine reference, it will be an
-implicit callback. If it's one of the values C<"0">, C<"1">, C<"yes">, 
+implicit callback. If it's one of the values C<"0">, C<"1">, C<"yes">,
 C<"no">, C<"true">, C<"false">, C<"True">, C<"False"> it will be considered
 a boolean. If it's a different string, a regular expression match will
 be attempted. Else, an excpetion will be thrown.
@@ -1333,8 +1333,8 @@ Here are some examples for predicates:
 
 =head1 The Node Description Class
 
-When retrieving the leading path or the C<nav_links_obj>, an array of objects 
-is returned. This section describes the class of these objects, so one will 
+When retrieving the leading path or the C<nav_links_obj>, an array of objects
+is returned. This section describes the class of these objects, so one will
 know how to use them.
 
 Basically, it is an object that has several accessors. The accessors are:
@@ -1354,7 +1354,7 @@ The URL of the node within the host. (one given in its 'url' key).
 The label of the node. (one given in its 'text' key). This is not
 SGML-escaped.
 
-=item title 
+=item title
 
 The title of the node. (that can be assigned to the URL 'title' attribute).
 This is not SGML-escaped.
@@ -1381,20 +1381,20 @@ L<http://www.perl.com/pub/a/2005/07/07/navwidgets.html>
 
 =item L<HTML::Widgets::NavMenu::HeaderRole>
 
-An HTML::Widgets::NavMenu sub-class that contains support for another 
+An HTML::Widgets::NavMenu sub-class that contains support for another
 role. Used for the navigation menu in L<http://perl-begin.berlios.de/>.
 
 =item L<HTML::Widget::SideBar>
 
-A module written by Yosef Meller for maintaining a navigation menu. 
+A module written by Yosef Meller for maintaining a navigation menu.
 HTML::Widgets::NavMenu originally utilized it, but no longer does. This module
-does not makes links relative on its own, and tends to generate a lot of 
+does not makes links relative on its own, and tends to generate a lot of
 JavaScript code by default. It also does not have too many automated test
 scripts.
 
 =item L<HTML::Menu::Hierarchical>
 
-A module by Don Owens for generating hierarchical HTML menus. I could not 
+A module by Don Owens for generating hierarchical HTML menus. I could not
 quite understand its tree traversal semantics, so I ended up not using it. Also
 seems to require that each of the tree node will have a unique ID.
 
@@ -1409,7 +1409,7 @@ why), so I abandoned it.
 
 =head1 AUTHORS
 
-Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt> 
+Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt>
 (L<http://search.cpan.org/~shlomif/>).
 
 =head1 THANKS

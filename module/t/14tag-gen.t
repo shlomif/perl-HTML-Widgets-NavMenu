@@ -9,7 +9,7 @@ use_ok ('HTML::Widgets::NavMenu::TagGen'); # TEST
 }
 
 {
-    my $test_tag = 
+    my $test_tag =
         HTML::Widgets::NavMenu::TagGen->new(
             {
                 'name' => "a",
@@ -24,16 +24,16 @@ use_ok ('HTML::Widgets::NavMenu::TagGen'); # TEST
         );
 
     # TEST
-    is ($test_tag->gen({'href' => "http://www.mysite.com/",}), 
-        q{<a href="http://www.mysite.com/">}, 
+    is ($test_tag->gen({'href' => "http://www.mysite.com/",}),
+        q{<a href="http://www.mysite.com/">},
         "Simple Tag Test");
     # TEST
     is ($test_tag->gen({'href' => "/hello&you<yes>",}),
         q{<a href="/hello&amp;you&lt;yes&gt;">},
         "Escaping");
     # TEST
-    is ($test_tag->gen({'href' => "http://www.mysite.com/",}, 1), 
-        q{<a href="http://www.mysite.com/" />}, 
+    is ($test_tag->gen({'href' => "http://www.mysite.com/",}, 1),
+        q{<a href="http://www.mysite.com/" />},
         "Standalone Tag");
     # TEST
     is ($test_tag->gen({'href' => "/hello&you<yes>",}, 1),
@@ -49,12 +49,12 @@ use_ok ('HTML::Widgets::NavMenu::TagGen'); # TEST
         "Non-escaping for unescaped attribute");
     # TEST
     is ($test_tag->gen({'title' => "Hello", 'href' => "/hi/", 'id' => "myid"}),
-        q{<a href="/hi/" id="myid" title="Hello">}, 
+        q{<a href="/hi/" id="myid" title="Hello">},
         "Multiple Attributes");
     # TEST
-    is ($test_tag->gen({'title' => "Hello", 
+    is ($test_tag->gen({'title' => "Hello",
         'href' => "/hi/", 'id' => "myid"}, 1),
-        q{<a href="/hi/" id="myid" title="Hello" />}, 
+        q{<a href="/hi/" id="myid" title="Hello" />},
         "Multiple Attributes Standalone");
     my $string = "&lt;Hello&amp;";
     # TEST

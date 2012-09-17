@@ -103,7 +103,7 @@ sub get_link_tag
 sub _start_root
 {
     my $self = shift;
-    
+
     $self->_add_tags(
         $self->gen_ul_tag(
             {
@@ -135,7 +135,7 @@ Gets the tags to open a new sub menu.
 sub get_open_sub_menu_tags
 {
     my $self = shift;
-    return ("<br />", 
+    return ("<br />",
         $self->gen_ul_tag(
             {'depth' => $self->stack->len()}
         )

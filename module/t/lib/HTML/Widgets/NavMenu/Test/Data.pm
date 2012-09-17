@@ -44,9 +44,9 @@ my @two_sites_data =
         {
             'base_url' => "http://www.hello.com/",
         },
-        'other' => 
-        { 
-            'base_url' => "http://www.other-url.co.il/~shlomif/", 
+        'other' =>
+        {
+            'base_url' => "http://www.other-url.co.il/~shlomif/",
         },
     },
     'tree_contents' =>
@@ -451,7 +451,7 @@ my @selective_expand_nav_menu =
                         'url' => "open-source/condor-man/",
                     },
                 ],
-            },            
+            },
         ],
     },
 );
@@ -460,9 +460,9 @@ my @url_type_menu =
 (
     'current_host' => "default",
     'hosts' =>
-        { 
-        'default' => 
-            { 
+        {
+        'default' =>
+            {
                 'base_url' => "http://www.hello.com/",
                 'trailing_url_base' => "/",
             },
@@ -497,9 +497,9 @@ my @rec_url_type_menu =
 (
     'current_host' => "default",
     'hosts' =>
-        { 
-        'default' => 
-            { 
+        {
+        'default' =>
+            {
                 'base_url' => "http://www.hello.com/~shlomif/",
                 'trailing_url_base' => "/~shlomif/",
             },
@@ -595,8 +595,8 @@ sub mixed_expand_nav_menu_cb2
 
 my @mixed_expand_nav_menu =
 (
-    'hosts' => { 
-        'default' => { 'base_url' => "http://www.default.net/", }, 
+    'hosts' => {
+        'default' => { 'base_url' => "http://www.default.net/", },
         'other' => { 'base_url' => "http://www.other.org/", },
     },
     'tree_contents' =>
@@ -653,7 +653,7 @@ my @mixed_expand_nav_menu =
                         'url' => "open-source/condor-man/",
                     },
                 ],
-            },            
+            },
         ],
     },
 );
@@ -744,7 +744,7 @@ my @with_skips_nav_menu =
                         'url' => "open-source/condor-man/",
                     },
                 ],
-            },            
+            },
         ],
     },
 );
@@ -800,11 +800,11 @@ my @non_capturing_expand =
                 'url' => "",
             },
             {
-                'text' => "Humour", 
+                'text' => "Humour",
                 'url' => "humour/",
                 'expand' => { 're' => "^humour/", },
                 'title' => "My Humorous Creations",
-                'subs' => 
+                'subs' =>
                 [
                     {
                         'text' => "Stories",
@@ -814,7 +814,7 @@ my @non_capturing_expand =
                         'subs' =>
                         [
                             {
-                                'text' => "The Enemy", 
+                                'text' => "The Enemy",
                                 'url' => "humour/TheEnemy/",
                             },
                             {
@@ -851,11 +851,11 @@ my @non_capturing_expand_reversed =
                 'url' => "",
             },
             {
-                'text' => "Humour", 
+                'text' => "Humour",
                 'url' => "humour/",
                 'expand' => { 're' => "^humour/", },
                 'title' => "My Humorous Creations",
-                'subs' => 
+                'subs' =>
                 [
                     {
                         'text' => "Stories",
@@ -864,7 +864,7 @@ my @non_capturing_expand_reversed =
                         'subs' =>
                         [
                             {
-                                'text' => "The Enemy", 
+                                'text' => "The Enemy",
                                 'url' => "humour/TheEnemy/",
                             },
                             {
@@ -908,11 +908,11 @@ my @non_capturing_expand_nested =
                 'url' => "",
             },
             {
-                'text' => "Humour", 
+                'text' => "Humour",
                 'url' => "humour/",
                 'expand' => { 're' => "^humour/", },
                 'title' => "My Humorous Creations",
-                'subs' => 
+                'subs' =>
                 [
                     {
                         'text' => "Stories",
@@ -922,7 +922,7 @@ my @non_capturing_expand_nested =
                         'subs' =>
                         [
                             {
-                                'text' => "The Enemy", 
+                                'text' => "The Enemy",
                                 'url' => "humour/TheEnemy/",
                             },
                             {

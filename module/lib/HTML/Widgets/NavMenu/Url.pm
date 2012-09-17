@@ -133,7 +133,7 @@ sub _get_url_worker
     else
     {
         my @components = ((map { ".." } @this_url[1..$#this_url]), @other_url);
-        $ret .= ($prefix . join("/", @components)); 
+        $ret .= ($prefix . join("/", @components));
         if (($to->_is_dir()) && ($base->_mode() ne "harddisk") && scalar(@components))
         {
             $ret .= "/";
