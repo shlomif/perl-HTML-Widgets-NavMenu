@@ -15,6 +15,10 @@ Shlomi Fish -> Philosophy.
 Long-Term:
 ----------
 
+* Add a way to manage sub-menu objects, where a navigation menu can refer
+to a sub-navigation menu.
+    - Perhaps it should be done by simply adding a reference to the tree?
+
 * Make the module support URLs with CGI GET parameters properly.
 
 * Add support for more attributes other than class="" to the ul and li
@@ -35,3 +39,5 @@ at a certain coords/url-path.
    - document the changes in Changes.
    - update the readme.
 
+* Maybe make a way to implement a generic backend to the data using various
+kinds of databases/etc.
