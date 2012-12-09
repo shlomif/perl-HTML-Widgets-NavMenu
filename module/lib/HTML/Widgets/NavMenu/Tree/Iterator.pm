@@ -165,7 +165,7 @@ sub traverse
 
 =head2 $self->get_node_from_sub()
 
-This function can be overriden to generate a node from the sub-nodes
+This function can be overridden to generate a node from the sub-nodes
 returned by get_node_subs() in a different way than the default.
 
 =cut
