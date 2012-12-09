@@ -1,5 +1,9 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0700    Sun  9 Dec 15:22:06 IST 2012
+    - Add the li_id attribute to the tree's nodes to add an id="..." attribute
+    to the <li> tags.
+
 1.0603    Tue Sep 18 00:22:52 IDT 2012
     - Update the URLs to the repository, and sites.
 
