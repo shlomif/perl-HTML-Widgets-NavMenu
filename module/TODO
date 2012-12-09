@@ -1,6 +1,8 @@
 Short-Term:
 -----------
 
+* Implement li_id for the non-JQueryTreeView tree.
+
 * Make sure H::W::NM will associate the breadcrumbs trail with a category,
 if this category expands there. So, for example:
 

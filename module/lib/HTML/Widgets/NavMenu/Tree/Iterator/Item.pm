@@ -91,6 +91,10 @@ sub _get_sub
     return $self->_subs()->[$sub_num];
 }
 
+sub _li_id {
+    return shift->_node->li_id();
+}
+
 =head1 COPYRIGHT & LICENSE
 
 Copyright 2006 Shlomi Fish, all rights reserved.

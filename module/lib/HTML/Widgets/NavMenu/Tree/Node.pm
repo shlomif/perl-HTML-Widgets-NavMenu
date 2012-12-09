@@ -7,7 +7,7 @@ use base 'HTML::Widgets::NavMenu::Object';
 
 __PACKAGE__->mk_acc_ref([
     qw(
-    CurrentlyActive expanded hide host role rec_url_type
+    CurrentlyActive expanded hide host li_id role rec_url_type
     separator show_always skip subs text title url url_is_abs url_type
     )]
     );
@@ -41,6 +41,10 @@ Internal use.
 Internal use.
 
 =head2 host
+
+Internal use.
+
+=head2 li_id
 
 Internal use.
 
@@ -201,7 +205,7 @@ sub list_regular_keys
 {
     my $self = shift;
 
-    return (qw(host rec_url_type role show_always text title url url_type));
+    return (qw(host li_id rec_url_type role show_always text title url url_type));
 }
 
 =head2 $self->list_boolean_keys()

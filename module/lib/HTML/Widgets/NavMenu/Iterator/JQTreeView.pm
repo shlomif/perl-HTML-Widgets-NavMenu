@@ -40,11 +40,18 @@ sub _calc_open_li_tag
 {
     my $self = shift;
 
+    my $li_id = $self->top()->_li_id;
+
+    my $id_attr =
+        (defined ($li_id)
+            ? qq/ id="/ . escape_html($li_id) . qq/"/
+            : q//
+        );
     return
     (
         $self->_is_expanded_for_treeview()
-        ? (qq{<li class="open">})
-        : ("<li>")
+        ? (qq{<li class="open"$id_attr>})
+        : ("<li$id_attr>")
     );
 
     return;

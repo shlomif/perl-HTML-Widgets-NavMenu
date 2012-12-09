@@ -344,6 +344,49 @@ my @hidden_item_nav_menu =
     },
 );
 
+my @with_ids_nav_menu =
+(
+    'current_host' => "default",
+    'hosts' => { 'default' => { 'base_url' => "http://www.hello.com/" }, },
+    'tree_contents' =>
+    {
+        'host' => "default",
+        'text' => "Top 1",
+        'title' => "T1 Title",
+        'subs' =>
+        [
+            {
+                'text' => "Home",
+                'url' => "",
+            },
+            {
+                'text' => "About Me",
+                'title' => "About Myself",
+                'url' => "me/",
+                li_id => "about_me",
+                'subs' =>
+                [
+                    {
+                        'text' => "Visible",
+                        'url' => "me/visible/",
+                        li_id => "visible",
+                    },
+                    {
+                        'text' => "Hidden",
+                        'url' => "me/hidden/",
+                        'hide' => 1,
+                    },
+                    {
+                        'text' => "Visible Too",
+                        'url' => "me/visible-too/",
+                        li_id => "FooBar",
+                    },
+                ],
+            },
+        ],
+    },
+);
+
 my @header_role_nav_menu =
 (
     'current_host' => "default",
@@ -1024,6 +1067,7 @@ sub get_test_data
             'mixed_expand_menu' => \@mixed_expand_nav_menu,
             'special_chars_menu' => \@special_chars_nav_menu,
             'with_skips' => \@with_skips_nav_menu,
+            'with_ids_nav_menu' => \@with_ids_nav_menu,
             'root_path_not_slash' => \@root_path_not_slash,
             'non_capturing_expand' => \@non_capturing_expand,
             'non_capturing_expand_reversed' => \@non_capturing_expand_reversed,
