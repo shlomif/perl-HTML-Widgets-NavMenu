@@ -35,6 +35,19 @@ sub _init
     return 0;
 }
 
+sub _calc_li_id_attr
+{
+    my $self = shift;
+
+    my $li_id = $self->top()->_li_id;
+
+    return
+    (defined ($li_id)
+        ? qq/ id="/ . escape_html($li_id) . qq/"/
+        : q//
+    );
+}
+
 =head2 $self->gen_ul_tag({depth => $depth});
 
 Generate a UL tag of depth $depth.
@@ -146,7 +159,8 @@ sub _start_handle_non_role
 {
     my $self = shift;
     my $top_item = $self->top;
-    my @tags_to_add = ("<li>", $self->get_link_tag());
+    my @tags_to_add = (("<li" . $self->_calc_li_id_attr() . ">"),
+        $self->get_link_tag());
     if ($top_item->_num_subs_to_go() && $self->_is_expanded())
     {
         push @tags_to_add, ($self->get_open_sub_menu_tags());
