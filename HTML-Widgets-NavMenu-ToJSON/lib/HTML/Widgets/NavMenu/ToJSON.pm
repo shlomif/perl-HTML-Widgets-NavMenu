@@ -4,6 +4,12 @@ use 5.008;
 use strict;
 use warnings FATAL => 'all';
 
+use Carp;
+
+use parent 'HTML::Widgets::NavMenu::Object';
+
+use JSON qw(encode_json);
+
 =head1 NAME
 
 HTML::Widgets::NavMenu::ToJSON - convert HTML::Widgets::NavMenu to JSON
@@ -15,7 +21,6 @@ Version 0.0.1
 =cut
 
 our $VERSION = '0.0.1';
-
 
 =head1 SYNOPSIS
 
@@ -48,6 +53,85 @@ our $VERSION = '0.0.1';
     );
 
 =head1 SUBROUTINES/METHODS
+
+=cut
+
+__PACKAGE__->mk_acc_ref(
+    [
+        qw(
+        _data_persistence_store
+        _tree_contents
+        ),
+    ]
+);
+
+sub _init
+{
+    my ($self, $args) = @_;
+
+    $self->_data_persistence_store(
+        $args->{'data_persistence_store'}
+    ) or Carp::confess("No data_persistence_store specified.");
+
+    $self->_tree_contents(
+        $args->{'tree_contents'}
+    ) or Carp::confess("No tree_contents specified.");
+
+    return;
+}
+
+sub _get_id_for_url
+{
+    my ($self, $url) = @_;
+    return $self->_data_persistence_store->get_id_for_path($url);
+}
+
+=head2 $self->output_as_json()
+
+=cut
+
+sub output_as_json
+{
+    my $self = shift;
+
+    my $persistence = $self->_data_persistence_store();
+
+    $persistence->load;
+
+    my $process_sub_tree;
+
+    $process_sub_tree = sub
+    {
+        my ($sub_tree) = @_;
+
+        my @keys = (grep { $_ ne 'subs' } keys %{$sub_tree});
+
+        my $has_subs = exists($sub_tree->{subs});
+
+        return
+        {
+            (exists($sub_tree->{url})
+                ? (id => $self->_get_id_for_url($sub_tree->{url}), )
+                : ()
+            ),
+            (map { $_ => $sub_tree->{$_} } @keys),
+            $has_subs
+            ?  (subs => [ map { $process_sub_tree->($_) }
+                    grep { ! exists($_->{separator}) }
+                    @{$sub_tree->{subs}}
+                ])
+            : (),
+        };
+    };
+
+    my $ret = encode_json(
+        $process_sub_tree->($self->_tree_contents)->{'subs'}
+    );
+
+    $persistence->save;
+
+    return $ret;
+}
 
 =head1 AUTHOR
 
