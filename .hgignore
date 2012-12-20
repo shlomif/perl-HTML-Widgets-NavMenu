@@ -6,3 +6,4 @@ module/MYMETA.yml
 module/Makefile.PL
 module/_build
 module/blib
+module/tags
