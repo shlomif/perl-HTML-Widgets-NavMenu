@@ -4,6 +4,10 @@ use 5.008;
 use strict;
 use warnings FATAL => 'all';
 
+use parent 'HTML::Widgets::NavMenu::ToJSON::Data_Persistence';
+
+use YAML::XS ();
+
 =head1 NAME
 
 HTML::Widgets::NavMenu::ToJSON::Data_Persistence::YAML - YAML-based persistence
@@ -17,12 +21,71 @@ Version 0.0.1
 
 our $VERSION = '0.0.1';
 
+__PACKAGE__->mk_acc_ref([ qw( _filename ) ]);
+
+sub _init
+{
+    my ($self, $args) = @_;
+
+    $self->_filename($args->{filename});
+
+    return;
+}
 
 =head1 SYNOPSIS
 
-    TODO: Write something.
+See HTML::Widgets::NavMenu::ToJSON .
+
+=head1 DESCRIPTION
+
+This is a sub-class of L<HTML::Widgets::NavMenu::ToJSON::Data_Persistence>
+for providing coarse-grained persistence using a serialised YAML store as
+storage.
 
 =head1 SUBROUTINES/METHODS
+
+=head2 HTML::Widgets::NavMenu::ToJSON::Data_Persistence::YAML->new({ filename => '/path/to/filename.yml' });
+
+Initializes the persistence store with the YAML file in $args->{filename} .
+
+=cut
+
+=head2 $self->load()
+
+Loads the data from the file.
+
+=cut
+
+sub load
+{
+    my $self = shift;
+
+    my ($data) = YAML::XS::LoadFile($self->_filename());
+
+    $self->_data(
+        $data
+    );
+
+    return;
+}
+
+=head2 $self->save()
+
+Saves the data from the file.
+
+=cut
+
+sub save
+{
+    my $self = shift;
+
+    YAML::XS::DumpFile(
+        $self->_filename,
+        $self->_data
+    );
+
+    return;
+}
 
 =head1 AUTHOR
 

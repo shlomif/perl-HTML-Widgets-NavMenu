@@ -83,7 +83,7 @@ sub _init
 sub _get_id_for_url
 {
     my ($self, $url) = @_;
-    return $self->_data_persistence_store->get_id_for_path($url);
+    return $self->_data_persistence_store->get_id_for_url($url);
 }
 
 =head2 $self->output_as_json()

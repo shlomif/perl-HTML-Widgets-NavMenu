@@ -23,6 +23,7 @@ my $builder = Test::Run::Builder->new(
         'Carp' => 0,
         'HTML::Widgets::NavMenu::Object' => 0,
         'JSON' => 0,
+        'YAML::XS' => 0,
         'parent' => 0,
         'strict' => 0,
         'warnings' => 0,

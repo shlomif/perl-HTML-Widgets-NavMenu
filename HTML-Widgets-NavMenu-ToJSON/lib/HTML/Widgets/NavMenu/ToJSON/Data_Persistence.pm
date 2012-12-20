@@ -4,6 +4,16 @@ use 5.008;
 use strict;
 use warnings FATAL => 'all';
 
+use parent 'HTML::Widgets::NavMenu::Object';
+
+__PACKAGE__->mk_acc_ref(
+    [
+        qw(
+            _data
+        ),
+    ]
+);
+
 =head1 NAME
 
 HTML::Widgets::NavMenu::ToJSON::Data_Persistence - Data persistence base class.
@@ -24,9 +34,37 @@ See L<HTML::Widgets::NavMenu::ToJSON> .
     use HTML::Widgets::NavMenu::ToJSON::Data_Persistence;
 
     my $foo = HTML::Widgets::NavMenu::ToJSON::Data_Persistence->new();
-    ...
 
 =head1 SUBROUTINES/METHODS
+
+=head2 $self->get_id_for_url($url)
+
+Returns the id (an integer) for the url fragment $url . If an ID does not
+exist, a new ID will be assigned and the old one incremented.
+
+=cut
+
+sub _get_id_persistence
+{
+    my $self = shift;
+
+    return $self->_data->{id_persistence};
+}
+
+
+sub get_id_for_url
+{
+    my ($self, $url) = @_;
+
+    my $ptr = $self->_get_id_persistence;
+
+    if (! exists($ptr->{paths_ids}->{$url}))
+    {
+        $ptr->{paths_ids}->{$url} = ($ptr->{next_id}++);
+    }
+
+    return $ptr->{paths_ids}->{$url};
+}
 
 =head1 AUTHOR
 
