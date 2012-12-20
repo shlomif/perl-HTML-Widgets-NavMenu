@@ -7,3 +7,11 @@ module/Makefile.PL
 module/_build
 module/blib
 module/tags
+HTML-Widgets-NavMenu-ToJSON/blib
+HTML-Widgets-NavMenu-ToJSON/_build
+HTML-Widgets-NavMenu-ToJSON/Build
+HTML-Widgets-NavMenu-ToJSON/Makefile.PL
+HTML-Widgets-NavMenu-ToJSON/META.json
+HTML-Widgets-NavMenu-ToJSON/META.yml
+HTML-Widgets-NavMenu-ToJSON/MYMETA.json
+HTML-Widgets-NavMenu-ToJSON/MYMETA.yml
