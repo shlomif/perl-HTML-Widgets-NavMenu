@@ -51,7 +51,7 @@ sub _get_id_persistence
     return $self->_data->{id_persistence};
 }
 
-sub _default_data
+sub _calc_initial_data
 {
     my $self = shift;
 

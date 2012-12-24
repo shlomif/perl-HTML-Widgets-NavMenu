@@ -69,7 +69,7 @@ sub load
         1;
     })
     {
-        $data = $self->_default_data();
+        $data = $self->_calc_initial_data();
     }
 
     $self->_data(
