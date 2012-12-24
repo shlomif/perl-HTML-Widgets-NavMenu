@@ -10,6 +10,7 @@ t/00-load.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
+t/output.t
 Makefile.PL
 META.yml
 META.json

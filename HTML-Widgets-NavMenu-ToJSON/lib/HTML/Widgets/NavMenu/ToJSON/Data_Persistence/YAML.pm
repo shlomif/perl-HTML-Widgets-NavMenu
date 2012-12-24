@@ -60,7 +60,17 @@ sub load
 {
     my $self = shift;
 
-    my ($data) = YAML::XS::LoadFile($self->_filename());
+    my $data;
+
+    if (!eval
+    {
+        ($data) = YAML::XS::LoadFile($self->_filename());
+
+        1;
+    })
+    {
+        $data = $self->_default_data();
+    }
 
     $self->_data(
         $data

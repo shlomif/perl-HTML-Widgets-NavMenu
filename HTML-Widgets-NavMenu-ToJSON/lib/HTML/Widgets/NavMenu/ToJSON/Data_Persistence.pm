@@ -51,6 +51,12 @@ sub _get_id_persistence
     return $self->_data->{id_persistence};
 }
 
+sub _default_data
+{
+    my $self = shift;
+
+    return { id_persistence => { paths_ids => { }, next_id => 1, }, };
+}
 
 sub get_id_for_url
 {
