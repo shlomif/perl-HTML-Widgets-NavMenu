@@ -17,7 +17,12 @@ my $builder = Test::Run::Builder->new(
         'Module::Build' => 0,
     },
     build_requires => {
+        'File::Temp' => 0,
+        'File::Spec' => 0,
+        'JSON' => 0,
         'Test::More' => 0,
+        'strict' => 0,
+        'warnings' => 0,
     },
     requires => {
         'Carp' => 0,
