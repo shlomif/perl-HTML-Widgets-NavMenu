@@ -1,5 +1,6 @@
 Revision history for Perl extension Shlomif::NavMenu.
 
+1.0702  2013-05-21
     - Add t/cpan-changes.t
         - Correct this file.
     - Add scripts/bump-version-number.pl .

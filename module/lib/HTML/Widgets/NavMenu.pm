@@ -3,7 +3,7 @@ use warnings;
 
 package HTML::Widgets::NavMenu;
 
-our $VERSION = '1.0701';
+our $VERSION = '1.0702';
 
 package HTML::Widgets::NavMenu::Error;
 
