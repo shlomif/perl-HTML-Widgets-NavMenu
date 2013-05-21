@@ -10,9 +10,14 @@ module/tags
 HTML-Widgets-NavMenu-ToJSON/blib
 HTML-Widgets-NavMenu-ToJSON/_build
 HTML-Widgets-NavMenu-ToJSON/Build
+HTML-Widgets-NavMenu-ToJSON/Makefile
 HTML-Widgets-NavMenu-ToJSON/Makefile.PL
 HTML-Widgets-NavMenu-ToJSON/META.json
 HTML-Widgets-NavMenu-ToJSON/META.yml
 HTML-Widgets-NavMenu-ToJSON/MYMETA.json
 HTML-Widgets-NavMenu-ToJSON/MYMETA.yml
-HTML-Widgets-NavMenu-ToJSON/HTML-Widgets-NavMenu-ToJSON-v\d
+
+syntax: regexp
+
+HTML-Widgets-NavMenu-ToJSON/HTML-Widgets-NavMenu-ToJSON-v\d+\.\d+\.\d+(?:/|\.tar\.gz$)
+module/HTML-Widgets-NavMenu-\d\.\d+(?:/|\.tar\.gz$)
