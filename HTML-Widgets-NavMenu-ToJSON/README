@@ -2,7 +2,7 @@ HTML-Widgets-NavMenu-ToJSON
 
 This distribution converts the navigation menus of HTML-Widgets-NavMenu
 to JSON so they can be embedded in JavaScript code or transferred using an
-AJAX (XMLHttpRequest) call, 
+AJAX (XMLHttpRequest) call,
 
 INSTALLATION
 
