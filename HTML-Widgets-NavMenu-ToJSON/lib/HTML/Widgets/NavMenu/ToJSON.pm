@@ -8,7 +8,7 @@ use Carp;
 
 use parent 'HTML::Widgets::NavMenu::Object';
 
-use JSON qw(encode_json);
+use JSON::MaybeXS ();
 
 =head1 NAME
 
@@ -124,7 +124,7 @@ sub output_as_json
         };
     };
 
-    my $ret = encode_json(
+    my $ret = JSON::MaybeXS->new(utf8 => 1, canonical => 1)->encode(
         $process_sub_tree->($self->_tree_contents)->{'subs'}
     );
 

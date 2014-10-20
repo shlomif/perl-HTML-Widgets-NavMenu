@@ -1,5 +1,9 @@
 Revision history for HTML-Widgets-NavMenu-ToJSON
 
+0.0.3   2014-10-20
+        - Convert to JSON::MaybeXS and make sure the order of the keys
+        is canonical.
+
 0.0.2   2014-01-31
         - Add minimum version of perl to Build.PL/META.yml.
         - Add t/cpan-changes.t and t/style-trailing-space.t .
