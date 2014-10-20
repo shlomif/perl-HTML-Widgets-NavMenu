@@ -7,7 +7,7 @@ use IO::All;
 
 my ($version) =
     (map { m{\$VERSION *= *'([^']+)'} ? ($1) : () }
-    io->file("./lib/HTML/Widgets/NavMenu.pm")->getlines()
+    io->file("./lib/HTML/Widgets/NavMenu/ToJSON.pm")->getlines()
     )
     ;
 
