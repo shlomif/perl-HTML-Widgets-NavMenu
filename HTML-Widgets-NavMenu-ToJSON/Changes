@@ -1,5 +1,9 @@
 Revision history for HTML-Widgets-NavMenu-ToJSON
 
+0.0.5   2014-10-22
+        - Convert the tests to use JSON::MaybeXS instead of JSON.pm.
+            - Missing dependency.
+
 0.0.4   2014-10-20
         - Build.PL dep on JSON::MaybeXS instead of JSON.pm.
         - Add scripts/bump-version-number.pl

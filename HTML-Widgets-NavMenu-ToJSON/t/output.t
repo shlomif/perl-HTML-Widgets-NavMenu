@@ -11,7 +11,7 @@ use HTML::Widgets::NavMenu::ToJSON::Data_Persistence::YAML;
 use File::Temp qw(tempdir);
 use File::Spec;
 
-use JSON ( qw(decode_json) );
+use JSON::MaybeXS ( qw(decode_json) );
 
 {
     my $tempdir = tempdir( CLEANUP => 1);
