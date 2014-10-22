@@ -15,11 +15,11 @@ for L<HTML::Widgets::NavMenu::ToJSON> .
 
 =head1 VERSION
 
-Version 0.0.4
+Version 0.0.5
 
 =cut
 
-our $VERSION = '0.0.4';
+our $VERSION = '0.0.5';
 
 __PACKAGE__->mk_acc_ref([ qw( _filename ) ]);
 
