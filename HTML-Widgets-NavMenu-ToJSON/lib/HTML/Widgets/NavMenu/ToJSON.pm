@@ -1,6 +1,7 @@
 package HTML::Widgets::NavMenu::ToJSON;
 
 use 5.008;
+
 use strict;
 use warnings FATAL => 'all';
 
@@ -8,7 +9,7 @@ use Carp;
 
 use parent 'HTML::Widgets::NavMenu::Object';
 
-use JSON::MaybeXS ();
+use JSON::MaybeXS 1.002002 ();
 
 =head1 NAME
 
