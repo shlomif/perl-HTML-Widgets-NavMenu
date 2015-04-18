@@ -32,15 +32,6 @@ Or the new CPANPLUS.pm module
 
     # perl -MCPANPLUS -e 'install HTML::Widgets::NavMenu'
 
-DEPENDENCIES
-
-This module requires these other modules and libraries:
-
-    Test::More
-    Class::Accessor
-    Error
-    CGI
-
 COPYRIGHT AND LICENCE
 
 Copyright (C) 2004 by Shlomi Fish
