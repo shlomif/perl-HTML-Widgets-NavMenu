@@ -1,4 +1,8 @@
-Revision history for Perl extension Shlomif::NavMenu.
+Revision history for Perl extension HTML::Widgets::NavMenu.
+
+1.0703  2015-06-10
+    - Fix broken links to the examples' version control repositories.
+        - Thanks to Anne for inspiring it.
 
 1.0702  2013-05-21
     - Add t/cpan-changes.t

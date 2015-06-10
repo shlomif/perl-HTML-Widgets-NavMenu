@@ -907,10 +907,11 @@ HTML::Widgets::NavMenu - A Perl Module for Generating HTML Navigation Menus
 This module generates a navigation menu for a site. It can also generate
 a complete site map, a path of leading components, and also keeps
 track of navigation links ("Next", "Prev", "Up", etc.) You can start from the
-example above and see more examples in the tests, and complete working sites
-in the Subversion repositories at
-L<http://opensvn.csie.org/shlomif/homepage/>
-and L<http://opensvn.csie.org/perlbegin/perl-begin/>.
+example above and see more examples in the tests, in the C<examples/>
+directory of the HTML-Widgets-NavMenu tarball, and complete working sites
+in the version control repositories at
+L<https://bitbucket.org/shlomif/shlomi-fish-homepage>
+and L<https://bitbucket.org/shlomif/perl-begin/>.
 
 =head1 USAGE
 
