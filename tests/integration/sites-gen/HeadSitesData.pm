@@ -1,7 +1,7 @@
 
 my $shlomif_hosts =
 {
-    't2' => 
+    't2' =>
     {
         'base_url' => "http://www.shlomifish.org/",
     },
@@ -25,7 +25,7 @@ my $shlomif_tree_contents =
         {
             'text' => "About Myself",
             'url' => "me/",
-            'subs' => 
+            'subs' =>
             [
                 {
                     'text' => "Bio",
@@ -54,14 +54,14 @@ my $shlomif_tree_contents =
                         },
                     ],
                 },
-            ],               
+            ],
         },
         {
             'text' => "Work",
             'url' => "work/",
             'title' => "Work-Related Pages",
             'show_always' => 1,
-            'subs' => 
+            'subs' =>
             [
                 {
                     'text' => "Private Lessons",
@@ -71,13 +71,13 @@ my $shlomif_tree_contents =
             ],
         },
         {
-            'text' => "Humour", 
+            'text' => "Humour",
             'url' => "humour/",
             'title' => "My Humorous Creations",
-            'subs' => 
+            'subs' =>
             [
                 {
-                    'text' => "The Enemy", 
+                    'text' => "The Enemy",
                     'url' => "humour/TheEnemy/",
                     'title' => "The Enemy and How I Helped to Fight It",
                 },
@@ -134,7 +134,7 @@ my $shlomif_tree_contents =
             'url' => "open-source/",
             'expand' => { 're' => "^open-source/" },
             'title' => "Pages related to Software (mostly Open-Source)",
-            'subs' => 
+            'subs' =>
             [
                 {
                     'text' => "Freecell Solver",
@@ -193,12 +193,12 @@ my $shlomif_tree_contents =
             ],
         },
         {
-            'text' => "Lectures", 
+            'text' => "Lectures",
             'url' => "lecture/",
             'expand' => { 're' => "^lecture/" },
             'title' => "Presentations I Wrote (Mostly Technical)",
             'host' => "vipe",
-            'subs' => 
+            'subs' =>
             [
                 {
                     'text' => "Perl for Newbies",
@@ -305,7 +305,7 @@ my $shlomif_file_list = +{ map { $_ => get_file_list_from_file("$_-filelist.txt"
 
 my $perl_begin_hosts =
 {
-    'berlios' => 
+    'berlios' =>
     {
         'base_url' => "http://perl-begin.berlios.de/",
     },
@@ -495,7 +495,7 @@ my @sites =
         'tree_contents' => $perl_begin_tree_contents,
         'file_list' => $perl_begin_file_list,
         'class' => "HeaderRole",
-    },    
+    },
 );
 
 sub get_sites

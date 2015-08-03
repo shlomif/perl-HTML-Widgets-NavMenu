@@ -83,7 +83,7 @@ sub process_site
             my $num_marks = 20;
             my $open_mark = "<" x $num_marks;
             my $close_mark = ">" x $num_marks;
-            my @args = 
+            my @args =
                 (
                     'path_info' => "/$canonized_file",
                     'current_host' => $host_id,
@@ -103,7 +103,7 @@ sub process_site
                     die "Unknown class " . $site_ref->{class} . "!";
                 }
             }
-            my $nav_menu = 
+            my $nav_menu =
                 $package->new(
                     @args,
                 );
@@ -138,7 +138,7 @@ sub process_site
                 print {$fh} (map { "$_\n" } @{$nav_menu->gen_site_map()});
                 print {$fh} "$close_mark\n";
             }
-            
+
             # TODO : add the nav-links, site-map, etc.
             close($fh);
         }
