@@ -1,5 +1,5 @@
 all: compare
-	
+
 compare: good.stamp head.stamp
 	diff -u -r Output/good Output/head
 
@@ -7,7 +7,7 @@ good.stamp: Good-Source good.pl SitesData.pm
 	perl good.pl
 
 Good-Source:
-	svn export svn://svn.berlios.de/web-cpan/nav-menu/branches/old-fangled Good-Source
+	hg clone ssh://hg@bitbucket.org/shlomif/perl-html-widgets-navmenu "$@" && cd "$@" && hg checkout old-fangled
 
 head.stamp: head.pl SitesData.pm
 	perl head.pl
