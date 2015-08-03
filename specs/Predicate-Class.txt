@@ -1,6 +1,6 @@
 Syntax:
 
-    'expand' => 
+    'expand' =>
         +{
             're' => $regexp,
             'cb' => sub { [Callback] },
@@ -17,7 +17,7 @@ Or:
     'expand' => [ 1, 0, "yes", "no", "true", "false", "True", "False" ],
 
 Equivalent to:
-    
+
     'expand' => +{ 'bool' => [1 , 0] },
 
 Or:
@@ -38,16 +38,16 @@ Return: a boolean value.
 Predicate Usage:
 ----------------
 
-my $predicate = 
+my $predicate =
     HTML::Widgets::NavMenu::Predicate->new(
         'spec' => $spec,
         );
 
 $spec is the value of 'expand' (or whatever) in the previous example.
 
-my $is_true = 
+my $is_true =
     $predicate->evaluate(
-        'path_info' => $path_info, 
+        'path_info' => $path_info,
         'current_host' => $host,
         );
 
