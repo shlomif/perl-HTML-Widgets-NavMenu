@@ -1,5 +1,8 @@
 Revision history for HTML-Widgets-NavMenu-ToJSON
 
+0.0.8   Unknown
+        - [RewriteVersion] in dist.ini.
+
 0.0.7   2015-05-30
         - Convert the build system to Dist-Zilla
             - Some improvements such as links to VCS repositories.
