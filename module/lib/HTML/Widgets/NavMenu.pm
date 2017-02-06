@@ -1,6 +1,8 @@
 use strict;
 use warnings;
 
+use 5.012;
+
 package HTML::Widgets::NavMenu;
 
 our $VERSION = '1.0703';
@@ -525,11 +527,11 @@ sub _get_prev_coords
     elsif ($coords[$#coords] > 0)
     {
         # Get the previous leaf
-	    my @previous_leaf =
-	        (
-                @coords[0 .. ($#coords - 1) ] ,
-                $coords[$#coords]-1
-            );
+        my @previous_leaf =
+        (
+            @coords[0 .. ($#coords - 1) ] ,
+            $coords[$#coords]-1
+        );
         # Continue in this leaf to the end.
         my $new_coords = $self->_get_most_advanced_leaf(\@previous_leaf);
 
