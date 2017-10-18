@@ -1448,15 +1448,15 @@ Shlomi Fish, E<lt>shlomif@cpan.orgE<gt>, L<http://www.shlomifish.org/> .
 
 =head1 THANKS
 
-Thanks to Yosef Meller (L<http://search.cpan.org/~yosefm/>) for writing
-the module HTML::Widget::SideBar on which initial versions of this modules
-were based. (albeit his code is no longer used here).
+Thanks to Yosef Meller (L<https://metacpan.org/author/YOSEFM>) for writing
+the module HTML::Widget::SideBar on which initial versions of these modules
+were based. (Albeit his code is no longer used here.)
 
 =head1 COPYRIGHT AND LICENSE
 
 Copyright 2004, Shlomi Fish. All rights reserved.
 
-You can use, modify and distribute this module under the terms of the MIT X11
+You can use, modify and distribute this module under the terms of the MIT Expat
 license. ( L<http://www.opensource.org/licenses/mit-license.php> ).
 
 =cut
