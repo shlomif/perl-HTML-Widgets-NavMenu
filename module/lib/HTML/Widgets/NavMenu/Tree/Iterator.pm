@@ -8,10 +8,14 @@ use base qw(HTML::Widgets::NavMenu::Object);
 use HTML::Widgets::NavMenu::Tree::Iterator::Stack;
 use HTML::Widgets::NavMenu::Tree::Iterator::Item;
 
-__PACKAGE__->mk_acc_ref([qw(
-    coords
-    stack
-    )]);
+__PACKAGE__->mk_acc_ref(
+    [
+        qw(
+            coords
+            stack
+            )
+    ]
+);
 
 =head1 NAME
 
@@ -33,13 +37,11 @@ Internal use.
 
 =cut
 
-
-
 sub _init
 {
     my $self = shift;
 
-    $self->stack(HTML::Widgets::NavMenu::Tree::Iterator::Stack->new());
+    $self->stack( HTML::Widgets::NavMenu::Tree::Iterator::Stack->new() );
 
     return 0;
 }
@@ -49,6 +51,7 @@ sub _init
 Retrieves the stack top item.
 
 =cut
+
 sub top
 {
     my $self = shift;
@@ -57,11 +60,9 @@ sub top
 
 sub _construct_new_item
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
 
-    return HTML::Widgets::NavMenu::Tree::Iterator::Item->new(
-        $args
-    );
+    return HTML::Widgets::NavMenu::Tree::Iterator::Item->new($args);
 }
 
 =head2 $self->get_new_item({'node' => $node, 'parent_item' => $parent})
@@ -72,25 +73,23 @@ Gets the new item.
 
 sub get_new_item
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
 
-    my $node = $args->{'node'};
+    my $node        = $args->{'node'};
     my $parent_item = $args->{'parent_item'};
 
-    return
-        $self->_construct_new_item(
-            {
-                'node' => $node,
-                'subs' => $self->get_node_subs( { 'node' => $node } ),
-                'accum_state' =>
-                    $self->get_new_accum_state(
-                        {
-                            'item' => $parent_item,
-                            'node' => $node,
-                        }
-                    ),
-            }
-        );
+    return $self->_construct_new_item(
+        {
+            'node'        => $node,
+            'subs'        => $self->get_node_subs( { 'node' => $node } ),
+            'accum_state' => $self->get_new_accum_state(
+                {
+                    'item' => $parent_item,
+                    'node' => $node,
+                }
+            ),
+        }
+    );
 }
 
 sub _push_into_stack
@@ -102,7 +101,7 @@ sub _push_into_stack
     $self->stack()->push(
         $self->get_new_item(
             {
-                'node' => $node,
+                'node'        => $node,
                 'parent_item' => $self->top(),
             }
         ),
@@ -119,34 +118,35 @@ sub traverse
 {
     my $self = shift;
 
-    $self->_push_into_stack($self->get_initial_node());
+    $self->_push_into_stack( $self->get_initial_node() );
 
-    $self->coords([]);
+    $self->coords( [] );
 
     my $top_item;
 
-    MAIN_LOOP: while ($top_item = $self->top())
+MAIN_LOOP: while ( $top_item = $self->top() )
     {
         my $visited = $top_item->_is_visited();
 
-        if (!$visited)
+        if ( !$visited )
         {
             $self->node_start();
         }
 
-        my $sub_item =
-            ($self->node_should_recurse() ?
-                $top_item->_visit() :
-                undef);
+        my $sub_item = (
+              $self->node_should_recurse()
+            ? $top_item->_visit()
+            : undef
+        );
 
-        if (defined($sub_item))
+        if ( defined($sub_item) )
         {
-            push @{$self->coords()}, $top_item->_visited_index();
+            push @{ $self->coords() }, $top_item->_visited_index();
             $self->_push_into_stack(
                 $self->get_node_from_sub(
                     {
                         'item' => $top_item,
-                        'sub' => $sub_item,
+                        'sub'  => $sub_item,
                     }
                 ),
             );
@@ -156,7 +156,7 @@ sub traverse
         {
             $self->node_end();
             $self->stack->pop();
-            pop(@{$self->coords()})
+            pop( @{ $self->coords() } );
         }
     }
 
@@ -186,43 +186,39 @@ Finds a node by its coordinations.
 
 sub find_node_by_coords
 {
-    my $self = shift;
-    my $coords = shift;
-    my $callback = shift || (sub { });
+    my $self     = shift;
+    my $coords   = shift;
+    my $callback = shift || ( sub { } );
 
-    my $idx = 0;
-    my $item =
-        $self->get_new_item(
-            {
-                'node' => $self->get_initial_node(),
-            }
+    my $idx  = 0;
+    my $item = $self->get_new_item(
+        {
+            'node' => $self->get_initial_node(),
+        }
+    );
+
+    my $internal_callback = sub {
+        $callback->(
+            'idx'  => $idx,
+            'item' => $item,
+            'self' => $self,
         );
-
-    my $internal_callback =
-        sub {
-            $callback->(
-                'idx' => $idx,
-                'item' => $item,
-                'self' => $self,
-            );
-        };
+    };
 
     $internal_callback->();
     foreach my $c (@$coords)
     {
-        $item =
-            $self->get_new_item(
-                {
-                    'node' =>
-                    $self->get_node_from_sub(
-                        {
-                            'item' => $item,
-                            'sub' => $item->_get_sub($c),
-                        }
-                    ),
-                    'parent_item' => $item,
-                }
-            );
+        $item = $self->get_new_item(
+            {
+                'node' => $self->get_node_from_sub(
+                    {
+                        'item' => $item,
+                        'sub'  => $item->_get_sub($c),
+                    }
+                ),
+                'parent_item' => $item,
+            }
+        );
         $idx++;
         $internal_callback->();
     }

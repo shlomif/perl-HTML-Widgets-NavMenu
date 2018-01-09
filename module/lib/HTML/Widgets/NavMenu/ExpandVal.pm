@@ -5,15 +5,13 @@ use warnings;
 
 use base 'HTML::Widgets::NavMenu::Object';
 
-__PACKAGE__->mk_acc_ref([
-    qw(_capture)],
-    );
+__PACKAGE__->mk_acc_ref( [qw(_capture)], );
 
 sub _init
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
 
-    $self->_capture($args->{'capture'});
+    $self->_capture( $args->{'capture'} );
 
     return 0;
 }

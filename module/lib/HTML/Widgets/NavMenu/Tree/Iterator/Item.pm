@@ -5,13 +5,17 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
 
-__PACKAGE__->mk_acc_ref([qw(
-    _node
-    _subs
-    _sub_idx
-    _visited
-    _accum_state
-)]);
+__PACKAGE__->mk_acc_ref(
+    [
+        qw(
+            _node
+            _subs
+            _sub_idx
+            _visited
+            _accum_state
+            )
+    ]
+);
 
 =head1 NAME
 
@@ -25,19 +29,19 @@ For internal use only.
 
 sub _init
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
 
-    $self->_node($args->{'node'}) or
-        die "node not specified!";
+    $self->_node( $args->{'node'} )
+        or die "node not specified!";
 
-    $self->_subs($args->{'subs'}) or
-        die "subs not specified!";
+    $self->_subs( $args->{'subs'} )
+        or die "subs not specified!";
 
     $self->_sub_idx(-1);
     $self->_visited(0);
 
-    $self->_accum_state($args->{'accum_state'}) or
-        die "accum_state not specified!";
+    $self->_accum_state( $args->{'accum_state'} )
+        or die "accum_state not specified!";
 
     return 0;
 }
@@ -54,13 +58,13 @@ sub _visit
 
     $self->_visited(1);
 
-    if ($self->_num_subs_to_go())
+    if ( $self->_num_subs_to_go() )
     {
-        return $self->_subs()->[$self->_sub_idx($self->_sub_idx()+1)];
+        return $self->_subs()->[ $self->_sub_idx( $self->_sub_idx() + 1 ) ];
     }
     else
     {
-        return undef;
+        return;
     }
 }
 
@@ -80,18 +84,19 @@ sub _num_subs_to_go
 sub _num_subs
 {
     my $self = shift;
-    return scalar(@{$self->_subs()});
+    return scalar( @{ $self->_subs() } );
 }
 
 sub _get_sub
 {
-    my $self = shift;
+    my $self    = shift;
     my $sub_num = shift;
 
     return $self->_subs()->[$sub_num];
 }
 
-sub _li_id {
+sub _li_id
+{
     return shift->_node->li_id();
 }
 

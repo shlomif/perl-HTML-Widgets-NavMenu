@@ -5,9 +5,13 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Iterator::NavMenu);
 
-__PACKAGE__->mk_acc_ref([qw(
-    _was_role
-)]);
+__PACKAGE__->mk_acc_ref(
+    [
+        qw(
+            _was_role
+            )
+    ]
+);
 
 =head1 NAME
 
@@ -27,11 +31,10 @@ sub _start_handle_non_role
 {
     my $self = shift;
 
-    if ($self->_was_role())
+    if ( $self->_was_role() )
     {
         $self->_add_tags(
-            $self->gen_ul_tag({'depth' => $self->stack->len()-2})
-        );
+            $self->gen_ul_tag( { 'depth' => $self->stack->len() - 2 } ) );
     }
 
     $self->_was_role(0);
@@ -42,15 +45,13 @@ sub _start_handle_non_role
 sub _start_handle_role
 {
     my $self = shift;
-    if ($self->get_role() eq "header")
+    if ( $self->get_role() eq "header" )
     {
-        if (! $self->_was_role())
+        if ( !$self->_was_role() )
         {
             $self->_add_tags("</ul>");
         }
-        $self->_add_tags(
-            "<h2>", $self->get_link_tag(), "</h2>",
-            );
+        $self->_add_tags( "<h2>", $self->get_link_tag(), "</h2>", );
 
         $self->_was_role(1);
     }
@@ -70,7 +71,7 @@ default behaviour with all others.
 sub _end_handle_role
 {
     my $self = shift;
-    if ($self->get_role() eq "header")
+    if ( $self->get_role() eq "header" )
     {
         # Do nothing;
     }

@@ -11,10 +11,8 @@ sub _get_nav_menu_traverser
 {
     my $self = shift;
 
-    return
-        HTML::Widgets::NavMenu::Iterator::NavMenu::HeaderRole->new(
-            $self->_get_nav_menu_traverser_args()
-        );
+    return HTML::Widgets::NavMenu::Iterator::NavMenu::HeaderRole->new(
+        $self->_get_nav_menu_traverser_args() );
 }
 
 1;

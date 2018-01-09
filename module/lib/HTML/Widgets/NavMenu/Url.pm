@@ -5,11 +5,15 @@ use warnings;
 
 use base 'HTML::Widgets::NavMenu::Object';
 
-__PACKAGE__->mk_acc_ref([qw(
-    _url
-    _is_dir
-    _mode
-    )]);
+__PACKAGE__->mk_acc_ref(
+    [
+        qw(
+            _url
+            _is_dir
+            _mode
+            )
+    ]
+);
 
 =head1 NAME
 
@@ -26,18 +30,18 @@ sub _init
 {
     my $self = shift;
 
-    my ($url, $is_dir, $mode) = @_;
+    my ( $url, $is_dir, $mode ) = @_;
 
     # TODO - extract a method.
     $self->_url(
-        (ref($url) eq "ARRAY")
-            ? [ @$url ]
-            : [ split(/\//, $url) ]
+          ( ref($url) eq "ARRAY" )
+        ? [@$url]
+        : [ split( /\//, $url ) ]
     );
 
-    $self->_is_dir($is_dir || 0);
+    $self->_is_dir( $is_dir || 0 );
 
-    $self->_mode($mode || 'server');
+    $self->_mode( $mode || 'server' );
 
     return 0;
 }
@@ -46,7 +50,7 @@ sub _get_url
 {
     my $self = shift;
 
-    return [ @{$self->_url()} ];
+    return [ @{ $self->_url() } ];
 }
 
 sub _get_relative_url
@@ -55,45 +59,43 @@ sub _get_relative_url
 
     my $url = $base->_get_url_worker(@_);
 
-    return ( ($url eq "") ? "./" : $url);
+    return ( ( $url eq "" ) ? "./" : $url );
 }
 
 sub _get_url_worker
 {
-    my $base = shift;
-    my $to = shift;
+    my $base             = shift;
+    my $to               = shift;
     my $slash_terminated = shift;
-    my $no_leading_dot = shift;
+    my $no_leading_dot   = shift;
 
-    my $prefix = ($no_leading_dot ? "" : "./");
+    my $prefix = ( $no_leading_dot ? "" : "./" );
 
-    my @this_url = @{$base->_get_url()};
-    my @other_url = @{$to->_get_url()};
+    my @this_url  = @{ $base->_get_url() };
+    my @other_url = @{ $to->_get_url() };
 
     my $ret;
 
-    my @this_url_bak = @this_url;
+    my @this_url_bak  = @this_url;
     my @other_url_bak = @other_url;
 
-    while(
-        scalar(@this_url) &&
-        scalar(@other_url) &&
-        ($this_url[0] eq $other_url[0])
-    )
+    while (scalar(@this_url)
+        && scalar(@other_url)
+        && ( $this_url[0] eq $other_url[0] ) )
     {
         shift(@this_url);
         shift(@other_url);
     }
 
-    if ((! @this_url) && (! @other_url))
+    if ( ( !@this_url ) && ( !@other_url ) )
     {
-        if ((!$base->_is_dir() ) ne (!$to->_is_dir()))
+        if ( ( !$base->_is_dir() ) ne ( !$to->_is_dir() ) )
         {
             die "Two identical URLs with non-matching _is_dir()'s";
         }
-        if (! $base->_is_dir())
+        if ( !$base->_is_dir() )
         {
-            if (scalar(@this_url_bak))
+            if ( scalar(@this_url_bak) )
             {
                 return $prefix . $this_url_bak[-1];
             }
@@ -104,7 +106,7 @@ sub _get_url_worker
         }
     }
 
-    if (($base->_mode() eq "harddisk") && ($to->_is_dir()))
+    if ( ( $base->_mode() eq "harddisk" ) && ( $to->_is_dir() ) )
     {
         push @other_url, "index.html";
     }
@@ -113,18 +115,18 @@ sub _get_url_worker
 
     if ($slash_terminated)
     {
-        if ((scalar(@this_url) == 0) && (scalar(@other_url) == 0))
+        if ( ( scalar(@this_url) == 0 ) && ( scalar(@other_url) == 0 ) )
         {
             $ret = $prefix;
         }
         else
         {
-            if (! $base->_is_dir())
+            if ( !$base->_is_dir() )
             {
                 pop(@this_url);
             }
-            $ret .= join("/", (map { ".." } @this_url), @other_url);
-            if ($to->_is_dir() && ($base->_mode() ne "harddisk"))
+            $ret .= join( "/", ( map { ".." } @this_url ), @other_url );
+            if ( $to->_is_dir() && ( $base->_mode() ne "harddisk" ) )
             {
                 $ret .= "/";
             }
@@ -132,9 +134,12 @@ sub _get_url_worker
     }
     else
     {
-        my @components = ((map { ".." } @this_url[1..$#this_url]), @other_url);
-        $ret .= ($prefix . join("/", @components));
-        if (($to->_is_dir()) && ($base->_mode() ne "harddisk") && scalar(@components))
+        my @components =
+            ( ( map { ".." } @this_url[ 1 .. $#this_url ] ), @other_url );
+        $ret .= ( $prefix . join( "/", @components ) );
+        if (   ( $to->_is_dir() )
+            && ( $base->_mode() ne "harddisk" )
+            && scalar(@components) )
         {
             $ret .= "/";
         }

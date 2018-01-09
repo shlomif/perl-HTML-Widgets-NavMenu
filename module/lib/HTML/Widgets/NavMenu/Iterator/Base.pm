@@ -5,10 +5,14 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Tree::Iterator);
 
-__PACKAGE__->mk_acc_ref([qw(
-    _html
-    nav_menu
-    )]);
+__PACKAGE__->mk_acc_ref(
+    [
+        qw(
+            _html
+            nav_menu
+            )
+    ]
+);
 
 =head1 NAME
 
@@ -33,10 +37,10 @@ sub _init
 
     $self->SUPER::_init($args);
 
-    $self->nav_menu($args->{'nav_menu'}) or
-        die "nav_menu not specified!";
+    $self->nav_menu( $args->{'nav_menu'} )
+        or die "nav_menu not specified!";
 
-    $self->_html([]);
+    $self->_html( [] );
 
     return 0;
 }
@@ -44,14 +48,14 @@ sub _init
 sub _add_tags
 {
     my $self = shift;
-    push (@{$self->_html()}, @_);
+    push( @{ $self->_html() }, @_ );
 }
 
 sub _is_root
 {
     my $self = shift;
 
-    return ($self->stack->len() == 1);
+    return ( $self->stack->len() == 1 );
 }
 
 sub _is_top_separator
@@ -79,14 +83,13 @@ Gets the subs of the node.
 
 =cut
 
-
 sub get_node_subs
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
 
     my $node = $args->{'node'};
 
-    return [ @{$node->subs()} ];
+    return [ @{ $node->subs() } ];
 }
 
 =head2 $self->get_new_accum_state( { item => $item, node => $node } )
@@ -98,13 +101,13 @@ Gets the new accumulated state.
 # TODO : This method is too long - refactor.
 sub get_new_accum_state
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
 
     my $parent_item = $args->{'item'};
-    my $node = $args->{'node'};
+    my $node        = $args->{'node'};
 
     my $prev_state;
-    if (defined($parent_item))
+    if ( defined($parent_item) )
     {
         $prev_state = $parent_item->_accum_state();
     }
@@ -114,30 +117,29 @@ sub get_new_accum_state
     }
 
     my $show_always = 0;
-    if (exists($prev_state->{'show_always'}))
+    if ( exists( $prev_state->{'show_always'} ) )
     {
         $show_always = $prev_state->{'show_always'};
     }
-    if (defined($node->show_always()))
+    if ( defined( $node->show_always() ) )
     {
         $show_always = $node->show_always();
     }
 
     my $rec_url_type;
-    if (exists($prev_state->{'rec_url_type'}))
+    if ( exists( $prev_state->{'rec_url_type'} ) )
     {
         $rec_url_type = $prev_state->{'rec_url_type'};
     }
-    if (defined($node->rec_url_type()))
+    if ( defined( $node->rec_url_type() ) )
     {
         $rec_url_type = $node->rec_url_type();
     }
-    return
-        {
-            'host' => ($node->host() ? $node->host() : $prev_state->{'host'}),
-            'show_always' => $show_always,
-            'rec_url_type' => $rec_url_type,
-        };
+    return {
+        'host' => ( $node->host() ? $node->host() : $prev_state->{'host'} ),
+        'show_always'  => $show_always,
+        'rec_url_type' => $rec_url_type,
+    };
 }
 
 =head2 my $array_ref = $self->get_results()
@@ -150,7 +152,7 @@ sub get_results
 {
     my $self = shift;
 
-    return [ @{$self->_html()} ];
+    return [ @{ $self->_html() } ];
 }
 
 =head1 COPYRIGHT & LICENSE

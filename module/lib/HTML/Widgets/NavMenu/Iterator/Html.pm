@@ -8,10 +8,9 @@ use base qw(HTML::Widgets::NavMenu::Tree::Iterator::Item);
 sub get_url_type
 {
     my $item = shift;
-    return
-        ($item->_node()->url_type() ||
-            $item->_accum_state()->{'rec_url_type'} ||
-            "rel");
+    return (   $item->_node()->url_type()
+            || $item->_accum_state()->{'rec_url_type'}
+            || "rel" );
 }
 
 package HTML::Widgets::NavMenu::Iterator::Html;
@@ -36,9 +35,7 @@ sub _construct_new_item
     my $self = shift;
     my $args = shift;
 
-    return HTML::Widgets::NavMenu::Iterator::Html::Item->new(
-        $args,
-    );
+    return HTML::Widgets::NavMenu::Iterator::Html::Item->new( $args, );
 }
 
 =head2 $self->node_start()
@@ -51,11 +48,11 @@ sub node_start
 {
     my $self = shift;
 
-    if ($self->_is_root())
+    if ( $self->_is_root() )
     {
         return $self->_start_root();
     }
-    elsif ($self->_is_top_separator())
+    elsif ( $self->_is_top_separator() )
     {
         # _start_sep() is short for start_separator().
         return $self->_start_sep();
@@ -76,11 +73,11 @@ sub node_end
 {
     my $self = shift;
 
-    if ($self->_is_root())
+    if ( $self->_is_root() )
     {
         return $self->end_root();
     }
-    elsif ($self->_is_top_separator())
+    elsif ( $self->_is_top_separator() )
     {
         return $self->_end_sep();
     }
@@ -106,7 +103,7 @@ sub end_root
 sub _end_regular
 {
     my $self = shift;
-    if ($self->top()->_num_subs() && $self->_is_expanded())
+    if ( $self->top()->_num_subs() && $self->_is_expanded() )
     {
         $self->_add_tags("</ul>");
     }
@@ -139,14 +136,12 @@ sub get_a_tag
     my $item = $self->top();
     my $node = $item->_node;
 
-    my $tag ="<a";
+    my $tag   = "<a";
     my $title = $node->title;
 
-    $tag .= " href=\"" .
-        escape_html(
-            $self->nav_menu()->_get_url_to_item($item)
-        ). "\"";
-    if (defined($title))
+    $tag .= " href=\""
+        . escape_html( $self->nav_menu()->_get_url_to_item($item) ) . "\"";
+    if ( defined($title) )
     {
         $tag .= " title=\"$title\"";
     }

@@ -16,7 +16,7 @@ sub _init
     $self->SUPER::_init($args);
 
     # Make a fresh copy just to be on the safe side.
-    $self->_ul_classes([ @{$args->{'ul_classes'}} ]);
+    $self->_ul_classes( [ @{ $args->{'ul_classes'} } ] );
 
     return 0;
 }
@@ -35,14 +35,14 @@ For internal use only.
 =head1 METHODS
 
 =cut
+
 sub _calc_open_li_tag
 {
     my $self = shift;
 
     my $id_attr = $self->_calc_li_id_attr();
 
-    return
-    (
+    return (
         $self->_is_expanded_for_treeview()
         ? (qq{<li class="open"$id_attr>})
         : ("<li$id_attr>")
@@ -60,12 +60,12 @@ with C<<< <b> ... </b> >>> tags.
 
 sub _start_handle_non_role
 {
-    my $self = shift;
-    my $top_item = $self->top;
-    my @tags_to_add = ($self->_calc_open_li_tag(), $self->get_link_tag());
-    if ($top_item->_num_subs_to_go() && $self->_is_expanded())
+    my $self        = shift;
+    my $top_item    = $self->top;
+    my @tags_to_add = ( $self->_calc_open_li_tag(), $self->get_link_tag() );
+    if ( $top_item->_num_subs_to_go() && $self->_is_expanded() )
     {
-        push @tags_to_add, ($self->get_open_sub_menu_tags());
+        push @tags_to_add, ( $self->get_open_sub_menu_tags() );
     }
     $self->_add_tags(@tags_to_add);
 
@@ -90,7 +90,7 @@ sub _is_expanded_for_treeview
 
     my $node = $self->top->_node();
 
-    return ($node->expanded() || $self->top->_accum_state->{'show_always'});
+    return ( $node->expanded() || $self->top->_accum_state->{'show_always'} );
 }
 
 =head1 COPYRIGHT & LICENSE

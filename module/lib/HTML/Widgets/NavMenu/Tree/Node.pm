@@ -5,12 +5,14 @@ use warnings;
 
 use base 'HTML::Widgets::NavMenu::Object';
 
-__PACKAGE__->mk_acc_ref([
-    qw(
-    CurrentlyActive expanded hide host li_id role rec_url_type
-    separator show_always skip subs text title url url_is_abs url_type
-    )]
-    );
+__PACKAGE__->mk_acc_ref(
+    [
+        qw(
+            CurrentlyActive expanded hide host li_id role rec_url_type
+            separator show_always skip subs text title url url_is_abs url_type
+            )
+    ]
+);
 
 use HTML::Widgets::NavMenu::ExpandVal;
 
@@ -98,7 +100,7 @@ sub _init
 {
     my $self = shift;
 
-    $self->subs([]);
+    $self->subs( [] );
 
     return $self;
 }
@@ -112,12 +114,14 @@ Expands the node.
 sub expand
 {
     my $self = shift;
-    my $v = @_ ? (shift(@_)) :
-        HTML::Widgets::NavMenu::ExpandVal->new({capture => 1})
-        ;
+    my $v =
+        @_
+        ? ( shift(@_) )
+        : HTML::Widgets::NavMenu::ExpandVal->new( { capture => 1 } );
+
     # Don't set it to something if it's already capture_expanded(),
     # otherwise it can set as a non-capturing expansion.
-    if (! $self->capture_expanded())
+    if ( !$self->capture_expanded() )
     {
         $self->expanded($v);
     }
@@ -141,7 +145,7 @@ sub mark_as_current
 sub _process_new_sub
 {
     my $self = shift;
-    my $sub = shift;
+    my $sub  = shift;
     $self->update_based_on_sub($sub);
 }
 
@@ -154,8 +158,8 @@ Propagate changes.
 sub update_based_on_sub
 {
     my $self = shift;
-    my $sub = shift;
-    if (my $expand_val = $sub->expanded())
+    my $sub  = shift;
+    if ( my $expand_val = $sub->expanded() )
     {
         $self->expand($expand_val);
     }
@@ -170,8 +174,8 @@ Adds a new subroutine.
 sub add_sub
 {
     my $self = shift;
-    my $sub = shift;
-    push (@{$self->subs}, $sub);
+    my $sub  = shift;
+    push( @{ $self->subs }, $sub );
     $self->_process_new_sub($sub);
     return 0;
 }
@@ -185,14 +189,14 @@ Get the $idx sub.
 sub get_nth_sub
 {
     my $self = shift;
-    my $idx = shift;
+    my $idx  = shift;
     return $self->subs()->[$idx];
 }
 
 sub _num_subs
 {
     my $self = shift;
-    return scalar(@{$self->subs()});
+    return scalar( @{ $self->subs() } );
 }
 
 =head2 $self->list_regular_keys()
@@ -205,7 +209,8 @@ sub list_regular_keys
 {
     my $self = shift;
 
-    return (qw(host li_id rec_url_type role show_always text title url url_type));
+    return (
+        qw(host li_id rec_url_type role show_always text title url url_type));
 }
 
 =head2 $self->list_boolean_keys()
@@ -229,20 +234,20 @@ Set the values from the hash ref.
 
 sub set_values_from_hash_ref
 {
-    my $self = shift;
+    my $self         = shift;
     my $sub_contents = shift;
 
-    foreach my $key ($self->list_regular_keys())
+    foreach my $key ( $self->list_regular_keys() )
     {
-        if (exists($sub_contents->{$key}))
+        if ( exists( $sub_contents->{$key} ) )
         {
-            $self->$key($sub_contents->{$key});
+            $self->$key( $sub_contents->{$key} );
         }
     }
 
-    foreach my $key ($self->list_boolean_keys())
+    foreach my $key ( $self->list_boolean_keys() )
     {
-        if ($sub_contents->{$key})
+        if ( $sub_contents->{$key} )
         {
             $self->$key(1);
         }
@@ -259,7 +264,7 @@ sub capture_expanded
 {
     my $self = shift;
 
-    if (my $e = $self->expanded())
+    if ( my $e = $self->expanded() )
     {
         return $e->is_capturing();
     }

@@ -23,7 +23,7 @@ Escapes the HTML.
 
 =cut
 
-@EXPORT=(qw(escape_html));
+@EXPORT = (qw(escape_html));
 
 sub escape_html
 {

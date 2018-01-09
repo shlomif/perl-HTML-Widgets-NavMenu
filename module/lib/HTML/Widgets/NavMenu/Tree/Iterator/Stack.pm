@@ -5,7 +5,7 @@ use warnings;
 
 use base qw(HTML::Widgets::NavMenu::Object);
 
-__PACKAGE__->mk_acc_ref([qw(_items)]);
+__PACKAGE__->mk_acc_ref( [qw(_items)] );
 
 sub _init
 {
@@ -32,7 +32,7 @@ sub push
     my $self = shift;
     my $item = shift;
 
-    push @{$self->_items()}, $item;
+    push @{ $self->_items() }, $item;
 
     return 0;
 }
@@ -47,7 +47,7 @@ sub len
 {
     my $self = shift;
 
-    return scalar(@{$self->_items()});
+    return scalar( @{ $self->_items() } );
 }
 
 =head2 $s->len($myitem)
@@ -68,10 +68,9 @@ Returns the highest item.
 
 =cut
 
-
 sub item
 {
-    my $self = shift;
+    my $self  = shift;
     my $index = shift;
     return $self->_items->[$index];
 }
@@ -85,7 +84,7 @@ Returns the item of index C<$index>.
 sub pop
 {
     my $self = shift;
-    return pop(@{$self->_items()});
+    return pop( @{ $self->_items() } );
 }
 
 =head2 my $item = $s->pop()
@@ -97,7 +96,7 @@ Pops the item and returns it.
 sub is_empty
 {
     my $self = shift;
-    return ($self->len() == 0);
+    return ( $self->len() == 0 );
 }
 
 =head2 my $bool = $s->is_empty()
@@ -110,7 +109,7 @@ sub reset
 {
     my $self = shift;
 
-    $self->_items([]);
+    $self->_items( [] );
 
     return 0;
 }
