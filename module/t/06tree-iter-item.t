@@ -34,7 +34,7 @@ sub does_throw_exception
     my @args_components = (
         [ 'node'        => +{ 'hello' => 'world', }, ],
         [ 'subs'        => [], ],
-        [ 'accum_state' => +{ 'yes'   => "sir", }, ],
+        [ 'accum_state' => +{ 'yes' => "sir", }, ],
     );
 
     # TEST*2*2*2
