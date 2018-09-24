@@ -471,7 +471,7 @@ title="[% nav_links.$key.title() %]" />
 <body>
 <div class="breadcrumb">
 [% FOREACH c = breadcrumbs %]
-[% UNLESS loop.first %] &rarr; [% END %]
+[% UNLESS loop.first %] → [% END %]
 <a href="[% HTML.escape(c.direct_url) %]"
 [% IF c.title %] title="[% c.title %]"[% END %]
 >[% c.label %]</a>
