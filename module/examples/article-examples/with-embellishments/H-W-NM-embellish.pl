@@ -366,7 +366,7 @@ my @pages = (
             'path'    => $_,
             'title'   => "Title for $_",
             'content' => "<p>Content for $_</p>"
-            }
+        }
     } @page_paths
 );
 

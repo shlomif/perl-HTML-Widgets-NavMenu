@@ -45,7 +45,7 @@ use HTML::Widgets::NavMenu::Url;
 
 {
     my $from = HTML::Widgets::NavMenu::Url->new( ["hello"], 1, "harddisk", );
-    my $to = HTML::Widgets::NavMenu::Url->new( ["good"], 1, );
+    my $to   = HTML::Widgets::NavMenu::Url->new( ["good"],  1, );
 
     # TEST
     is( $from->_get_relative_url( $to, 1 ),
@@ -54,7 +54,7 @@ use HTML::Widgets::NavMenu::Url;
 
 {
     my $from = HTML::Widgets::NavMenu::Url->new( ["hello"], 1, "harddisk", );
-    my $to = HTML::Widgets::NavMenu::Url->new( ["good"], 1, );
+    my $to   = HTML::Widgets::NavMenu::Url->new( ["good"],  1, );
 
     # TEST
     is( $from->_get_relative_url( $to, 0 ),

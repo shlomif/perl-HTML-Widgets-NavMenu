@@ -886,7 +886,7 @@ EOF
     my $nav_menu = HTML::Widgets::NavMenu->new(
         'path_info' => "/me/bio.html",
         @{ $test_data->{'items_in_sub'} },
-        'ul_classes' => [ "navbarmain", ("navbarnested") x 5 ],
+        'ul_classes'   => [ "navbarmain", ("navbarnested") x 5 ],
         no_leading_dot => 1,
     );
 

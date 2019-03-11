@@ -722,7 +722,7 @@ COORDS_LOOP:
 
         # This is a workaround for the root link.
         my $host_url = ( defined( $node->url() ) ? ( $node->url() ) : "" );
-        my $host = $item->_accum_state()->{'host'};
+        my $host     = $item->_accum_state()->{'host'};
 
         my $url_type = (
             $node->url_is_abs()
