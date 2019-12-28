@@ -463,7 +463,7 @@ sub _get_next_coords
 
     my $i;
 
-    for ( $i = 0 ; $i < scalar(@coords) ; $i++ )
+    for ( $i = 0 ; $i < scalar(@coords) ; ++$i )
     {
         $branches[ $i + 1 ] = $branches[$i]->get_nth_sub( $coords[$i] );
     }
@@ -474,7 +474,7 @@ sub _get_next_coords
     }
     else
     {
-        for ( $i-- ; $i >= 0 ; $i-- )
+        for ( --$i ; $i >= 0 ; --$i )
         {
             if ( $branches[$i]->_num_subs() > ( $coords[$i] + 1 ) )
             {

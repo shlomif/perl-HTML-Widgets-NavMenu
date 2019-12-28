@@ -30,7 +30,7 @@ use vars qw($exit_count);
 
 BEGIN
 {
-    *CORE::GLOBAL::exit = sub { $exit_count++; };
+    *CORE::GLOBAL::exit = sub { ++$exit_count; };
 }
 
 use lib './t/lib';

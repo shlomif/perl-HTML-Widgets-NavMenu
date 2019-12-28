@@ -219,7 +219,7 @@ sub find_node_by_coords
                 'parent_item' => $item,
             }
         );
-        $idx++;
+        ++$idx;
         $internal_callback->();
     }
     return +{ 'item' => $item, };
