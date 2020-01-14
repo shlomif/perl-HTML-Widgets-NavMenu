@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use IO::All;
+use IO::All qw/ io /;
 
 my ($version) =
     ( map { m{\$VERSION *= *'([^']+)'} ? ($1) : () }
@@ -15,7 +15,7 @@ if ( !defined($version) )
 }
 
 my @cmd = (
-    "hg", "tag", "-m", "Tagging HTML-Widgets-NavMenu as $version",
+    "git", "tag", "-m", "Tagging HTML-Widgets-NavMenu as $version",
     "cpan-releases/$version",
 );
 
