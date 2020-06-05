@@ -1396,8 +1396,8 @@ scripts.
 =item L<HTML::Menu::Hierarchical>
 
 A module by Don Owens for generating hierarchical HTML menus. I could not
-quite understand its tree traversal semantics, so I ended up not using it. Also
-seems to require that each of the tree node will have a unique ID.
+quite understand its tree traversal semantics, so I ended up not using it.
+It also seems to require that each of the tree nodes will have a unique ID.
 
 =item L<HTML::Widgets::Menu>
 
