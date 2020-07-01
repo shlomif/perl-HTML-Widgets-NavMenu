@@ -100,14 +100,13 @@ sub _push_into_stack
     my $node = shift;
 
     $self->stack()->push(
-        $self->get_new_item(
+        $self->{_top} = $self->get_new_item(
             {
                 'node'        => $node,
-                'parent_item' => $self->top(),
+                'parent_item' => $self->{_top},
             }
-        ),
+        )
     );
-    $self->{_top} = $self->stack->top;
     return;
 }
 
@@ -127,7 +126,7 @@ sub traverse
 
     my $top_item;
 
-MAIN_LOOP: while ( $top_item = $self->top() )
+MAIN_LOOP: while ( $top_item = $self->{_top} )
     {
         my $visited = $top_item->_is_visited();
 
