@@ -166,7 +166,7 @@ package HTML::Widgets::NavMenu;
 
 use parent 'HTML::Widgets::NavMenu::Object';
 
-use HTML::Widgets::NavMenu::Url;
+use HTML::Widgets::NavMenu::Url ();
 
 require HTML::Widgets::NavMenu::Iterator::NavMenu;
 require HTML::Widgets::NavMenu::Iterator::SiteMap;

@@ -28,7 +28,7 @@ For internal use only.
 
 use parent qw(HTML::Widgets::NavMenu::Iterator::Base);
 
-use HTML::Widgets::NavMenu::EscapeHtml;
+use HTML::Widgets::NavMenu::EscapeHtml qw/ escape_html /;
 
 sub _construct_new_item
 {

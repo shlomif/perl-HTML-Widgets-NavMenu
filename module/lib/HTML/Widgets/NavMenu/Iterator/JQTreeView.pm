@@ -3,8 +3,7 @@ package HTML::Widgets::NavMenu::Iterator::JQTreeView;
 use strict;
 use warnings;
 
-# For escape_html().
-use HTML::Widgets::NavMenu::EscapeHtml;
+use HTML::Widgets::NavMenu::EscapeHtml qw/ escape_html /;
 
 use parent qw(HTML::Widgets::NavMenu::Iterator::NavMenu);
 

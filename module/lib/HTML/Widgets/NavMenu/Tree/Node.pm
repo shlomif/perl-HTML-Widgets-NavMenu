@@ -14,7 +14,7 @@ __PACKAGE__->mk_acc_ref(
     ]
 );
 
-use HTML::Widgets::NavMenu::ExpandVal;
+use HTML::Widgets::NavMenu::ExpandVal ();
 
 =head1 NAME
 

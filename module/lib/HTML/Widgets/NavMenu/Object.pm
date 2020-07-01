@@ -3,7 +3,7 @@ package HTML::Widgets::NavMenu::Object;
 use strict;
 use warnings;
 
-use Class::XSAccessor;
+use Class::XSAccessor ();
 
 sub new
 {

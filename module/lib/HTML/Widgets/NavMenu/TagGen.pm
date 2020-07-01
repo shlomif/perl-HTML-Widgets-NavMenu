@@ -5,7 +5,7 @@ use warnings;
 
 use parent 'HTML::Widgets::NavMenu::Object';
 
-use HTML::Widgets::NavMenu::EscapeHtml;
+use HTML::Widgets::NavMenu::EscapeHtml qw/ escape_html /;
 
 __PACKAGE__->mk_acc_ref( [qw(name attributes)] );
 

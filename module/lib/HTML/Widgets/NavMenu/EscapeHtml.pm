@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(Exporter);
 
-use vars qw(@EXPORT);
+use vars qw(@EXPORT_OK);
 
 =head1 NAME
 
@@ -13,7 +13,7 @@ HTML::Widgets::NavMenu::EscapeHtml - provides a function to escape HTML.
 
 =head1 SYNOPSIS
 
-    use HTML::Widgets::NavMenu::EscapeHtml;
+    use HTML::Widgets::NavMenu::EscapeHtml qw/ escape_html /;
 
     my $escaped_html = escape_html($html);
 
@@ -23,7 +23,7 @@ Escapes the HTML.
 
 =cut
 
-@EXPORT = (qw(escape_html));
+@EXPORT_OK = (qw(escape_html));
 
 sub escape_html
 {
