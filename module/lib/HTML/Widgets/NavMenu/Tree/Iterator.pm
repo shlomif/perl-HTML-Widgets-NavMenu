@@ -122,7 +122,7 @@ sub traverse
 
     $self->_push_into_stack( $self->get_initial_node() );
 
-    $self->coords( [] );
+    my $co = $self->coords( [] );
 
     my $top_item;
 
@@ -143,7 +143,7 @@ MAIN_LOOP: while ( $top_item = $self->{_top} )
 
         if ( defined($sub_item) )
         {
-            push @{ $self->coords() }, $top_item->_visited_index();
+            push @$co, $top_item->_visited_index();
             $self->_push_into_stack(
                 $self->get_node_from_sub(
                     {
@@ -159,7 +159,7 @@ MAIN_LOOP: while ( $top_item = $self->{_top} )
             $self->node_end();
             $self->stack->pop();
             $self->{_top} = $self->stack->top;
-            pop( @{ $self->coords() } );
+            pop @$co;
         }
     }
 
