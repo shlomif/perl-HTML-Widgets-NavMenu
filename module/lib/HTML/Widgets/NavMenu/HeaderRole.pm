@@ -3,7 +3,7 @@ package HTML::Widgets::NavMenu::HeaderRole;
 use strict;
 use warnings;
 
-use base 'HTML::Widgets::NavMenu';
+use parent 'HTML::Widgets::NavMenu';
 
 require HTML::Widgets::NavMenu::Iterator::NavMenu::HeaderRole;
 

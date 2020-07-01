@@ -3,7 +3,7 @@ package HTML::Widgets::NavMenu::TagGen;
 use strict;
 use warnings;
 
-use base 'HTML::Widgets::NavMenu::Object';
+use parent 'HTML::Widgets::NavMenu::Object';
 
 use HTML::Widgets::NavMenu::EscapeHtml;
 

@@ -3,7 +3,7 @@ package HTML::Widgets::NavMenu::EscapeHtml;
 use strict;
 use warnings;
 
-use base qw(Exporter);
+use parent qw(Exporter);
 
 use vars qw(@EXPORT);
 

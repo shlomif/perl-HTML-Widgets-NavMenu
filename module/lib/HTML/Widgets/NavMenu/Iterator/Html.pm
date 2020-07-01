@@ -3,7 +3,7 @@ package HTML::Widgets::NavMenu::Iterator::Html::Item;
 use strict;
 use warnings;
 
-use base qw(HTML::Widgets::NavMenu::Tree::Iterator::Item);
+use parent qw(HTML::Widgets::NavMenu::Tree::Iterator::Item);
 
 sub get_url_type
 {
@@ -26,7 +26,7 @@ For internal use only.
 =head1 METHODS
 =cut
 
-use base qw(HTML::Widgets::NavMenu::Iterator::Base);
+use parent qw(HTML::Widgets::NavMenu::Iterator::Base);
 
 use HTML::Widgets::NavMenu::EscapeHtml;
 

@@ -3,7 +3,7 @@ package HTML::Widgets::NavMenu::Iterator::NavMenu;
 use strict;
 use warnings;
 
-use base qw(HTML::Widgets::NavMenu::Iterator::Html);
+use parent qw(HTML::Widgets::NavMenu::Iterator::Html);
 
 use HTML::Widgets::NavMenu::EscapeHtml;
 

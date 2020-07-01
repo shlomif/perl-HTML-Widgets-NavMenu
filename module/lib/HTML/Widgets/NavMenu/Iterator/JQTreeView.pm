@@ -6,7 +6,7 @@ use warnings;
 # For escape_html().
 use HTML::Widgets::NavMenu::EscapeHtml;
 
-use base qw(HTML::Widgets::NavMenu::Iterator::NavMenu);
+use parent qw(HTML::Widgets::NavMenu::Iterator::NavMenu);
 
 sub _init
 {

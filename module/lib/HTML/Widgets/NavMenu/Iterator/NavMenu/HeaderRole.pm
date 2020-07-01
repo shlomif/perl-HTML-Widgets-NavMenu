@@ -3,7 +3,7 @@ package HTML::Widgets::NavMenu::Iterator::NavMenu::HeaderRole;
 use strict;
 use warnings;
 
-use base qw(HTML::Widgets::NavMenu::Iterator::NavMenu);
+use parent qw(HTML::Widgets::NavMenu::Iterator::NavMenu);
 
 __PACKAGE__->mk_acc_ref(
     [

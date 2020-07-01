@@ -3,7 +3,7 @@ package HTML::Widgets::NavMenu::Tree::Iterator;
 use strict;
 use warnings;
 
-use base qw(HTML::Widgets::NavMenu::Object);
+use parent qw(HTML::Widgets::NavMenu::Object);
 
 use HTML::Widgets::NavMenu::Tree::Iterator::Stack;
 use HTML::Widgets::NavMenu::Tree::Iterator::Item;

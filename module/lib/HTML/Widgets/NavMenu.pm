@@ -9,7 +9,7 @@ our $VERSION = '1.0703';
 
 package HTML::Widgets::NavMenu::Error;
 
-use base "HTML::Widgets::NavMenu::Object";
+use parent "HTML::Widgets::NavMenu::Object";
 
 package HTML::Widgets::NavMenu::Error::Redirect;
 
@@ -31,7 +31,7 @@ package HTML::Widgets::NavMenu::NodeDescription;
 
 use strict;
 
-use base qw(HTML::Widgets::NavMenu::Object);
+use parent qw(HTML::Widgets::NavMenu::Object);
 
 __PACKAGE__->mk_acc_ref( [qw(host host_url title label direct_url url_type)] );
 
@@ -57,7 +57,7 @@ use vars qw(@ISA);
 
 package HTML::Widgets::NavMenu::Iterator::GetCurrentlyActive;
 
-use base 'HTML::Widgets::NavMenu::Iterator::Base';
+use parent 'HTML::Widgets::NavMenu::Iterator::Base';
 
 __PACKAGE__->mk_acc_ref(
     [
@@ -166,7 +166,7 @@ sub _get_leading_path_coords
 
 package HTML::Widgets::NavMenu;
 
-use base 'HTML::Widgets::NavMenu::Object';
+use parent 'HTML::Widgets::NavMenu::Object';
 
 use HTML::Widgets::NavMenu::Url;
 
