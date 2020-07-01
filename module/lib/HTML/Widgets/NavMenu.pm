@@ -1,11 +1,9 @@
+package HTML::Widgets::NavMenu;
+
 use strict;
 use warnings;
 
 use 5.012;
-
-package HTML::Widgets::NavMenu;
-
-our $VERSION = '1.0703';
 
 package HTML::Widgets::NavMenu::Error;
 

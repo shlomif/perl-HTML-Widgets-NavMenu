@@ -5,14 +5,15 @@ use warnings;
 
 use parent qw(HTML::Widgets::NavMenu::Object);
 
-use HTML::Widgets::NavMenu::Tree::Iterator::Stack;
-use HTML::Widgets::NavMenu::Tree::Iterator::Item;
+use HTML::Widgets::NavMenu::Tree::Iterator::Stack ();
+use HTML::Widgets::NavMenu::Tree::Iterator::Item  ();
 
 __PACKAGE__->mk_acc_ref(
     [
         qw(
             coords
             stack
+            _top
             )
     ]
 );
@@ -42,6 +43,7 @@ sub _init
     my $self = shift;
 
     $self->stack( HTML::Widgets::NavMenu::Tree::Iterator::Stack->new() );
+    $self->{_top} = undef();
 
     return 0;
 }
@@ -54,8 +56,7 @@ Retrieves the stack top item.
 
 sub top
 {
-    my $self = shift;
-    return $self->stack()->top();
+    return shift(@_)->{_top};
 }
 
 sub _construct_new_item
@@ -106,6 +107,8 @@ sub _push_into_stack
             }
         ),
     );
+    $self->{_top} = $self->stack->top;
+    return;
 }
 
 =head2 $self->traverse()
@@ -156,6 +159,7 @@ MAIN_LOOP: while ( $top_item = $self->top() )
         {
             $self->node_end();
             $self->stack->pop();
+            $self->{_top} = $self->stack->top;
             pop( @{ $self->coords() } );
         }
     }
