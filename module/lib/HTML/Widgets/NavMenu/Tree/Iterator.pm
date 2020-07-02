@@ -118,9 +118,11 @@ Traverses the tree.
 
 sub traverse
 {
-    my $self = shift;
+    my $self   = shift;
+    my $_items = $self->stack->_items;
 
     $self->_push_into_stack( $self->get_initial_node() );
+    $self->{_is_root} = ( scalar(@$_items) == 1 );
 
     my $co = $self->coords( [] );
 
@@ -150,13 +152,15 @@ MAIN_LOOP: while ( my $top_item = $self->{_top} )
                     }
                 ),
             );
+            $self->{_is_root} = ( scalar(@$_items) == 1 );
             next MAIN_LOOP;
         }
         else
         {
             $self->node_end();
-            $self->stack->pop();
-            $self->{_top} = $self->stack->top;
+            pop @$_items;
+            $self->{_top}     = $_items->[-1];
+            $self->{_is_root} = ( scalar(@$_items) == 1 );
             pop @$co;
         }
     }
@@ -237,6 +241,13 @@ sub get_coords
     my $self = shift;
 
     return $self->coords();
+}
+
+sub _is_root
+{
+    my $self = shift;
+
+    return $self->{_is_root};
 }
 
 =head1 COPYRIGHT & LICENSE

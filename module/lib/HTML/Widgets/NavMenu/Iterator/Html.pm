@@ -48,7 +48,7 @@ sub node_start
 {
     my $self = shift;
 
-    if ( $self->_is_root() )
+    if ( $self->{_is_root} )
     {
         return $self->_start_root();
     }
@@ -73,7 +73,7 @@ sub node_end
 {
     my $self = shift;
 
-    if ( $self->_is_root() )
+    if ( $self->{_is_root} )
     {
         return $self->end_root();
     }
