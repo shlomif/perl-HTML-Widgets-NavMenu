@@ -11,7 +11,7 @@ sub _init
 {
     my $self = shift;
 
-    $self->reset();
+    $self->_items( [] );
 
     return 0;
 }
@@ -109,7 +109,7 @@ sub reset
 {
     my $self = shift;
 
-    $self->_items( [] );
+    $#{ $self->_items() } = -1;
 
     return 0;
 }
