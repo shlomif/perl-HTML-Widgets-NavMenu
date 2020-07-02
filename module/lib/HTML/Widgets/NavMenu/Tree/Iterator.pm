@@ -124,9 +124,7 @@ sub traverse
 
     my $co = $self->coords( [] );
 
-    my $top_item;
-
-MAIN_LOOP: while ( $top_item = $self->{_top} )
+MAIN_LOOP: while ( my $top_item = $self->{_top} )
     {
         my $visited = $top_item->_is_visited();
 
