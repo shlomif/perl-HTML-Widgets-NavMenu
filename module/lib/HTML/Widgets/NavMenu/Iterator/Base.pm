@@ -58,13 +58,6 @@ sub _is_root
     return ( $self->stack->len() == 1 );
 }
 
-sub _is_top_separator
-{
-    my $self = shift;
-
-    return $self->top->_node->separator;
-}
-
 =head2 $self->get_initial_node()
 
 Gets the initial node.

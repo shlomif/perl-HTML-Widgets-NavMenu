@@ -44,6 +44,11 @@ Gets called upon node start.
 
 =cut
 
+sub _is_top_separator
+{
+    return $_[0]->top->{_node}->{separator};
+}
+
 sub node_start
 {
     my $self = shift;
