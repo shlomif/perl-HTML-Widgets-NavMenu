@@ -1,6 +1,6 @@
-[PerlCritic]
-select = **/*.{pl,pm,t}
-ignore = lib/**/*.pm xt/*.t xt/**/*.t
+;[PerlCritic]
+;select = **/*.{pl,pm,t}
+;ignore = lib/**/*.pm xt/*.t xt/**/*.t
 
 [PerlTidy]
 argv = -ci=4 -bl -cti=0
