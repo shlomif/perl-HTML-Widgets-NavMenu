@@ -1,5 +1,8 @@
 Revision history for Perl extension HTML::Widgets::NavMenu.
 
+1.0801  2020-07-03
+    - Fix and re-enable the PerlCritic test on tidyall.
+
 1.0800  2020-07-03
     - Speed up some hot spots / bottlenecks.
         - "A Lisp programmer knows the value of everything and the cost
