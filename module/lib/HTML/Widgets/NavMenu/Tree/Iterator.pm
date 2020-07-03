@@ -177,10 +177,7 @@ returned by get_node_subs() in a different way than the default.
 
 sub get_node_from_sub
 {
-    my $self = shift;
-    my $args = shift;
-
-    return $args->{'sub'};
+    return $_[1]->{'sub'};
 }
 
 =head2 $self->find_node_by_coords($coords, $callback)
