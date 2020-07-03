@@ -66,6 +66,7 @@ sub mk_acc_ref
 
     my $mapping = +{ map { $_ => $_ } @$names };
 
+    ## no critic
     eval <<"EOF";
 package $package;
 
@@ -74,6 +75,7 @@ Class::XSAccessor->import(
 );
 EOF
 
+    ## use critic
 }
 
 =head1 NAME

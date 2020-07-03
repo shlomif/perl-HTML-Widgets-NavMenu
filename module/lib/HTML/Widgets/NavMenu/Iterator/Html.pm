@@ -1,19 +1,9 @@
-package HTML::Widgets::NavMenu::Iterator::Html::Item;
+package HTML::Widgets::NavMenu::Iterator::Html;
 
 use strict;
 use warnings;
 
-use parent qw(HTML::Widgets::NavMenu::Tree::Iterator::Item);
-
-sub get_url_type
-{
-    my $item = shift;
-    return (   $item->_node()->url_type()
-            || $item->_accum_state()->{'rec_url_type'}
-            || "rel" );
-}
-
-package HTML::Widgets::NavMenu::Iterator::Html;
+use HTML::Widgets::NavMenu::Iterator::Html::Item ();
 
 =head1 NAME
 
