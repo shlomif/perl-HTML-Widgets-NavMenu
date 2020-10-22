@@ -3,11 +3,11 @@
 use strict;
 use warnings;
 
-use IO::All qw/ io /;
+use Path::Tiny qw/ path /;
 
 my ($version) =
-    ( map { m{\$VERSION *= *'([^']+)'} ? ($1) : () }
-        io->file("./lib/HTML/Widgets/NavMenu/ToJSON.pm")->getlines() );
+    ( map { m{\Aversion * = *(\S+)} ? ($1) : () }
+        path("./dist.ini")->lines_utf8() );
 
 if ( !defined($version) )
 {
