@@ -65,7 +65,7 @@ __PACKAGE__->mk_acc_ref(
             _ret_coords
             _temp_coords
             _tree
-            )
+        )
     ]
 );
 
@@ -177,6 +177,7 @@ __PACKAGE__->mk_acc_ref(
     [
         qw(
             _current_coords
+            coords_stop
             current_host
             _hosts
             _no_leading_dot
@@ -185,7 +186,7 @@ __PACKAGE__->mk_acc_ref(
             _traversed_tree
             _tree_contents
             _ul_classes
-            )
+        )
     ]
 );
 
@@ -207,6 +208,8 @@ sub _init
 
     $self->_no_leading_dot(
         exists( $args{'no_leading_dot'} ) ? $args{'no_leading_dot'} : 0 );
+
+    $self->coords_stop( $args{coords_stop} || 0 );
 
     return 0;
 }
@@ -701,9 +704,15 @@ sub _get_leading_path_of_coords
     my $self   = shift;
     my $coords = shift;
 
+    my $coords_stop = $self->coords_stop();
+
     if ( !@$coords )
     {
         $coords = [0];
+    }
+    if (0)    # ( $coords->[0] == 0 )
+    {
+        $coords = [ @$coords[ 1 .. $#$coords ] ];
     }
 
     my @leading_path;
@@ -740,7 +749,11 @@ COORDS_LOOP:
             }
             );
 
-        if ( ( scalar(@$coords) == 1 ) && ( $coords->[0] == 0 ) )
+        if (
+            $coords_stop
+            ? ( scalar(@$coords) == 0 )
+            : ( ( scalar(@$coords) == 1 ) && ( $coords->[0] == 0 ) )
+            )
         {
             last COORDS_LOOP;
         }
@@ -750,7 +763,15 @@ COORDS_LOOP:
         $coords = $self->_get_up_coords($coords);
     }
 
-    return [ reverse(@leading_path) ];
+    my $p = [ reverse(@leading_path) ];
+    if ($coords_stop)
+    {
+        while ( ( @$p > 1 and $p->[0]->host_url eq $p->[1]->host_url ) )
+        {
+            shift @$p;
+        }
+    }
+    return $p;
 }
 
 sub _get_leading_path
