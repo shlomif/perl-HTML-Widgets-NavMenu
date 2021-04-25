@@ -533,7 +533,13 @@ sub _get_up_coords
     {
         if ( ( @coords == 1 ) && ( $coords[0] > 0 ) )
         {
-            return [0];
+            my $coords_stop = $self->coords_stop();
+            my $ret         = [0];
+            if ($coords_stop)
+            {
+                $ret = [];
+            }
+            return $ret;
         }
         pop(@coords);
         return \@coords;
