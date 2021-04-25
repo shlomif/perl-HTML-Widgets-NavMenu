@@ -11,7 +11,7 @@ __PACKAGE__->mk_acc_ref(
     [
         qw(
             _ul_classes
-            )
+        )
     ]
 );
 

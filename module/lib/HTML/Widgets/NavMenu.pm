@@ -1004,6 +1004,12 @@ do not start with "./" when possible. That way, the generated markup will
 be a little more compact. This option is not enabled by default for
 backwards compatibility, but is highly recommended.
 
+=item coords_stop
+
+Experimental ( Boolean ; defaults to false ). B<TBD:> for use by
+L<https://www.shlomifish.org/meta/site-source/> .
+
+
 =back
 
 A complete invocation of an HTML::Widgets::NavMenu constructor can be

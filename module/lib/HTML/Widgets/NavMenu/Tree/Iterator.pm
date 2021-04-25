@@ -14,7 +14,7 @@ __PACKAGE__->mk_acc_ref(
             coords
             stack
             _top
-            )
+        )
     ]
 );
 

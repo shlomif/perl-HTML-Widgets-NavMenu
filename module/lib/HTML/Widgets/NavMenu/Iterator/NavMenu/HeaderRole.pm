@@ -9,7 +9,7 @@ __PACKAGE__->mk_acc_ref(
     [
         qw(
             _was_role
-            )
+        )
     ]
 );
 

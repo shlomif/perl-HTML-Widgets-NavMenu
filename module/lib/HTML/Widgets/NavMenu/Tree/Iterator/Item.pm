@@ -13,7 +13,7 @@ __PACKAGE__->mk_acc_ref(
             _sub_idx
             _visited
             _accum_state
-            )
+        )
     ]
 );
 
