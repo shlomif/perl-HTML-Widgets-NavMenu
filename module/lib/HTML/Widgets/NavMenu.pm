@@ -706,9 +706,12 @@ sub _get_leading_path_of_coords
 
     my $coords_stop = $self->coords_stop();
 
-    if ( !@$coords )
+    if ( !$coords_stop )
     {
-        $coords = [0];
+        if ( !@$coords )
+        {
+            $coords = [0];
+        }
     }
     if (0)    # ( $coords->[0] == 0 )
     {
