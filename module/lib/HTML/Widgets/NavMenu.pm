@@ -838,12 +838,13 @@ sub _render_generic
         'up'  => scalar( $self->_get_up_coords() ),
         'top' => scalar( $self->_get_top_coords() ),
     );
+    my $IS_TOP = $self->_is_top_coords( $self->_current_coords() );
 
     while ( my ( $link_rel, $coords ) = each(%links_proto) )
     {
         # This is so we would avoid coordinates that point to the
         # root ($coords == []).
-        if (    $self->_is_top_coords( $self->_current_coords() )
+        if (    $IS_TOP
             and $self->_is_top_coords( $coords, 1 ) )
         {
             undef($coords);
