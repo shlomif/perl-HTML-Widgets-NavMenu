@@ -798,6 +798,21 @@ sub render
         { %args, _iter_method => '_get_nav_menu_traverser', } );
 }
 
+sub _is_top_coords
+{
+    my ( $self, $coords ) = @_;
+
+    return (
+        defined($coords)
+        ? (
+              ( @$coords == 0 ) ? 1
+            : ( @$coords == 1 ) ? ( $coords->[0] == 0 )
+            :                     ''
+            )
+        : 1
+    );
+}
+
 sub _render_generic
 {
     my $self = shift;
@@ -827,7 +842,8 @@ sub _render_generic
     {
         # This is so we would avoid coordinates that point to the
         # root ($coords == []).
-        if ( defined($coords) && @$coords == 0 )
+        if (    $self->_is_top_coords( $self->_current_coords() )
+            and $self->_is_top_coords($coords) )
         {
             undef($coords);
         }
