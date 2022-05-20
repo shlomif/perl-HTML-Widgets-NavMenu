@@ -927,8 +927,8 @@ track of navigation links ("Next", "Prev", "Up", etc.) You can start from the
 example above and see more examples in the tests, in the C<examples/>
 directory of the HTML-Widgets-NavMenu tarball, and complete working sites
 in the version control repositories at
-L<https://bitbucket.org/shlomif/shlomi-fish-homepage>
-and L<https://bitbucket.org/shlomif/perl-begin/>.
+L<https://www.shlomifish.org/meta/site-source/>
+and L<https://perl-begin.org/source/> .
 
 =head1 USAGE
 
