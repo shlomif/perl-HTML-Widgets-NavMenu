@@ -800,12 +800,13 @@ sub render
 
 sub _is_top_coords
 {
-    my ( $self, $coords ) = @_;
+    my ( $self, $coords, $only_empty, ) = @_;
 
     return (
         defined($coords)
         ? (
               ( @$coords == 0 ) ? 1
+            : $only_empty       ? ''
             : ( @$coords == 1 ) ? ( $coords->[0] == 0 )
             :                     ''
             )
@@ -843,7 +844,7 @@ sub _render_generic
         # This is so we would avoid coordinates that point to the
         # root ($coords == []).
         if (    $self->_is_top_coords( $self->_current_coords() )
-            and $self->_is_top_coords($coords) )
+            and $self->_is_top_coords( $coords, 1 ) )
         {
             undef($coords);
         }
