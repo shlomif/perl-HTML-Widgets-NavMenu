@@ -3,7 +3,7 @@ use warnings;
 
 use IO::Scalar ();
 
-open my $SAVEOUT, ">&STDOUT";
+open my $SAVEOUT, ">&", \*STDOUT;
 print {$SAVEOUT} "";
 
 my $buffer = "";
